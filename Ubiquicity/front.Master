@@ -1,0 +1,43 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="front.master.cs" Inherits="Ubiquicity.front" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Ubiqui-city</title>
+</head>
+<body>
+
+<header>
+  Datos de login
+</header>
+  <nav>
+    <div>
+        <asp:ContentPlaceHolder ID="navigationHolder" runat="server">
+        
+        </asp:ContentPlaceHolder>
+    </div>
+  </nav>
+    <aside>
+        <div>
+            <asp:ContentPlaceHolder ID="lateralHolder" runat="server">
+        
+            </asp:ContentPlaceHolder>
+        </div>
+    </aside>
+<section>
+  
+  <article>
+    <div>
+        <asp:ContentPlaceHolder ID="contentHolder" runat="server">
+        
+        </asp:ContentPlaceHolder>
+    </div>
+  </article>
+</section>
+
+<footer>
+  <p>Footer</p>
+</footer>
+</body>
+</html>
