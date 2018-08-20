@@ -1,18 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BE788804-9B98-41E1-91A9-D191310F107E}</ProjectGuid>
+    <ProjectGuid>{F84F25A9-96D5-48F6-AC69-4D2CFEB75303}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Ubiquicity.Tests</RootNamespace>
-    <AssemblyName>Ubiquicity.Tests</AssemblyName>
+    <RootNamespace>BL</RootNamespace>
+    <AssemblyName>BL</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <IsCodedUITest>False</IsCodedUITest>
-    <TestProjectType>UnitTest</TestProjectType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,26 +30,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
-      <Private>False</Private>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Web.ApplicationServices" />
-    <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Web.Abstractions" />
-    <Reference Include="System.Web.Routing" />
-    <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DalTest.cs" />
-    <Compile Include="UserTest.cs" />
+    <Compile Include="BaseManager.cs" />
+    <Compile Include="LanguageManager.cs" />
+    <Compile Include="SessionManager.cs" />
+    <Compile Include="UserManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -59,24 +51,15 @@
       <Project>{56bdebea-dcc7-434a-b68e-4ececb004e33}</Project>
       <Name>BE</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BL\BL.csproj">
-      <Project>{f84f25a9-96d5-48f6-ac69-4d2cfeb75303}</Project>
-      <Name>BL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DA\DA.csproj">
-      <Project>{b14e0b54-9679-4b84-a1da-5e7210490dc8}</Project>
-      <Name>DA</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Helper\Helper.csproj">
       <Project>{0790da23-3d6e-441b-abbe-1629011f2b14}</Project>
       <Name>Helper</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Ubiquicity\Ubiquicity.csproj">
-      <Project>{3CFFC8B6-6FEA-42F2-9A68-AC1E418B4A90}</Project>
-      <Name>Ubiquicity</Name>
+    <ProjectReference Include="..\ORM\ORM.csproj">
+      <Project>{14368a50-7d72-479e-9a1d-fce6eb709e47}</Project>
+      <Name>ORM</Name>
     </ProjectReference>
   </ItemGroup>
-  <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

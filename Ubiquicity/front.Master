@@ -9,19 +9,25 @@
 <body>
 
 <header>
-  Datos de login
+    <asp:Panel ID="panelLogin" runat="server">
+
+    </asp:Panel>
 </header>
   <nav>
     <div>
         <asp:ContentPlaceHolder ID="navigationHolder" runat="server">
-        
         </asp:ContentPlaceHolder>
     </div>
   </nav>
     <aside>
         <div>
             <asp:ContentPlaceHolder ID="lateralHolder" runat="server">
-        
+                <form id="form1" runat="server">
+                <input id="txtUser" type="text" />
+                <br />
+                <input id="txtPassword" type="text" />
+                    <asp:Button ID="txtLogin" runat="server" OnClick="Button1_Click" Text="Login" />
+                </form>
             </asp:ContentPlaceHolder>
         </div>
     </aside>
@@ -39,5 +45,6 @@
 <footer>
   <p>Footer</p>
 </footer>
+    
 </body>
 </html>
