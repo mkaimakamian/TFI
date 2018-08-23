@@ -2,15 +2,24 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<%--<html xmlns="http://www.w3.org/1999/xhtml">--%>
+<html lang="en">
 <head runat="server">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="Content/bootstrap.css" rel="stylesheet" />
     <title>Ubiqui-city</title>
 </head>
 <body>
 
 <header>
     <asp:Panel ID="panelLogin" runat="server">
-
+        <form id="form1" runat="server">
+                <input id="txtUser" type="text" runat="server" />
+                <br />
+                <input id="txtPassword" type="text" runat="server" />
+                    <asp:Button ID="btnLogin" runat="server" OnClick="btnLogin_Click" Text="Login"/>
+                </form>
     </asp:Panel>
 </header>
   <nav>
@@ -22,24 +31,23 @@
     <aside>
         <div>
             <asp:ContentPlaceHolder ID="lateralHolder" runat="server">
-                <form id="form1" runat="server">
-                <input id="txtUser" type="text" />
-                <br />
-                <input id="txtPassword" type="text" />
-                    <asp:Button ID="txtLogin" runat="server" OnClick="Button1_Click" Text="Login" />
-                </form>
+                
             </asp:ContentPlaceHolder>
         </div>
     </aside>
 <section>
   
-  <article>
-    <div>
+<div class="container-fluid">
+  <%--<article>
+    <div>--%>
         <asp:ContentPlaceHolder ID="contentHolder" runat="server">
         
         </asp:ContentPlaceHolder>
-    </div>
-  </article>
+<%--    </div>
+  </article>--%>
+</div>
+
+
 </section>
 
 <footer>

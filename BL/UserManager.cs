@@ -66,33 +66,24 @@ namespace BL
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        public ResultBE Save(User user)
+        public bool Save(User user)
         {
-            ResultBE validation = ValidateForSave(user);
-            if (!validation.IsValid) return validation;
+            if (!IsValidForSave(user)) return false;
+            UserMapper mapper = new UserMapper();
 
-            try {
-                UserMapper mapper = new UserMapper();
+            // Setting up default values
+            user.Lastupdate = DateTime.Now;
+            user.Locked = true;
+            user.Active = false;
 
-                // Setting up default values
-                user.Lastupdate = DateTime.Now;
-                user.Locked = true;
-                user.Active = false;
-
-                if (mapper.Save(user))
-                {
-                    return new ResultBE(ResultBE.Type.OK);
-                } else
-                {
-                    return new ResultBE(ResultBE.Type.FAIL);
-                }
-
-            } catch (Exception e)
+            if (mapper.Save(user))
             {
-                //Notificar situación
-                return new ResultBE(ResultBE.Type.EXCEPTION, e.Message, e);
+                return true;
+            } else
+            {
+                AddError(new ResultBE(ResultBE.Type.FAIL, "Error al grabar"));
+                return false;
             }
-
         }
 
         public bool SaveForWeb(User user)
@@ -113,38 +104,43 @@ namespace BL
             return true;
         }
 
-        private ResultBE ValidateForSave(User user)
+        //TODO - agregar en ea
+        private bool IsValidForSave(User user)
         {
+            bool isValid = true;
+
             if (String.IsNullOrEmpty(user.Name))
             {
-                //Log
-                return new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, "EMPTY_FIELD_ERROR");
+                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, "EMPTY_FIELD_ERROR"));
+                isValid = false;
             }
 
             if (String.IsNullOrEmpty(user.Lastname))
             {
-                //Log
-                return new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, "EMPTY_FIELD_ERROR");
+                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, "EMPTY_FIELD_ERROR"));
+                isValid = false;
             }
 
             if (String.IsNullOrEmpty(user.Username))
             {
-                //Log
-                return new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, "EMPTY_FIELD_ERROR");
+                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, "EMPTY_FIELD_ERROR"));
+                isValid = false;
             }
 
             if (String.IsNullOrEmpty(user.Mail))
             {
-                //Log
-                return new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, "EMPTY_FIELD_ERROR");
+                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, "EMPTY_FIELD_ERROR"));
+                isValid = false;
             }
 
             if (String.IsNullOrEmpty(user.Password))
             {
-                //Log
-                return new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, "EMPTY_FIELD_ERROR");
+                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, "EMPTY_FIELD_ERROR"));
+                isValid = false;
             }
-            return new ResultBE(ResultBE.Type.OK);
+
+            //TODO - usuario no debe existir!!
+            return isValid;
         }
 
        

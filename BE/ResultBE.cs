@@ -16,7 +16,6 @@ namespace BE
             CHECKSUM_ERROR,
             INCOMPLETE_FIELDS,
             EXCEPTION,
-            CORRUPTED_DATABASE,
             FAIL,
             EMPTY_PROFILE,
             NULL

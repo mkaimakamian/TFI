@@ -23,8 +23,8 @@ namespace Ubiquicity.Tests
             user.Language = language;
 
             UserManager um = new UserManager();
-            ResultBE result = um.Save(user);
-            Assert.IsTrue(result.IsValid, "El valor debería haber sido True.");
+            bool result = um.Save(user);
+            Assert.IsTrue(result, "El valor debería haber sido True.");
 
             SessionManager sm = new SessionManager();
             User retrievedUser = sm.LogIn(user.Username, user.Password);

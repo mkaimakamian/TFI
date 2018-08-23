@@ -14,7 +14,7 @@ namespace BL
     {
      
         /// <summary>
-        /// Performs login action.
+        /// Autentica el usuario ante el sistema.
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
@@ -23,6 +23,9 @@ namespace BL
             if (!IsValid(username, password)) return null;
 
             UserMapper mapper = new UserMapper();
+            RoleManager roleManager = new RoleManager();
+            LanguageManager languageManager = new LanguageManager();
+
             User user = mapper.Get(username, password);
 
             if (user == null)
@@ -32,9 +35,9 @@ namespace BL
             }
             //if (!user.Active) return new ResultBE(ResultBE.Type.INACTIVE_USER, "Usuario inactivo: " + username);
 
-            //TODO - Ver si hay que incluir la opción de lockeo cuando el usuatio se eqiovoca
+            //TODO - Ver si hay que incluir la opción de lockeo cuando el usuario se equivoca
             //if (!user.Locked) return new ResultBE(ResultBE.Type.OK, "Usuario encontrado: " + username);
-            LanguageManager languageManager = new LanguageManager();
+            
             user.Language = languageManager.Get(user.Language.Id);
 
             if (languageManager.HasErrors)
@@ -42,10 +45,16 @@ namespace BL
                 Errors.AddRange(languageManager.Errors);
                 return null;
             }
+            
+            List<Role> roles = roleManager.Get(user);
 
-            // 2. recuperar permisos
+            if (roleManager.HasErrors)
+            {
+                Errors.AddRange(roleManager.Errors);
+                return null;
+            }
 
-            //El objeto para crear la sesión está listo.
+            user.Roles = roles;
             return user; 
         }
 

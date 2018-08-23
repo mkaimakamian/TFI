@@ -10,23 +10,23 @@ namespace BL
 {
     public class LanguageManager:BaseManager
     {
-        public bool CheckExistence(string name)
-        {
+        //public bool CheckExistence(string name)
+        //{
 
-            return true;
-        }
-
-        
-        public void Delete(int id)
-        {
-
-        }
+        //    return true;
+        //}
 
         
-        public void Edit(Language language)
-        {
+        //public void Delete(int id)
+        //{
 
-        }
+        //}
+
+        
+        //public void Edit(Language language)
+        //{
+
+        //}
 
         public Language Get(int id)
         {
@@ -42,21 +42,21 @@ namespace BL
             return language;
         }
 
-        public List<Language> Get()
-        {
+        //public List<Language> Get()
+        //{
 
-            return null;
-        }
+        //    return null;
+        //}
 
-        public List<Label> GetLabels()
-        {
+        //public List<Label> GetLabels()
+        //{
 
-            return null;
-        }
+        //    return null;
+        //}
 
-        public void Save(Language language)
-        {
+        //public void Save(Language language)
+        //{
 
-        }
+        //}
     }
 }

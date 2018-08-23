@@ -8,6 +8,7 @@
         [Encuestas]</p>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="contentHolder" runat="server">
+
     <p>
         En la página principal se incluirá...</p>
     <p>

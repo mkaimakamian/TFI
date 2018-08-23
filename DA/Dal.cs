@@ -98,7 +98,7 @@ namespace DA
             {
                 new SqlDataAdapter(command).Fill(dataBaseInfo);
                 return dataBaseInfo;
-            } catch
+            } catch (Exception e)
             {
                 return null;
             }
