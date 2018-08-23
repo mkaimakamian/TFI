@@ -14,7 +14,10 @@ namespace Ubiquicity
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["SessionCreated"] != null)
+            {
+                //loginForm.Visible = false;
+            }
         }
 
         protected void btnLogin_Click(object sender, EventArgs e)
@@ -23,10 +26,16 @@ namespace Ubiquicity
                 if (IsValid(txtUser.Value, txtPassword.Value)) {
                     SessionManager sessionManager = new SessionManager();
                     User user = sessionManager.LogIn(txtUser.Value, txtPassword.Value);
-                    SessionHelper.StartSession(user);
-                    Session.Add(user.Username, user);
-                    //Response.Redirect();
-                    
+
+                    if (sessionManager.HasErrors)
+                    {
+                        //mostrar error en pantalla
+                    } else
+                    {
+                        SessionHelper.StartSession(user);
+                        Session["SessionCreated"] = user;
+                        Response.Redirect(Request.RawUrl);
+                    }
                 }
             } catch (Exception exception)
             {
@@ -37,6 +46,7 @@ namespace Ubiquicity
         private bool IsValid(string username, string password)
         {
             return true;
+
         }
     }
 }

@@ -13,46 +13,54 @@
 <body>
 
 <header>
-    <asp:Panel ID="panelLogin" runat="server">
-        <form id="form1" runat="server">
-                <input id="txtUser" type="text" runat="server" />
-                <br />
-                <input id="txtPassword" type="text" runat="server" />
-                    <asp:Button ID="btnLogin" runat="server" OnClick="btnLogin_Click" Text="Login"/>
-                </form>
-    </asp:Panel>
+    <nav class="navbar navbar-light bg-light">
+      <a class="navbar-brand">Ubiqui-city</a>
+      <%--<div runat="server" id="loginForm">--%>
+          <form class="form-inline" runat="server">
+            <div class="form-group">
+                <label for="txtUser">Email address</label>
+                <input runat="server" type="text" CssClass="form-control" id="txtUser" aria-describedby="emailHelp" placeholder="Enter email">
+              </div>
+              <div class="form-group">
+                <label for="txtPassword">Password</label>
+                <input runat="server" type="password" CssClass="form-control" id="txtPassword" placeholder="Password">
+              </div>
+                <asp:Button ID="Button1" runat="server" CssClass="btn btn-primary" OnClick="btnLogin_Click" Text="Login"/>
+          </form>
+      <%--  </div>--%>
+    </nav>
 </header>
+
   <nav>
     <div>
         <asp:ContentPlaceHolder ID="navigationHolder" runat="server">
         </asp:ContentPlaceHolder>
     </div>
   </nav>
-    <aside>
-        <div>
+
+<section>
+  
+<div class="container-fluid">
+    <div class="row">
+  
+        <div class="col-6 col-md-4">
             <asp:ContentPlaceHolder ID="lateralHolder" runat="server">
                 
             </asp:ContentPlaceHolder>
         </div>
-    </aside>
-<section>
-  
-<div class="container-fluid">
-  <%--<article>
-    <div>--%>
-        <asp:ContentPlaceHolder ID="contentHolder" runat="server">
+        <div class="col-12 col-md-8">
+            <asp:ContentPlaceHolder ID="contentHolder" runat="server">
         
-        </asp:ContentPlaceHolder>
-<%--    </div>
-  </article>--%>
+            </asp:ContentPlaceHolder>
+        </div>
+    </div>
 </div>
 
 
 </section>
 
-<footer>
-  <p>Footer</p>
-</footer>
+    <div class="bg-light text-center py-3">Esto es un footer</a>
+    </div>
     
 </body>
 </html>

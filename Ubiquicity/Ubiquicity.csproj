@@ -68,6 +68,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="home.aspx" />
     <Content Include="packages.config" />
     <Content Include="front.Master" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
@@ -140,6 +141,13 @@
     </Compile>
     <Compile Include="front.Master.designer.cs">
       <DependentUpon>front.Master</DependentUpon>
+    </Compile>
+    <Compile Include="home.aspx.cs">
+      <DependentUpon>home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="home.aspx.designer.cs">
+      <DependentUpon>home.aspx</DependentUpon>
     </Compile>
     <Compile Include="index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>
