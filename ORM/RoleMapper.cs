@@ -36,33 +36,45 @@ namespace ORM
         //          return null;
         //      }
 
-        //      /// 
-        //      /// <param name="role"></param>
-        //      public boolean Exists(string role)
-        //      {
+        //TODO - Cambiar el tipo de parámetro en ea
+        /// <summary>
+        /// Chequea si existe un rol con el mismo nombre.
+        /// </summary>
+        /// <param name="role"></param>
+        /// <returns></returns>
+        public bool Exists(Role role)
+        {
 
-        //          return null;
-        //      }
+            Dal dal = new Dal();
+            Hashtable table = new Hashtable();
 
+            table.Add("@id", DBNull.Value);
+            table.Add("@userId", DBNull.Value);
+            table.Add("@name", role.Name);
+
+            DataSet result = dal.Read(table, "spReadRole");
+
+            return result != null && result.Tables[0].Rows.Count > 0;
+        }
         //      /// 
         //      /// <param name="id"></param>
         //      public Clases.BE.Role Get(int id)
         //      {
 
-        //          return null;
-        //      }
+            //          return null;
+            //      }
 
-        //      public List<Role> Get()
-        //      {
+            //      public List<Role> Get()
+            //      {
 
-        //          return null;
-        //      }
+            //          return null;
+            //      }
 
-        /// <summary>
-        /// Recupera el listado de roles a los que pertenece el usuario.
-        /// </summary>
-        /// <param name="user"></param>
-        /// <returns></returns>
+            /// <summary>
+            /// Recupera el listado de roles a los que pertenece el usuario.
+            /// </summary>
+            /// <param name="user"></param>
+            /// <returns></returns>
         public List<Role> Get(User user)
         {
             Dal dal = new Dal();
@@ -70,7 +82,8 @@ namespace ORM
 
             table.Add("@id", DBNull.Value);
             table.Add("@userId", user.Id);
-            
+            table.Add("@name", DBNull.Value);
+
             DataSet result = dal.Read(table, "spReadRole");
 
             if (result != null && result.Tables[0].Rows.Count > 0)
@@ -88,7 +101,7 @@ namespace ORM
                 return null;
             }
         }
-
+        
         private Role ConvertToModel(DataRow data)
         {
             return new Role
@@ -99,14 +112,23 @@ namespace ORM
             };
         }
 
-        //      /// 
-        //      /// <param name="role"></param>
-        //      public boolean Save(Role role)
-        //      {
+        /// <summary>
+        /// Persiste el rol.
+        /// </summary>
+        /// <param name="role"></param>
+        /// <returns></returns>
+        public bool Save(Role role)
+        {
+            Dal dal = new Dal();
+            Hashtable table = new Hashtable();
 
-        //          return null;
-        //      }
+            table.Add("@name", role.Name);
+            table.Add("@description", role.Description);
 
+            return dal.Write(table, "spWriteRole");
+        }
+
+        //TODO - ver si este método puede recibir únicamente User
         //      /// 
         //      /// <param name="user"></param>
         //      /// <param name="roles"></param>

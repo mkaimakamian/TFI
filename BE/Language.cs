@@ -42,6 +42,10 @@ namespace BE
         {
             get
             {
+                if (translations == null)
+                {
+                    translations = new List<Translation>();
+                }
                 return translations;
             }
 

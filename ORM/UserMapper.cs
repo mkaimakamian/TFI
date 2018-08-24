@@ -39,6 +39,7 @@ namespace ORM
         private User ConvertToModel(DataRow data)
         {
             User user = new User();
+            user.Id = Convert.ToInt32(data["id"].ToString());
             user.Username = data["username"].ToString();
             user.Password = data["password"].ToString();
             user.Mail = data["mail"].ToString();
@@ -52,47 +53,47 @@ namespace ORM
         }
         
 
-		public bool Delete(int id)
-        {
+		//public bool Delete(int id)
+  //      {
 
-            return true;
-        }
+  //          return true;
+  //      }
 
-        public bool Edit(User user)
-        {
+  //      public bool Edit(User user)
+  //      {
 
-            return true;
-        }
+  //          return true;
+  //      }
 
-        public bool Exists(string username)
-        {
+  //      public bool Exists(string username)
+  //      {
 
-            return true;
-        }
+  //          return true;
+  //      }
 
-        public List<User> Get()
-        {
+  //      public List<User> Get()
+  //      {
 
-            return null;
-        }
+  //          return null;
+  //      }
 
-        public User Get(int id)
-        {
+  //      public User Get(int id)
+  //      {
 
-            return null;
-        }
+  //          return null;
+  //      }
 
-        public User Get(string username)
-        {
+  //      public User Get(string username)
+  //      {
 
-            return null;
-        }
+  //          return null;
+  //      }
         
-        public List<User> Get(List<QueryFilter> queryFilter)
-        {
+  //      public List<User> Get(List<QueryFilter> queryFilter)
+  //      {
 
-            return null;
-        }
+  //          return null;
+  //      }
 
         /// <summary>
         /// Save an user into database.
@@ -114,7 +115,7 @@ namespace ORM
             table.Add("@lastname", user.Lastname);
             table.Add("@lastupdate", user.Lastupdate);
 
-            return dal.Write(table, "spSaveUser");
+            return dal.Write(table, "spWriteUse");
         }
     }
 }

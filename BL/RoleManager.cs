@@ -83,13 +83,39 @@ namespace BL
             return roles;
         }
 
-        //      /// 
-        //      /// <param name="role"></param>
-        //      public boolean Save(Role role)
-        //      {
+        /// <summary>
+        /// Persiste el rol y los permisos asociados.
+        /// </summary>
+        /// <param name="role"></param>
+        /// <returns></returns>
+        public bool Save(Role role)
+        {
 
-        //          return null;
-        //      }
+            RoleMapper roleMapper = new RoleMapper();
+            RolePermissionMapper rolePermissionMapper = new RolePermissionMapper();
+
+            if (!IsValid(role)) return false;
+
+            if (roleMapper.Exists(role))
+            {
+                AddError(new ResultBE(ResultBE.Type.ALREADY_EXISTS, "Rol existente"));
+                return false;
+            }
+
+            if (!roleMapper.Save(role))
+            {
+                AddError(new ResultBE(ResultBE.Type.FAIL, "Error al grabar rol"));
+                return false;
+            }
+
+            if (!rolePermissionMapper.Save(role))
+            {
+                AddError(new ResultBE(ResultBE.Type.FAIL, "Error al grabar permisos"));
+                return false;
+            }
+
+            return true;
+        }
 
         //      /// 
         //      /// <param name="user"></param>
@@ -99,6 +125,25 @@ namespace BL
 
         //          return null;
         //      }
+
+        private bool IsValid(Role role)
+        {
+            bool isValid = true;
+
+            if (String.IsNullOrEmpty(role.Name))
+            {
+                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, "EMPTY_FIELD_ERROR"));
+                isValid = false;
+            }
+
+            if(role.Permissions.Count == 0)
+            {
+                AddError(new ResultBE(ResultBE.Type.EMPTY, "EMPTY_FIELD_ERROR"));
+                isValid = false;
+            }
+
+            return isValid;
+        }
 
     }
 }

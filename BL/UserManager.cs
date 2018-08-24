@@ -68,22 +68,22 @@ namespace BL
         /// <returns></returns>
         public bool Save(User user)
         {
-            if (!IsValidForSave(user)) return false;
             UserMapper mapper = new UserMapper();
+
+            if (!IsValidForSave(user)) return false;
 
             // Setting up default values
             user.Lastupdate = DateTime.Now;
             user.Locked = true;
             user.Active = false;
 
-            if (mapper.Save(user))
-            {
-                return true;
-            } else
+            if (!mapper.Save(user))
             {
                 AddError(new ResultBE(ResultBE.Type.FAIL, "Error al grabar"));
-                return false;
+                return false;                
             }
+
+            return true;
         }
 
         public bool SaveForWeb(User user)

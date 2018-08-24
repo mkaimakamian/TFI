@@ -18,7 +18,9 @@ namespace BE
             EXCEPTION,
             FAIL,
             EMPTY_PROFILE,
-            NULL
+            NULL,
+            EMPTY,
+            ALREADY_EXISTS
         };
 
         private Type type;

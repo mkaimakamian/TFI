@@ -14,9 +14,16 @@ namespace Ubiquicity
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["SessionCreated"] != null)
-            {
-                //loginForm.Visible = false;
+            if(!IsPostBack) { 
+                if (Session["SessionCreated"] != null)
+                {
+
+                    //1. Ocultar el form de logueo y mostrar nombre
+                    panelLogin.Visible = false;
+
+                    //2. Mostrar menú
+
+                }
             }
         }
 
@@ -34,6 +41,7 @@ namespace Ubiquicity
                     {
                         SessionHelper.StartSession(user);
                         Session["SessionCreated"] = user;
+
                         Response.Redirect(Request.RawUrl);
                     }
                 }
@@ -45,6 +53,7 @@ namespace Ubiquicity
 
         private bool IsValid(string username, string password)
         {
+            //TODO - Validar los inputs
             return true;
 
         }
