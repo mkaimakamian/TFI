@@ -5,12 +5,15 @@
 <%--<html xmlns="http://www.w3.org/1999/xhtml">--%>
 <html lang="en">
 <head runat="server">
+    <title>Ubiqui-city</title>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="Content/bootstrap.css" rel="stylesheet" />
     <script src="Scripts/popper.js"></script>
     <script src="Scripts/jquery-3.3.1.js"></script>
-    <title>Ubiqui-city</title>
+    <script src="Scripts/bootstrap.js"></script>
+
 </head>
 <body>
 
@@ -18,18 +21,13 @@
     <nav class="navbar navbar-light bg-light">
       <a class="navbar-brand">Ubiqui-city</a>
        
+        <!-- Visibilidad controlada por backend -->
         <asp:Panel ID="panelLogin" runat="server" >
-          <form class="form-inline" runat="server">
-            <div class="form-group">
-                <label for="txtUser">Usuario</label>
-                <input runat="server" type="text" CssClass="form-control" id="txtUser" aria-describedby="emailHelp" placeholder="Usuario">
-              </div>
-              <div class="form-group">
-                <label for="txtPassword">Password</label>
-                <input runat="server" type="password" CssClass="form-control" id="txtPassword" placeholder="Password">
-              </div>
-                <asp:Button ID="Button1" runat="server" CssClass="btn btn-primary" OnClick="btnLogin_Click" Text="Login"/>
-          </form>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">Login</button>
+        </asp:Panel>
+        <asp:Panel ID="panelAlreadyLogged" runat="server" >
+       <%-- <asp:Button runat="server" CssClass="btn btn-secondary" Text="Logout"/>--%>
+            <button type="button" class="btn btn-secondary" data-toggle="modal" >Logout</button>
         </asp:Panel>
 
     </nav>
@@ -42,11 +40,8 @@
     </div>
   </nav>
 
-<section>
-  
 <div class="container-fluid">
     <div class="row">
-  
         <div class="col-6 col-md-4">
             <asp:ContentPlaceHolder ID="lateralHolder" runat="server">
                 
@@ -60,11 +55,42 @@
     </div>
 </div>
 
-
-</section>
-
-    <div class="bg-light text-center py-3">Esto es un footer</a>
+    <div class="bg-light text-center py-3">Esto es un footer
     </div>
-    
+
+<!-- Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="loginModalTitle">Login</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <form runat="server">
+      <div class="modal-body">
+            <div class="form-group">
+                <label for="txtUser">Usuario</label>
+                <input runat="server" type="text" CssClass="form-control" id="txtUser" aria-describedby="emailHelp" placeholder="Usuario">
+              </div>
+              <div class="form-group">
+                <label for="txtPassword">Password</label>
+                <input runat="server" type="password" CssClass="form-control" id="txtPassword" placeholder="Password">
+              </div>
+      </div>
+      <div class="modal-footer">
+          <asp:Button ID="btnLogin" runat="server" CssClass="btn btn-primary" OnClick="btnLogin_Click" Text="Login"/>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+         <button type="button" class="btn btn-primary">Olvidé contraseña</button>
+      </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+    <UCmmb:UCModalMessageBox runat="server" ID="customAlertBox" />
 </body>
 </html>

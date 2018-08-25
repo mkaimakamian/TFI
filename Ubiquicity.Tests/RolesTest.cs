@@ -7,7 +7,7 @@ using BL;
 namespace Ubiquicity.Tests
 {
     [TestClass]
-    public class RoleTest
+    public class RolesTest
     {
         [TestMethod]
         public void RetrieveRoles()
@@ -17,7 +17,7 @@ namespace Ubiquicity.Tests
 
             RoleManager roleManager = new RoleManager();
             List<Role> roles = roleManager.Get(user);
-            
+
             Assert.IsFalse(roleManager.HasErrors, "No debería contener errores.");
 
             Assert.IsTrue(roles.Count > 0, "Debería contener elementos.");

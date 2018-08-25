@@ -14,40 +14,37 @@ namespace Ubiquicity
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(!IsPostBack) { 
-                if (Session["SessionCreated"] != null)
-                {
+            if (!IsPostBack) {
+                bool logged = Session["SessionCreated"] != null;
 
-                    //1. Ocultar el form de logueo y mostrar nombre
-                    panelLogin.Visible = false;
-
-                    //2. Mostrar menú
-
-                }
+                panelLogin.Visible = !logged;
+                panelAlreadyLogged.Visible = logged;
+                //falta el menu
             }
         }
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
-            try {   
+            try
+            {   
                 if (IsValid(txtUser.Value, txtPassword.Value)) {
                     SessionManager sessionManager = new SessionManager();
                     User user = sessionManager.LogIn(txtUser.Value, txtPassword.Value);
 
                     if (sessionManager.HasErrors)
                     {
-                        //mostrar error en pantalla
+                        ShowAlert("Exception", sessionManager.Errors[0].description);
+
                     } else
                     {
                         SessionHelper.StartSession(user);
                         Session["SessionCreated"] = user;
-
                         Response.Redirect(Request.RawUrl);
                     }
                 }
             } catch (Exception exception)
             {
-                //mostrar mensaje de error
+                ShowAlert("Exception", exception.Message);
             }
         }
 
@@ -56,6 +53,13 @@ namespace Ubiquicity
             //TODO - Validar los inputs
             return true;
 
+        }
+
+        private void ShowAlert(string title, string message)
+        {
+            customAlertBox.title = title;
+            customAlertBox.message = message;
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "openModal", "window.onload = function() { $('#ucModalMessageBox').modal('show'); }", true);
         }
     }
 }
