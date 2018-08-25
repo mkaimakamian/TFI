@@ -10,9 +10,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="Content/bootstrap.css" rel="stylesheet" />
-    <script src="Scripts/popper.js"></script>
-    <script src="Scripts/jquery-3.3.1.js"></script>
-    <script src="Scripts/bootstrap.js"></script>
+
+    <script type="text/javascript">
+        function logout(){
+           <%= Session["SessionCreated"] = null %>
+            //document.location.reload(true);
+        }
+    </script>
 
 </head>
 <body>
@@ -27,7 +31,7 @@
         </asp:Panel>
         <asp:Panel ID="panelAlreadyLogged" runat="server" >
        <%-- <asp:Button runat="server" CssClass="btn btn-secondary" Text="Logout"/>--%>
-            <button type="button" class="btn btn-secondary" data-toggle="modal" >Logout</button>
+            <button type="button" class="btn btn-secondary" data-toggle="modal" onclick="Logout()" >Logout</button>
         </asp:Panel>
 
     </nav>
@@ -92,5 +96,9 @@
 </div>
 
     <UCmmb:UCModalMessageBox runat="server" ID="customAlertBox" />
+
+    <script src="Scripts/popper.js"></script>
+    <script src="Scripts/jquery-3.3.1.js"></script>
+    <script src="Scripts/bootstrap.js"></script>
 </body>
 </html>

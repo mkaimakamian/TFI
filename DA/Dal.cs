@@ -45,28 +45,32 @@ namespace DA
         /// <returns></returns>
         public bool Write(Hashtable table, String sql)
         {
-            SqlConnection connection = new SqlConnection(connStr);
-            connection.Open();
-            SqlTransaction transaction = connection.BeginTransaction();
-            SqlCommand command = new SqlCommand(sql, connection);
-            command.CommandType = CommandType.StoredProcedure;
-            command.Transaction = transaction;
-
-            if (table != null) {
-                foreach (string data in table.Keys) {
-                    command.Parameters.AddWithValue(data, table[data]);
-                }
-            }
+            SqlConnection connection = null;
+            SqlTransaction transaction = null;
+            SqlCommand command = null;
 
             try
             {
-                command.ExecuteNonQuery();
+               connection = new SqlConnection(connStr);
+                connection.Open();
+                transaction = connection.BeginTransaction();
+                command = new SqlCommand(sql, connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Transaction = transaction;
+
+                if (table != null) {
+                    foreach (string data in table.Keys) {
+                        command.Parameters.AddWithValue(data, table[data]);
+                    }
+                }
+            
+                int affected = command.ExecuteNonQuery();
                 transaction.Commit();
-                return true;
-            } catch //(Exception e)
+                return affected > 0;
+            } catch (Exception e)
             {
                 transaction.Rollback();
-                return false;
+                throw e;
             } finally
             {
                 connection.Close();
@@ -100,7 +104,10 @@ namespace DA
                 return dataBaseInfo;
             } catch (Exception e)
             {
-                return null;
+                throw e;
+            } finally
+            {
+                connection.Close();
             }
         }
     }
