@@ -61,5 +61,11 @@ namespace Ubiquicity
             customAlertBox.message = message;
             Page.ClientScript.RegisterStartupScript(this.GetType(), "openModal", "window.onload = function() { $('#ucModalMessageBox').modal('show'); }", true);
         }
+
+        protected void btnLogout_Click(object sender, EventArgs e)
+        {
+            Session.Remove("SessionCreated");
+            Response.Redirect(Request.RawUrl);
+        }
     }
 }

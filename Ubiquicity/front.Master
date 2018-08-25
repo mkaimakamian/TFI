@@ -11,16 +11,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="Content/bootstrap.css" rel="stylesheet" />
 
-    <script type="text/javascript">
-        function logout(){
-           <%= Session["SessionCreated"] = null %>
-            //document.location.reload(true);
-        }
-    </script>
-
 </head>
 <body>
-
+<form runat="server">
 <header>
     <nav class="navbar navbar-light bg-light">
       <a class="navbar-brand">Ubiqui-city</a>
@@ -30,8 +23,7 @@
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">Login</button>
         </asp:Panel>
         <asp:Panel ID="panelAlreadyLogged" runat="server" >
-       <%-- <asp:Button runat="server" CssClass="btn btn-secondary" Text="Logout"/>--%>
-            <button type="button" class="btn btn-secondary" data-toggle="modal" onclick="Logout()" >Logout</button>
+        <asp:Button ID="btnLogout" runat="server" CssClass="btn btn-secondary" Text="Logout"  OnClick="btnLogout_Click"/>
         </asp:Panel>
 
     </nav>
@@ -73,7 +65,7 @@
         </button>
       </div>
 
-      <form runat="server">
+      <%--<form runat="server">--%>
       <div class="modal-body">
             <div class="form-group">
                 <label for="txtUser">Usuario</label>
@@ -89,14 +81,14 @@
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
          <button type="button" class="btn btn-primary">Olvidé contraseña</button>
       </div>
-      </form>
+     <%-- </form>--%>
 
     </div>
   </div>
 </div>
 
     <UCmmb:UCModalMessageBox runat="server" ID="customAlertBox" />
-
+</form>
     <script src="Scripts/popper.js"></script>
     <script src="Scripts/jquery-3.3.1.js"></script>
     <script src="Scripts/bootstrap.js"></script>
