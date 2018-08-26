@@ -15,12 +15,12 @@ namespace Ubiquicity
         {
             if (!IsPostBack)
             {
-                RefreshContent();
+                LoadGrid();
             }
 
         }
 
-        private void RefreshContent()
+        private void LoadGrid()
         {
             try {
 
@@ -36,6 +36,43 @@ namespace Ubiquicity
                     gvUser.DataBind();
                 }
                 }
+            catch (Exception exception)
+            {
+                ShowAlert("Exception", exception.Message);
+            }
+        }
+
+        protected void gvUser_OnRowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            int id = Convert.ToInt32(e.CommandArgument);
+
+            try
+            {
+                UserManager userManager = new UserManager();
+
+                if (e.CommandName == "EditItem")
+                {
+                    User user = userManager.Get(id);
+
+                    if (userManager.HasErrors)
+                    {
+                        ShowAlert("Error", userManager.Errors[0].description);
+                    }
+                    else
+                    {
+                        UCFormNewMember.Fill(user);
+                    }
+               
+
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "openModal", "window.onload = function() { $('#ucModalNewMember').modal('show'); }", true);
+                }
+                else if (e.CommandName == "DeleteItem")
+                {
+                    //TODO -  Agregar confirmación
+                    userManager.Delete(id);
+                    LoadGrid();
+                }
+            }
             catch (Exception exception)
             {
                 ShowAlert("Exception", exception.Message);

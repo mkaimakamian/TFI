@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using BE;
 
 namespace Ubiquicity.UserControls
 {
@@ -13,5 +14,16 @@ namespace Ubiquicity.UserControls
         {
 
         }
+
+        public void Fill(User user)
+        {
+            firstNameInput.Value = user.Name;
+            lastNameInput.Value = user.Lastname;
+            mailInput.Value = user.Mail;
+        }
+        
+        //public string FirstName {
+        //    get { return firstNameInput.Value; } set { firstNameInput.Value = value; }
+        //}
     }
 }

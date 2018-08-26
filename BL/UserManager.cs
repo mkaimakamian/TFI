@@ -27,8 +27,8 @@ namespace BL
 
         public bool Delete(int id)
         {
-
-            return true;
+            UserMapper mapper = new UserMapper();
+            return mapper.Delete(id);
         }
 
         public bool Edit(User user)
@@ -49,14 +49,45 @@ namespace BL
                 return null;
             }
 
-            
             return users;
         }
 
         public User Get(int id)
         {
+            UserMapper mapper = new UserMapper();
+            //RoleManager roleManager = new RoleManager();
+            LanguageManager languageManager = new LanguageManager();
 
-            return null;
+            User user = mapper.Get(id);
+
+            if (user == null)
+            {
+                AddError(new ResultBE(ResultBE.Type.NULL, "Usuario no existe: " + id));
+                return null;
+            }
+            //if (!user.Active) return new ResultBE(ResultBE.Type.INACTIVE_USER, "Usuario inactivo: " + username);
+
+            //TODO - Ver si hay que incluir la opción de lockeo cuando el usuario se equivoca
+            //if (!user.Locked) return new ResultBE(ResultBE.Type.OK, "Usuario encontrado: " + username);
+
+            user.Language = languageManager.Get(user.Language.Id);
+
+            if (languageManager.HasErrors)
+            {
+                Errors.AddRange(languageManager.Errors);
+                return null;
+            }
+
+            //List<Role> roles = roleManager.Get(user);
+
+            //if (roleManager.HasErrors)
+            //{
+            //    Errors.AddRange(roleManager.Errors);
+            //    return null;
+            //}
+
+            //user.Roles = roles;
+            return user;
         }
 
         public User Get(string username)

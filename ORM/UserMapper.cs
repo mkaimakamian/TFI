@@ -15,7 +15,7 @@ namespace ORM
         {
             Dal dal = new Dal();
             Hashtable table = new Hashtable();
-
+            
             table.Add("@username", username);
             table.Add("@password", password);
 
@@ -30,11 +30,31 @@ namespace ORM
             }
         }
 
+        public User Get(int id)
+        {
+            Dal dal = new Dal();
+            Hashtable table = new Hashtable();
+            User user = null;
+
+            table.Add("@id", id);
+
+            DataSet result = dal.Read(table, "spReadUser");
+
+            if (result != null && result.Tables[0].Rows.Count > 0)
+            {
+                user =  ConvertToModel(result.Tables[0].Rows[0]);
+            }
+
+            return user;
+        }
+
         public List<User> Get()
         {
             Dal dal = new Dal();
             Hashtable table = new Hashtable();
             List<User> users = null;
+
+            table.Add("@id", DBNull.Value);
 
             DataSet result = dal.Read(table, "spReadUser");
 
@@ -50,6 +70,15 @@ namespace ORM
 
             return users;
         }
+
+        public bool Delete(int id)
+        {
+            Dal dal = new Dal();
+            Hashtable table = new Hashtable();
+            table.Add("@id", id);
+            return dal.Write(table, "spDeleteUser");
+        }
+
 
         // TODO - Agregar en EA
         /// <summary>
@@ -74,11 +103,7 @@ namespace ORM
         }
 
 
-        //public bool Delete(int id)
-        //      {
 
-        //          return true;
-        //      }
 
         //      public bool Edit(User user)
         //      {
@@ -94,11 +119,7 @@ namespace ORM
 
 
 
-        //      public User Get(int id)
-        //      {
 
-        //          return null;
-        //      }
 
         //      public User Get(string username)
         //      {
