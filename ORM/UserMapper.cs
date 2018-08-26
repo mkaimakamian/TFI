@@ -30,6 +30,27 @@ namespace ORM
             }
         }
 
+        public List<User> Get()
+        {
+            Dal dal = new Dal();
+            Hashtable table = new Hashtable();
+            List<User> users = null;
+
+            DataSet result = dal.Read(table, "spReadUser");
+
+            if (result != null && result.Tables[0].Rows.Count > 0)
+            {
+                users = new List<User>();
+
+                foreach (DataRow data in result.Tables[0].Rows)
+                {
+                    users.Add(ConvertToModel(data));
+                }
+            }
+
+            return users;
+        }
+
         // TODO - Agregar en EA
         /// <summary>
         /// Convierte el dataset al modelo de datos correspondiente.
@@ -51,49 +72,45 @@ namespace ORM
             user.Lastupdate = Convert.ToDateTime(data["lastupdate"]);
             return user;
         }
-        
 
-		//public bool Delete(int id)
-  //      {
 
-  //          return true;
-  //      }
+        //public bool Delete(int id)
+        //      {
 
-  //      public bool Edit(User user)
-  //      {
+        //          return true;
+        //      }
 
-  //          return true;
-  //      }
+        //      public bool Edit(User user)
+        //      {
 
-  //      public bool Exists(string username)
-  //      {
+        //          return true;
+        //      }
 
-  //          return true;
-  //      }
+        //      public bool Exists(string username)
+        //      {
 
-  //      public List<User> Get()
-  //      {
+        //          return true;
+        //      }
 
-  //          return null;
-  //      }
 
-  //      public User Get(int id)
-  //      {
 
-  //          return null;
-  //      }
+        //      public User Get(int id)
+        //      {
 
-  //      public User Get(string username)
-  //      {
+        //          return null;
+        //      }
 
-  //          return null;
-  //      }
-        
-  //      public List<User> Get(List<QueryFilter> queryFilter)
-  //      {
+        //      public User Get(string username)
+        //      {
 
-  //          return null;
-  //      }
+        //          return null;
+        //      }
+
+        //      public List<User> Get(List<QueryFilter> queryFilter)
+        //      {
+
+        //          return null;
+        //      }
 
         /// <summary>
         /// Save an user into database.

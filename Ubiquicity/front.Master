@@ -16,11 +16,12 @@
 <form runat="server">
 <header>
     <nav class="navbar navbar-light bg-light">
-      <a class="navbar-brand">Ubiqui-city</a>
+      <a class="navbar-brand" href="index.aspx">Ubiqui-city</a>
        
         <!-- Visibilidad controlada por backend -->
         <asp:Panel ID="panelLogin" runat="server" >
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">Login</button>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ucModalNewMember">¡Soy nuevo!</button>
         </asp:Panel>
         <asp:Panel ID="panelAlreadyLogged" runat="server" >
         <asp:Button ID="btnLogout" runat="server" CssClass="btn btn-secondary" Text="Logout"  OnClick="btnLogout_Click"/>
@@ -31,22 +32,44 @@
 
   <nav>
     <div>
-        <asp:ContentPlaceHolder ID="navigationHolder" runat="server">
-        </asp:ContentPlaceHolder>
+   
+        <asp:Menu ID="mnuSection" runat="server" Orientation="Horizontal">
+            <Items>
+                <asp:MenuItem Text="Contenido" Value="Contenido">
+                    <asp:MenuItem Text="Novedades" Value="Novedades"></asp:MenuItem>
+                    <asp:MenuItem Text="Artículos" Value="Artículos"></asp:MenuItem>
+                    <asp:MenuItem Text="Idiomas" Value="Idiomas"></asp:MenuItem>
+                    <asp:MenuItem Text="Categoría de negocios" Value="Categoría de negocios"></asp:MenuItem>
+                    <asp:MenuItem Text="Marketing mix" Value="Marketing mix"></asp:MenuItem>
+                </asp:MenuItem>
+                <asp:MenuItem Text="Ventas" Value="Ventas">
+                    <asp:MenuItem Text="Créditos / débitos" Value="Créditos / débitos"></asp:MenuItem>
+                    <asp:MenuItem Text="Promoción" Value="Promoción"></asp:MenuItem>
+                    <asp:MenuItem Text="Códigos de canje" Value="Códigos de canje"></asp:MenuItem>
+                    <asp:MenuItem Text="Niveles de aprobación" Value="Niveles de aprobación"></asp:MenuItem>
+                </asp:MenuItem>
+                <asp:MenuItem Text="Seguridad" Value="Seguridad">
+                    <asp:MenuItem Text="Bitácora" Value="Bitácora"></asp:MenuItem>
+                    <asp:MenuItem NavigateUrl="~/user.aspx" Text="Usuarios" Value="Usuarios"></asp:MenuItem>
+                    <asp:MenuItem Text="Roles" Value="Roles"></asp:MenuItem>
+                    <asp:MenuItem Text="Roles y usuarios" Value="Roles y usuarios"></asp:MenuItem>
+                    <asp:MenuItem Text="Respaldo" Value="Respaldo"></asp:MenuItem>
+                </asp:MenuItem>
+                <asp:MenuItem Text="Perfil de usuario" Value="Perfil de usuario"></asp:MenuItem>
+                <asp:MenuItem NavigateUrl="~/about.aspx" Text="Nosotros" Value="Nosotros"></asp:MenuItem>
+                <asp:MenuItem NavigateUrl="~/privacy.aspx" Text="Privacidad" Value="Privacidad"></asp:MenuItem>
+                <asp:MenuItem NavigateUrl="~/contact.aspx" Text="Contacto" Value="Contacto"></asp:MenuItem>
+            </Items>
+            </asp:Menu>
     </div>
   </nav>
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-6 col-md-4">
-            <asp:ContentPlaceHolder ID="lateralHolder" runat="server">
-                
-            </asp:ContentPlaceHolder>
-        </div>
         <div class="col-12 col-md-8">
             <asp:ContentPlaceHolder ID="contentHolder" runat="server">
         
-            </asp:ContentPlaceHolder>
+            </asp:ContentPlaceHolder>         
         </div>
     </div>
 </div>
@@ -54,7 +77,7 @@
     <div class="bg-light text-center py-3">Esto es un footer
     </div>
 
-<!-- Modal -->
+<!-- Modal Login -->
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -65,15 +88,14 @@
         </button>
       </div>
 
-      <%--<form runat="server">--%>
       <div class="modal-body">
             <div class="form-group">
                 <label for="txtUser">Usuario</label>
-                <input runat="server" type="text" CssClass="form-control" id="txtUser" aria-describedby="emailHelp" placeholder="Usuario">
+                <input id="txtUser" runat="server" type="text" class="form-control"  placeholder="Ingrese usuario">
               </div>
               <div class="form-group">
                 <label for="txtPassword">Password</label>
-                <input runat="server" type="password" CssClass="form-control" id="txtPassword" placeholder="Password">
+                  <input id="txtPassword" runat="server" type="password" class="form-control"  placeholder="Ingrese password">
               </div>
       </div>
       <div class="modal-footer">
@@ -81,13 +103,27 @@
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
          <button type="button" class="btn btn-primary">Olvidé contraseña</button>
       </div>
-     <%-- </form>--%>
 
     </div>
   </div>
 </div>
 
-    <UCmmb:UCModalMessageBox runat="server" ID="customAlertBox" />
+    <!-- new member -->
+    <div class="modal fade" id="ucModalNewMember" tabindex="-1" role="dialog" aria-labelledby="Registro" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <UCmkc:UCModalTitle runat="server" id="UCModalTitle" title="XXXXXX"  />
+                <ucmkc:ucformnewmember runat="server" ID="UCFormNewMember" />
+                <div class="modal-footer">
+                    <asp:Button ID="btnRegister" runat="server" CssClass="btn btn-primary" Text="Registrarse"/>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+         </div>
+    </div>
+
+
+    <UCmkc:UCModalMessageBox runat="server" ID="customAlertBox" />
 </form>
     <script src="Scripts/popper.js"></script>
     <script src="Scripts/jquery-3.3.1.js"></script>

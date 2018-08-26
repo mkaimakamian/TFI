@@ -40,22 +40,13 @@ namespace Ubiquicity {
         protected global::System.Web.UI.WebControls.Button btnLogout;
         
         /// <summary>
-        /// navigationHolder control.
+        /// mnuSection control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder navigationHolder;
-        
-        /// <summary>
-        /// lateralHolder control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder lateralHolder;
+        protected global::System.Web.UI.WebControls.Menu mnuSection;
         
         /// <summary>
         /// contentHolder control.
@@ -92,6 +83,33 @@ namespace Ubiquicity {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnLogin;
+        
+        /// <summary>
+        /// UCModalTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ubiquicity.UserControls.UCModalTitle UCModalTitle;
+        
+        /// <summary>
+        /// UCFormNewMember control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ubiquicity.UserControls.UCModalNewMember UCFormNewMember;
+        
+        /// <summary>
+        /// btnRegister control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnRegister;
         
         /// <summary>
         /// customAlertBox control.

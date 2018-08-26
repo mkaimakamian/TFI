@@ -39,8 +39,18 @@ namespace BL
 
         public List<User> Get()
         {
+            UserMapper mapper = new UserMapper();
 
-            return null;
+            List<User> users = mapper.Get();
+
+            if (users == null)
+            {
+                AddError(new ResultBE(ResultBE.Type.EMPTY, "Sin usuarios "));
+                return null;
+            }
+
+            
+            return users;
         }
 
         public User Get(int id)

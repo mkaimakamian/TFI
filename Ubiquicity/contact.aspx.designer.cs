@@ -11,7 +11,7 @@ namespace Ubiquicity
 {
 
 
-    public partial class home
+    public partial class contact
     {
     }
 }

@@ -79,6 +79,7 @@ namespace ORM
         {
             Dal dal = new Dal();
             Hashtable table = new Hashtable();
+            List<Role> roles = null;
 
             table.Add("@id", DBNull.Value);
             table.Add("@userId", user.Id);
@@ -88,18 +89,14 @@ namespace ORM
 
             if (result != null && result.Tables[0].Rows.Count > 0)
             {
-                List<Role> roles = new List<Role>();
+                roles = new List<Role>();
 
                 foreach (DataRow data in result.Tables[0].Rows) {
                     roles.Add(ConvertToModel(data));
                 }
+            }
 
-                return roles;
-            }
-            else
-            {
-                return null;
-            }
+            return roles;
         }
         
         private Role ConvertToModel(DataRow data)

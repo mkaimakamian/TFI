@@ -33,7 +33,7 @@ namespace Ubiquicity
 
                     if (sessionManager.HasErrors)
                     {
-                        ShowAlert("Exception", sessionManager.Errors[0].description);
+                        ShowAlert("Error", sessionManager.Errors[0].description);
 
                     } else
                     {
@@ -67,5 +67,6 @@ namespace Ubiquicity
             Session.Remove("SessionCreated");
             Response.Redirect(Request.RawUrl);
         }
+
     }
 }
