@@ -109,7 +109,7 @@
 </div>
 
     <!-- new member -->
-    <div class="modal fade" id="ucModalNewMember" tabindex="-1" role="dialog" aria-labelledby="Registro" aria-hidden="true">
+   <%-- <div class="modal fade" id="ucModalNewMember" tabindex="-1" role="dialog" aria-labelledby="Registro" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <UCmkc:UCModalTitle runat="server" id="UCModalTitle" title="XXXXXX"  />
@@ -120,7 +120,7 @@
                 </div>
             </div>
          </div>
-    </div>
+    </div>--%>
 
 
     <UCmkc:UCModalMessageBox runat="server" ID="customAlertBox" />

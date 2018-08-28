@@ -15,15 +15,58 @@ namespace Ubiquicity.UserControls
 
         }
 
-        public void Fill(User user)
+        public void FillForm(User user)
         {
-            firstNameInput.Value = user.Name;
-            lastNameInput.Value = user.Lastname;
-            mailInput.Value = user.Mail;
+            FirstName = user.Name;
+            LastName = user.Lastname;
+            Mail = user.Mail;
+            UserName = user.Username;
+            Password = user.Password;
+            PasswordVerification = user.Password;
+            //Language = 
+
         }
-        
-        //public string FirstName {
-        //    get { return firstNameInput.Value; } set { firstNameInput.Value = value; }
+
+        public string FirstName
+        {
+            get { return firstNameInput.Value; }
+            set { firstNameInput.Value = value; }
+        }
+
+        public string LastName
+        {
+            get { return lastNameInput.Value; }
+            set { lastNameInput.Value = value; }
+        }
+
+        public string Mail
+        {
+            get { return mailInput.Value; }
+            set { mailInput.Value = value; }
+        }
+
+        public string UserName
+        {
+            get { return userInput.Value; }
+            set { userInput.Value = value; }
+        }
+
+        public string Password
+        {
+            get { return passwordInput.Value; }
+            set { passwordInput.Value = value; }
+        }
+
+        public string PasswordVerification
+        {
+            get { return passwordVerificationInput.Value; }
+            set { passwordVerificationInput.Value = value; }
+        }
+
+        //public string Language
+        //{
+        //    get { return passwordVerificationInput.Value; }
+        //    set { passwordVerificationInput.Value = value; }
         //}
     }
 }

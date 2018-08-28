@@ -19,10 +19,11 @@ namespace Ubiquicity
 
                 panelLogin.Visible = !logged;
                 panelAlreadyLogged.Visible = logged;
-                //falta el menu
+                //falta el menu            
             }
-        }
 
+        }
+        
         protected void btnLogin_Click(object sender, EventArgs e)
         {
             try

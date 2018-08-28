@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/front.Master" AutoEventWireup="true" CodeBehind="user.aspx.cs" Inherits="Ubiquicity.user" %>
 <asp:Content ID="Content2" ContentPlaceHolderID="contentHolder" runat="server">
     Agregar barra de título 
+    <asp:Button ID="btnNewUser" runat="server" CssClass="btn btn-primary" Text="Aceptar" OnClick="btnNewUser_Click" />
     <asp:GridView ID="gvUser" runat="server" OnRowCommand="gvUser_OnRowCommand">
         <Columns>
             <asp:TemplateField ShowHeader="False">
@@ -18,7 +19,7 @@
             <div class="modal-content">
                 <ucmkc:ucformnewmember runat="server" ID="UCFormNewMember" />
                 <div class="modal-footer">
-                    <asp:Button ID="btnRegister" runat="server" CssClass="btn btn-primary" Text="Aceptar"/>
+                    <asp:Button ID="ucModalNewMember_btnAccept" runat="server" CssClass="btn btn-primary" Text="Aceptar" OnClick="ucModalNewMember_btnAcceptClick"/>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>

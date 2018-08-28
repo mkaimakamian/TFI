@@ -31,8 +31,30 @@ namespace BL
             return mapper.Delete(id);
         }
 
+        /// <summary>
+        /// Guarda los cambios del modelo.
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         public bool Edit(User user)
         {
+            UserMapper mapper = new UserMapper();
+
+            if (!IsValidForSave(user)) return false;
+
+            // Setting up default values
+            user.Lastupdate = DateTime.Now;
+            user.Locked = true;
+            user.Active = false;
+
+            //TODO - idioma debería estar provisto por el form
+            user.Language.Id = 1;
+
+            if (!mapper.Edit(user))
+            {
+                AddError(new ResultBE(ResultBE.Type.FAIL, "Error al grabar"));
+                return false;
+            }
 
             return true;
         }
@@ -117,6 +139,8 @@ namespace BL
             user.Lastupdate = DateTime.Now;
             user.Locked = true;
             user.Active = false;
+
+            user.Language.Id = 1;
 
             if (!mapper.Save(user))
             {

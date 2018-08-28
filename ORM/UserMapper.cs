@@ -79,6 +79,24 @@ namespace ORM
             return dal.Write(table, "spDeleteUser");
         }
 
+        public bool Edit(User user)
+        {
+
+            Dal dal = new Dal();
+            Hashtable table = new Hashtable();
+
+            table.Add("@username", user.Username);
+            table.Add("@password", user.Password);
+            table.Add("@mail", user.Mail);
+            table.Add("@active", user.Active);
+            table.Add("@locked", user.Locked);
+            table.Add("@language", user.Language.Id);
+            table.Add("@name", user.Name);
+            table.Add("@lastname", user.Lastname);
+            table.Add("@lastupdate", user.Lastupdate);
+
+            return dal.Write(table, "spModifyUser");
+        }
 
         // TODO - Agregar en EA
         /// <summary>
@@ -105,11 +123,7 @@ namespace ORM
 
 
 
-        //      public bool Edit(User user)
-        //      {
 
-        //          return true;
-        //      }
 
         //      public bool Exists(string username)
         //      {
@@ -153,7 +167,7 @@ namespace ORM
             table.Add("@lastname", user.Lastname);
             table.Add("@lastupdate", user.Lastupdate);
 
-            return dal.Write(table, "spWriteUse");
+            return dal.Write(table, "spWriteUser");
         }
     }
 }

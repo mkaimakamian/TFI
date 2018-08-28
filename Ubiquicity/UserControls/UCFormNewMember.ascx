@@ -18,15 +18,10 @@
           </div>
           <div class="form-group">
             <label for="passwordInput">Password</label>
-            <input id="passwordInput" runat="server" type="text" class="form-control"  placeholder="Ingresá tu password" aria-describedby="passwordHelp">
-            <small id="passwordHelp" class="form-text text-muted">¡Hey! asegurate que nadie te vea</small>
+            <input id="passwordInput" runat="server" type="text" class="form-control"  placeholder="Ingresá tu password">
           </div>
           <div class="form-group">
             <label for="passwordConfirmInput">Confirmar password</label>
-            <input id="passwordConfirmInput" runat="server" type="text" class="form-control" placeholder="Reingresá tu password">
-          </div>
-          <div class="form-check">
-            <input id="checkPrivacyAgreement" runat="server" type="checkbox" class="form-check-input" >
-            <label class="form-check-label" for="checkPrivacyAgreement">Leí los términos y condiciones</label>
+            <input id="passwordVerificationInput" runat="server" type="text" class="form-control" placeholder="Reingresá tu password">
           </div>
       </div>

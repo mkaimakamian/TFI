@@ -1,5 +1,4 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UCModalMessageBox.ascx.cs" Inherits="Ubiquicity.UserControls.UCModalMessageBox" %>
-<!-- Creado por Mariano Kaimakamian Carrau -->
 <div class="modal fade" id="ucModalMessageBox" tabindex="-1" role="dialog" aria-labelledby="ucModalMessageBoxLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -13,6 +12,8 @@
         XXXXXXX
       </div>
       <div class="modal-footer">
+        <asp:Button ID="btnMainAction" runat="server" CssClass="btn btn-primary"  Text="xxx" OnClick="btnMainAction_Click" Visible="false"/>
+        <asp:Button ID="btnSecondAction" runat="server" CssClass="btn btn-primary"  Text="xxx" OnClick="btnSecondAction_Click" Visible =" false"/>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
