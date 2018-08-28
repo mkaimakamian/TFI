@@ -62,7 +62,7 @@ namespace Ubiquicity
                 switch (action) {
                     case CREATE:
                         user = new User();
-                        PopulateModel(user);
+                        UCFormNewMember.PopulateModel(user);
                         userManager.Save(user);
                         break;
 
@@ -70,7 +70,7 @@ namespace Ubiquicity
                         if (Session["Ubiquicity_itemId"] != null)
                         {
                             user = userManager.Get(Convert.ToInt32(Session["Ubiquicity_itemId"]));
-                            PopulateModel(user);
+                            UCFormNewMember.PopulateModel(user);
                             userManager.Edit(user);
                         }
                         break;
@@ -87,26 +87,7 @@ namespace Ubiquicity
                 UCcrudGrid.ShowAlert("Exception", exception.Message);
             }
         }
-
-        private void PopulateModel(User user)
-        {
-            user.Name = UCFormNewMember.FirstName;
-            user.Lastname = UCFormNewMember.LastName;
-            user.Password = UCFormNewMember.Password;
-            user.Username = UCFormNewMember.UserName;
-            user.Language.Id = 1; //Todo - cambiar esto!
-            user.Mail = UCFormNewMember.Mail;
-        }
-
-        private void CleanForm()
-        {
-            UCFormNewMember.FirstName = "";
-            UCFormNewMember.LastName = "";
-            UCFormNewMember.Password = "";
-            UCFormNewMember.UserName = "";
-            UCFormNewMember.Mail = "";
-        }
-
+        
         private void AskForDelete(object sender, EventArgs e)
         {
             //Session["Ubiquicity_itemId"] = id;
@@ -131,7 +112,7 @@ namespace Ubiquicity
         /// <param name="e"></param>
         private void ShowNewForm(object sender, EventArgs e)
         {
-            CleanForm();
+            UCFormNewMember.CleanForm();
             Session["Ubiquicity_action"] = CREATE;
             Page.ClientScript.RegisterStartupScript(this.GetType(), "openModalCreate", "window.onload = function() { $('#ucModalNewMember').modal('show'); }", true);
         }

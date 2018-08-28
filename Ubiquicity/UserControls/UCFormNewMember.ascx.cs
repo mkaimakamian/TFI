@@ -68,5 +68,25 @@ namespace Ubiquicity.UserControls
         //    get { return passwordVerificationInput.Value; }
         //    set { passwordVerificationInput.Value = value; }
         //}
+
+        public void CleanForm()
+        {
+            FirstName = "";
+            LastName = "";
+            Password = "";
+            PasswordVerification = "";
+            UserName = "";
+            Mail = "";
+        }
+
+        public void PopulateModel(User user)
+        {
+            user.Name = FirstName;
+            user.Lastname = LastName;
+            user.Password = Password;
+            user.Username = UserName;
+            user.Language.Id = 1; //Todo - cambiar esto!
+            user.Mail = Mail;
+        }
     }
 }

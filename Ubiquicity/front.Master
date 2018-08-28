@@ -33,12 +33,14 @@
   <nav>
     <div>
    
-        <asp:Menu ID="mnuSection" runat="server" Orientation="Horizontal">
+        <asp:Menu ID="mnuSection" runat="server" Orientation="Horizontal" SkipLinkText=""
+            CssClass="nav navbar-fix-top" DynamicMenuStyle-CssClass="dropdown-menu">
+            <DynamicMenuStyle CssClass="dropdown-menu" />
             <Items>
-                <asp:MenuItem Text="Contenido" Value="Contenido">
+                <asp:MenuItem Text="Contenido" Value="Contenido" >
                     <asp:MenuItem Text="Novedades" Value="Novedades"></asp:MenuItem>
                     <asp:MenuItem Text="Artículos" Value="Artículos"></asp:MenuItem>
-                    <asp:MenuItem Text="Idiomas" Value="Idiomas"></asp:MenuItem>
+                    <asp:MenuItem Text="Idiomas" Value="Idiomas" NavigateUrl="~/language.aspx"></asp:MenuItem>
                     <asp:MenuItem Text="Categoría de negocios" Value="Categoría de negocios"></asp:MenuItem>
                     <asp:MenuItem Text="Marketing mix" Value="Marketing mix"></asp:MenuItem>
                 </asp:MenuItem>
@@ -74,8 +76,7 @@
     </div>
 </div>
 
-    <div class="bg-light text-center py-3">Esto es un footer
-    </div>
+
 
 <!-- Modal Login -->
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
@@ -125,6 +126,10 @@
 
     <UCmkc:UCModalMessageBox runat="server" ID="customAlertBox" />
 </form>
+<div class="navbar navbar-default navbar-fixed-bottom">
+  <p>Footer</p>
+</div>
+
     <script src="Scripts/popper.js"></script>
     <script src="Scripts/jquery-3.3.1.js"></script>
     <script src="Scripts/bootstrap.js"></script>

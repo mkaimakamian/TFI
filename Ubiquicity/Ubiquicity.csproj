@@ -70,6 +70,7 @@
   <ItemGroup>
     <Content Include="about.aspx" />
     <Content Include="contact.aspx" />
+    <Content Include="language.aspx" />
     <Content Include="packages.config" />
     <Content Include="front.Master" />
     <Content Include="privacy.aspx" />
@@ -169,6 +170,13 @@
     </Compile>
     <Compile Include="index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="language.aspx.cs">
+      <DependentUpon>language.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="language.aspx.designer.cs">
+      <DependentUpon>language.aspx</DependentUpon>
     </Compile>
     <Compile Include="privacy.aspx.cs">
       <DependentUpon>privacy.aspx</DependentUpon>
