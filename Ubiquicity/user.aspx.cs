@@ -21,10 +21,13 @@ namespace Ubiquicity
                 LoadGrid();
             }
 
+            //Se asigna el Alert que está incrustado en la master page
+            //TODO - quizá el componente debería utilizar su propio alert box
             UCcrudGrid.AlertBox = (UserControls.UCModalMessageBox)Master.FindControl("customAlertBox");
             
             //Se asignó al botón principal la tarea de ejecutar la eliminación
             UCcrudGrid.PerformAlertBoxMainAction = PerformDeleteItem;
+
             UCcrudGrid.DeleteActionClick += AskForDelete;
             UCcrudGrid.EditActionClick += ShowEditForm;
             UCcrudGrid.NewActionClick += ShowNewForm;
@@ -36,7 +39,7 @@ namespace Ubiquicity
                 UserManager userManager = new UserManager();
                 List<User> users = userManager.Get();
 
-                //TODO - Quizá se pueda definit en el base un get genérico
+                //TODO - Quizá se pueda definir en el base un get genérico
                 UCcrudGrid.LoadGrid(userManager, users);
             }
             catch (Exception exception)
@@ -95,6 +98,15 @@ namespace Ubiquicity
             user.Mail = UCFormNewMember.Mail;
         }
 
+        private void CleanForm()
+        {
+            UCFormNewMember.FirstName = "";
+            UCFormNewMember.LastName = "";
+            UCFormNewMember.Password = "";
+            UCFormNewMember.UserName = "";
+            UCFormNewMember.Mail = "";
+        }
+
         private void AskForDelete(object sender, EventArgs e)
         {
             //Session["Ubiquicity_itemId"] = id;
@@ -119,6 +131,7 @@ namespace Ubiquicity
         /// <param name="e"></param>
         private void ShowNewForm(object sender, EventArgs e)
         {
+            CleanForm();
             Session["Ubiquicity_action"] = CREATE;
             Page.ClientScript.RegisterStartupScript(this.GetType(), "openModalCreate", "window.onload = function() { $('#ucModalNewMember').modal('show'); }", true);
         }

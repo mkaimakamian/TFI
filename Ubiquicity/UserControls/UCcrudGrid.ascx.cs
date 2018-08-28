@@ -10,7 +10,6 @@ namespace Ubiquicity.UserControls
 {
     public partial class UCcrudGrid : System.Web.UI.UserControl
     {
-        // TODO - La master podría tener la referencia del objeto.
         private UCModalMessageBox customAlertBox;
         public event EventHandler EditActionClick;
         public event EventHandler DeleteActionClick;
