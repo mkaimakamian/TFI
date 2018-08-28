@@ -47,9 +47,6 @@ namespace BL
             user.Locked = true;
             user.Active = false;
 
-            //TODO - idioma debería estar provisto por el form
-            user.Language.Id = 1;
-
             if (!mapper.Edit(user))
             {
                 AddError(new ResultBE(ResultBE.Type.FAIL, "Error al grabar"));
@@ -139,8 +136,6 @@ namespace BL
             user.Lastupdate = DateTime.Now;
             user.Locked = true;
             user.Active = false;
-
-            user.Language.Id = 1;
 
             if (!mapper.Save(user))
             {

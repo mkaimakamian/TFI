@@ -67,13 +67,14 @@ namespace Ubiquicity
                     {
                         UCFormNewMember.FillForm(user);
                         Session["Ubiquicity_action"] = EDIT;
+                        Session["Ubiquicity_itemId"] = id;
                         Page.ClientScript.RegisterStartupScript(this.GetType(), "openModalEdit", "window.onload = function() { $('#ucModalNewMember').modal('show'); }", true);
                     }
                     
                 }
                 else if (e.CommandName == "DeleteItem")
                 {
-                    Session["idToDelete"] = id;
+                    Session["Ubiquicity_itemId"] = id;
                     ShowAlert("Eliminar registro", "¿Está seguro de querer eliminar el registro?", "Si", "No");
                 }
             }
@@ -85,12 +86,12 @@ namespace Ubiquicity
 
         private void DeleteItem(object sender, EventArgs e)
         {
-            if (Session["idToDelete"] != null)
+            if (Session["Ubiquicity_itemId"] != null)
             {
                 UserManager userManager = new UserManager();
-                userManager.Delete(Convert.ToInt32(Session["idToDelete"]));
+                userManager.Delete(Convert.ToInt32(Session["Ubiquicity_itemId"]));
                 LoadGrid();
-                Session.Remove("idToDelete");
+                Session.Remove("Ubiquicity_itemId");
             }
         }
        
@@ -103,21 +104,22 @@ namespace Ubiquicity
                
                 //TODO - Validar los campos
                 UserManager userManager = new UserManager();
-                User newUser = new User();
-
-                newUser.Name = UCFormNewMember.FirstName;
-                newUser.Lastname = UCFormNewMember.LastName;
-                newUser.Password = UCFormNewMember.Password;
-                newUser.Username = UCFormNewMember.UserName;
-                //newUser.Language = UCFormNewMember.Language;
-                newUser.Mail = UCFormNewMember.Mail;
+                User user = null;                
 
                 switch (action) {
                     case CREATE:
-                        userManager.Save(newUser);
+                        user = new User();
+                        PopulateModel(user);
+                        userManager.Save(user);
                         break;
+
                     case EDIT:
-                        userManager.Edit(newUser);
+                        if (Session["Ubiquicity_itemId"] != null)
+                        {
+                            user = userManager.Get(Convert.ToInt32(Session["Ubiquicity_itemId"]));
+                            PopulateModel(user);
+                            userManager.Edit(user);
+                        }
                         break;
                 }
 
@@ -131,6 +133,16 @@ namespace Ubiquicity
             {
                 ShowAlert("Exception", exception.Message);
             }
+        }
+
+        private void PopulateModel(User user)
+        {
+            user.Name = UCFormNewMember.FirstName;
+            user.Lastname = UCFormNewMember.LastName;
+            user.Password = UCFormNewMember.Password;
+            user.Username = UCFormNewMember.UserName;
+            user.Language.Id = 1; //Todo - cambiar esto!
+            user.Mail = UCFormNewMember.Mail;
         }
 
         private void ShowAlert(string title, string message, String button1Label = "", String button2Label = "")

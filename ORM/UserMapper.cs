@@ -85,12 +85,13 @@ namespace ORM
             Dal dal = new Dal();
             Hashtable table = new Hashtable();
 
+            table.Add("@id", user.Id);
             table.Add("@username", user.Username);
             table.Add("@password", user.Password);
             table.Add("@mail", user.Mail);
             table.Add("@active", user.Active);
             table.Add("@locked", user.Locked);
-            table.Add("@language", user.Language.Id);
+            table.Add("@languageId", user.Language.Id);
             table.Add("@name", user.Name);
             table.Add("@lastname", user.Lastname);
             table.Add("@lastupdate", user.Lastupdate);
