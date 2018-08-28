@@ -126,6 +126,7 @@
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="user.aspx" />
+    <Content Include="UserControls\UCcrudGrid.ascx" />
     <Content Include="UserControls\UCModalMessageBox.ascx" />
     <Content Include="UserControls\UCFormNewMember.ascx" />
     <Content Include="UserControls\UCModalTitle.ascx" />
@@ -183,6 +184,13 @@
     </Compile>
     <Compile Include="user.aspx.designer.cs">
       <DependentUpon>user.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCcrudGrid.ascx.cs">
+      <DependentUpon>UCcrudGrid.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCcrudGrid.ascx.designer.cs">
+      <DependentUpon>UCcrudGrid.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\UCModalMessageBox.ascx.cs">
       <DependentUpon>UCModalMessageBox.ascx</DependentUpon>

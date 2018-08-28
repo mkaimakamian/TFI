@@ -7,36 +7,27 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Ubiquicity {
+namespace Ubiquicity.UserControls {
     
     
-    public partial class user {
+    public partial class UCcrudGrid {
         
         /// <summary>
-        /// UCcrudGrid control.
+        /// btnNewItem control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ubiquicity.UserControls.UCcrudGrid UCcrudGrid;
+        protected global::System.Web.UI.WebControls.Button btnNewItem;
         
         /// <summary>
-        /// UCFormNewMember control.
+        /// gvItem control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ubiquicity.UserControls.UCModalNewMember UCFormNewMember;
-        
-        /// <summary>
-        /// ucModalNewMember_btnAccept control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ucModalNewMember_btnAccept;
+        protected global::System.Web.UI.WebControls.GridView gvItem;
     }
 }

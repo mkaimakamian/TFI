@@ -1,17 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/front.Master" AutoEventWireup="true" CodeBehind="user.aspx.cs" Inherits="Ubiquicity.user" %>
+
+<%@ Register Src="~/UserControls/UCcrudGrid.ascx" TagPrefix="UCmkc" TagName="UCcrudGrid" %>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="contentHolder" runat="server">
     Agregar barra de título 
-    <asp:Button ID="btnNewUser" runat="server" CssClass="btn btn-primary" Text="Aceptar" OnClick="btnNewUser_Click" />
-    <asp:GridView ID="gvUser" runat="server" OnRowCommand="gvUser_OnRowCommand">
-        <Columns>
-            <asp:TemplateField ShowHeader="False">
-                <ItemTemplate>
-                    <asp:Button ID="btnDelete" runat="server" CausesValidation="false" CommandName="DeleteItem" Text="Eliminar" CommandArgument='<%# Eval("id") %>'/>
-                    <asp:Button ID="btnEdit" runat="server" CausesValidation="false" CommandName="EditItem" Text="Editar" CommandArgument='<%# Eval("id") %>'/>
-                </ItemTemplate>
-            </asp:TemplateField>
-            </Columns>
-    </asp:GridView>
+
+    <UCmkc:UCcrudGrid runat="server" id="UCcrudGrid" />
 
     <!-- new member -->
     <div class="modal fade" id="ucModalNewMember" tabindex="-1" role="dialog" aria-labelledby="Registro" aria-hidden="true">

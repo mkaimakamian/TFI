@@ -57,7 +57,7 @@ namespace Ubiquicity.UserControls
         protected void btnSecondAction_Click(object sender, EventArgs e)
         {
             //Se propaga el evento para el consumo por parte del parent
-            if (PerformMainAction != null) PerformMainAction(this, e);
+            if (PerformSecondAction != null) PerformSecondAction(this, e);
         }
         
     }
