@@ -17,7 +17,9 @@
 <header>
     <nav class="navbar navbar-light bg-light">
       <a class="navbar-brand" href="index.aspx">Ubiqui-city</a>
-       
+        
+        <asp:DropDownList ID="dropLanguage" runat="server" cclass="btn btn-secondary dropdown-toggle"/>
+
         <!-- Visibilidad controlada por backend -->
         <asp:Panel ID="panelLogin" runat="server" >
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">Login</button>
@@ -126,9 +128,26 @@
 
     <UCmkc:UCModalMessageBox runat="server" ID="customAlertBox" />
 </form>
-<div class="navbar navbar-default navbar-fixed-bottom">
-  <p>Footer</p>
-</div>
+
+    <div class=" container ">
+            <nav class="navbar navbar-expand-sm fixed-bottom navbar-light bg-light mx-auto">
+                Footer :D
+                <%--<ul class="navbar-nav mr-auto mx-auto ">
+                    <li class="nav-item ">
+                        <a class="nav-link" href="QuienesSomos.aspx">¿Quiénes Somos?</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Terminos.aspx">Términos y Condiciones</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Politicas.aspx">Políticas de Privacidad</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Contactenos.aspx">Contáctenos</a>
+                    </li>
+                </ul>--%>
+            </nav>
+        </div>
 
     <script src="Scripts/popper.js"></script>
     <script src="Scripts/jquery-3.3.1.js"></script>

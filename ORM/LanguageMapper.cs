@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Data;
 using BE;
@@ -21,7 +22,6 @@ namespace ORM
             Hashtable table = new Hashtable();
 
             table.Add("@id", id);
-           
             DataSet result = dal.Read(table, "spReadLanguage");
 
             if (result != null && result.Tables[0].Rows.Count > 0)
@@ -33,6 +33,37 @@ namespace ORM
                 return null;
             }
         }
+
+        public List<Language> Get()
+        {
+            Dal dal = new Dal();
+            Hashtable table = new Hashtable();
+            List<Language> languages = null;
+
+            table.Add("@id", DBNull.Value);
+            DataSet result = dal.Read(table, "spReadLanguage");
+
+            if (result != null && result.Tables[0].Rows.Count > 0)
+            {
+                languages = new List<Language>();
+
+                foreach (DataRow data in result.Tables[0].Rows)
+                {
+                    languages.Add(ConvertToModel(data));
+                }
+            }
+
+            return languages;
+        }
+
+        public bool Delete(int id)
+        {
+            Dal dal = new Dal();
+            Hashtable table = new Hashtable();
+            table.Add("@id", id);
+            return dal.Write(table, "spDeleteLanguage");
+        }
+
 
         // TODO - Agregar en EA
         /// <summary>

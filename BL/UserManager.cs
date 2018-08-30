@@ -59,7 +59,6 @@ namespace BL
         public List<User> Get()
         {
             UserMapper mapper = new UserMapper();
-
             List<User> users = mapper.Get();
 
             if (users == null)

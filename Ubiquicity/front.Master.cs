@@ -15,15 +15,33 @@ namespace Ubiquicity
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack) {
-                bool logged = Session["SessionCreated"] != null;
-
-                panelLogin.Visible = !logged;
-                panelAlreadyLogged.Visible = logged;
-                //falta el menu            
+                    // Todo - ver si en vez de usuario es Session
+                    User user = (User) Session["SessionCreated"];
+                    ManageLoginPanel(Session["SessionCreated"] != null);
+                    ManageMenu(user);
+                    LoadLanguages();
             }
 
         }
         
+        private void ManageLoginPanel(bool logged) {
+            panelLogin.Visible = !logged;
+            panelAlreadyLogged.Visible = logged;
+        }
+
+        private void ManageMenu(User user) {
+
+        }
+
+        private void LoadLanguages()
+        {
+            LanguageManager languageManager = new LanguageManager();
+            dropLanguage.DataTextField = "Name";
+            dropLanguage.DataValueField = "Id";
+            dropLanguage.DataSource = languageManager.Get();
+            dropLanguage.DataBind();
+        }
+
         protected void btnLogin_Click(object sender, EventArgs e)
         {
             try

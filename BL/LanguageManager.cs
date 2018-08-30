@@ -16,13 +16,17 @@ namespace BL
         //    return true;
         //}
 
-        
-        //public void Delete(int id)
-        //{
 
-        //}
+        public bool Delete(int id)
+        {
+            LanguageMapper mapper = new LanguageMapper();
 
-        
+            //borrar traducciones
+            //borrar idioma
+            return mapper.Delete(id);
+        }
+
+
         //public void Edit(Language language)
         //{
 
@@ -42,11 +46,19 @@ namespace BL
             return language;
         }
 
-        //public List<Language> Get()
-        //{
+        public List<Language> Get()
+        {
+            LanguageMapper languageMapper = new LanguageMapper();
+            List<Language> languages = languageMapper.Get();
 
-        //    return null;
-        //}
+            if (languages == null)
+            {
+                Errors.Add(new ResultBE(ResultBE.Type.NULL, "No existen idiomas"));
+                return null;
+            }
+
+            return languages;
+        }
 
         //public List<Label> GetLabels()
         //{

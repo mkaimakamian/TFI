@@ -13,6 +13,15 @@ namespace Ubiquicity {
     public partial class front {
         
         /// <summary>
+        /// dropLanguage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList dropLanguage;
+        
+        /// <summary>
         /// panelLogin control.
         /// </summary>
         /// <remarks>

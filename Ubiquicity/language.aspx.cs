@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using BL;
+using BE;
 
 namespace Ubiquicity
 {
@@ -14,11 +16,6 @@ namespace Ubiquicity
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-                LoadGrid();
-            }
-
             //Se asigna el Alert que está incrustado en la master page
             //TODO - quizá el componente debería utilizar su propio alert box
             UCcrudGrid.AlertBox = (UserControls.UCModalMessageBox)Master.FindControl("customAlertBox");
@@ -29,22 +26,27 @@ namespace Ubiquicity
             UCcrudGrid.DeleteActionClick += AskForDelete;
             UCcrudGrid.EditActionClick += ShowEditForm;
             UCcrudGrid.NewActionClick += ShowNewForm;
+
+            if (!IsPostBack)
+            {
+                LoadGrid();
+            }
         }
 
         private void LoadGrid()
         {
-            //try
-            //{
-            //    UserManager userManager = new UserManager();
-            //    List<User> users = userManager.Get();
+            try
+            {
+                LanguageManager languageManager = new LanguageManager();
+                List<Language> languages = languageManager.Get();
 
-            //    //TODO - Quizá se pueda definir en el base un get genérico
-            //    UCcrudGrid.LoadGrid(userManager, users);
-            //}
-            //catch (Exception exception)
-            //{
-            //    UCcrudGrid.ShowAlert("Exception", exception.Message);
-            //}
+                //TODO - Quizá se pueda definir en el base un get genérico
+                UCcrudGrid.LoadGrid(languageManager, languages);
+            }
+            catch (Exception exception)
+            {
+                UCcrudGrid.ShowAlert("Exception", exception.Message);
+            }
         }
 
         // Atiende la llamada del botón aceptar del form de usuario
@@ -91,24 +93,6 @@ namespace Ubiquicity
         //    }
         //}
 
-        //private void PopulateModel(User user)
-        //{
-        //    user.Name = UCFormNewMember.FirstName;
-        //    user.Lastname = UCFormNewMember.LastName;
-        //    user.Password = UCFormNewMember.Password;
-        //    user.Username = UCFormNewMember.UserName;
-        //    user.Language.Id = 1; //Todo - cambiar esto!
-        //    user.Mail = UCFormNewMember.Mail;
-        //}
-
-        //private void CleanForm()
-        //{
-        //    UCFormNewMember.FirstName = "";
-        //    UCFormNewMember.LastName = "";
-        //    UCFormNewMember.Password = "";
-        //    UCFormNewMember.UserName = "";
-        //    UCFormNewMember.Mail = "";
-        //}
 
         private void AskForDelete(object sender, EventArgs e)
         {
@@ -120,8 +104,8 @@ namespace Ubiquicity
         {
             if (Session["Ubiquicity_itemId"] != null)
             {
-                //UserManager userManager = new UserManager();
-                //userManager.Delete(Convert.ToInt32(Session["Ubiquicity_itemId"]));
+                LanguageManager languageManager = new LanguageManager();
+                languageManager.Delete(Convert.ToInt32(Session["Ubiquicity_itemId"]));
                 //LoadGrid();
                 //Session.Remove("Ubiquicity_itemId");
             }

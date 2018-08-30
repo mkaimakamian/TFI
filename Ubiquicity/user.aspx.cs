@@ -16,21 +16,21 @@ namespace Ubiquicity
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-                LoadGrid();
-            }
-
             //Se asigna el Alert que está incrustado en la master page
             //TODO - quizá el componente debería utilizar su propio alert box
             UCcrudGrid.AlertBox = (UserControls.UCModalMessageBox)Master.FindControl("customAlertBox");
-            
+
             //Se asignó al botón principal la tarea de ejecutar la eliminación
             UCcrudGrid.PerformAlertBoxMainAction = PerformDeleteItem;
 
             UCcrudGrid.DeleteActionClick += AskForDelete;
             UCcrudGrid.EditActionClick += ShowEditForm;
             UCcrudGrid.NewActionClick += ShowNewForm;
+
+            if (!IsPostBack)
+            {
+                LoadGrid();
+            }
         }
 
         private void LoadGrid()
