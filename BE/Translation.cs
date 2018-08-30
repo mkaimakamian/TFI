@@ -43,14 +43,6 @@ namespace BE
             }
         }
 
-        public String LabelId
-        {
-            get
-            {
-                return label.Id;
-            }
-        }
-
         public string LabelDescription
         {
             get

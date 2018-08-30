@@ -78,13 +78,22 @@ namespace BL
         public List<Translation> GetTranslations(int languageId)
         {
             TranslationMapper translationMapper = new TranslationMapper();
+           // LabelMapper labelMapper = new LabelMapper();
             List<Translation> translations = translationMapper.Get(languageId);
+            //List<Label> labels = labelMapper.Get();
+
 
             if (translations == null)
             {
                 Errors.Add(new ResultBE(ResultBE.Type.NULL, "No existen traducciones"));
                 return null;
             }
+
+            ////TODO - reveer si se puede mejorar
+            //foreach (Translation translation in translations)
+            //{
+            //    Get()
+            //}
 
             return translations;
         }

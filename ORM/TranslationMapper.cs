@@ -18,6 +18,7 @@ namespace ORM
             Hashtable table = new Hashtable();
             List<Translation> translations = null;
 
+            table.Add("@languageId", languageId);
             DataSet result = dal.Read(table, "spReadTranslation");
 
             if (result != null && result.Tables[0].Rows.Count > 0)
@@ -38,6 +39,7 @@ namespace ORM
             Translation translation = new Translation();
             translation.Id = int.Parse(data["id"].ToString());
             translation.Label.Id = data["labelId"].ToString();
+            translation.Label.Description = data["description"].ToString();
             translation.Translate = data["translation"].ToString();
             return translation;
         }

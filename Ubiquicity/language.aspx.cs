@@ -83,7 +83,7 @@ namespace Ubiquicity
                         translations.Add(translation);
                     }
 
-                    UCFormLanguage.LoadTranslations(translations);
+                    UCFormLanguage.FillForm(translations);
                 }
             }
             catch (Exception exception)
@@ -188,12 +188,12 @@ namespace Ubiquicity
             //    UCFormNewMember.FillForm(user);
             //    Session["Ubiquicity_action"] = EDIT;
             //    //Session["Ubiquicity_itemId"] = id;
-            //    Page.ClientScript.RegisterStartupScript(this.GetType(), "openModalEdit", "window.onload = function() { $('#ucModalLanguage').modal('show'); }", true);
             //}
 
             try
             {
                 LanguageManager languageManager = new LanguageManager();
+                Language language = languageManager.Get(id);
                 List<Translation> translations = languageManager.GetTranslations(id);
 
                 if (languageManager.HasErrors)
@@ -202,8 +202,12 @@ namespace Ubiquicity
                 }
                 else
                 {
-                    // TODO - a lo mejor esto debe estar en un método separado
-                    UCFormLanguage.LoadTranslations(translations);
+                    // Para evitar traer apbsolutamente todo el contenido del objeto
+                    //(y facilitar la carga en la grilla inicial), las traducciones
+                    //y el idioma asociado se recuperan por separado
+                    UCFormLanguage.FillForm(language, translations);
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "openModalEdit", "window.onload = function() { $('#ucModalLanguage').modal('show'); }", true);
+
                 }
             }
             catch (Exception exception)

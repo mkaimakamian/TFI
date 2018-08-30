@@ -15,32 +15,27 @@ namespace Ubiquicity.UserControls
 
         }
 
-        public void FillForm()
-        {
-            //FirstName = user.Name;
-            //LastName = user.Lastname;
-            //Mail = user.Mail;
-            //UserName = user.Username;
-            //Password = user.Password;
-            //PasswordVerification = user.Password;
-            //dropLanguageInput.SelectedValue = user.Language.Id.ToString();
-        }
-
         public void Cleanform()
         {
             languageNameInput.Value = "";
         }
 
-        public void LoadTranslations(List<Translation> translations)
+        public void FillForm(List<Translation> translations)
         {
+            FillForm(null, translations);
+        }
+
+        public void FillForm(Language language, List<Translation> translations)
+        {
+            languageNameInput.Value = language.Name;
             gvTranslation.DataSource = translations;
             gvTranslation.DataBind();
         }
 
         protected void RowCreated(object sender, GridViewRowEventArgs e)
         {
-            //e.Row.Cells[1].Visible = false;
-            //e.Row.Cells[4].Visible = false;
+            e.Row.Cells[1].Visible = false;
+            e.Row.Cells[3].Visible = false;
             //e.Row.Cells[0].Text = e.Row.Cells[4].Text;
         }
 
