@@ -48,11 +48,12 @@ namespace BL
             
             List<Role> roles = roleManager.Get(user);
 
-            if (roleManager.HasErrors)
-            {
-                Errors.AddRange(roleManager.Errors);
-                return null;
-            }
+            //TODO - Habilitar roles
+            //if (roleManager.HasErrors)
+            //{
+            //    Errors.AddRange(roleManager.Errors);
+            //    return null;
+            //}
 
             user.Roles = roles;
             return user; 

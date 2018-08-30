@@ -12,6 +12,11 @@ namespace BE
         private Label label;
         private string translate;
 
+        public Translation()
+        {
+            label = new Label();
+        }
+
         public int Id
         {
             get
@@ -35,6 +40,22 @@ namespace BE
             set
             {
                 label = value;
+            }
+        }
+
+        public String LabelId
+        {
+            get
+            {
+                return label.Id;
+            }
+        }
+
+        public string LabelDescription
+        {
+            get
+            {
+                return label.Description;
             }
         }
 

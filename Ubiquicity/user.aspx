@@ -7,7 +7,7 @@
 
     <UCmkc:UCcrudGrid runat="server" id="UCcrudGrid" />
 
-    <!-- new member -->
+    <!-- Register form -->
     <div class="modal fade" id="ucModalNewMember" tabindex="-1" role="dialog" aria-labelledby="Registro" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">

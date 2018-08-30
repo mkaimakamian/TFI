@@ -60,11 +60,34 @@ namespace BL
             return languages;
         }
 
-        //public List<Label> GetLabels()
-        //{
+        public List<Label> GetLabels()
+        {
+            LabelMapper labelMapper = new LabelMapper();
+            List<Label> labels = labelMapper.Get();
 
-        //    return null;
-        //}
+            if (labels == null)
+            {
+                Errors.Add(new ResultBE(ResultBE.Type.NULL, "No existen etiquetas"));
+                return null;
+            }
+
+            return labels;
+        }
+
+        //TODO - agregar en ea
+        public List<Translation> GetTranslations(int languageId)
+        {
+            TranslationMapper translationMapper = new TranslationMapper();
+            List<Translation> translations = translationMapper.Get(languageId);
+
+            if (translations == null)
+            {
+                Errors.Add(new ResultBE(ResultBE.Type.NULL, "No existen traducciones"));
+                return null;
+            }
+
+            return translations;
+        }
 
         //public void Save(Language language)
         //{

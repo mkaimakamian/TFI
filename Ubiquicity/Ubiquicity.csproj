@@ -128,6 +128,7 @@
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="user.aspx" />
     <Content Include="UserControls\UCcrudGrid.ascx" />
+    <Content Include="UserControls\UCFormLanguage.ascx" />
     <Content Include="UserControls\UCModalMessageBox.ascx" />
     <Content Include="UserControls\UCFormNewMember.ascx" />
     <Content Include="UserControls\UCModalTitle.ascx" />
@@ -199,6 +200,13 @@
     </Compile>
     <Compile Include="UserControls\UCcrudGrid.ascx.designer.cs">
       <DependentUpon>UCcrudGrid.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCFormLanguage.ascx.cs">
+      <DependentUpon>UCFormLanguage.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCFormLanguage.ascx.designer.cs">
+      <DependentUpon>UCFormLanguage.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\UCModalMessageBox.ascx.cs">
       <DependentUpon>UCModalMessageBox.ascx</DependentUpon>

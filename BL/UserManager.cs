@@ -133,8 +133,8 @@ namespace BL
 
             // Setting up default values
             user.Lastupdate = DateTime.Now;
-            user.Locked = true;
-            user.Active = false;
+            user.Locked = false;
+            user.Active = true;
 
             if (!mapper.Save(user))
             {

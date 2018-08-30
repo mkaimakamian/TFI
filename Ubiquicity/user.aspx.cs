@@ -39,8 +39,14 @@ namespace Ubiquicity
                 UserManager userManager = new UserManager();
                 List<User> users = userManager.Get();
 
-                //TODO - Quizá se pueda definir en el base un get genérico
-                UCcrudGrid.LoadGrid(userManager, users);
+                if (userManager.HasErrors)
+                {
+                    UCcrudGrid.ShowAlert("Error", userManager.Errors[0].description);
+                }
+                else
+                {
+                    UCcrudGrid.LoadGrid(users);
+                }
             }
             catch (Exception exception)
             {
@@ -48,7 +54,7 @@ namespace Ubiquicity
             }
         }
 
-        // Atiende la llamada del botón aceptar del form de usuario
+        // Atiende la llamada del botón aceptar del form de creación de usuario
         protected void ucModalNewMember_btnAcceptClick(object sender, EventArgs e)
         {
             try

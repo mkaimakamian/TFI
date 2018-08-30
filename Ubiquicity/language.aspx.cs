@@ -33,6 +33,9 @@ namespace Ubiquicity
             }
         }
 
+        /// <summary>
+        /// Carga la grilla con los idiomas disponibles.
+        /// </summary>
         private void LoadGrid()
         {
             try
@@ -40,8 +43,48 @@ namespace Ubiquicity
                 LanguageManager languageManager = new LanguageManager();
                 List<Language> languages = languageManager.Get();
 
-                //TODO - Quizá se pueda definir en el base un get genérico
-                UCcrudGrid.LoadGrid(languageManager, languages);
+                if (languageManager.HasErrors)
+                {
+                    UCcrudGrid.ShowAlert("Error", languageManager.Errors[0].description);
+                }
+                else
+                {
+                    UCcrudGrid.LoadGrid(languages);
+                }
+            }
+            catch (Exception exception)
+            {
+                UCcrudGrid.ShowAlert("Exception", exception.Message);
+            }
+        }
+
+        /// <summary>
+        /// Carga las traducciones para el alta / modificación de los idiomas.
+        /// </summary>
+        private void LoadGridTranslationForNewLanguage()
+        {
+            try
+            {
+                LanguageManager languageManager = new LanguageManager();
+                List<BE.Label> labels = languageManager.GetLabels();
+                List<Translation> translations = new List<Translation>();
+                Translation translation = null;
+
+                if (languageManager.HasErrors)
+                {
+                    UCcrudGrid.ShowAlert("Error", languageManager.Errors[0].description);
+                }
+                else
+                {
+                    foreach (BE.Label label in labels)
+                    {
+                        translation = new Translation();
+                        translation.Label = label;
+                        translations.Add(translation);
+                    }
+
+                    UCFormLanguage.LoadTranslations(translations);
+                }
             }
             catch (Exception exception)
             {
@@ -50,8 +93,8 @@ namespace Ubiquicity
         }
 
         // Atiende la llamada del botón aceptar del form de usuario
-        //protected void ucModalNewMember_btnAcceptClick(object sender, EventArgs e)
-        //{
+        protected void ucModalLanguage_btnAcceptClick(object sender, EventArgs e)
+        {
         //    try
         //    {
         //        int action = Convert.ToInt32(Session["Ubiquicity_action"]);
@@ -91,7 +134,7 @@ namespace Ubiquicity
         //    {
         //        UCcrudGrid.ShowAlert("Exception", exception.Message);
         //    }
-        //}
+        }
 
 
         private void AskForDelete(object sender, EventArgs e)
@@ -106,8 +149,8 @@ namespace Ubiquicity
             {
                 LanguageManager languageManager = new LanguageManager();
                 languageManager.Delete(Convert.ToInt32(Session["Ubiquicity_itemId"]));
-                //LoadGrid();
-                //Session.Remove("Ubiquicity_itemId");
+                LoadGrid();
+                Session.Remove("Ubiquicity_itemId");
             }
         }
 
@@ -118,10 +161,11 @@ namespace Ubiquicity
         /// <param name="e"></param>
         private void ShowNewForm(object sender, EventArgs e)
         {
-            //CleanForm();
+            LoadGridTranslationForNewLanguage();
             Session["Ubiquicity_action"] = CREATE;
-            Page.ClientScript.RegisterStartupScript(this.GetType(), "openModalCreate", "window.onload = function() { $('#ucModalNewMember').modal('show'); }", true);
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "openModalCreate", "window.onload = function() { $('#ucModalLanguage').modal('show'); }", true);
         }
+
 
         /// <summary>
         /// Muestra el formulario para la edición de un usuario existente.
@@ -130,7 +174,7 @@ namespace Ubiquicity
         /// <param name="e"></param>
         private void ShowEditForm(object sender, EventArgs e)
         {
-            //int id = Convert.ToInt32(Session["Ubiquicity_itemId"]);
+            int id = Convert.ToInt32(Session["Ubiquicity_itemId"]);
 
             //UserManager userManager = new UserManager();
             //User user = userManager.Get(id);
@@ -144,8 +188,28 @@ namespace Ubiquicity
             //    UCFormNewMember.FillForm(user);
             //    Session["Ubiquicity_action"] = EDIT;
             //    //Session["Ubiquicity_itemId"] = id;
-            //    Page.ClientScript.RegisterStartupScript(this.GetType(), "openModalEdit", "window.onload = function() { $('#ucModalNewMember').modal('show'); }", true);
+            //    Page.ClientScript.RegisterStartupScript(this.GetType(), "openModalEdit", "window.onload = function() { $('#ucModalLanguage').modal('show'); }", true);
             //}
+
+            try
+            {
+                LanguageManager languageManager = new LanguageManager();
+                List<Translation> translations = languageManager.GetTranslations(id);
+
+                if (languageManager.HasErrors)
+                {
+                    UCcrudGrid.ShowAlert("Error", languageManager.Errors[0].description);
+                }
+                else
+                {
+                    // TODO - a lo mejor esto debe estar en un método separado
+                    UCFormLanguage.LoadTranslations(translations);
+                }
+            }
+            catch (Exception exception)
+            {
+                UCcrudGrid.ShowAlert("Exception", exception.Message);
+            }
         }
     }
 }

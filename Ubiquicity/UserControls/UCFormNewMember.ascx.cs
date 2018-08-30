@@ -36,11 +36,7 @@ namespace Ubiquicity.UserControls
             UserName = user.Username;
             Password = user.Password;
             PasswordVerification = user.Password;
-
-            //TODO - rever... esto parece estar de más
-
             dropLanguageInput.SelectedValue = user.Language.Id.ToString();
-
         }
 
         public string FirstName
@@ -101,7 +97,7 @@ namespace Ubiquicity.UserControls
             user.Lastname = LastName;
             user.Password = Password;
             user.Username = UserName;
-            user.Language.Id = 1; //Todo - cambiar esto!
+            user.Language.Id = int.Parse(dropLanguageInput.SelectedValue);
             user.Mail = Mail;
         }
     }

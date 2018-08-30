@@ -55,19 +55,20 @@ namespace Ubiquicity.UserControls
         /// <summary>
         /// Carga el datasource y establece el binding con los objetos a mostrar
         /// </summary>
-        /// <param name="manager"></param>
         /// <param name="objetcs"></param>
-        public void LoadGrid(BaseManager manager, object objetcs)
+        public void LoadGrid(object objetcs)
         {
-            if (manager.HasErrors)
-            {
-                ShowAlert("Error", manager.Errors[0].description);
-            }
-            else
-            {
-                gvItem.DataSource = objetcs;
-                gvItem.DataBind();
-            }
+            gvItem.DataSource = objetcs;
+            gvItem.DataBind();
+            //if (manager.HasErrors)
+            //{
+            //    ShowAlert("Error", manager.Errors[0].description);
+            //}
+            //else
+            //{
+            //    gvItem.DataSource = objetcs;
+            //    gvItem.DataBind();
+            //}
         }
 
         /// <summary>

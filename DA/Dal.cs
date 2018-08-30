@@ -66,7 +66,8 @@ namespace DA
             
                 int affected = command.ExecuteNonQuery();
                 transaction.Commit();
-                return affected > 0;
+
+                return true; //TODO - devolver filas modificadas affected > 0;
             } catch (Exception e)
             {
                 transaction.Rollback();

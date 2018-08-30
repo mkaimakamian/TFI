@@ -40,10 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LabelMapper.cs" />
     <Compile Include="LanguageMapper.cs" />
     <Compile Include="PermissionMapper.cs" />
     <Compile Include="RoleMapper.cs" />
     <Compile Include="RolePermissionMapper.cs" />
+    <Compile Include="TranslationMapper.cs" />
     <Compile Include="UserMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

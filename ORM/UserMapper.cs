@@ -108,13 +108,13 @@ namespace ORM
         private User ConvertToModel(DataRow data)
         {
             User user = new User();
-            user.Id = Convert.ToInt32(data["id"].ToString());
+            user.Id = int.Parse(data["id"].ToString());
             user.Username = data["username"].ToString();
             user.Password = data["password"].ToString();
             user.Mail = data["mail"].ToString();
             user.Active = Convert.ToBoolean(data["active"]);
             user.Locked = Convert.ToBoolean(data["locked"]);
-            user.Language.Id = Convert.ToInt32(data["languageId"]);
+            user.Language.Id = int.Parse(data["languageId"].ToString());
             user.Name = data["name"].ToString();
             user.Lastname = data["lastname"].ToString();
             user.Lastupdate = Convert.ToDateTime(data["lastupdate"]);
