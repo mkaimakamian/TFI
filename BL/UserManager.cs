@@ -12,18 +12,18 @@ namespace BL
     {
         
 
-        public bool ActivateAccount(User user)
-        {
+        //public bool ActivateAccount(User user)
+        //{
 
-            return true;
-        }
+        //    return true;
+        //}
 
    
-        public bool CheckExistence(string username)
-        {
+        //public bool CheckExistence(string username)
+        //{
 
-            return true;
-        }
+        //    return true;
+        //}
 
         public bool Delete(int id)
         {
@@ -108,17 +108,17 @@ namespace BL
             return user;
         }
 
-        public User Get(string username)
-        {
+        //public User Get(string username)
+        //{
 
-            return null;
-        }
+        //    return null;
+        //}
 
-        public List<User> Get(List<QueryFilter> queryFilter)
-        {
+        //public List<User> Get(List<QueryFilter> queryFilter)
+        //{
 
-            return null;
-        }
+        //    return null;
+        //}
 
         /// <summary>
         /// Creates a user for backoffice.

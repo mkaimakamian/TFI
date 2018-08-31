@@ -10,12 +10,15 @@ namespace Ubiquicity.UserControls
 {
     public partial class UCFormLanguage : System.Web.UI.UserControl
     {
+
+        //private List<Translation> translations;
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
         }
 
-        public void Cleanform()
+        public void CleanForm()
         {
             languageNameInput.Value = "";
         }
@@ -27,16 +30,22 @@ namespace Ubiquicity.UserControls
 
         public void FillForm(Language language, List<Translation> translations)
         {
-            languageNameInput.Value = language.Name;
+            languageNameInput.Value = language == null? "" : language.Name;
+            //this.translations = translations; //TODO - mmm
             gvTranslation.DataSource = translations;
             gvTranslation.DataBind();
+        }
+
+        public void PopulateModel(Language language)
+        {
+            language.Name = languageNameInput.Value;
+            //language.Translations = this.translations; //NUULLLLL
         }
 
         protected void RowCreated(object sender, GridViewRowEventArgs e)
         {
             e.Row.Cells[1].Visible = false;
             e.Row.Cells[3].Visible = false;
-            //e.Row.Cells[0].Text = e.Row.Cells[4].Text;
         }
 
 

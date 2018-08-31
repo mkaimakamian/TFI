@@ -18,7 +18,7 @@
     <nav class="navbar navbar-light bg-light">
       <a class="navbar-brand" href="index.aspx">Ubiqui-city</a>
         
-        <asp:DropDownList ID="dropLanguage" runat="server" cclass="btn btn-secondary dropdown-toggle"/>
+        <asp:DropDownList ID="dropLanguage" runat="server" CssClass="btn dropdown-toggle"/>
 
         <!-- Visibilidad controlada por backend -->
         <asp:Panel ID="panelLogin" runat="server" >

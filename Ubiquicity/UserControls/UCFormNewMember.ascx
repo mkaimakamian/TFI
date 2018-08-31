@@ -26,6 +26,6 @@
           </div>
           <div class="form-group">
             <label for="languageInput">Idioma</label>
-            <asp:DropDownList ID="dropLanguageInput" runat="server" cclass="btn btn-secondary dropdown-toggle form-control"/>
+            <asp:DropDownList ID="dropLanguageInput" runat="server" CssClass="btn dropdown-toggle form-control"/>
           </div>
       </div>

@@ -11,8 +11,7 @@
         <Columns>
             <asp:TemplateField ShowHeader="False">
                 <ItemTemplate>
-                    <asp:TextBox ID="translationInput" runat="server" text='<%# Eval("Translate") %>'/>
-                    <%--<asp:Button ID="btnEdit" runat="server"  CssClass="btn btn-secondary" CausesValidation="false" CommandName="EditItem" Text="Editar" CommandArgument='<%# Eval("id") %>'/>--%>
+                    <asp:TextBox ID="translationInput" runat="server" CssClass="form-control" text='<%# Eval("Translate") %>'/>
                     <%--<input id="translationInput" runat="server" type="text" text='<%# Eval("Translate") %>'/>--%>
                 </ItemTemplate>
             </asp:TemplateField>

@@ -34,6 +34,23 @@ namespace ORM
             return translations;
         }
 
+        // actualizar en EA
+        public bool Save(Language language)
+        {
+            Dal dal = new Dal();
+            Hashtable table = new Hashtable();
+
+            foreach(Translation translation in language.Translations)
+            {
+                table.Add("@labelId", translation.Label.Id);
+                table.Add("@languageId", language.Id);
+                table.Add("@translation", translation.Translate);
+            }
+
+            return dal.Write(table, "spWriteTranslation");
+        }
+
+
         private Translation ConvertToModel(DataRow data)
         {
             Translation translation = new Translation();

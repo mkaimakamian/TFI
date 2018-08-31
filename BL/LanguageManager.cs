@@ -98,9 +98,45 @@ namespace BL
             return translations;
         }
 
-        //public void Save(Language language)
-        //{
+        public bool Save(Language language)
+        {
+            LanguageMapper languageMapper = new LanguageMapper();
+            TranslationMapper translationMapper = new TranslationMapper();
 
-        //}
+            if (!IsValid(language)) return false;
+
+            if (!languageMapper.Save(language))
+            {
+                AddError(new ResultBE(ResultBE.Type.FAIL, "Error al grabar"));
+                return false;
+            }
+
+            if (!translationMapper.Save(language))
+            {
+                AddError(new ResultBE(ResultBE.Type.FAIL, "Error al grabar"));
+                return false;
+            }
+
+            return true;
+        }
+
+        public bool IsValid(Language language)
+        {
+            bool isValid = true;
+
+            if (String.IsNullOrEmpty(language.Name))
+            {
+                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, "EMPTY_FIELD_ERROR"));
+                isValid = false;
+            }
+
+            if (language.Translations.Count == 0)
+            {
+                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, "EMPTY_FIELD_ERROR"));
+                isValid = false;
+            }
+
+            return isValid;
+        }
     }
 }

@@ -95,45 +95,45 @@ namespace Ubiquicity
         // Atiende la llamada del botón aceptar del form de usuario
         protected void ucModalLanguage_btnAcceptClick(object sender, EventArgs e)
         {
-        //    try
-        //    {
-        //        int action = Convert.ToInt32(Session["Ubiquicity_action"]);
+            try
+            {
+                int action = int.Parse(Session["Ubiquicity_action"].ToString());
 
-        //        //TODO - Validar los campos
-        //        UserManager userManager = new UserManager();
-        //        User user = null;
+                //TODO - Validar los campos
+                LanguageManager languageManager = new LanguageManager();
+                Language language = null;
 
-        //        switch (action)
-        //        {
-        //            case CREATE:
-        //                user = new User();
-        //                PopulateModel(user);
-        //                userManager.Save(user);
-        //                break;
+                switch (action)
+                {
+                    case CREATE:
+                        language = new Language();
+                        UCFormLanguage.PopulateModel(language);
+                        languageManager.Save(language);
+                        break;
 
-        //            case EDIT:
-        //                if (Session["Ubiquicity_itemId"] != null)
-        //                {
-        //                    user = userManager.Get(Convert.ToInt32(Session["Ubiquicity_itemId"]));
-        //                    PopulateModel(user);
-        //                    userManager.Edit(user);
-        //                }
-        //                break;
-        //        }
+                    case EDIT:
+                        if (Session["Ubiquicity_itemId"] != null)
+                        {
+                            language = languageManager.Get(int.Parse(Session["Ubiquicity_itemId"].ToString()));
+                            UCFormLanguage.PopulateModel(language);
+                            //languageManager.Edit(language);
+                        }
+                        break;
+                }
 
-        //        if (userManager.HasErrors)
-        //        {
-        //            UCcrudGrid.ShowAlert("Error", userManager.Errors[0].description);
-        //        }
-        //        else
-        //        {
-        //            Response.Redirect(Request.RawUrl);
-        //        }
-        //    }
-        //    catch (Exception exception)
-        //    {
-        //        UCcrudGrid.ShowAlert("Exception", exception.Message);
-        //    }
+                if (languageManager.HasErrors)
+                {
+                    UCcrudGrid.ShowAlert("Error", languageManager.Errors[0].description);
+                }
+                else
+                {
+                    Response.Redirect(Request.RawUrl);
+                }
+            }
+            catch (Exception exception)
+            {
+                UCcrudGrid.ShowAlert("Exception", exception.Message);
+            }
         }
 
 
@@ -161,6 +161,7 @@ namespace Ubiquicity
         /// <param name="e"></param>
         private void ShowNewForm(object sender, EventArgs e)
         {
+            UCFormLanguage.CleanForm();
             LoadGridTranslationForNewLanguage();
             Session["Ubiquicity_action"] = CREATE;
             Page.ClientScript.RegisterStartupScript(this.GetType(), "openModalCreate", "window.onload = function() { $('#ucModalLanguage').modal('show'); }", true);
@@ -175,21 +176,7 @@ namespace Ubiquicity
         private void ShowEditForm(object sender, EventArgs e)
         {
             int id = Convert.ToInt32(Session["Ubiquicity_itemId"]);
-
-            //UserManager userManager = new UserManager();
-            //User user = userManager.Get(id);
-
-            //if (userManager.HasErrors)
-            //{
-            //    UCcrudGrid.ShowAlert("Error", userManager.Errors[0].description);
-            //}
-            //else
-            //{
-            //    UCFormNewMember.FillForm(user);
-            //    Session["Ubiquicity_action"] = EDIT;
-            //    //Session["Ubiquicity_itemId"] = id;
-            //}
-
+            
             try
             {
                 LanguageManager languageManager = new LanguageManager();
@@ -202,6 +189,7 @@ namespace Ubiquicity
                 }
                 else
                 {
+                    Session["Ubiquicity_action"] = EDIT;
                     // Para evitar traer apbsolutamente todo el contenido del objeto
                     //(y facilitar la carga en la grilla inicial), las traducciones
                     //y el idioma asociado se recuperan por separado
