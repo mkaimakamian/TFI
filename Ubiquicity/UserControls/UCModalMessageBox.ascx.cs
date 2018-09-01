@@ -59,6 +59,22 @@ namespace Ubiquicity.UserControls
             //Se propaga el evento para el consumo por parte del parent
             if (PerformSecondAction != null) PerformSecondAction(this, e);
         }
-        
+
+        public void Show(string title, string message, String button1Label = "", String button2Label = "")
+        {
+            //customAlertBox.title = title;
+            //customAlertBox.message = message;
+            //Page.ClientScript.RegisterStartupScript(this.GetType(), "openModal", "window.onload = function() { $('#ucModalMessageBox').modal('show'); }", true);
+
+            this.title = title;
+            this.message = message;
+            this.MainActionLabel = button1Label;
+            this.SecondActionLabel = button2Label;
+
+            this.MainActionVisible = !String.IsNullOrEmpty(button1Label);
+            this.SecondActionVisible = !String.IsNullOrEmpty(button2Label);
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "openModal", "window.onload = function() { $('#ucModalMessageBox').modal('show'); }", true);
+        }
+
     }
 }

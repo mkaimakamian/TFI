@@ -4,7 +4,7 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="contentHolder" runat="server">
 
     <p>
-        En la página principal se incluirá...</p>
+        &nbsp;En la página principal se incluirá...</p>
     <p>
         [Carrusel con promociones]</p>
     <p>

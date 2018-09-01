@@ -10,46 +10,12 @@ namespace Ubiquicity.UserControls
 {
     public partial class UCcrudGrid : System.Web.UI.UserControl
     {
-        private UCModalMessageBox customAlertBox;
         public event EventHandler EditActionClick;
         public event EventHandler DeleteActionClick;
         public event EventHandler NewActionClick;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-        }
-
-        /// <summary>
-        /// Guarda la referencia del alert box que empleará
-        /// </summary>
-        public UCModalMessageBox AlertBox
-        {
-            set
-            {
-                customAlertBox = value;
-            }
-        }
-
-        /// <summary>
-        /// Settea el handler para el botón principal del alert box
-        /// </summary>
-        public EventHandler PerformAlertBoxMainAction
-        {
-            set
-            {
-                customAlertBox.PerformMainAction += value;
-            }
-        }
-
-        /// <summary>
-        /// Settea el handler para el botón secundario de alert box
-        /// </summary>
-        public EventHandler PerformAlertBoxSecondAction
-        {
-            set
-            {
-                customAlertBox.PerformSecondAction += value;
-            }
         }
 
         /// <summary>
@@ -60,36 +26,6 @@ namespace Ubiquicity.UserControls
         {
             gvItem.DataSource = objetcs;
             gvItem.DataBind();
-            //if (manager.HasErrors)
-            //{
-            //    ShowAlert("Error", manager.Errors[0].description);
-            //}
-            //else
-            //{
-            //    gvItem.DataSource = objetcs;
-            //    gvItem.DataBind();
-            //}
-        }
-
-        /// <summary>
-        /// Emplea el alert box definido para mostrar información en pantalla.
-        /// </summary>
-        /// <param name="title"></param>
-        /// <param name="message"></param>
-        /// <param name="button1Label"></param>
-        /// <param name="button2Label"></param>
-        public void ShowAlert(string title, string message, String button1Label = "", String button2Label = "")
-        {
-            customAlertBox.title = title;
-            customAlertBox.message = message;
-            customAlertBox.MainActionLabel = button1Label;
-            customAlertBox.SecondActionLabel = button2Label;
-
-            customAlertBox.MainActionVisible = !String.IsNullOrEmpty(button1Label);
-            customAlertBox.SecondActionVisible = !String.IsNullOrEmpty(button2Label);
-
-            //TODO - a lo mejor es preferible que tenga su propio alert box
-            Page.ClientScript.RegisterStartupScript(this.GetType(), "openModalMessageGVItem", "window.onload = function() { $('#ucModalMessageBox').modal('show'); }", true);
         }
 
         /// <summary>
@@ -99,7 +35,6 @@ namespace Ubiquicity.UserControls
         /// <param name="e"></param>
         protected void gvItem_OnRowCommand(object sender, GridViewCommandEventArgs e)
         {
-            //int id = Convert.ToInt32(e.CommandArgument);
             Session["Ubiquicity_itemId"] = e.CommandArgument;
             if (e.CommandName == "EditItem")
             {

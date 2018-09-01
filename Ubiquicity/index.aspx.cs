@@ -11,16 +11,6 @@ namespace Ubiquicity
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if (!IsPostBack) {
-            //    lla = (UserControls.UCModalMessageBox)Master.FindControl("customAlertBox");
-            //    lla.PerformMainAction += new EventHandler(prueba);
-            //}
-            
         }
-
-        //private void prueba(object sender, EventArgs e)
-        //{
-
-        //}
     }
 }

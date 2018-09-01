@@ -16,12 +16,8 @@ namespace Ubiquicity
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //Se asigna el Alert que está incrustado en la master page
-            //TODO - quizá el componente debería utilizar su propio alert box
-            UCcrudGrid.AlertBox = (UserControls.UCModalMessageBox)Master.FindControl("customAlertBox");
-
             //Se asignó al botón principal la tarea de ejecutar la eliminación
-            UCcrudGrid.PerformAlertBoxMainAction = PerformDeleteItem;
+            Alert.PerformMainAction += PerformDeleteItem;
 
             UCcrudGrid.DeleteActionClick += AskForDelete;
             UCcrudGrid.EditActionClick += ShowEditForm;
@@ -41,7 +37,7 @@ namespace Ubiquicity
 
                 if (userManager.HasErrors)
                 {
-                    UCcrudGrid.ShowAlert("Error", userManager.Errors[0].description);
+                    Alert.Show("Error", userManager.Errors[0].description);
                 }
                 else
                 {
@@ -50,7 +46,7 @@ namespace Ubiquicity
             }
             catch (Exception exception)
             {
-                UCcrudGrid.ShowAlert("Exception", exception.Message);
+                Alert.Show("Exception", exception.Message);
             }
         }
 
@@ -84,20 +80,20 @@ namespace Ubiquicity
 
                 if (userManager.HasErrors)
                 {
-                    UCcrudGrid.ShowAlert("Error", userManager.Errors[0].description);
+                    Alert.Show("Error", userManager.Errors[0].description);
                 } else {
                     Response.Redirect(Request.RawUrl);
                 }
             } catch (Exception exception)
             {
-                UCcrudGrid.ShowAlert("Exception", exception.Message);
+                Alert.Show("Exception", exception.Message);
             }
         }
         
         private void AskForDelete(object sender, EventArgs e)
         {
             //Session["Ubiquicity_itemId"] = id;
-            UCcrudGrid.ShowAlert("Eliminar registro", "¿Está seguro de querer eliminar el registro?", "Si");
+            Alert.Show("Eliminar registro", "¿Está seguro de querer eliminar el registro?", "Si");
         }
 
         private void PerformDeleteItem(object sender, EventArgs e)
@@ -137,7 +133,7 @@ namespace Ubiquicity
 
             if (userManager.HasErrors)
             {
-                UCcrudGrid.ShowAlert("Error", userManager.Errors[0].description);
+                Alert.Show("Error", userManager.Errors[0].description);
             }
             else
             {
@@ -146,6 +142,12 @@ namespace Ubiquicity
                 //Session["Ubiquicity_itemId"] = id;
                 Page.ClientScript.RegisterStartupScript(this.GetType(), "openModalEdit", "window.onload = function() { $('#ucModalNewMember').modal('show'); }", true);
             }
+        }
+
+        //Para simplificar un poco, recupero el componente a través de la propiedad
+        public UserControls.UCModalMessageBox Alert
+        {
+            get { return ((front)Master).Alert; }
         }
     }
 }
