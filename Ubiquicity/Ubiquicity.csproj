@@ -71,9 +71,12 @@
     <Content Include="about.aspx" />
     <Content Include="contact.aspx" />
     <Content Include="language.aspx" />
+    <Content Include="log.aspx" />
+    <Content Include="logManager.aspx" />
     <Content Include="packages.config" />
     <Content Include="front.Master" />
     <Content Include="privacy.aspx" />
+    <Content Include="role.aspx" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
     <None Include="Web.Debug.config">
@@ -179,6 +182,20 @@
     <Compile Include="language.aspx.designer.cs">
       <DependentUpon>language.aspx</DependentUpon>
     </Compile>
+    <Compile Include="log.aspx.cs">
+      <DependentUpon>log.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="log.aspx.designer.cs">
+      <DependentUpon>log.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="logManager.aspx.cs">
+      <DependentUpon>logManager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="logManager.aspx.designer.cs">
+      <DependentUpon>logManager.aspx</DependentUpon>
+    </Compile>
     <Compile Include="privacy.aspx.cs">
       <DependentUpon>privacy.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -187,6 +204,13 @@
       <DependentUpon>privacy.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="role.aspx.cs">
+      <DependentUpon>role.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="role.aspx.designer.cs">
+      <DependentUpon>role.aspx</DependentUpon>
+    </Compile>
     <Compile Include="user.aspx.cs">
       <DependentUpon>user.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

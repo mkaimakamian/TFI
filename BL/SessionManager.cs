@@ -30,7 +30,9 @@ namespace BL
 
             if (user == null)
             {
-                AddError(new ResultBE(ResultBE.Type.INVALID_CREDENTIAL, "Usuario no existe: " + username));
+                string errorDescription = "El usuario " + username+" no existe.";
+                log.AddLogWarn("LogIn", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.INVALID_CREDENTIAL, errorDescription));
                 return null;
             }
             //if (!user.Active) return new ResultBE(ResultBE.Type.INACTIVE_USER, "Usuario inactivo: " + username);
@@ -56,6 +58,8 @@ namespace BL
             //}
 
             user.Roles = roles;
+            
+            log.AddLogInfo("LogIn", "éxito", this);
             return user; 
         }
 
@@ -66,11 +70,16 @@ namespace BL
 
             if (String.IsNullOrEmpty(username))
             {
-                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, "EMPTY_FIELD_ERROR"));
+                string errorDescription = "Nombre de usuario incompleto";
+                log.AddLogWarn("IsValid", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
                 isValid = false;
             }
+
             if (String.IsNullOrEmpty(password))
             {
+                string errorDescription = "Password incompleto";
+                log.AddLogWarn("IsValid", errorDescription, this);
                 AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, "EMPTY_FIELD_ERROR"));
                 isValid = false;
             }

@@ -11,7 +11,8 @@ namespace BL
     public abstract class BaseManager
     {
         private List<ResultBE> errors;
-
+        protected LogManager log = new LogManager();
+        
         public bool HasErrors
         {
             get

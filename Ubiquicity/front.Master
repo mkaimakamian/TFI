@@ -53,9 +53,9 @@
                     <asp:MenuItem Text="Niveles de aprobación" Value="Niveles de aprobación"></asp:MenuItem>
                 </asp:MenuItem>
                 <asp:MenuItem Text="Seguridad" Value="Seguridad">
-                    <asp:MenuItem Text="Bitácora" Value="Bitácora"></asp:MenuItem>
+                    <asp:MenuItem Text="Bitácora" Value="Bitácora" NavigateUrl="~/logManager.aspx"></asp:MenuItem>
                     <asp:MenuItem NavigateUrl="~/user.aspx" Text="Usuarios" Value="Usuarios"></asp:MenuItem>
-                    <asp:MenuItem Text="Roles" Value="Roles"></asp:MenuItem>
+                    <asp:MenuItem Text="Roles" Value="Roles" NavigateUrl="~/role.aspx"></asp:MenuItem>
                     <asp:MenuItem Text="Roles y usuarios" Value="Roles y usuarios"></asp:MenuItem>
                     <asp:MenuItem Text="Respaldo" Value="Respaldo"></asp:MenuItem>
                 </asp:MenuItem>
