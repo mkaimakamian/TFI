@@ -35,7 +35,7 @@ namespace Ubiquicity
         }
         //protected virtual void PerformDeleteItem(object sender, EventArgs e) { }
         //protected virtual void AskForDelete(object sender, EventArgs e) { }
-        //protected virtual void ShowEditForm(object sender, EventArgs e) { }
+        //
 
         protected void modalUserRole_btnAcceptClick(object sender, EventArgs e)
         {
@@ -51,27 +51,22 @@ namespace Ubiquicity
                 RoleManager roleManager = new RoleManager();
                 User user = null;
 
+                user = userManager.Get(userId);
+                //UCFormUserRole.PopulateModel(user);
+                user.Roles = RetrieveFromSession("granted");
+
                 switch (action)
                 {
                     case CREATE:
-                        //TODO - Evaluar los errores
-                        user = userManager.Get(userId);
-                        //UCFormUserRole.PopulateModel(user);
-                        user.Roles = RetrieveFromSession("granted");
                         roleManager.SaveRoleForUser(user);
                         break;
 
                     case EDIT:
-                        if (Session["Ubiquicity_itemId"] != null)
-                        {
-                            //role = rolManager.Get(Convert.ToInt32(Session["Ubiquicity_itemId"]));
-                            //UCFormUserRole.PopulateModel(role);
-                            //role.Permissions = RetrieveFromSession("granted");
-                            //rolManager.Edit(role);
-                            //Session.Remove("Ubiquicity_itemId");
-                        }
+                        roleManager.EditRoleForUser(user);
                         break;
                 }
+
+                Session.Remove("Ubiquicity_itemId");
 
                 if (roleManager.HasErrors || userManager.HasErrors )
                 {
@@ -85,6 +80,36 @@ namespace Ubiquicity
             catch (Exception exception)
             {
                 Alert.Show("Exception", exception.Message);
+            }
+        }
+
+        protected override void ShowEditForm(object sender, EventArgs e) {
+            int id = Convert.ToInt32(Session["Ubiquicity_itemId"]);
+
+            UserManager userManager = new UserManager();
+            User user = userManager.Get(id);
+
+            RoleManager roleManager = new RoleManager();
+            List<Role> unassignedRoles = roleManager.GetUnassignedRole(user);
+
+            if (userManager.HasErrors)
+            {
+                Alert.Show("Error", userManager.Errors[0].description);
+            }
+            else
+            {
+                if (unassignedRoles == null)
+                {
+                    unassignedRoles = new List<Role>();
+                }
+
+                //Se guardan en sesión para su manejo posterior
+                KeepInSession("granted", user.Roles);
+                KeepInSession("toGrant", unassignedRoles);
+
+                UCFormUserRole.FillForm(user, unassignedRoles);
+                Session["Ubiquicity_action"] = EDIT;
+                ShowCrudForm();
             }
         }
 

@@ -93,7 +93,7 @@ namespace BL
         public User Get(int id)
         {
             UserMapper mapper = new UserMapper();
-            //RoleManager roleManager = new RoleManager();
+            RoleManager roleManager = new RoleManager();
             LanguageManager languageManager = new LanguageManager();
 
             User user = mapper.Get(id);
@@ -116,15 +116,15 @@ namespace BL
                 return null;
             }
 
-            //List<Role> roles = roleManager.Get(user);
+            List<Role> roles = roleManager.Get(user);
 
-            //if (roleManager.HasErrors)
-            //{
-            //    Errors.AddRange(roleManager.Errors);
-            //    return null;
-            //}
+            if (roleManager.HasErrors)
+            {
+                Errors.AddRange(roleManager.Errors);
+                return null;
+            }
 
-            //user.Roles = roles;
+            user.Roles = roles;
             return user;
         }
 

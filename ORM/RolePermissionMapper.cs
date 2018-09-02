@@ -23,12 +23,17 @@ namespace ORM
             return result && SavePermissionForRole(role);
         }
 
-        public bool Delete(int roleId)
+        /// <summary>
+        /// Elimina el rol cuyo id es pasado por parámetro.
+        /// </summary>
+        /// <param name="roleId"></param>
+        /// <returns></returns>
+        public bool Delete(int id)
         {
             Dal dal = new Dal();
             Hashtable table = new Hashtable();
 
-            table.Add("@roleId", roleId);
+            table.Add("@roleId", id);
             return dal.Write(table, "spDeleteRolePermission") > 0;
         }
 
@@ -75,14 +80,38 @@ namespace ORM
             {
                 table.Remove("@roleId");
                 table.Add("@roleId", role.Id);
-                
                 result = result & dal.Write(table, "spWriteUserRole") > 0;
             }
 
             return result;
         }
 
-        public List<Permission> GetUnassigned(Role role)
+        public bool EditRoleForUser(User user)
+        {
+            bool result = DeleteRoleForUser(user);
+            return result && SaveRoleForUser(user);
+        }
+
+        /// <summary>
+        /// Elimina las relación usuario - rol.
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        private bool DeleteRoleForUser(User user)
+        {
+            Dal dal = new Dal();
+            Hashtable table = new Hashtable();
+
+            table.Add("@userId", user.Id);
+            return dal.Write(table, "spDeleteUserRole") > 0;
+        }
+
+        /// <summary>
+        /// Recupera todos los permisos que no se encuentren asignados al rol.
+        /// </summary>
+        /// <param name="role"></param>
+        /// <returns></returns>
+        public List<Permission> GetUnassignedPermission(Role role)
         {
             Dal dal = new Dal();
             Hashtable table = new Hashtable();
@@ -99,13 +128,47 @@ namespace ORM
 
                 foreach (DataRow data in result.Tables[0].Rows)
                 {
-                    permissions.Add(ConvertToModel(data));
+                    permissions.Add(ConvertToPermissionModel(data));
                 }
             }
 
             return permissions;
         }
 
+        /// <summary>
+        /// Recupera todos los roles disponibles para el usuario pasado por parámetro.
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        public List<Role> GetUnassignedRole(User user)
+        {
+            Dal dal = new Dal();
+            Hashtable table = new Hashtable();
+            List<Role> roles = null;
+
+            table.Add("@inUse", false);
+            table.Add("@userId", user.Id);
+            table.Add("@roleId", DBNull.Value);
+
+            DataSet result = dal.Read(table, "spReadUserRole");
+
+            if (result != null && result.Tables[0].Rows.Count > 0)
+            {
+                roles = new List<Role>();
+
+                foreach (DataRow data in result.Tables[0].Rows)
+                {
+                    roles.Add(ConvertToRoleModel(data));
+                }
+            }
+
+            return roles;
+        }
+
+        /// <summary>
+        /// Recupera todos los permisos.
+        /// </summary>
+        /// <returns></returns>
         public List<Permission> Get()
         {
             Dal dal = new Dal();
@@ -123,7 +186,7 @@ namespace ORM
 
                 foreach (DataRow data in result.Tables[0].Rows)
                 {
-                    permissions.Add(ConvertToModel(data));
+                    permissions.Add(ConvertToPermissionModel(data));
                 }
             }
 
@@ -152,20 +215,30 @@ namespace ORM
 
                 foreach (DataRow data in result.Tables[0].Rows)
                 {
-                    permissions.Add(ConvertToModel(data));
+                    permissions.Add(ConvertToPermissionModel(data));
                 }
             }
 
             return permissions;
         }
 
-        private Permission ConvertToModel(DataRow data)
+        private Permission ConvertToPermissionModel(DataRow data)
         {
             return new Permission
             {
                 Id = int.Parse(data["id"].ToString()),
                 Description = data["description"].ToString(),
                 UrlAccess = data["urlAccess"].ToString()
+            };
+        }
+
+        private Role ConvertToRoleModel(DataRow data)
+        {
+            return new Role
+            {
+                Id = int.Parse(data["id"].ToString()),
+                Name = data["name"].ToString(),
+                Description = data["description"].ToString()
             };
         }
     }

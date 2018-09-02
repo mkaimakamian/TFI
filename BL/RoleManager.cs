@@ -139,9 +139,17 @@ namespace BL
             return success;
         }
 
-        public void EditRoleForUser(User user)
+        public bool EditRoleForUser(User user)
         {
-            //lll
+            RolePermissionMapper rolePermissionMapper = new RolePermissionMapper();
+            bool success = rolePermissionMapper.EditRoleForUser(user);
+
+            if (!success)
+            {
+                AddError(new ResultBE(ResultBE.Type.FAIL, "No se pudo asignar el rol"));
+            }
+
+            return success;
         }
 
         /// <summary>
@@ -218,7 +226,7 @@ namespace BL
         public List<Permission> GetUnassignedPermission(Role role)
         {
             RolePermissionMapper rolePermissionMapper = new RolePermissionMapper();
-            List<Permission> permissions = rolePermissionMapper.GetUnassigned(role);
+            List<Permission> permissions = rolePermissionMapper.GetUnassignedPermission(role);
 
             //if (permissions == null)
             //{
@@ -240,6 +248,25 @@ namespace BL
             }
 
             return permissions;
+        }
+
+        // TODO - agregar a ea
+        /// <summary>
+        /// Devuelve la lista de roles disponibles para un usuario.
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        public List<Role> GetUnassignedRole(User user)
+        {
+            RolePermissionMapper rolePermissionMapper = new RolePermissionMapper();
+            List<Role> roles = rolePermissionMapper.GetUnassignedRole(user);
+
+            //if (permissions == null)
+            //{
+            //    AddError(new ResultBE(ResultBE.Type.EMPTY, "Sin permisos sin asignar."));
+            //}
+
+            return roles;
         }
 
         private bool IsValid(Role role)

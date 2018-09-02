@@ -20,6 +20,7 @@ namespace Ubiquicity.UserControls
 
         public void InitializeForm(List<User> users, List<Role> granted, List<Role> toGrant)
         {
+            userDrop.Enabled = true;
             userDrop.DataSource = users;
             userDrop.DataTextField = "Username";
             userDrop.DataValueField = "Id";
@@ -34,12 +35,17 @@ namespace Ubiquicity.UserControls
             //No se pueden recuperar los datos de las listas!
         }
 
-        //public void FillForm(Role role, List<Permission> toGrant)
-        //{
-        //    roleNameInput.Value = role.Name;
-        //    roleDescriptionInput.Value = role.Description;
-        //    FillForm(role.Permissions, toGrant);
-        //}
+        public void FillForm(User user, List<Role> toGrant)
+        {
+            List<User> users = new List<User>();
+            users.Add(user);
+            userDrop.DataSource = users;
+            userDrop.DataTextField = "Username";
+            userDrop.DataValueField = "Id";
+            userDrop.DataBind();
+            userDrop.Enabled = false;
+            FillForm(user.Roles, toGrant);
+        }
 
         public void FillForm(List<Role> granted, List<Role> toGrant)
         {
