@@ -97,35 +97,6 @@ namespace ORM
         //          return null;
         //      }
 
-        /// <summary>
-        /// Recupera el listado de roles a los que pertenece el usuario.
-        /// </summary>
-        /// <param name="user"></param>
-        /// <returns></returns>
-        public List<Role> Get(User user)
-        {
-            Dal dal = new Dal();
-            Hashtable table = new Hashtable();
-            List<Role> roles = null;
-
-            table.Add("@id", DBNull.Value);
-            table.Add("@userId", user.Id);
-            table.Add("@name", DBNull.Value);
-
-            DataSet result = dal.Read(table, "spReadRole");
-
-            if (result != null && result.Tables[0].Rows.Count > 0)
-            {
-                roles = new List<Role>();
-
-                foreach (DataRow data in result.Tables[0].Rows) {
-                    roles.Add(ConvertToModel(data));
-                }
-            }
-
-            return roles;
-        }
-
         public List<Role> Get()
         {
             Dal dal = new Dal();

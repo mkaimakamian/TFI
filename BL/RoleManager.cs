@@ -34,8 +34,11 @@ namespace BL
         //          return null;
         //      }
 
-        //      /// 
+        /// <summary>
+        /// Elimina el rol cuyo id es pasado por parámetro.
+        /// </summary>
         /// <param name="id"></param>
+        /// <returns></returns>
         public bool Delete(int id)
         {
             RoleMapper rolMapper = new RoleMapper();
@@ -52,8 +55,41 @@ namespace BL
                 AddError(new ResultBE(ResultBE.Type.RELATIONSHIP_ERROR, "El rol está en uso."));
                 return true;
             }
+        }
 
-            
+        /// <summary>
+        /// Persiste el rol y los permisos asociados.
+        /// </summary>
+        /// <param name="role"></param>
+        /// <returns></returns>
+        public bool Save(Role role)
+        {
+
+            RoleMapper roleMapper = new RoleMapper();
+            RolePermissionMapper rolePermissionMapper = new RolePermissionMapper();
+
+            if (!IsValid(role)) return false;
+
+            if (roleMapper.Exists(role))
+            {
+                AddError(new ResultBE(ResultBE.Type.ALREADY_EXISTS, "Rol existente"));
+                return false;
+            }
+
+            if (!roleMapper.Save(role))
+            {
+                AddError(new ResultBE(ResultBE.Type.FAIL, "Error al grabar rol"));
+                return false;
+            }
+
+            // TODO - los roles tienen una lista de permisos
+            if (!rolePermissionMapper.SavePermissionForRole(role))
+            {
+                AddError(new ResultBE(ResultBE.Type.FAIL, "Error al grabar permisos"));
+                return false;
+            }
+
+            return true;
         }
 
         /// <summary>
@@ -90,19 +126,23 @@ namespace BL
             return true;
         }
 
-        //      public List<Role> Get()
-        //      {
+        public bool SaveRoleForUser(User user)
+        {
+            RolePermissionMapper rolePermissionMapper = new RolePermissionMapper();
+            bool success = rolePermissionMapper.SaveRoleForUser(user);
 
-        //          return null;
-        //      }
+            if (!success)
+            {
+                AddError(new ResultBE(ResultBE.Type.FAIL, "No se pudo asignar el rol"));
+            }
 
-        //      /// 
-        //      /// <param name="id"></param>
-        //      public Role Get(int id)
-        //      {
+            return success;
+        }
 
-        //          return null;
-        //      }
+        public void EditRoleForUser(User user)
+        {
+            //lll
+        }
 
         /// <summary>
         /// Devuelve la lista de roles del usuario pasado por parámetro.
@@ -111,8 +151,8 @@ namespace BL
         /// <returns></returns>
         public List<Role> Get(User user)
         {
-            RoleMapper roleMapper = new RoleMapper();
-            List<Role> roles = roleMapper.Get(user);
+            UserRoleMapper userRoleMapper = new UserRoleMapper();
+            List<Role> roles = userRoleMapper.Get(user);
 
             if (roles == null)
             {
@@ -200,41 +240,6 @@ namespace BL
             }
 
             return permissions;
-        }
-
-        /// <summary>
-        /// Persiste el rol y los permisos asociados.
-        /// </summary>
-        /// <param name="role"></param>
-        /// <returns></returns>
-        public bool Save(Role role)
-        {
-
-            RoleMapper roleMapper = new RoleMapper();
-            RolePermissionMapper rolePermissionMapper = new RolePermissionMapper();
-
-            if (!IsValid(role)) return false;
-
-            if (roleMapper.Exists(role))
-            {
-                AddError(new ResultBE(ResultBE.Type.ALREADY_EXISTS, "Rol existente"));
-                return false;
-            }
-
-            if (!roleMapper.Save(role))
-            {
-                AddError(new ResultBE(ResultBE.Type.FAIL, "Error al grabar rol"));
-                return false;
-            }
-
-            // TODO - los roles tienen una lista de permisos
-            if (!rolePermissionMapper.Save(role))
-            {
-                AddError(new ResultBE(ResultBE.Type.FAIL, "Error al grabar permisos"));
-                return false;
-            }
-
-            return true;
         }
 
         private bool IsValid(Role role)

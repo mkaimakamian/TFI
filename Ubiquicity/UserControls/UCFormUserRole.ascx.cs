@@ -8,7 +8,7 @@ using BE;
 
 namespace Ubiquicity.UserControls
 {
-    public partial class UCFormRolePermission : System.Web.UI.UserControl
+    public partial class UCFormUserRole : System.Web.UI.UserControl
     {
         public event EventHandler GrantAction;
         public event EventHandler UngrantAction;
@@ -18,29 +18,30 @@ namespace Ubiquicity.UserControls
 
         }
 
-        public void InitializeForm(List<Permission> granted, List<Permission> toGrant)
+        public void InitializeForm(List<User> users, List<Role> granted, List<Role> toGrant)
         {
-            roleNameInput.Value = "";
-            roleDescriptionInput.Value = "";
+            userDrop.DataSource = users;
+            userDrop.DataTextField = "Username";
+            userDrop.DataValueField = "Id";
+            userDrop.DataBind();
+
             FillForm(granted, toGrant);
         }
 
-        public void PopulateModel(Role rol)
+        public void PopulateModel(User user)
         {
-            rol.Name = roleNameInput.Value;
-            rol.Description = roleDescriptionInput.Value;
-
-            //No sse pueden recuperar los datos de las listas!
+            //No se puede recuperar dato del combo;
+            //No se pueden recuperar los datos de las listas!
         }
 
-        public void FillForm(Role role, List<Permission> toGrant)
-        {
-            roleNameInput.Value = role.Name;
-            roleDescriptionInput.Value = role.Description;
-            FillForm(role.Permissions, toGrant);
-        }
+        //public void FillForm(Role role, List<Permission> toGrant)
+        //{
+        //    roleNameInput.Value = role.Name;
+        //    roleDescriptionInput.Value = role.Description;
+        //    FillForm(role.Permissions, toGrant);
+        //}
 
-        public void FillForm(List<Permission> granted, List<Permission> toGrant)
+        public void FillForm(List<Role> granted, List<Role> toGrant)
         {
             lstPermissionGranted.DataSource = granted;
             lstPermissionGranted.DataTextField = "Description";
@@ -57,15 +58,18 @@ namespace Ubiquicity.UserControls
         {
             if (lstPermissionGranted.SelectedIndex > -1)
             {
-                Session["Ubiquicity_permissionId"] = lstPermissionGranted.SelectedValue;
+                Session["Ubiquicity_roleId"] = lstPermissionGranted.SelectedValue;
+                Session["Ubiquicity_userId"] = userDrop.SelectedValue;
                 if (UngrantAction != null) UngrantAction(this, e);
             }
         }
 
         protected void btnGrant_Click(object sender, EventArgs e)
         {
-            if (lstPermissionToGrant.SelectedIndex > -1) { 
-                Session["Ubiquicity_permissionId"] = lstPermissionToGrant.SelectedValue;
+            if (lstPermissionToGrant.SelectedIndex > -1)
+            {
+                Session["Ubiquicity_roleId"] = lstPermissionToGrant.SelectedValue;
+                Session["Ubiquicity_userId"] = userDrop.SelectedValue;
                 if (GrantAction != null) GrantAction(this, e);
             }
         }

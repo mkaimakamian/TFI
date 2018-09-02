@@ -174,12 +174,40 @@ namespace BE
         {
             get
             {
+                if (roles == null)
+                {
+                    roles = new List<Role>();
+                }
                 return roles;
             }
 
             set
             {
                 roles = value;
+            }
+        }
+
+        //TODO - agregar en ea
+
+        public string Permission
+        {
+            get
+            {
+                string permissionList = "";
+
+                foreach (Role role in Roles)
+                {
+                    permissionList += role.Name + ", ";
+                }
+
+                if (Roles.Count > 0)
+                {
+                    return permissionList.Substring(0, permissionList.Length - 2);
+                } else
+                {
+                    return "";
+                }
+                
             }
         }
     }

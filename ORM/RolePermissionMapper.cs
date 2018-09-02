@@ -20,7 +20,7 @@ namespace ORM
         /// <returns></returns>
         public bool Edit(Role role) {
             bool result = Delete(role.Id);
-            return result && Save(role);
+            return result && SavePermissionForRole(role);
         }
 
         public bool Delete(int roleId)
@@ -32,8 +32,12 @@ namespace ORM
             return dal.Write(table, "spDeleteRolePermission") > 0;
         }
 
-
-        public bool Save(Role role)
+        /// <summary>
+        /// Guarda la relación rol - permisos
+        /// </summary>
+        /// <param name="role"></param>
+        /// <returns></returns>
+        public bool SavePermissionForRole(Role role)
         {
             Dal dal = new Dal();
             Hashtable table = new Hashtable();
@@ -48,6 +52,31 @@ namespace ORM
                 table.Add("@roleId", role.Id);
                 table.Add("@permissionId", permission.Id);
                 result = result & dal.Write(table, "spWriteRolePermission") > 0;
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Guarda la relación usuario - rol
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        public bool SaveRoleForUser(User user)
+        {
+            Dal dal = new Dal();
+            Hashtable table = new Hashtable();
+            bool result = true;
+
+            table.Add("@userId", user.Id);
+
+            //TODO -  Cambiar para que soporte transaccionalidad
+            foreach (Role role in user.Roles)
+            {
+                table.Remove("@roleId");
+                table.Add("@roleId", role.Id);
+                
+                result = result & dal.Write(table, "spWriteUserRole") > 0;
             }
 
             return result;

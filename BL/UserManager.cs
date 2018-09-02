@@ -24,6 +24,18 @@ namespace BL
 
         //    return true;
         //}
+        public List<User> GetUserWithoutRole()
+        {
+            UserRoleMapper userRoleMapper = new UserRoleMapper();
+            List<User> users = userRoleMapper.GetUserWithoutRole();
+
+            if (users == null)
+            {
+                AddError(new ResultBE(ResultBE.Type.EMPTY, "Sin usuarios "));
+            }
+            
+            return users;
+        }
 
         public bool Delete(int id)
         {
@@ -59,10 +71,22 @@ namespace BL
         public List<User> Get()
         {
             UserMapper mapper = new UserMapper();
+            UserRoleMapper userRoleMapper = new UserRoleMapper();
+            RoleManager roleManager = new RoleManager();
+
             List<User> users = mapper.Get();
 
-            if (users == null) AddError(new ResultBE(ResultBE.Type.EMPTY, "Sin usuarios "));
-           
+            if (users == null)
+            {
+                AddError(new ResultBE(ResultBE.Type.EMPTY, "Sin usuarios "));
+                return users;
+            }
+
+            foreach (User user in users)
+            {
+                user.Roles = roleManager.Get(user);
+            }
+            
             return users;
         }
 

@@ -130,12 +130,14 @@
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="UserControls\UCFormRolePermission.ascx" />
+    <Content Include="UserControls\UCFormUserRole.ascx" />
     <Content Include="user_manager.aspx" />
     <Content Include="UserControls\UCcrudGrid.ascx" />
     <Content Include="UserControls\UCFormLanguage.ascx" />
     <Content Include="UserControls\UCModalMessageBox.ascx" />
     <Content Include="UserControls\UCFormNewMember.ascx" />
     <Content Include="UserControls\UCModalTitle.ascx" />
+    <Content Include="user_role_manager.aspx" />
     <Content Include="Web.config" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
@@ -222,6 +224,13 @@
     <Compile Include="UserControls\UCFormRolePermission.ascx.designer.cs">
       <DependentUpon>UCFormRolePermission.ascx</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\UCFormUserRole.ascx.cs">
+      <DependentUpon>UCFormUserRole.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCFormUserRole.ascx.designer.cs">
+      <DependentUpon>UCFormUserRole.ascx</DependentUpon>
+    </Compile>
     <Compile Include="user_manager.aspx.cs">
       <DependentUpon>user_manager.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -263,6 +272,13 @@
     </Compile>
     <Compile Include="UserControls\UCModalTitle.ascx.designer.cs">
       <DependentUpon>UCModalTitle.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="user_role_manager.aspx.cs">
+      <DependentUpon>user_role_manager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="user_role_manager.aspx.designer.cs">
+      <DependentUpon>user_role_manager.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
