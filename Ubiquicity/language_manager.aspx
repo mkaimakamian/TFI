@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/front.Master" AutoEventWireup="true" CodeBehind="language.aspx.cs" Inherits="Ubiquicity.language" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/front.Master" AutoEventWireup="true" CodeBehind="language_manager.aspx.cs" Inherits="Ubiquicity.language" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="contentHolder" runat="server">
     

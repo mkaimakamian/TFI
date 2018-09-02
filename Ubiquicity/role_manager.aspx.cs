@@ -16,7 +16,6 @@ namespace Ubiquicity
         {
             // Obligatorio para que la clase padre pueda operar
             GridView = UCcrudGrid;
-
             UCFormRolePermission.GrantAction += GrantPermission;
             UCFormRolePermission.UngrantAction += UngrantPermission;
         }
@@ -26,15 +25,7 @@ namespace Ubiquicity
             {
                 RoleManager roleManager = new RoleManager();
                 List<Role> roles = roleManager.Get();
-
-                if (roleManager.HasErrors)
-                {
-                    Alert.Show("Error", roleManager.Errors[0].description);
-                }
-                else
-                {
-                    GridView.LoadGrid(roles);
-                }
+                GridView.LoadGrid(roles);
             }
             catch (Exception exception)
             {
@@ -89,6 +80,7 @@ namespace Ubiquicity
         }
 
         protected override void ShowEditForm(object sender, EventArgs e) {
+
             int id = Convert.ToInt32(Session["Ubiquicity_itemId"]);
 
             RoleManager roleManager = new RoleManager();
@@ -101,32 +93,37 @@ namespace Ubiquicity
             }
             else
             {
+                if (unassignedPermission == null) { 
+                    unassignedPermission = new List<Permission>();
+                }
+
                 //Se guardan en sesión para su manejo posterior
                 KeepInSession("granted", role.Permissions);
                 KeepInSession("toGrant", unassignedPermission);
 
-                UCFormRolePermission.FillForm(role.Permissions, unassignedPermission);
+                UCFormRolePermission.FillForm(role, unassignedPermission);
                 Session["Ubiquicity_action"] = EDIT;
-                Page.ClientScript.RegisterStartupScript(this.GetType(), "openModalEdit", "window.onload = function() { $('#modalRolePermission').modal('show'); }", true);
+                ShowCrudForm();
             }
         }
 
+        /// <summary>
+        /// Muestra el formulario para el alta de un nuevo rol.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected override void ShowNewForm(object sender, EventArgs e) {
             RoleManager roleManager = new RoleManager();
             List<Permission> unassignedPermission = roleManager.GetAllPermission();
+            List<Permission> granted = new List<Permission>();
 
-            if (roleManager.HasErrors)
-            {
-                Alert.Show("Error", roleManager.Errors[0].description);
-            }
-            else
-            {
-                UCFormRolePermission.InitializeForm(unassignedPermission);
-                KeepInSession("granted", new List<Permission>());
-                KeepInSession("toGrant", unassignedPermission);
-                Session["Ubiquicity_action"] = CREATE;
-                Page.ClientScript.RegisterStartupScript(this.GetType(), "openModalCreate", "window.onload = function() { $('#modalRolePermission').modal('show'); }", true);
-            }
+            //Se guardan en sesión para su manejo posterior
+            KeepInSession("granted", granted);
+            KeepInSession("toGrant", unassignedPermission);
+
+            UCFormRolePermission.InitializeForm(granted, unassignedPermission);
+            Session["Ubiquicity_action"] = CREATE;
+            ShowCrudForm();
         }
 
         /// <summary>
@@ -135,9 +132,10 @@ namespace Ubiquicity
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void GrantPermission(object sender, EventArgs e) {
-            int id = int.Parse(Session["Ubiquicity_itemId"].ToString());
             List<Permission> granted = RetrieveFromSession("granted");
             List<Permission> toGrant = RetrieveFromSession("toGrant");
+
+            int id = int.Parse(Session["Ubiquicity_permissionId"].ToString());
             SwitchPermission(id, "toGrant", toGrant, "granted", granted);
             UCFormRolePermission.FillForm(granted, toGrant);
         }
@@ -148,16 +146,16 @@ namespace Ubiquicity
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void UngrantPermission(object sender, EventArgs e) {
-            int id = int.Parse(Session["Ubiquicity_itemId"].ToString());
             List<Permission> granted = RetrieveFromSession("granted");
             List<Permission> toGrant = RetrieveFromSession("toGrant");
+
+            int id = int.Parse(Session["Ubiquicity_permissionId"].ToString());
             SwitchPermission(id, "granted", granted, "toGrant", toGrant);
             UCFormRolePermission.FillForm(granted, toGrant);
         }
 
         private void SwitchPermission(int id, string keyfrom, List<Permission> from, string keyTo, List<Permission> to)
         {
-            
             bool found = false;
 
             // Traspaso a la lista de disponibles
@@ -171,12 +169,40 @@ namespace Ubiquicity
                 }
             }
 
-            // Actualización de las listas
             KeepInSession(keyfrom, from);
             KeepInSession(keyTo, to);
-            Session.Remove("Ubiquicity_itemId");
-            Page.ClientScript.RegisterStartupScript(this.GetType(), "openModalCreate", "window.onload = function() { $('#modalRolePermission').modal('show'); }", true);
+            Session.Remove("Ubiquicity_permissionId");
+            ShowCrudForm();
         }
+
+        protected override void PerformDeleteItem(object sender, EventArgs e) {
+            if (Session["Ubiquicity_itemId"] != null)
+            {
+                int id = int.Parse(Session["Ubiquicity_itemId"].ToString());
+                RoleManager rolManager = new RoleManager();
+
+                if (rolManager.Delete(id))
+                {
+                    LoadGridView();
+                    Session.Remove("Ubiquicity_itemId");
+                }
+
+                if (rolManager.HasErrors) {
+                    Alert.Show("Error", rolManager.Errors[0].description);
+                }
+                
+            }
+        }
+
+        protected override void AskForDelete(object sender, EventArgs e) {
+            Alert.Show("Eliminar registro", "¿Está seguro de querer eliminar el registro?", "Si");
+        }
+
+        private void ShowCrudForm()
+        {
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "openModalRole", "window.onload = function() { $('#modalRolePermission').modal('show'); }", true);
+        }
+
         //estrategia para manejar las listas: el uso de la sesión
         private void KeepInSession(string key, List<Permission> value)
         {
@@ -187,6 +213,5 @@ namespace Ubiquicity
         {
             return (List < Permission > ) Session[key];
         }
-
     }   
 }

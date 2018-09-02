@@ -13,14 +13,14 @@ namespace BE
             OK,
             INVALID_CREDENTIAL,
             INACTIVE_USER,
-            CHECKSUM_ERROR,
             INCOMPLETE_FIELDS,
             EXCEPTION,
             FAIL,
             EMPTY_PROFILE,
             NULL,
             EMPTY,
-            ALREADY_EXISTS
+            ALREADY_EXISTS,
+            RELATIONSHIP_ERROR
         };
 
         private Type type;

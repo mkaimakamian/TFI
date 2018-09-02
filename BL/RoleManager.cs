@@ -35,12 +35,26 @@ namespace BL
         //      }
 
         //      /// 
-        //      /// <param name="id"></param>
-        //      public boolean Delete(int id)
-        //      {
+        /// <param name="id"></param>
+        public bool Delete(int id)
+        {
+            RoleMapper rolMapper = new RoleMapper();
+            RolePermissionMapper rolePermissionMapper = new RolePermissionMapper();
+            UserRoleMapper userRolMapper = new UserRoleMapper();
 
-        //          return null;
-        //      }
+            if (!userRolMapper.InUse(id))
+            {
+                rolePermissionMapper.Delete(id);
+                rolMapper.Delete(id);
+                return true;
+            } else
+            {
+                AddError(new ResultBE(ResultBE.Type.RELATIONSHIP_ERROR, "El rol está en uso."));
+                return true;
+            }
+
+            
+        }
 
         /// <summary>
         /// Guarda las modificaciones del rol.
@@ -49,34 +63,31 @@ namespace BL
         /// <returns></returns>
         public bool Edit(Role role)
         {
-            return false;
-            //RoleMapper roleMapper = new RoleMapper();
-            //RolePermissionMapper rolePermissionMapper = new RolePermissionMapper();
+            RoleMapper roleMapper = new RoleMapper();
+            RolePermissionMapper rolePermissionMapper = new RolePermissionMapper();
 
-            //if (!IsValid(role)) return false;
+            if (!IsValid(role)) return false;
 
-            //if (roleMapper.Exists(role))
-            //{
-            //    AddError(new ResultBE(ResultBE.Type.ALREADY_EXISTS, "Rol existente"));
-            //    return false;
-            //}
+            if (roleMapper.Exists(role))
+            {
+                AddError(new ResultBE(ResultBE.Type.ALREADY_EXISTS, "Rol existente"));
+                return false;
+            }
 
-            //if (!roleMapper.Save(role))
-            //{
-            //    AddError(new ResultBE(ResultBE.Type.FAIL, "Error al grabar rol"));
-            //    return false;
-            //}
+            if (!roleMapper.Edit(role))
+            {
+                AddError(new ResultBE(ResultBE.Type.FAIL, "Error al grabar rol"));
+                return false;
+            }
 
-            ////eliminar la relación existente!!!
+            // TODO - los roles tienen una lista de permisos
+            if (!rolePermissionMapper.Edit(role))
+            {
+                AddError(new ResultBE(ResultBE.Type.FAIL, "Error al editar permisos"));
+                return false;
+            }
 
-            //// TODO - los roles tienen una lista de permisos
-            //if (!rolePermissionMapper.Save(role))
-            //{
-            //    AddError(new ResultBE(ResultBE.Type.FAIL, "Error al grabar permisos"));
-            //    return false;
-            //}
-
-            //return true;
+            return true;
         }
 
         //      public List<Role> Get()
@@ -131,11 +142,11 @@ namespace BL
 
             List<Permission> permissions = rolePermissionMapper.Get(role);
 
-            if (role == null)
-            {
-                AddError(new ResultBE(ResultBE.Type.EMPTY, "El rol no posee permisos asociados."));
-                return null;
-            }
+            //if (role == null)
+            //{
+            //    AddError(new ResultBE(ResultBE.Type.EMPTY, "El rol no posee permisos asociados."));
+            //    return null;
+            //}
 
             role.Permissions = permissions;
 
@@ -169,10 +180,10 @@ namespace BL
             RolePermissionMapper rolePermissionMapper = new RolePermissionMapper();
             List<Permission> permissions = rolePermissionMapper.GetUnassigned(role);
 
-            if (permissions == null)
-            {
-                AddError(new ResultBE(ResultBE.Type.EMPTY, "Sin permisos sin asignar."));
-            }
+            //if (permissions == null)
+            //{
+            //    AddError(new ResultBE(ResultBE.Type.EMPTY, "Sin permisos sin asignar."));
+            //}
 
             return permissions;
         }

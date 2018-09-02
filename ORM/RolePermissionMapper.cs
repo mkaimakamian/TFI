@@ -13,9 +13,28 @@ namespace ORM
     //TODO - agregar en ea
     public class RolePermissionMapper
     {
+        /// <summary>
+        /// La edición de la relación consiste en la eliinación y recreación de las relaciones.
+        /// </summary>
+        /// <param name="role"></param>
+        /// <returns></returns>
+        public bool Edit(Role role) {
+            bool result = Delete(role.Id);
+            return result && Save(role);
+        }
+
+        public bool Delete(int roleId)
+        {
+            Dal dal = new Dal();
+            Hashtable table = new Hashtable();
+
+            table.Add("@roleId", roleId);
+            return dal.Write(table, "spDeleteRolePermission") > 0;
+        }
+
+
         public bool Save(Role role)
         {
-            // TODO - guarda que debería ser recursivo
             Dal dal = new Dal();
             Hashtable table = new Hashtable();
 

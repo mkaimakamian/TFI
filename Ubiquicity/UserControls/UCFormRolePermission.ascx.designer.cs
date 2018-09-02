@@ -13,22 +13,22 @@ namespace Ubiquicity.UserControls {
     public partial class UCFormRolePermission {
         
         /// <summary>
-        /// rolNameInput control.
+        /// roleNameInput control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText rolNameInput;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText roleNameInput;
         
         /// <summary>
-        /// rolDescriptionInput control.
+        /// roleDescriptionInput control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText rolDescriptionInput;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText roleDescriptionInput;
         
         /// <summary>
         /// lstPermissionGranted control.

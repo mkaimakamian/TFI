@@ -1,12 +1,12 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UCFormRolePermission.ascx.cs" Inherits="Ubiquicity.UserControls.UCFormRolePermission" %>
 <div class="modal-body">
     <div class="form-group">
-    <label for="rolNameInput">Nombre</label>
-    <input id="rolNameInput" runat="server" type="text" class="form-control"  placeholder="Ingresa el nombre">
+    <label for="roleNameInput">Nombre</label>
+    <input id="roleNameInput" runat="server" type="text" class="form-control"  placeholder="Ingresa el nombre">
     </div>
     <div class="form-group">
-    <label for="rolDescriptionInput">Descripción</label>
-    <input id="rolDescriptionInput" runat="server" type="text" class="form-control"  placeholder="Ingresa la descripcióno">
+    <label for="roleDescriptionInput">Descripción</label>
+    <input id="roleDescriptionInput" runat="server" type="text" class="form-control"  placeholder="Ingresa la descripcióno">
     </div>
     <div class="form-group">
         <label for="lstPermissionGranted">Obtenidos</label>

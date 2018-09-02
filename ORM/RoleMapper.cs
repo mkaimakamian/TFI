@@ -20,21 +20,36 @@ namespace ORM
         //          return null;
         //      }
 
-        //      /// 
-        //      /// <param name="id"></param>
-        //      public boolean Delete(int id)
-        //      {
+        /// <summary>
+        /// Elimina el rol.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public bool Delete(int roleId)
+        {
+            Dal dal = new Dal();
+            Hashtable table = new Hashtable();
 
-        //          return null;
-        //      }
+            table.Add("@roleId", roleId);
+            return dal.Write(table, "spDeleteRole") > 0;
+        }
 
-        //      /// 
-        //      /// <param name="role"></param>
-        //      public boolean Edit(Role role)
-        //      {
+        /// <summary>
+        /// Guarda los cambios del rol.
+        /// </summary>
+        /// <param name="role"></param>
+        /// <returns></returns>
+        public bool Edit(Role role)
+        {
+            Dal dal = new Dal();
+            Hashtable table = new Hashtable();
 
-        //          return null;
-        //      }
+            table.Add("@id", role.Id);
+            table.Add("@name", role.Name);
+            table.Add("@description", role.Description);
+
+            return dal.Write(table, "spModifyRole") > 0;
+        }
 
         //TODO - Cambiar el tipo de parámetro en ea
         /// <summary>
@@ -136,16 +151,6 @@ namespace ORM
             return roles;
         }
 
-        private Role ConvertToModel(DataRow data)
-        {
-            return new Role
-            {
-                Id = Convert.ToInt32(data["id"]),
-                Name = data["name"].ToString(),
-                Description = data["description"].ToString()
-            };
-        }
-
         /// <summary>
         /// Persiste el rol.
         /// </summary>
@@ -162,17 +167,17 @@ namespace ORM
             return true;
         }
 
-        //TODO - ver si este método puede recibir únicamente User
-        //      /// 
-        //      /// <param name="user"></param>
-        //      /// <param name="roles"></param>
-        //      public boolean Save(User user, List<Role> roles)
-        //      {
+        private Role ConvertToModel(DataRow data)
+        {
+            return new Role
+            {
+                Id = Convert.ToInt32(data["id"]),
+                Name = data["name"].ToString(),
+                Description = data["description"].ToString()
+            };
+        }
 
-        //          return null;
-        //      }
-
-        //      /// 
+         //      /// 
         //      /// <param name="user"></param>
         //      public boolean SaveWebUserRol(User user)
         //      {

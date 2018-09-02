@@ -42,7 +42,7 @@
                 <asp:MenuItem Text="Contenido" Value="Contenido" >
                     <asp:MenuItem Text="Novedades" Value="Novedades"></asp:MenuItem>
                     <asp:MenuItem Text="Artículos" Value="Artículos"></asp:MenuItem>
-                    <asp:MenuItem Text="Idiomas" Value="Idiomas" NavigateUrl="~/language.aspx"></asp:MenuItem>
+                    <asp:MenuItem Text="Idiomas" Value="Idiomas" NavigateUrl="~/language_manager.aspx"></asp:MenuItem>
                     <asp:MenuItem Text="Categoría de negocios" Value="Categoría de negocios"></asp:MenuItem>
                     <asp:MenuItem Text="Marketing mix" Value="Marketing mix"></asp:MenuItem>
                 </asp:MenuItem>
@@ -53,9 +53,9 @@
                     <asp:MenuItem Text="Niveles de aprobación" Value="Niveles de aprobación"></asp:MenuItem>
                 </asp:MenuItem>
                 <asp:MenuItem Text="Seguridad" Value="Seguridad">
-                    <asp:MenuItem Text="Bitácora" Value="Bitácora" NavigateUrl="~/logManager.aspx"></asp:MenuItem>
-                    <asp:MenuItem NavigateUrl="~/user.aspx" Text="Usuarios" Value="Usuarios"></asp:MenuItem>
-                    <asp:MenuItem Text="Roles" Value="Roles" NavigateUrl="~/roleManager.aspx"></asp:MenuItem>
+                    <asp:MenuItem Text="Bitácora" Value="Bitácora" NavigateUrl="~/log_manager.aspx"></asp:MenuItem>
+                    <asp:MenuItem NavigateUrl="~/user_manager.aspx" Text="Usuarios" Value="Usuarios"></asp:MenuItem>
+                    <asp:MenuItem Text="Roles" Value="Roles" NavigateUrl="~/role_manager.aspx"></asp:MenuItem>
                     <asp:MenuItem Text="Roles y usuarios" Value="Roles y usuarios"></asp:MenuItem>
                     <asp:MenuItem Text="Respaldo" Value="Respaldo"></asp:MenuItem>
                 </asp:MenuItem>

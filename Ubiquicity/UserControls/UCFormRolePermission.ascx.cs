@@ -18,11 +18,11 @@ namespace Ubiquicity.UserControls
 
         }
 
-        public void InitializeForm(List<Permission> toGrant)
+        public void InitializeForm(List<Permission> granted, List<Permission> toGrant)
         {
-            rolNameInput.Value = "";
-            rolDescriptionInput.Value = "";
-            lstPermissionGranted.DataSource = null;
+            roleNameInput.Value = "";
+            roleDescriptionInput.Value = "";
+            lstPermissionGranted.DataSource = granted;
             lstPermissionGranted.DataBind();
             lstPermissionToGrant.DataSource = toGrant;
             lstPermissionToGrant.DataTextField = "Description";
@@ -32,10 +32,17 @@ namespace Ubiquicity.UserControls
 
         public void PopulateModel(Role rol)
         {
-            rol.Name = rolNameInput.Value;
-            rol.Description = rolDescriptionInput.Value;
+            rol.Name = roleNameInput.Value;
+            rol.Description = roleDescriptionInput.Value;
 
             //No sse pueden recuperar los datos de las listas!
+        }
+
+        public void FillForm(Role role, List<Permission> toGrant)
+        {
+            roleNameInput.Value = role.Name;
+            roleDescriptionInput.Value = role.Description;
+            FillForm(role.Permissions, toGrant);
         }
 
         public void FillForm(List<Permission> granted, List<Permission> toGrant)
@@ -55,7 +62,7 @@ namespace Ubiquicity.UserControls
         {
             if (lstPermissionGranted.SelectedIndex > -1)
             {
-                Session["Ubiquicity_itemId"] = lstPermissionGranted.SelectedValue;
+                Session["Ubiquicity_permissionId"] = lstPermissionGranted.SelectedValue;
                 if (UngrantAction != null) UngrantAction(this, e);
             }
         }
@@ -63,7 +70,7 @@ namespace Ubiquicity.UserControls
         protected void btnGrant_Click(object sender, EventArgs e)
         {
             if (lstPermissionToGrant.SelectedIndex > -1) { 
-                Session["Ubiquicity_itemId"] = lstPermissionToGrant.SelectedValue;
+                Session["Ubiquicity_permissionId"] = lstPermissionToGrant.SelectedValue;
                 if (GrantAction != null) GrantAction(this, e);
             }
         }
