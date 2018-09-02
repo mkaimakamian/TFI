@@ -74,6 +74,7 @@ namespace Ubiquicity
                             user = userManager.Get(Convert.ToInt32(Session["Ubiquicity_itemId"]));
                             UCFormNewMember.PopulateModel(user);
                             userManager.Edit(user);
+                            Session.Remove("Ubiquicity_itemId");
                         }
                         break;
                 }

@@ -61,7 +61,7 @@ namespace ORM
             Dal dal = new Dal();
             Hashtable table = new Hashtable();
             table.Add("@id", id);
-            return dal.Write(table, "spDeleteLanguage");
+            return dal.Write(table, "spDeleteLanguage") > 0;
         }
 
         public bool Save(Language language)
@@ -71,7 +71,7 @@ namespace ORM
 
             table.Add("@name", language.Name);
 
-            return dal.Write(table, "spWriteLanguage");
+            return dal.Write(table, "spWriteLanguage") > 0;
         }
 
         // TODO - Agregar en EA

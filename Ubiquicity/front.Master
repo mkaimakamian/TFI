@@ -55,7 +55,7 @@
                 <asp:MenuItem Text="Seguridad" Value="Seguridad">
                     <asp:MenuItem Text="Bitácora" Value="Bitácora" NavigateUrl="~/logManager.aspx"></asp:MenuItem>
                     <asp:MenuItem NavigateUrl="~/user.aspx" Text="Usuarios" Value="Usuarios"></asp:MenuItem>
-                    <asp:MenuItem Text="Roles" Value="Roles" NavigateUrl="~/role.aspx"></asp:MenuItem>
+                    <asp:MenuItem Text="Roles" Value="Roles" NavigateUrl="~/roleManager.aspx"></asp:MenuItem>
                     <asp:MenuItem Text="Roles y usuarios" Value="Roles y usuarios"></asp:MenuItem>
                     <asp:MenuItem Text="Respaldo" Value="Respaldo"></asp:MenuItem>
                 </asp:MenuItem>

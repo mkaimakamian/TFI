@@ -44,7 +44,6 @@ namespace ORM
         /// <returns></returns>
         public bool Exists(Role role)
         {
-
             Dal dal = new Dal();
             Hashtable table = new Hashtable();
 
@@ -56,25 +55,38 @@ namespace ORM
 
             return result != null && result.Tables[0].Rows.Count > 0;
         }
-        //      /// 
-        //      /// <param name="id"></param>
-        //      public Clases.BE.Role Get(int id)
+        
+        public Role Get(int id)
+        {
+            Dal dal = new Dal();
+            Hashtable table = new Hashtable();
+            Role role = null;
+
+            table.Add("@id", id);
+            table.Add("@userId", DBNull.Value);
+            table.Add("@name", DBNull.Value);
+
+            DataSet result = dal.Read(table, "spReadRole");
+
+            if (result != null && result.Tables[0].Rows.Count > 0)
+            {
+                role = ConvertToModel(result.Tables[0].Rows[0]);
+            }
+
+            return role;
+        }
+
+        //      public List<Role> Get()
         //      {
 
-            //          return null;
-            //      }
+        //          return null;
+        //      }
 
-            //      public List<Role> Get()
-            //      {
-
-            //          return null;
-            //      }
-
-            /// <summary>
-            /// Recupera el listado de roles a los que pertenece el usuario.
-            /// </summary>
-            /// <param name="user"></param>
-            /// <returns></returns>
+        /// <summary>
+        /// Recupera el listado de roles a los que pertenece el usuario.
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         public List<Role> Get(User user)
         {
             Dal dal = new Dal();
@@ -98,7 +110,32 @@ namespace ORM
 
             return roles;
         }
-        
+
+        public List<Role> Get()
+        {
+            Dal dal = new Dal();
+            Hashtable table = new Hashtable();
+            List<Role> roles = null;
+
+            table.Add("@id", DBNull.Value);
+            table.Add("@userId", DBNull.Value);
+            table.Add("@name", DBNull.Value);
+
+            DataSet result = dal.Read(table, "spReadRole");
+
+            if (result != null && result.Tables[0].Rows.Count > 0)
+            {
+                roles = new List<Role>();
+
+                foreach (DataRow data in result.Tables[0].Rows)
+                {
+                    roles.Add(ConvertToModel(data));
+                }
+            }
+
+            return roles;
+        }
+
         private Role ConvertToModel(DataRow data)
         {
             return new Role
@@ -121,8 +158,8 @@ namespace ORM
 
             table.Add("@name", role.Name);
             table.Add("@description", role.Description);
-
-            return dal.Write(table, "spWriteRole");
+            role.Id = dal.Write(table, "spWriteRole");
+            return true;
         }
 
         //TODO - ver si este método puede recibir únicamente User

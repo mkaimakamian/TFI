@@ -15,7 +15,8 @@ namespace ORM
         {
             Dal dal = new Dal();
             Hashtable table = new Hashtable();
-            
+            User user = null;
+
             table.Add("@username", username);
             table.Add("@password", password);
 
@@ -23,11 +24,10 @@ namespace ORM
 
             if (result != null && result.Tables[0].Rows.Count > 0)
             {
-                return ConvertToModel(result.Tables[0].Rows[0]);
-            } else
-            {
-                return null;
+                user = ConvertToModel(result.Tables[0].Rows[0]);
             }
+
+            return user;
         }
 
         public User Get(int id)
@@ -76,7 +76,7 @@ namespace ORM
             Dal dal = new Dal();
             Hashtable table = new Hashtable();
             table.Add("@id", id);
-            return dal.Write(table, "spDeleteUser");
+            return dal.Write(table, "spDeleteUser") > 0;
         }
 
         public bool Edit(User user)
@@ -96,7 +96,7 @@ namespace ORM
             table.Add("@lastname", user.Lastname);
             table.Add("@lastupdate", user.Lastupdate);
 
-            return dal.Write(table, "spModifyUser");
+            return dal.Write(table, "spModifyUser") > 0;
         }
 
         // TODO - Agregar en EA
@@ -167,8 +167,8 @@ namespace ORM
             table.Add("@name", user.Name);
             table.Add("@lastname", user.Lastname);
             table.Add("@lastupdate", user.Lastupdate);
-
-            return dal.Write(table, "spWriteUser");
+           // user.Id = ;
+            return dal.Write(table, "spWriteUser") > 0;
         }
     }
 }

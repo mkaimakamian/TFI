@@ -43,7 +43,7 @@ namespace DA
         /// <param name="table"></param>
         /// <param name="sql"></param>
         /// <returns></returns>
-        public bool Write(Hashtable table, String sql)
+        public int Write(Hashtable table, String sql)
         {
             SqlConnection connection = null;
             SqlTransaction transaction = null;
@@ -64,10 +64,10 @@ namespace DA
                     }
                 }
             
-                int affected = command.ExecuteNonQuery();
+                object affected = command.ExecuteScalar();
                 transaction.Commit();
 
-                return true; //TODO - devolver filas modificadas affected > 0;
+                return int.Parse(affected.ToString());
             } catch (Exception e)
             {
                 transaction.Rollback();

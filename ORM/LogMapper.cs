@@ -23,7 +23,7 @@ namespace ORM
             table.Add("@entity", logEntry.Entity);
             table.Add("@userName", logEntry.User);
 
-            return dal.Write(table, "spWriteLog");
+            return dal.Write(table, "spWriteLog") > 0;
         }
 
         public List<LogEntry> Get()

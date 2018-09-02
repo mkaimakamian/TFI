@@ -47,7 +47,7 @@ namespace ORM
                 table.Add("@translation", translation.Translate);
             }
 
-            return dal.Write(table, "spWriteTranslation");
+            return dal.Write(table, "spWriteTranslation") > 0;
         }
 
 

@@ -39,7 +39,7 @@ namespace BL
 
             if(language == null)
             {
-                Errors.Add(new ResultBE(ResultBE.Type.NULL, "No existe idioma con id " + id));
+                AddError(new ResultBE(ResultBE.Type.NULL, "No existe idioma con id " + id));
                 return null;
             }
 
@@ -53,7 +53,7 @@ namespace BL
 
             if (languages == null)
             {
-                Errors.Add(new ResultBE(ResultBE.Type.NULL, "No existen idiomas"));
+                AddError(new ResultBE(ResultBE.Type.NULL, "No existen idiomas"));
                 return null;
             }
 
@@ -67,7 +67,7 @@ namespace BL
 
             if (labels == null)
             {
-                Errors.Add(new ResultBE(ResultBE.Type.NULL, "No existen etiquetas"));
+                AddError(new ResultBE(ResultBE.Type.NULL, "No existen etiquetas"));
                 return null;
             }
 
@@ -85,7 +85,7 @@ namespace BL
 
             if (translations == null)
             {
-                Errors.Add(new ResultBE(ResultBE.Type.NULL, "No existen traducciones"));
+                AddError(new ResultBE(ResultBE.Type.NULL, "No existen traducciones"));
                 return null;
             }
 

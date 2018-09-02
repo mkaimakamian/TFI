@@ -8,8 +8,22 @@ namespace BE
 {
     public class Permission
     {
+        private int id;
         private string description;
-        private string id;
+        private string urlAccess;
+
+        public int Id
+        {
+            get
+            {
+                return id;
+            }
+
+            set
+            {
+                id = value;
+            }
+        }
 
         public string Description
         {
@@ -23,17 +37,16 @@ namespace BE
                 description = value;
             }
         }
-
-        public string Id
+        public string UrlAccess
         {
             get
             {
-                return id;
+                return urlAccess;
             }
 
             set
             {
-                id = value;
+                urlAccess = value;
             }
         }
     }

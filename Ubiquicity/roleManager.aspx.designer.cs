@@ -20,5 +20,23 @@ namespace Ubiquicity {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Ubiquicity.UserControls.UCcrudGrid UCcrudGrid;
+        
+        /// <summary>
+        /// UCFormRolePermission control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ubiquicity.UserControls.UCFormRolePermission UCFormRolePermission;
+        
+        /// <summary>
+        /// ucModalLanguage_btnAccept control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ucModalLanguage_btnAccept;
     }
 }
