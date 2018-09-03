@@ -51,10 +51,9 @@ namespace BL
         public bool Edit(User user)
         {
             UserMapper mapper = new UserMapper();
-
+            
             if (!IsValidForSave(user)) return false;
 
-            // Setting up default values
             user.Lastupdate = DateTime.Now;
             user.Locked = true;
             user.Active = false;
