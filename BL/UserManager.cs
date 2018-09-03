@@ -167,8 +167,11 @@ namespace BL
 
         public bool SaveForWeb(User user)
         {
-
-            return true;
+            //validar
+            //enviar mail
+            //asignar permisos
+            //guardar
+            return Save(user);
         }
 
         public bool SendActivation(User user)

@@ -15,6 +15,7 @@ namespace Ubiquicity
         {
             //Requerido por la clase padre
             GridView = UCcrudGrid;
+            GridView.HideDeleteButton();
 
             UCFormUserRole.GrantAction += GrantPermission;
             UCFormUserRole.UngrantAction += UngrantPermission;
@@ -33,9 +34,6 @@ namespace Ubiquicity
                 Alert.Show("Exception", exception.Message);
             }
         }
-        //protected virtual void PerformDeleteItem(object sender, EventArgs e) { }
-        //protected virtual void AskForDelete(object sender, EventArgs e) { }
-        //
 
         protected void modalUserRole_btnAcceptClick(object sender, EventArgs e)
         {

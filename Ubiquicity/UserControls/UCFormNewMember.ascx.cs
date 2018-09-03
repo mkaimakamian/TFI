@@ -75,11 +75,11 @@ namespace Ubiquicity.UserControls
             set { passwordVerificationInput.Value = value; }
         }
 
-        //public string Language
-        //{
-        //    get { return passwordVerificationInput.Value; }
-        //    set { passwordVerificationInput.Value = value; }
-        //}
+        public string Language
+        {
+            get { return dropLanguageInput.SelectedValue; }
+            set { passwordVerificationInput.SelectedValue = value; }
+        }
 
         public void CleanForm()
         {

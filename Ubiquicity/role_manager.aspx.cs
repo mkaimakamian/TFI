@@ -175,6 +175,11 @@ namespace Ubiquicity
             ShowCrudForm();
         }
 
+        protected override void AskForDelete(object sender, EventArgs e)
+        {
+            Alert.Show("Eliminar registro", "¿Está seguro de querer eliminar el registro?", "Si");
+        }
+
         protected override void PerformDeleteItem(object sender, EventArgs e) {
             if (Session["Ubiquicity_itemId"] != null)
             {
@@ -192,10 +197,6 @@ namespace Ubiquicity
                 }
                 
             }
-        }
-
-        protected override void AskForDelete(object sender, EventArgs e) {
-            Alert.Show("Eliminar registro", "¿Está seguro de querer eliminar el registro?", "Si");
         }
 
         private void ShowCrudForm()

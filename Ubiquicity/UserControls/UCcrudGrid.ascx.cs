@@ -18,6 +18,11 @@ namespace Ubiquicity.UserControls
         {
         }
 
+        public void HideDeleteButton()
+        {
+            gvItem.Columns[0].Visible = false;
+        }
+
         /// <summary>
         /// Carga el datasource y establece el binding con los objetos a mostrar
         /// </summary>

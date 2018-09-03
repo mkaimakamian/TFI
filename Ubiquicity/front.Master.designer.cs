@@ -94,6 +94,33 @@ namespace Ubiquicity {
         protected global::System.Web.UI.WebControls.Button btnLogin;
         
         /// <summary>
+        /// UCModalTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ubiquicity.UserControls.UCModalTitle UCModalTitle;
+        
+        /// <summary>
+        /// FormRegisterWebUser control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ubiquicity.UserControls.UCModalNewMember FormRegisterWebUser;
+        
+        /// <summary>
+        /// btnRegister control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnRegister;
+        
+        /// <summary>
         /// customAlertBox control.
         /// </summary>
         /// <remarks>
