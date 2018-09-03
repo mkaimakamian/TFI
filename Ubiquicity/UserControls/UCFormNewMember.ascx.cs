@@ -78,7 +78,7 @@ namespace Ubiquicity.UserControls
         public string Language
         {
             get { return dropLanguageInput.SelectedValue; }
-            set { passwordVerificationInput.SelectedValue = value; }
+            set { dropLanguageInput.SelectedValue = value; }
         }
 
         public void CleanForm()

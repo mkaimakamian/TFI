@@ -23,11 +23,11 @@
            <div class="form-row">
               <div class="form-group">
                 <label for="passwordInput">Password</label>
-                <input id="passwordInput" runat="server" type="text" class="form-control"  placeholder="Ingresá tu password">
+                <input id="passwordInput" runat="server" type="password" class="form-control"  placeholder="Ingresá tu password">
               </div>
               <div class="form-group">
                 <label for="passwordConfirmInput">Confirmar password</label>
-                <input id="passwordVerificationInput" runat="server" type="text" class="form-control" placeholder="Reingresá tu password">
+                <input id="passwordVerificationInput" runat="server" type="password" class="form-control" placeholder="Reingresá tu password">
               </div>
               </div>
           <div class="form-group">

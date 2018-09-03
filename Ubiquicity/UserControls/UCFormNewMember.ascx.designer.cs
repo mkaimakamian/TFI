@@ -55,7 +55,7 @@ namespace Ubiquicity.UserControls {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText passwordInput;
+        protected global::System.Web.UI.HtmlControls.HtmlInputPassword passwordInput;
         
         /// <summary>
         /// passwordVerificationInput control.
@@ -64,7 +64,7 @@ namespace Ubiquicity.UserControls {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText passwordVerificationInput;
+        protected global::System.Web.UI.HtmlControls.HtmlInputPassword passwordVerificationInput;
         
         /// <summary>
         /// dropLanguageInput control.

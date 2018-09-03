@@ -30,6 +30,24 @@ namespace BL
             }
         }
 
+        /// <summary>
+        /// Devuelve la descripción de todos los errores producidos durante la última operación.
+        /// </summary>
+        public string ErrorDescription
+        {
+            get {
+                string description = "";
+
+                foreach (ResultBE error in Errors)
+                {
+
+                    description += error.description + Environment.NewLine;
+                }
+
+                return description;
+            }
+        }
+
         protected void AddError(ResultBE error)
         {
             Errors.Add(error);

@@ -25,8 +25,8 @@ namespace BL
             UserMapper mapper = new UserMapper();
             RoleManager roleManager = new RoleManager();
             LanguageManager languageManager = new LanguageManager();
-
-            User user = mapper.Get(username, password);
+            
+            User user = mapper.Get(username, SecurityHelper.Encrypt(password));
 
             if (user == null)
             {

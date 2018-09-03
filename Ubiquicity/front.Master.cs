@@ -76,13 +76,18 @@ namespace Ubiquicity
                 user.Lastname = FormRegisterWebUser.LastName;
                 user.Username = FormRegisterWebUser.UserName;
                 user.Mail = FormRegisterWebUser.Mail;
-                user.Password = FormRegisterWebUser.Password;
-                user.Language.Id = FormRegisterWebUser.Dr
+                user.Password = SecurityHelper.Encrypt(FormRegisterWebUser.Password);
+                user.Language.Id = int.Parse(FormRegisterWebUser.Language);
                 userManager.SaveForWeb(user);
+
+                if (userManager.HasErrors)
+                {
+                    Alert.Show("Exception", userManager.ErrorDescription);
+                }
 
             } catch (Exception exception)
             {
-
+                Alert.Show("Exception", exception.Message);
             }
 
         }
