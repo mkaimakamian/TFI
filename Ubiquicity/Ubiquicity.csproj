@@ -76,6 +76,7 @@
     <Content Include="packages.config" />
     <Content Include="front.Master" />
     <Content Include="privacy.aspx" />
+    <Content Include="register_action.aspx" />
     <Content Include="role_manager.aspx" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
@@ -210,6 +211,13 @@
       <DependentUpon>privacy.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="register_action.aspx.cs">
+      <DependentUpon>register_action.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="register_action.aspx.designer.cs">
+      <DependentUpon>register_action.aspx</DependentUpon>
+    </Compile>
     <Compile Include="role_manager.aspx.cs">
       <DependentUpon>role_manager.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

@@ -167,8 +167,8 @@ namespace ORM
             table.Add("@name", user.Name);
             table.Add("@lastname", user.Lastname);
             table.Add("@lastupdate", user.Lastupdate);
-           // user.Id = ;
-            return dal.Write(table, "spWriteUser") > 0;
+            user.Id = dal.Write(table, "spWriteUser");
+            return user.Id > 0;
         }
     }
 }

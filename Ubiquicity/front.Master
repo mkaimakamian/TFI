@@ -103,8 +103,8 @@
       </div>
       <div class="modal-footer">
           <asp:Button ID="btnLogin" runat="server" CssClass="btn btn-primary" OnClick="btnLogin_Click" Text="Login"/>
+          <button type="button" class="btn btn-primary">Olvidé contraseña</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-         <button type="button" class="btn btn-primary">Olvidé contraseña</button>
       </div>
 
     </div>

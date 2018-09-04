@@ -25,7 +25,7 @@ namespace Ubiquicity.Tests
             Dal dal = new Dal();
             Hashtable table = new Hashtable();
             table.Add("@key", "value");
-            bool result = dal.Write(table, "spWriteTest");
+            bool result = dal.Write(table, "spWriteTest") >1;
             
             Assert.IsTrue(result, "El valor debería haber sido True.");
 

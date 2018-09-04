@@ -5,25 +5,43 @@ using System.Text;
 using System.Threading.Tasks;
 using BE;
 using ORM;
+using Helper;
 
 namespace BL
 {
     public class UserManager:BaseManager
     {
-        
 
-        //public bool ActivateAccount(User user)
-        //{
+        //TODO - Actualizar en ea
+        public bool ActivateAccount(string hash)
+        {
+            string activation = hash.Substring(0, 32);
+            int userId = int.Parse(hash.Substring(32, hash.Length - 32));
 
-        //    return true;
-        //}
+            UserMapper userMapper = new UserMapper();
+            User user = userMapper.Get(userId);
 
-   
+            if (SecurityHelper.IsEquivalent(user.Username + user.Lastupdate.Minute, activation))
+            {
+                //activo!
+                user.Locked = false;
+                user.Active = true;
+                return true;
+            } else
+            {
+                //lo mando a freir churros
+            }
+
+            return true;
+        }
+
+
         //public bool CheckExistence(string username)
         //{
 
         //    return true;
         //}
+
         public List<User> GetUserWithoutRole()
         {
             UserRoleMapper userRoleMapper = new UserRoleMapper();
@@ -166,11 +184,35 @@ namespace BL
 
         public bool SaveForWeb(User user)
         {
-            //validar
-            //enviar mail
-            //asignar permisos
-            //guardar
-            return Save(user);
+            UserMapper mapper = new UserMapper();
+
+            if (!IsValidForSave(user)) return false;
+
+            user.Lastupdate = DateTime.Now;
+            user.Locked = true;
+            user.Active = false;
+
+            string activationHash = SecurityHelper.Encrypt(user.Username + user.Lastupdate.Minute);
+
+            // Asignar permisos de usuario web (recién cuando se loguea)
+            if (mapper.Save(user))
+            {
+                //TODO - Confeccionar plantillas para el envío de mail
+                MailerHelper.Send(
+                    "Gracias por registrarte, " + user.Name + "!",
+                    "Estás recibiendo este mail porque te has registrado y queremos verificar tu identidad." + 
+                    Environment.NewLine +
+                    "Por favor, accedé a la siguiente url: http://localhost:50551/register_action.aspx?a=" + activationHash + user.Id,
+                    new string[] { user.Mail }
+                );
+            }
+            else
+            {
+                AddError(new ResultBE(ResultBE.Type.FAIL, "Error al grabar"));
+                return false;
+            }
+
+            return true;
         }
 
         public bool SendActivation(User user)

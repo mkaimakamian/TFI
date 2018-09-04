@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="DalTest.cs" />
     <Compile Include="LanguageTest.cs" />
+    <Compile Include="NotificationTest.cs" />
     <Compile Include="RolesTest.cs" />
     <Compile Include="UserTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
