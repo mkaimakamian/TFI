@@ -96,14 +96,16 @@
                 <label for="txtUser">Usuario</label>
                 <input id="txtUser" runat="server" type="text" class="form-control"  placeholder="Ingrese usuario">
             </div>
-            <div class="form-group">
-            <label for="txtPassword">Password</label>
-                <input id="txtPassword" runat="server" type="password" class="form-control"  placeholder="Ingrese password">
-            </div>
+            <%--<div class="panel-collapse collapse show" id="passwordCollpase" >--%>
+                <div id="passwordCollpase" class="form-group collapse show" >
+                <label for="txtPassword">Password</label>
+                    <input id="txtPassword" runat="server" type="password" class="form-control"  placeholder="Ingrese password">
+                </div>
+            <%--</div>--%>
       </div>
       <div class="modal-footer">
           <asp:Button ID="btnLogin" runat="server" CssClass="btn btn-primary" OnClick="btnLogin_Click" Text="Login"/>
-          <button type="button" class="btn btn-primary">Olvidé contraseña</button>
+          <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#passwordCollpase" >Olvidé contraseña</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
       </div>
 

@@ -221,10 +221,31 @@ namespace BL
             return true;
         }
 
-        public bool SendRecovery(User user)
+        //TODO - Actualizar ea
+        public bool SendRecovery(string userName)
         {
+            UserMapper userMapper = new UserMapper();
+            User user = userMapper.Get(userName);
 
-            return true;
+            if (user == null)
+            {
+                AddError(new ResultBE(ResultBE.Type.NULL, "Usuario no existe: " + userName));
+                return false;
+            } else
+            {
+                string recoveryHash = SecurityHelper.Encrypt(user.Username + user.Lastupdate.Minute);
+                
+                //TODO - Confeccionar plantillas para el envío de mail
+                MailerHelper.Send(
+                    "Buenas! " + user.Name + "!",
+                    "Parece que te has olvidado la contraseña... o al menos esos nos has dicho." +
+                    Environment.NewLine +
+                    "Para cambiar tu password, accedé a la siguiente url: http://localhost:50551/recovery_action.aspx?r=" + recoveryHash + user.Id,
+                    new string[] { user.Mail }
+                );
+
+                return true;
+            }
         }
 
         //TODO - agregar en ea

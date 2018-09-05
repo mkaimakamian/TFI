@@ -26,7 +26,7 @@ namespace Ubiquicity
         }
 
         /// <summary>
-        /// Atiende el evento de logueo
+        /// Atiende el evento de logueo.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -34,21 +34,28 @@ namespace Ubiquicity
         {
             try
             {
+                //Todo - debería evaluar de algún modo si me están solicitando el reenvío
+                //if (String.IsNullOrEmpty(txtPassword.Value))
+                //{
+                //    UserManager userManager = new UserManager();
+                //    userManager.SendRecovery(txtUser.Value);
+                //}
+
                 if (IsValid(txtUser.Value, txtPassword.Value))
                 {
                     SessionManager sessionManager = new SessionManager();
                     User user = sessionManager.LogIn(txtUser.Value, txtPassword.Value);
 
-                    if (sessionManager.HasErrors)
-                    {
-                        Alert.Show("Error", sessionManager.Errors[0].description);
-
-                    }
-                    else
+                    if (!sessionManager.HasErrors)
                     {
                         SessionHelper.StartSession(user);
                         Session["SessionCreated"] = user;
                         Response.Redirect(Request.RawUrl);
+                    }
+                    else
+                    {
+                        Alert.Show("Error", sessionManager.ErrorDescription);
+
                     }
                 }
             }

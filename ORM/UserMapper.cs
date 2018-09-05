@@ -37,12 +37,33 @@ namespace ORM
             User user = null;
 
             table.Add("@id", id);
+            table.Add("@userName", DBNull.Value);
 
             DataSet result = dal.Read(table, "spReadUser");
 
             if (result != null && result.Tables[0].Rows.Count > 0)
             {
                 user =  ConvertToModel(result.Tables[0].Rows[0]);
+            }
+
+            return user;
+        }
+
+
+        public User Get(string username)
+        {
+            Dal dal = new Dal();
+            Hashtable table = new Hashtable();
+            User user = null;
+
+            table.Add("@id", DBNull.Value);
+            table.Add("@userName", username);
+
+            DataSet result = dal.Read(table, "spReadUser");
+
+            if (result != null && result.Tables[0].Rows.Count > 0)
+            {
+                user = ConvertToModel(result.Tables[0].Rows[0]);
             }
 
             return user;
@@ -130,16 +151,6 @@ namespace ORM
         //      {
 
         //          return true;
-        //      }
-
-
-
-
-
-        //      public User Get(string username)
-        //      {
-
-        //          return null;
         //      }
 
         //      public List<User> Get(List<QueryFilter> queryFilter)

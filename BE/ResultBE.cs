@@ -20,7 +20,8 @@ namespace BE
             NULL,
             EMPTY,
             ALREADY_EXISTS,
-            RELATIONSHIP_ERROR
+            RELATIONSHIP_ERROR,
+            LOCKED_USER
         };
 
         private Type type;

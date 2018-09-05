@@ -28,18 +28,9 @@ namespace BL
             
             User user = mapper.Get(username, SecurityHelper.Encrypt(password));
 
-            if (user == null)
-            {
-                string errorDescription = "El usuario " + username+" no existe.";
-                log.AddLogWarn("LogIn", errorDescription, this);
-                AddError(new ResultBE(ResultBE.Type.INVALID_CREDENTIAL, errorDescription));
-                return null;
-            }
-            //if (!user.Active) return new ResultBE(ResultBE.Type.INACTIVE_USER, "Usuario inactivo: " + username);
-
-            //TODO - Ver si hay que incluir la opción de lockeo cuando el usuario se equivoca
-            //if (!user.Locked) return new ResultBE(ResultBE.Type.OK, "Usuario encontrado: " + username);
+            if (!IsValidAfterRetrieve(user)) return null;
             
+
             user.Language = languageManager.Get(user.Language.Id);
 
             if (languageManager.HasErrors)
@@ -49,17 +40,16 @@ namespace BL
             }
             
             List<Role> roles = roleManager.Get(user);
-
-            //TODO - Habilitar roles
-            //if (roleManager.HasErrors)
-            //{
-            //    Errors.AddRange(roleManager.Errors);
-            //    return null;
-            //}
+            
+            if (roleManager.HasErrors)
+            {
+                Errors.AddRange(roleManager.Errors);
+                return null;
+            }
 
             user.Roles = roles;
             
-            log.AddLogInfo("LogIn", "éxito", this);
+            log.AddLogInfo("LogIn", "Usuaerio " + user.Username + " identificado exitosamente.", this);
             return user; 
         }
 
@@ -80,11 +70,41 @@ namespace BL
             {
                 string errorDescription = "Password incompleto";
                 log.AddLogWarn("IsValid", errorDescription, this);
-                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, "EMPTY_FIELD_ERROR"));
+                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
                 isValid = false;
             }
 
             return isValid;
+        }
+
+        //TODO - Agregar en EA
+        private bool IsValidAfterRetrieve(User user)
+        {
+            if (user == null)
+            {
+                string errorDescription = "El usuario no existe.";
+                log.AddLogWarn("LogIn", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.INVALID_CREDENTIAL, errorDescription));
+                return false;
+            }
+
+            if (!user.Active)
+            {
+                string errorDescription = "El usuario " + user.Username + " no está activo.";
+                log.AddLogWarn("LogIn", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.INACTIVE_USER, errorDescription));
+                return false;
+            }
+
+            if (!user.Locked)
+            {
+                string errorDescription = "El usuario " + user.Username + " no está bloqueado.";
+                log.AddLogWarn("LogIn", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.LOCKED_USER, errorDescription));
+                return false;
+            }
+
+            return true;
         }
     }
 }
