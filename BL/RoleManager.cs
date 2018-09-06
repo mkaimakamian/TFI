@@ -141,6 +141,17 @@ namespace BL
 
         public bool EditRoleForUser(User user)
         {
+            //TODO validar que el usuairo posea roles
+
+            if (user.Roles == null || user.Roles.Count == 0)
+            {
+                string errorDescription = "Debe asignarse al menos un rol.";
+                log.AddLogWarn("EditRoleForUser", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.EMPTY, errorDescription));
+                return false;
+            }
+
+
             RolePermissionMapper rolePermissionMapper = new RolePermissionMapper();
             bool success = rolePermissionMapper.EditRoleForUser(user);
 

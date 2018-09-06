@@ -135,11 +135,12 @@ namespace BL
 
             List<Role> roles = roleManager.Get(user);
 
-            if (roleManager.HasErrors)
-            {
-                Errors.AddRange(roleManager.Errors);
-                return null;
-            }
+            //Explota cuando uno intenta editar un usuario-rol
+            //if (roleManager.HasErrors)
+            //{
+            //    Errors.AddRange(roleManager.Errors);
+            //    return null;
+            //}
 
             user.Roles = roles;
             return user;
@@ -182,29 +183,31 @@ namespace BL
             return true;
         }
 
+        // TODO - ver si este y el de registro de usuario nomral, puede ser el mismo
         public bool SaveForWeb(User user)
         {
             UserMapper mapper = new UserMapper();
 
             if (!IsValidForSave(user)) return false;
 
+            if(mapper.Get(user.Username) != null)
+            {
+                string errorDescription = "El usuario ya existe.";
+                log.AddLogWarn("SaveForWeb", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.ALREADY_EXISTS, errorDescription));
+                return false;
+            }
+            
             user.Lastupdate = DateTime.Now;
             user.Locked = true;
             user.Active = false;
 
-            string activationHash = SecurityHelper.Encrypt(user.Username + user.Lastupdate.Minute);
-
             // Asignar permisos de usuario web (recién cuando se loguea)
             if (mapper.Save(user))
             {
-                //TODO - Confeccionar plantillas para el envío de mail
-                MailerHelper.Send(
-                    "Gracias por registrarte, " + user.Name + "!",
-                    "Estás recibiendo este mail porque te has registrado y queremos verificar tu identidad." + 
-                    Environment.NewLine +
-                    "Por favor, accedé a la siguiente url: http://localhost:50551/register_action.aspx?a=" + activationHash + user.Id,
-                    new string[] { user.Mail }
-                );
+                string activationHash = SecurityHelper.Encrypt(user.Username + user.Lastupdate.Minute) +user.Id;
+
+                MailerHelper.SendWelcomeMail(user, activationHash);
             }
             else
             {
@@ -255,35 +258,44 @@ namespace BL
 
             if (String.IsNullOrEmpty(user.Name))
             {
-                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, "EMPTY_FIELD_ERROR"));
+                string errorDescription = "Debe completarse el nombre.";
+                log.AddLogWarn("SaveForWeb", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
                 isValid = false;
             }
 
             if (String.IsNullOrEmpty(user.Lastname))
             {
+                string errorDescription = "Debe completarse el apellido.";
+                log.AddLogWarn("SaveForWeb", errorDescription, this);
                 AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, "EMPTY_FIELD_ERROR"));
                 isValid = false;
             }
 
             if (String.IsNullOrEmpty(user.Username))
             {
+                string errorDescription = "Debe completarse el usuario.";
+                log.AddLogWarn("SaveForWeb", errorDescription, this);
                 AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, "EMPTY_FIELD_ERROR"));
                 isValid = false;
             }
 
             if (String.IsNullOrEmpty(user.Mail))
             {
+                string errorDescription = "Debe completarse el correo electrónico.";
+                log.AddLogWarn("SaveForWeb", errorDescription, this);
                 AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, "EMPTY_FIELD_ERROR"));
                 isValid = false;
             }
 
             if (String.IsNullOrEmpty(user.Password))
             {
+                string errorDescription = "Debe completarse el password.";
+                log.AddLogWarn("SaveForWeb", errorDescription, this);
                 AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, "EMPTY_FIELD_ERROR"));
                 isValid = false;
             }
 
-            //TODO - usuario no debe existir!!
             return isValid;
         }
 

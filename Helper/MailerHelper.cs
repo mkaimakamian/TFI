@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Mail;
 using System.Net;
+using BE;
 
 namespace Helper
 {
@@ -37,12 +38,21 @@ namespace Helper
                 mail.Body = body;
                 smtp.Send(mail);
 
-                } catch (Exception exception)
-                {
-                    Console.WriteLine(exception.Message);
-                }
+            } catch (Exception exception)
+            {
+                Console.WriteLine(exception.Message);
+            }
 
-                }
+            }
 
+        public static void SendWelcomeMail(User user, String activationHash)
+        {
+            Send(
+            "Gracias por registrarte, " + user.Name + "!",
+            "Estás recibiendo este mail porque te has registrado y queremos verificar tu identidad." +
+            Environment.NewLine +
+            "Por favor, accedé a la siguiente url: http://localhost:50551/register_action.aspx?a=" + activationHash,
+            new string[] { user.Mail });
+        }
     }
 }

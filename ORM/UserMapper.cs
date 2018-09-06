@@ -76,6 +76,7 @@ namespace ORM
             List<User> users = null;
 
             table.Add("@id", DBNull.Value);
+            table.Add("@userName", DBNull.Value);
 
             DataSet result = dal.Read(table, "spReadUser");
 

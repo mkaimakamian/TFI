@@ -88,8 +88,8 @@ namespace ORM
 
         public bool EditRoleForUser(User user)
         {
-            bool result = DeleteRoleForUser(user);
-            return result && SaveRoleForUser(user);
+            DeleteRoleForUser(user);
+            return SaveRoleForUser(user);
         }
 
         /// <summary>
