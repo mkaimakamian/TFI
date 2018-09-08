@@ -17,6 +17,7 @@ namespace BL
         {
             string activation = hash.Substring(0, 32);
             int userId = int.Parse(hash.Substring(32, hash.Length - 32));
+            string errorDescription = "";
 
             UserMapper userMapper = new UserMapper();
             User user = userMapper.Get(userId);
@@ -26,12 +27,24 @@ namespace BL
                 //activo!
                 user.Locked = false;
                 user.Active = true;
-                return true;
-            } else
-            {
-                //lo mando a freir churros
-            }
+                user.Lastupdate = DateTime.Now;
 
+                if (!userMapper.Edit(user))
+                {
+                    // Siempre se devuelve true para ofuscar
+                    errorDescription = "Quizá quieras solicitar la contraseña de nuevo... el sistema no está actualmente disponible (solo es momentáneo!)";
+                    log.AddLogCritical("ActivateAccount", errorDescription, this);
+                    AddError(new ResultBE(ResultBE.Type.FAIL, errorDescription));
+                    return false;
+                } 
+
+                return true;
+            } 
+
+            // Siempre se devuelve true para ofuscar // bería mostrar el formulario? cuando?
+            errorDescription = "Excelente! gracias por recuperar tu password :D";
+            log.AddLogWarn("Edit", errorDescription, this);
+            AddError(new ResultBE(ResultBE.Type.FAIL, errorDescription));
             return true;
         }
 
@@ -49,7 +62,9 @@ namespace BL
 
             if (users == null)
             {
-                AddError(new ResultBE(ResultBE.Type.EMPTY, "Sin usuarios "));
+                string errorDescription = "Todos los usuarios poseen roles asociados.";
+                log.AddLogWarn("GetUserWithoutRole", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.EMPTY, errorDescription));
             }
             
             return users;
@@ -78,13 +93,19 @@ namespace BL
 
             if (!mapper.Edit(user))
             {
-                AddError(new ResultBE(ResultBE.Type.FAIL, "Error al grabar"));
+                string errorDescription = "Las modifiaciones no se han podido guardar.";
+                log.AddLogWarn("Edit", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.FAIL, errorDescription));
                 return false;
             }
 
             return true;
         }
 
+        /// <summary>
+        /// Recupera la nómina de usuarios del sistema que no se encuentren eliminados.
+        /// </summary>
+        /// <returns></returns>
         public List<User> Get()
         {
             UserMapper mapper = new UserMapper();
@@ -95,7 +116,9 @@ namespace BL
 
             if (users == null)
             {
-                AddError(new ResultBE(ResultBE.Type.EMPTY, "Sin usuarios "));
+                string errorDescription = "No existen usuarios.";
+                log.AddLogWarn("Edit", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.FAIL, errorDescription));
                 return users;
             }
 
@@ -183,13 +206,19 @@ namespace BL
             return true;
         }
 
-        // TODO - ver si este y el de registro de usuario nomral, puede ser el mismo
+        /// <summary>
+        /// Genera el alta de usuario, que implica la persistencia y el envío de mail de bienvenida.
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         public bool SaveForWeb(User user)
         {
+            RoleManager roleManager = new RoleManager();
             UserMapper mapper = new UserMapper();
 
             if (!IsValidForSave(user)) return false;
 
+            // Existencia del user name
             if(mapper.Get(user.Username) != null)
             {
                 string errorDescription = "El usuario ya existe.";
@@ -197,21 +226,38 @@ namespace BL
                 AddError(new ResultBE(ResultBE.Type.ALREADY_EXISTS, errorDescription));
                 return false;
             }
-            
+/*
+            // Existencia del correo electrónico
+            if (mapper.GetByMail(user.Mail))
+            {
+                string errorDescription = "El mail se encuentra en uso.";
+                log.AddLogWarn("SaveForWeb", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.ALREADY_EXISTS, errorDescription));
+                return false;
+            }
+*/
             user.Lastupdate = DateTime.Now;
             user.Locked = true;
             user.Active = false;
 
+            user.Roles = roleManager.GetForWebUser();
+            
+
             // Asignar permisos de usuario web (recién cuando se loguea)
             if (mapper.Save(user))
             {
-                string activationHash = SecurityHelper.Encrypt(user.Username + user.Lastupdate.Minute) +user.Id;
+                roleManager.SaveRoleForUser(user);
 
+                //se recupera de nuevo el usuario porque hay discrepancia entre la fecha de la base y la del sistema
+                user = mapper.Get(user.Id);
+                string activationHash = SecurityHelper.Encrypt(user.Username + user.Lastupdate.Minute) +user.Id;
                 MailerHelper.SendWelcomeMail(user, activationHash);
             }
             else
             {
-                AddError(new ResultBE(ResultBE.Type.FAIL, "Error al grabar"));
+                string errorDescription = "El mail se encuentra en uso.";
+                log.AddLogCritical("SaveForWeb", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.FAIL, errorDescription));
                 return false;
             }
 
@@ -268,7 +314,7 @@ namespace BL
             {
                 string errorDescription = "Debe completarse el apellido.";
                 log.AddLogWarn("SaveForWeb", errorDescription, this);
-                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, "EMPTY_FIELD_ERROR"));
+                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
                 isValid = false;
             }
 
@@ -276,7 +322,7 @@ namespace BL
             {
                 string errorDescription = "Debe completarse el usuario.";
                 log.AddLogWarn("SaveForWeb", errorDescription, this);
-                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, "EMPTY_FIELD_ERROR"));
+                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
                 isValid = false;
             }
 
@@ -284,7 +330,7 @@ namespace BL
             {
                 string errorDescription = "Debe completarse el correo electrónico.";
                 log.AddLogWarn("SaveForWeb", errorDescription, this);
-                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, "EMPTY_FIELD_ERROR"));
+                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
                 isValid = false;
             }
 
@@ -292,7 +338,7 @@ namespace BL
             {
                 string errorDescription = "Debe completarse el password.";
                 log.AddLogWarn("SaveForWeb", errorDescription, this);
-                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, "EMPTY_FIELD_ERROR"));
+                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
                 isValid = false;
             }
 

@@ -26,11 +26,12 @@ namespace BL
             RoleManager roleManager = new RoleManager();
             LanguageManager languageManager = new LanguageManager();
             
-            User user = mapper.Get(username, SecurityHelper.Encrypt(password));
+            User user = mapper.Get(username, password);
+            
+            // TODO - APLICAR CONTROL DE LOCKEO
 
             if (!IsValidAfterRetrieve(user)) return null;
             
-
             user.Language = languageManager.Get(user.Language.Id);
 
             if (languageManager.HasErrors)
@@ -41,10 +42,12 @@ namespace BL
             
             List<Role> roles = roleManager.Get(user);
             
+            // Si no posee permisos asociados, debería poder navegar igual aunque a los efectos prácticos
+            // sería como si estuviese navegando como cualquier visitante
             if (roleManager.HasErrors)
             {
                 Errors.AddRange(roleManager.Errors);
-                return null;
+                //return null;
             }
 
             user.Roles = roles;
@@ -96,9 +99,9 @@ namespace BL
                 return false;
             }
 
-            if (!user.Locked)
+            if (user.Locked)
             {
-                string errorDescription = "El usuario " + user.Username + " no está bloqueado.";
+                string errorDescription = "El usuario " + user.Username + " está bloqueado.";
                 log.AddLogWarn("LogIn", errorDescription, this);
                 AddError(new ResultBE(ResultBE.Type.LOCKED_USER, errorDescription));
                 return false;

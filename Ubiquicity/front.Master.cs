@@ -40,22 +40,23 @@ namespace Ubiquicity
                 //    UserManager userManager = new UserManager();
                 //    userManager.SendRecovery(txtUser.Value);
                 //}
-
+               
                 if (IsValid(txtUser.Value, txtPassword.Value))
                 {
+                    // El password se encrypta antes de enviarse al back
+                    txtPassword.Value = String.IsNullOrEmpty(txtPassword.Value) ? "" : SecurityHelper.Encrypt(txtPassword.Value);
+
                     SessionManager sessionManager = new SessionManager();
                     User user = sessionManager.LogIn(txtUser.Value, txtPassword.Value);
 
-                    if (!sessionManager.HasErrors)
+                    if (user == null && sessionManager.HasErrors)
                     {
-                        SessionHelper.StartSession(user);
-                        Session["SessionCreated"] = user;
-                        Response.Redirect(Request.RawUrl);
+                        Alert.Show("Error", sessionManager.ErrorDescription);
                     }
                     else
                     {
-                        Alert.Show("Error", sessionManager.ErrorDescription);
-
+                        Session["SessionCreated"] = user;
+                        Response.Redirect(Request.RawUrl);
                     }
                 }
             }
@@ -77,19 +78,30 @@ namespace Ubiquicity
                 UserManager userManager = new UserManager();
 
                 //TODO - Validar los campos
+                if (!chekCondition.Checked)
+                {
+                    Alert.Show("Error", "Debes leer y aceptar los términos para poder registrarte");
+                    return;
+                }
 
                 User user = new User();
                 user.Name = FormRegisterWebUser.FirstName;
                 user.Lastname = FormRegisterWebUser.LastName;
                 user.Username = FormRegisterWebUser.UserName;
                 user.Mail = FormRegisterWebUser.Mail;
-                user.Password = SecurityHelper.Encrypt(FormRegisterWebUser.Password);
-                user.Language.Id = int.Parse(FormRegisterWebUser.Language);
-                userManager.SaveForWeb(user);
 
-                if (userManager.HasErrors)
+                if (!String.IsNullOrEmpty(FormRegisterWebUser.Password))
                 {
-                    Alert.Show("Exception", userManager.ErrorDescription);
+                    user.Password = SecurityHelper.Encrypt(FormRegisterWebUser.Password);
+                }
+
+                //TODO - tomar el idioma que está en curso!
+                user.Language.Id = int.Parse(FormRegisterWebUser.Language);
+                bool success = userManager.SaveForWeb(user);
+
+                if (!success && userManager.HasErrors)
+                {
+                    Alert.Show("Error", userManager.ErrorDescription);
                 }
 
             } catch (Exception exception)
@@ -99,16 +111,25 @@ namespace Ubiquicity
 
         }
 
-
+        /// <summary>
+        /// Según el valor pasado, muestra los paneles que permiten el acceso al botón de login + registro, o logout.
+        /// </summary>
+        /// <param name="logged"></param>
         private void ManageLoginPanel(bool logged) {
             panelLogin.Visible = !logged;
             panelAlreadyLogged.Visible = logged;
         }
 
         private void LoadMenu(User user) {
-
+            if (user != null) { 
+            //mnuSection.DataSource = user.Roles;
+            //mnuSection.DataBind();
+            }
         }
 
+        /// <summary>
+        /// Carga todos los idiomas disponibles en el combo - próximamente se reemplazará por google.
+        /// </summary>
         private void LoadLanguages()
         {
             LanguageManager languageManager = new LanguageManager();
@@ -120,19 +141,24 @@ namespace Ubiquicity
 
         private bool IsValid(string username, string password)
         {
-            //TODO - Validar los inputs
+            //TODO - Validar los inputs... quizá con java script mejor
             return true;
 
         }
         
+        /// <summary>
+        /// Finaliza la sesión del usuario y lo devuelve a la misma página en la que estaba.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void btnLogout_Click(object sender, EventArgs e)
         {
             Session.Remove("SessionCreated");
             Response.Redirect(Request.RawUrl);
         }
 
-        // Obtiene el componente para mostrar los alertas y lo expone como variable de la Master para un más fácil 
-        // acceso desde los hijos
+        // Obtiene el componente para mostrar los alertas y lo expone como variable de la master page 
+        // para un más fácil acceso desde los hijos
         public UserControls.UCModalMessageBox Alert
         {
             get { return customAlertBox; }

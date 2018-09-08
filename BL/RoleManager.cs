@@ -126,6 +126,11 @@ namespace BL
             return true;
         }
 
+        /// <summary>
+        /// Guarda los roles del usuario.
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         public bool SaveRoleForUser(User user)
         {
             RolePermissionMapper rolePermissionMapper = new RolePermissionMapper();
@@ -220,6 +225,24 @@ namespace BL
         {
             RoleMapper roleMapper = new RoleMapper();
             List<Role> roles = roleMapper.Get();
+
+            if (roles == null)
+            {
+                AddError(new ResultBE(ResultBE.Type.EMPTY_PROFILE, "No existen roles."));
+            }
+
+            return roles;
+        }
+
+        //TODO agregar a ea
+        /// <summary>
+        /// Recupera los roles que son exclusivamente de usuarios web
+        /// </summary>
+        /// <returns></returns>
+        public List<Role> GetForWebUser()
+        {
+            RoleMapper roleMapper = new RoleMapper();
+            List<Role> roles = roleMapper.GetForWebUser();
 
             if (roles == null)
             {

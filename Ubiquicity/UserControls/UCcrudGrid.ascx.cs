@@ -27,9 +27,10 @@ namespace Ubiquicity.UserControls
         /// Carga el datasource y establece el binding con los objetos a mostrar
         /// </summary>
         /// <param name="objetcs"></param>
-        public void LoadGrid(object objetcs)
+        public void LoadGrid(object objects)
         {
-            gvItem.DataSource = objetcs;
+            
+            gvItem.DataSource = objects;
             gvItem.DataBind();
         }
 
@@ -49,7 +50,7 @@ namespace Ubiquicity.UserControls
             {
                 if (DeleteActionClick != null) DeleteActionClick(this, e);
             }
-            
+
         }
 
         /// <summary>
@@ -61,5 +62,11 @@ namespace Ubiquicity.UserControls
         {
             if (NewActionClick != null) NewActionClick(this, e);
         }
+
+        //protected void gvItem_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        //{
+        //    gvItem.PageIndex = e.NewPageIndex;
+        //    this.LoadGrid(null);
+        //}
     }
 }

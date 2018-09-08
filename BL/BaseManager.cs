@@ -41,7 +41,7 @@ namespace BL
                 foreach (ResultBE error in Errors)
                 {
 
-                    description += error.description + Environment.NewLine;
+                    description += error.description + "<br>";
                 }
 
                 return description;

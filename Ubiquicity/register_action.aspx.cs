@@ -30,14 +30,9 @@ namespace Ubiquicity
             UserManager userManager = new UserManager();
             bool success = userManager.ActivateAccount(activationHash);
 
-            if (!success)
-            {
-                //mensaje de "intentalo de nuevo manualmente"
-            }
-            else
-            {
-                //Joya!
-            }
+            activationSuccess.Visible = success;
+            activationRetry.Visible = !success;
         }
+        
     }
 }

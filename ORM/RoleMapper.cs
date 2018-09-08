@@ -65,12 +65,18 @@ namespace ORM
             table.Add("@id", DBNull.Value);
             table.Add("@userId", DBNull.Value);
             table.Add("@name", role.Name);
+            table.Add("@userOnly", DBNull.Value);
 
             DataSet result = dal.Read(table, "spReadRole");
 
             return result != null && result.Tables[0].Rows.Count > 0;
         }
         
+        /// <summary>
+        /// Recupera el rol cuyo id es pasado por parámetro.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Role Get(int id)
         {
             Dal dal = new Dal();
@@ -80,6 +86,7 @@ namespace ORM
             table.Add("@id", id);
             table.Add("@userId", DBNull.Value);
             table.Add("@name", DBNull.Value);
+            table.Add("@userOnly", DBNull.Value);
 
             DataSet result = dal.Read(table, "spReadRole");
 
@@ -91,13 +98,20 @@ namespace ORM
             return role;
         }
 
-        //      public List<Role> Get()
-        //      {
+        /// <summary>
+        /// Devuelve la lista de roles que se asignan a los usuarios.
+        /// </summary>
+        /// <returns></returns>
+        public List<Role> GetForWebUser()
+        {
+            return Get(true);
+        }
 
-        //          return null;
-        //      }
-
-        public List<Role> Get()
+        /// <summary>
+        /// Recupera el listado completo de roles.
+        /// </summary>
+        /// <returns></returns>
+        public List<Role> Get(bool userOnly = false)
         {
             Dal dal = new Dal();
             Hashtable table = new Hashtable();
@@ -106,6 +120,7 @@ namespace ORM
             table.Add("@id", DBNull.Value);
             table.Add("@userId", DBNull.Value);
             table.Add("@name", DBNull.Value);
+            table.Add("@userOnly", userOnly);
 
             DataSet result = dal.Read(table, "spReadRole");
 
@@ -123,7 +138,7 @@ namespace ORM
         }
 
         /// <summary>
-        /// Persiste el rol.
+        /// Persiste el rol pasado por parámetro.
         /// </summary>
         /// <param name="role"></param>
         /// <returns></returns>

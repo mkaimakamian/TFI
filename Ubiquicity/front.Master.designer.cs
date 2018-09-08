@@ -112,6 +112,15 @@ namespace Ubiquicity {
         protected global::Ubiquicity.UserControls.UCModalNewMember FormRegisterWebUser;
         
         /// <summary>
+        /// chekCondition control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox chekCondition;
+        
+        /// <summary>
         /// btnRegister control.
         /// </summary>
         /// <remarks>

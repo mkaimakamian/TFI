@@ -121,7 +121,7 @@
                 <ucmkc:ucformnewmember runat="server" ID="FormRegisterWebUser" />
                 <div class="modal-footer">
                     <div class="form-check">
-                        <input id="chekCondition" class="form-check-input" type="checkbox" >
+                        <input id="chekCondition" runat="server" class="form-check-input" type="checkbox" >
                         <label class="form-check-label" for="gridCheck">Acepto los términos y condiciones</label>
                     </div>
                     <asp:Button ID="btnRegister" runat="server" CssClass="btn btn-primary" Text="Registrarse" OnClick="btnRegister_Click"/>

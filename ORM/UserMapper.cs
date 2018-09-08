@@ -38,6 +38,7 @@ namespace ORM
 
             table.Add("@id", id);
             table.Add("@userName", DBNull.Value);
+            table.Add("@mail", DBNull.Value);
 
             DataSet result = dal.Read(table, "spReadUser");
 
@@ -49,6 +50,26 @@ namespace ORM
             return user;
         }
 
+        //TODO - Agregar a ea
+
+        /// <summary>
+        /// Chequea si algún usuario ya está usando el correo
+        /// </summary>
+        /// <param name="mail"></param>
+        /// <returns></returns>
+        public bool GetByMail(string mail)
+        {
+            Dal dal = new Dal();
+            Hashtable table = new Hashtable();
+
+            table.Add("@id", DBNull.Value);
+            table.Add("@userName", DBNull.Value);
+            table.Add("@mail", mail);
+
+            DataSet result = dal.Read(table, "spReadUser");
+
+            return result != null && result.Tables[0].Rows.Count > 0;
+        }
 
         public User Get(string username)
         {
@@ -58,6 +79,7 @@ namespace ORM
 
             table.Add("@id", DBNull.Value);
             table.Add("@userName", username);
+            table.Add("@mail", DBNull.Value);
 
             DataSet result = dal.Read(table, "spReadUser");
 
@@ -77,6 +99,7 @@ namespace ORM
 
             table.Add("@id", DBNull.Value);
             table.Add("@userName", DBNull.Value);
+            table.Add("@mail", DBNull.Value);
 
             DataSet result = dal.Read(table, "spReadUser");
 
@@ -143,11 +166,6 @@ namespace ORM
             return user;
         }
 
-
-
-
-
-
         //      public bool Exists(string username)
         //      {
 
@@ -179,6 +197,7 @@ namespace ORM
             table.Add("@name", user.Name);
             table.Add("@lastname", user.Lastname);
             table.Add("@lastupdate", user.Lastupdate);
+
             user.Id = dal.Write(table, "spWriteUser");
             return user.Id > 0;
         }

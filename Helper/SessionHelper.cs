@@ -4,7 +4,7 @@ using BE;
 
 namespace Helper
 {
-    // TODO - agregar a EA
+    // TODO - agregar a EA || YA NO TIENE SENTIDO, PORQUE LAS TRADUCCIONES ERA LO MÁS IMPORTANTE QUE HACÍA.
     public class SessionHelper
     {
 
