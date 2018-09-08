@@ -17,20 +17,43 @@
 <header>
     <nav class="navbar navbar-light bg-light">
       <a class="navbar-brand" href="index.aspx">Ubiqui-city</a>
-        
-        <asp:DropDownList ID="dropLanguage" runat="server" CssClass="btn dropdown-toggle"/>
-
-        <!-- Visibilidad controlada por backend -->
-        <asp:Panel ID="panelLogin" runat="server" >
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">Login</button>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalRegisterWebUser">¡Soy nuevo!</button>
-        </asp:Panel>
-        <asp:Panel ID="panelAlreadyLogged" runat="server" >
-        <asp:Button ID="btnLogout" runat="server" CssClass="btn btn-secondary" Text="Logout"  OnClick="btnLogout_Click"/>
-        </asp:Panel>
-
+       <%-- <div class="form-row form-inline">
+            <div class="form-group">
+                <input class="form-control form-control-sm mr-sm-2" type="search" placeholder="Buscar" aria-label="Buscar">
+                <button class="btn btn-outline-primary btn-sm my-2 my-sm-0" type="submit">Buscar</button>
+            </div>
+        </div>--%>
+        <ul class="nav justify-content-center">
+          <li class="nav-item">
+            <a class="nav-link" href="newsletter.aspx">Newsletter</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.aspx">Nosotros</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="privacy.aspx">Términos y condiciones</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.aspx">Contactate</a>
+          </li>
+        </ul>
+        <div class="row">
+            <asp:DropDownList ID="dropLanguage" runat="server" CssClass="btn dropdown-toggle btn-sm"/>
+             <!-- Visibilidad controlada por backend -->
+            <asp:Panel ID="panelLogin" runat="server">
+                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#loginModal">Login</button>
+                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#ModalRegisterWebUser">¡Soy nuevo!</button>
+            </asp:Panel>
+            <asp:Panel ID="panelAlreadyLogged" runat="server" >
+                <asp:Button ID="btnLogout" runat="server" CssClass="btn btn-secondary btn-sm" Text="Logout"  OnClick="btnLogout_Click"/>
+            </asp:Panel>
+        </div>
     </nav>
+   <%-- <nav class="navbar navbar-light bg-light bg">
+        
+     </nav>--%>
 </header>
+
 
   <nav>
     <div>
@@ -60,9 +83,6 @@
                     <asp:MenuItem Text="Respaldo" Value="Respaldo"></asp:MenuItem>
                 </asp:MenuItem>
                 <asp:MenuItem Text="Perfil de usuario" Value="Perfil de usuario"></asp:MenuItem>
-                <asp:MenuItem NavigateUrl="~/about.aspx" Text="Nosotros" Value="Nosotros"></asp:MenuItem>
-                <asp:MenuItem NavigateUrl="~/privacy.aspx" Text="Privacidad" Value="Privacidad"></asp:MenuItem>
-                <asp:MenuItem NavigateUrl="~/contact.aspx" Text="Contacto" Value="Contacto"></asp:MenuItem>
             </Items>
             </asp:Menu>
     </div>
@@ -94,19 +114,19 @@
       <div class="modal-body">
             <div class="form-group">
                 <label for="txtUser">Usuario</label>
-                <input id="txtUser" runat="server" type="text" class="form-control"  placeholder="Ingrese usuario">
+                <input id="txtUser" runat="server" type="text" class="form-control form-control-sm"  placeholder="Ingrese usuario">
             </div>
             <%--<div class="panel-collapse collapse show" id="passwordCollpase" >--%>
                 <div id="passwordCollpase" class="form-group collapse show" >
                 <label for="txtPassword">Password</label>
-                    <input id="txtPassword" runat="server" type="password" class="form-control"  placeholder="Ingrese password">
+                    <input id="txtPassword" runat="server" type="password" class="form-control form-control-sm"  placeholder="Ingrese password">
                 </div>
             <%--</div>--%>
       </div>
       <div class="modal-footer">
-          <asp:Button ID="btnLogin" runat="server" CssClass="btn btn-primary" OnClick="btnLogin_Click" Text="Login"/>
-          <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#passwordCollpase" >Olvidé contraseña</button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <asp:Button ID="btnLogin" runat="server" CssClass="btn btn-primary btn-sm" OnClick="btnLogin_Click" Text="Login"/>
+          <button type="button" class="btn btn-primary btn-sm" data-toggle="collapse" data-target="#passwordCollpase" >Olvidé contraseña</button>
+          <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cerrar</button>
       </div>
 
     </div>

@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace Ubiquicity
 {
-    public partial class log : System.Web.UI.Page
+    public partial class newsletter : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
