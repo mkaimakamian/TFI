@@ -35,7 +35,7 @@ namespace Ubiquicity.UserControls
         /// <param name="objetcs"></param>
         public void LoadGrid(object objects)
         {
-            
+            Session["gvItemDatasource"] = objects; //empleado internamente para el paginado
             gvItem.DataSource = objects;
             gvItem.DataBind();
         }
@@ -69,10 +69,19 @@ namespace Ubiquicity.UserControls
             if (NewActionClick != null) NewActionClick(this, e);
         }
 
-        //protected void gvItem_PageIndexChanging(object sender, GridViewPageEventArgs e)
-        //{
-        //    gvItem.PageIndex = e.NewPageIndex;
-        //    this.LoadGrid(null);
-        //}
+        protected void gvItem_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            if (gvItem.EditIndex != -1)
+            {
+                e.Cancel = true;
+            } else
+            {
+                gvItem.PageIndex = e.NewPageIndex;
+                gvItem.DataSource = Session["gvItemDatasource"];
+                gvItem.DataBind();
+                gvItem.UseAccessibleHeader = true;
+                gvItem.HeaderRow.TableSection = TableRowSection.TableHeader;
+            }
+        }
     }
 }

@@ -2,7 +2,8 @@
     
 <asp:Button ID="btnNewItem" runat="server" CssClass="btn btn-primary" Text="Nuevo" OnClick="btnNewItem_Click" />
     
-<asp:GridView ID="gvItem" runat="server" OnRowCommand="gvItem_OnRowCommand" class="table table-bordered bs-table table-striped table-sm" >
+<asp:GridView AllowPaging="true" PageSize="10" OnPageIndexChanging="gvItem_PageIndexChanging"
+    ID="gvItem" runat="server" OnRowCommand="gvItem_OnRowCommand" class="table table-bordered bs-table table-striped table-sm" >
     <Columns>
         <asp:TemplateField ShowHeader="False">
             <ItemTemplate>
