@@ -42,6 +42,7 @@ namespace Ubiquicity
                 //TODO - Validar los campos
                 RoleManager rolManager = new RoleManager();
                 Role role = null;
+                bool success = false;
 
                 switch (action)
                 {
@@ -49,7 +50,7 @@ namespace Ubiquicity
                         role = new Role();
                         UCFormRolePermission.PopulateModel(role);
                         role.Permissions = RetrieveFromSession("granted");
-                        rolManager.Save(role);
+                        success = rolManager.Save(role);
                         break;
 
                     case EDIT:
@@ -58,15 +59,15 @@ namespace Ubiquicity
                             role = rolManager.Get(Convert.ToInt32(Session["Ubiquicity_itemId"]));
                             UCFormRolePermission.PopulateModel(role);
                             role.Permissions = RetrieveFromSession("granted");
-                            rolManager.Edit(role);
+                            success = rolManager.Edit(role);
                             Session.Remove("Ubiquicity_itemId");
                         }
                         break;
                 }
 
-                if (rolManager.HasErrors)
+                if (!success && rolManager.HasErrors)
                 {
-                    Alert.Show("Error", rolManager.Errors[0].description);
+                    Alert.Show("Error", rolManager.ErrorDescription);
                 }
                 else
                 {
@@ -89,7 +90,7 @@ namespace Ubiquicity
 
             if (roleManager.HasErrors)
             {
-                Alert.Show("Error", roleManager.Errors[0].description);
+                Alert.Show("Error", roleManager.ErrorDescription);
             }
             else
             {

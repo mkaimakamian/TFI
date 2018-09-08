@@ -30,8 +30,8 @@
                 <input id="passwordVerificationInput" runat="server" type="password" class="form-control" placeholder="Reingresá tu password">
               </div>
               </div>
-          <div class="form-group">
+        <%--  <div class="form-group">
             <label for="languageInput">Idioma</label>
             <asp:DropDownList ID="dropLanguageInput" runat="server" CssClass="btn dropdown-toggle form-control"/>
-          </div>
+          </div>--%>
       </div>

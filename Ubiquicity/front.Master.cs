@@ -96,7 +96,7 @@ namespace Ubiquicity
                 }
 
                 //TODO - tomar el idioma que está en curso!
-                user.Language.Id = int.Parse(FormRegisterWebUser.Language);
+                user.Language.Id = 1; // int.Parse(FormRegisterWebUser.Language);
                 bool success = userManager.SaveForWeb(user);
 
                 if (!success && userManager.HasErrors)

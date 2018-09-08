@@ -81,7 +81,7 @@ namespace Ubiquicity
 
                 if (userManager.HasErrors)
                 {
-                    Alert.Show("Error", userManager.Errors[0].description);
+                    Alert.Show("Error", userManager.ErrorDescription);
                 } else {
                     Response.Redirect(Request.RawUrl);
                 }

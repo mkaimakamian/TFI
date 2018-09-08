@@ -72,20 +72,26 @@ namespace BL
 
             if (roleMapper.Exists(role))
             {
-                AddError(new ResultBE(ResultBE.Type.ALREADY_EXISTS, "Rol existente"));
+                string errorDescription = "Ya existe un rol con ese nombre.";
+                log.AddLogCritical("Save", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.ALREADY_EXISTS, errorDescription));
                 return false;
             }
 
             if (!roleMapper.Save(role))
             {
-                AddError(new ResultBE(ResultBE.Type.FAIL, "Error al grabar rol"));
+                string errorDescription = "Error al grabar rol";
+                log.AddLogCritical("Save", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.FAIL, errorDescription));
                 return false;
             }
 
             // TODO - los roles tienen una lista de permisos
             if (!rolePermissionMapper.SavePermissionForRole(role))
             {
-                AddError(new ResultBE(ResultBE.Type.FAIL, "Error al grabar permisos"));
+                string errorDescription = "Error al asociar los permisos al rol.";
+                log.AddLogCritical("Save", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.FAIL, errorDescription));
                 return false;
             }
 
@@ -309,13 +315,17 @@ namespace BL
 
             if (String.IsNullOrEmpty(role.Name))
             {
-                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, "EMPTY_FIELD_ERROR"));
+                string errorDescription = "Debe completarse el nombre del rol.";
+                log.AddLogCritical("IsValid", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
                 isValid = false;
             }
 
             if(role.Permissions.Count == 0)
             {
-                AddError(new ResultBE(ResultBE.Type.EMPTY, "EMPTY_FIELD_ERROR"));
+                string errorDescription = "El rol debe estar asociado a almenos un permiso.";
+                log.AddLogCritical("IsValid", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
                 isValid = false;
             }
 

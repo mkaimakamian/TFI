@@ -13,20 +13,20 @@ namespace Ubiquicity.UserControls
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-                LoadLanguages();   
-            }
+            //if (!IsPostBack)
+            //{
+            //    LoadLanguages();   
+            //}
         }
 
-        private void LoadLanguages()
-        {
-            LanguageManager languageManager = new LanguageManager();
-            dropLanguageInput.DataTextField = "Name";
-            dropLanguageInput.DataValueField = "Id";
-            dropLanguageInput.DataSource = languageManager.Get();
-            dropLanguageInput.DataBind();
-        }
+        //private void LoadLanguages()
+        //{
+        //    LanguageManager languageManager = new LanguageManager();
+        //    dropLanguageInput.DataTextField = "Name";
+        //    dropLanguageInput.DataValueField = "Id";
+        //    dropLanguageInput.DataSource = languageManager.Get();
+        //    dropLanguageInput.DataBind();
+        //}
 
         public void FillForm(User user)
         {
@@ -36,7 +36,7 @@ namespace Ubiquicity.UserControls
             UserName = user.Username;
             Password = user.Password;
             PasswordVerification = user.Password;
-            dropLanguageInput.SelectedValue = user.Language.Id.ToString();
+            //dropLanguageInput.SelectedValue = user.Language.Id.ToString();
         }
 
         public string FirstName
@@ -75,11 +75,11 @@ namespace Ubiquicity.UserControls
             set { passwordVerificationInput.Value = value; }
         }
 
-        public string Language
-        {
-            get { return dropLanguageInput.SelectedValue; }
-            set { dropLanguageInput.SelectedValue = value; }
-        }
+        //public string Language
+        //{
+        //    get { return dropLanguageInput.SelectedValue; }
+        //    set { dropLanguageInput.SelectedValue = value; }
+        //}
 
         public void CleanForm()
         {
@@ -97,7 +97,7 @@ namespace Ubiquicity.UserControls
             user.Lastname = LastName;
             user.Password = Password;
             user.Username = UserName;
-            user.Language.Id = int.Parse(dropLanguageInput.SelectedValue);
+            //user.Language.Id = int.Parse(dropLanguageInput.SelectedValue);
             user.Mail = Mail;
         }
     }

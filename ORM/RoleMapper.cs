@@ -62,12 +62,10 @@ namespace ORM
             Dal dal = new Dal();
             Hashtable table = new Hashtable();
 
-            table.Add("@id", DBNull.Value);
-            table.Add("@userId", DBNull.Value);
-            table.Add("@name", role.Name);
-            table.Add("@userOnly", DBNull.Value);
+            table.Add("@roleId", DBNull.Value);
+            table.Add("@roleName", role.Name);
 
-            DataSet result = dal.Read(table, "spReadRole");
+            DataSet result = dal.Read(table, "spCheckRoleExistence");
 
             return result != null && result.Tables[0].Rows.Count > 0;
         }
@@ -86,7 +84,7 @@ namespace ORM
             table.Add("@id", id);
             table.Add("@userId", DBNull.Value);
             table.Add("@name", DBNull.Value);
-            table.Add("@userOnly", DBNull.Value);
+            table.Add("@userOnly", false);
 
             DataSet result = dal.Read(table, "spReadRole");
 

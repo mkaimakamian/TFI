@@ -186,32 +186,7 @@ namespace BL
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        public bool Save(User user)
-        {
-            UserMapper mapper = new UserMapper();
-
-            if (!IsValidForSave(user)) return false;
-
-            // Setting up default values
-            user.Lastupdate = DateTime.Now;
-            user.Locked = false;
-            user.Active = true;
-
-            if (!mapper.Save(user))
-            {
-                AddError(new ResultBE(ResultBE.Type.FAIL, "Error al grabar"));
-                return false;                
-            }
-
-            return true;
-        }
-
-        /// <summary>
-        /// Genera el alta de usuario, que implica la persistencia y el envío de mail de bienvenida.
-        /// </summary>
-        /// <param name="user"></param>
-        /// <returns></returns>
-        public bool SaveForWeb(User user)
+        public bool Save(User user, bool assignWebRol = false)
         {
             RoleManager roleManager = new RoleManager();
             UserMapper mapper = new UserMapper();
@@ -219,38 +194,42 @@ namespace BL
             if (!IsValidForSave(user)) return false;
 
             // Existencia del user name
-            if(mapper.Get(user.Username) != null)
+            if (mapper.Get(user.Username) != null)
             {
                 string errorDescription = "El usuario ya existe.";
                 log.AddLogWarn("SaveForWeb", errorDescription, this);
                 AddError(new ResultBE(ResultBE.Type.ALREADY_EXISTS, errorDescription));
                 return false;
             }
-/*
-            // Existencia del correo electrónico
-            if (mapper.GetByMail(user.Mail))
-            {
-                string errorDescription = "El mail se encuentra en uso.";
-                log.AddLogWarn("SaveForWeb", errorDescription, this);
-                AddError(new ResultBE(ResultBE.Type.ALREADY_EXISTS, errorDescription));
-                return false;
-            }
-*/
+            /*
+                        // Existencia del correo electrónico
+                        if (mapper.GetByMail(user.Mail))
+                        {
+                            string errorDescription = "El mail se encuentra en uso.";
+                            log.AddLogWarn("SaveForWeb", errorDescription, this);
+                            AddError(new ResultBE(ResultBE.Type.ALREADY_EXISTS, errorDescription));
+                            return false;
+                        }
+            */
             user.Lastupdate = DateTime.Now;
             user.Locked = true;
             user.Active = false;
 
-            user.Roles = roleManager.GetForWebUser();
             
+
 
             // Asignar permisos de usuario web (recién cuando se loguea)
             if (mapper.Save(user))
             {
-                roleManager.SaveRoleForUser(user);
+                if (assignWebRol)
+                {
+                    user.Roles = roleManager.GetForWebUser();
+                    roleManager.SaveRoleForUser(user);
+                }
 
                 //se recupera de nuevo el usuario porque hay discrepancia entre la fecha de la base y la del sistema
                 user = mapper.Get(user.Id);
-                string activationHash = SecurityHelper.Encrypt(user.Username + user.Lastupdate.Minute) +user.Id;
+                string activationHash = SecurityHelper.Encrypt(user.Username + user.Lastupdate.Minute) + user.Id;
                 MailerHelper.SendWelcomeMail(user, activationHash);
             }
             else
@@ -263,6 +242,17 @@ namespace BL
 
             return true;
         }
+
+        /// <summary>
+        /// Genera el alta de usuario, que implica la persistencia y el envío de mail de bienvenida.
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        public bool SaveForWeb(User user)
+        {
+            return Save(user, true);
+        }
+        
 
         public bool SendActivation(User user)
         {
@@ -305,7 +295,7 @@ namespace BL
             if (String.IsNullOrEmpty(user.Name))
             {
                 string errorDescription = "Debe completarse el nombre.";
-                log.AddLogWarn("SaveForWeb", errorDescription, this);
+                log.AddLogWarn("IsValidForSave", errorDescription, this);
                 AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
                 isValid = false;
             }
@@ -313,7 +303,7 @@ namespace BL
             if (String.IsNullOrEmpty(user.Lastname))
             {
                 string errorDescription = "Debe completarse el apellido.";
-                log.AddLogWarn("SaveForWeb", errorDescription, this);
+                log.AddLogWarn("IsValidForSave", errorDescription, this);
                 AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
                 isValid = false;
             }
@@ -321,7 +311,7 @@ namespace BL
             if (String.IsNullOrEmpty(user.Username))
             {
                 string errorDescription = "Debe completarse el usuario.";
-                log.AddLogWarn("SaveForWeb", errorDescription, this);
+                log.AddLogWarn("IsValidForSave", errorDescription, this);
                 AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
                 isValid = false;
             }
@@ -329,7 +319,7 @@ namespace BL
             if (String.IsNullOrEmpty(user.Mail))
             {
                 string errorDescription = "Debe completarse el correo electrónico.";
-                log.AddLogWarn("SaveForWeb", errorDescription, this);
+                log.AddLogWarn("IsValidForSave", errorDescription, this);
                 AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
                 isValid = false;
             }
@@ -337,7 +327,7 @@ namespace BL
             if (String.IsNullOrEmpty(user.Password))
             {
                 string errorDescription = "Debe completarse el password.";
-                log.AddLogWarn("SaveForWeb", errorDescription, this);
+                log.AddLogWarn("IsValidForSave", errorDescription, this);
                 AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
                 isValid = false;
             }
