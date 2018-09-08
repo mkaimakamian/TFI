@@ -28,6 +28,10 @@ namespace Ubiquicity.UserControls
             btnNewItem.Visible = false;
         }
 
+        public void HideEditButton()
+        {
+            gvItem.Columns[1].Visible = false;
+        }
 
         /// <summary>
         /// Carga el datasource y establece el binding con los objetos a mostrar

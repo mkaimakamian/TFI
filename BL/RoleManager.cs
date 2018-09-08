@@ -191,12 +191,22 @@ namespace BL
         /// <returns></returns>
         public List<Role> Get(User user)
         {
+            RolePermissionMapper rolePermissionMapper = new RolePermissionMapper();
             UserRoleMapper userRoleMapper = new UserRoleMapper();
             List<Role> roles = userRoleMapper.Get(user);
 
             if (roles == null)
             {
-                AddError(new ResultBE(ResultBE.Type.EMPTY, "El usuario no posee permisos asociados."));
+                string errorDescription = "El usuario " + user.Username + " no posee permisos asociados.";
+                log.AddLogInfo("IsValid", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.EMPTY, errorDescription));
+            } else
+            {
+                //TODO - revisar la performance
+                foreach (Role role in roles)
+                {
+                    role.Permissions = rolePermissionMapper.Get(role);
+                }
             }
 
             return roles;

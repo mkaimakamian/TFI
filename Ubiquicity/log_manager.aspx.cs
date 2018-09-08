@@ -16,21 +16,26 @@ namespace Ubiquicity
             {
                 LoadGrid();
             }
+
+            UCcrudGrid.HideDeleteButton();
+            UCcrudGrid.HideEditButton();
+            UCcrudGrid.HideNewButton();
         }
 
         private void LoadGrid()
         {
+            
             try
             {
                 LogManager logManager = new LogManager();
-                gvLogEntry.DataSource = logManager.Get();
-                gvLogEntry.DataBind();
+                UCcrudGrid.LoadGrid(logManager.Get());
 
-            } catch (Exception exception)
+            }
+            catch (Exception exception)
             {
 
             }
-            
+
         }
     }
 }

@@ -3,31 +3,31 @@
           <div class="form-row">
               <div class="form-group">
                 <label for="firstNameInput">Nombre</label>
-                <input id="firstNameInput" runat="server" type="text" class="form-control"  placeholder="Ingresa tu nombre">
+                <input id="firstNameInput" runat="server" type="text" class="form-control form-control-sm"  placeholder="Ingresa tu nombre">
               </div>
               <div class="form-group">
                 <label for="lastNameInput">Apellido</label>
-                <input id="lastNameInput" runat="server" type="text" class="form-control"  placeholder="Ingresa tu apellido">
+                <input id="lastNameInput" runat="server" type="text" class="form-control form-control-sm"  placeholder="Ingresa tu apellido">
               </div>
           </div>
           <div class="form-row">
               <div class="form-group">
                 <label for="userInput">Usuario</label>
-                <input id="userInput" runat="server" type="text" class="form-control"  placeholder="Ingresá tu usuario">
+                <input id="userInput" runat="server" type="text" class="form-control form-control-sm"  placeholder="Ingresá tu usuario">
               </div>
               <div class="form-group">
                 <label for="mailInput">Dirección de correo</label>
-                <input id="mailInput" runat="server" type="email" class="form-control"  placeholder="Ingresá tu correo electrónico">
+                <input id="mailInput" runat="server" type="email" class="form-control form-control-sm"  placeholder="Ingresá tu correo electrónico">
               </div>
             </div>
            <div class="form-row">
               <div class="form-group">
                 <label for="passwordInput">Password</label>
-                <input id="passwordInput" runat="server" type="password" class="form-control"  placeholder="Ingresá tu password">
+                <input id="passwordInput" runat="server" type="password" class="form-control form-control-sm"  placeholder="Ingresá tu password">
               </div>
               <div class="form-group">
                 <label for="passwordConfirmInput">Confirmar password</label>
-                <input id="passwordVerificationInput" runat="server" type="password" class="form-control" placeholder="Reingresá tu password">
+                <input id="passwordVerificationInput" runat="server" type="password" class="form-control form-control-sm" placeholder="Reingresá tu password">
               </div>
               </div>
         <%--  <div class="form-group">

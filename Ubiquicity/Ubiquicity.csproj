@@ -50,6 +50,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -136,6 +140,7 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="shop.aspx" />
     <Content Include="UserControls\UCFormRolePermission.ascx" />
     <Content Include="UserControls\UCFormUserRole.ascx" />
     <Content Include="user_manager.aspx" />
@@ -237,6 +242,13 @@
     </Compile>
     <Compile Include="role_manager.aspx.designer.cs">
       <DependentUpon>role_manager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="shop.aspx.cs">
+      <DependentUpon>shop.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="shop.aspx.designer.cs">
+      <DependentUpon>shop.aspx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\UCFormRolePermission.ascx.cs">
       <DependentUpon>UCFormRolePermission.ascx</DependentUpon>

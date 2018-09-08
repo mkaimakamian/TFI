@@ -7,6 +7,10 @@ using System.Web.UI.WebControls;
 using BE;
 using BL;
 using Helper;
+using System.Net;
+using System.IO;
+using System.Configuration;
+using Newtonsoft.Json.Linq;
 
 namespace Ubiquicity
 {
@@ -18,9 +22,9 @@ namespace Ubiquicity
             if (!IsPostBack) {
                     // Todo - ver si en vez de usuario es Session
                     User user = (User) Session["SessionCreated"];
-                    ManageLoginPanel(Session["SessionCreated"] != null);
+                    ManageLoginPanel(user);
                     LoadMenu(user);
-                    LoadLanguages();
+                  //  LoadLanguages();
             }
 
         }
@@ -77,10 +81,15 @@ namespace Ubiquicity
             {
                 UserManager userManager = new UserManager();
 
-                //TODO - Validar los campos
                 if (!chekCondition.Checked)
                 {
                     Alert.Show("Error", "Debes leer y aceptar los términos para poder registrarte");
+                    return;
+                }
+                
+                if (!IsValidCapcha())
+                {
+                    Alert.Show("Error", "Por el momento no estamos aceptando robots; mil disculpas.");
                     return;
                 }
 
@@ -115,28 +124,63 @@ namespace Ubiquicity
         /// Según el valor pasado, muestra los paneles que permiten el acceso al botón de login + registro, o logout.
         /// </summary>
         /// <param name="logged"></param>
-        private void ManageLoginPanel(bool logged) {
-            panelLogin.Visible = !logged;
-            panelAlreadyLogged.Visible = logged;
-        }
+        private void ManageLoginPanel(User user) {
 
-        private void LoadMenu(User user) {
-            if (user != null) { 
-            //mnuSection.DataSource = user.Roles;
-            //mnuSection.DataBind();
+            if (user != null)
+            {
+                panelLogin.Visible = false;
+                panelAlreadyLogged.Visible = true;
+                btnLogout.Text = user.Username + " (salir)";
+            } else
+            {
+                panelLogin.Visible = true;
+                panelAlreadyLogged.Visible = false;
             }
         }
 
-        /// <summary>
-        /// Carga todos los idiomas disponibles en el combo - próximamente se reemplazará por google.
-        /// </summary>
-        private void LoadLanguages()
+        // TODO - revisar la performance (la idea es evitar duplicados)
+        //Eventualmente crear un método que recupere los permisos directamente de la base, sin duplicados.
+        private void LoadMenu(User user) {
+            if (user != null) {
+                mnuSection.Items.Clear();
+                Dictionary<int, MenuItem> access = new Dictionary<int, MenuItem>();
+
+            foreach (Role role in user.Roles)
+                {
+                    foreach (Permission permission in role.Permissions)
+                    {
+                        MenuItem permissionItem = new MenuItem();
+                        permissionItem.Text = permission.Description;
+                        permissionItem.NavigateUrl = permission.UrlAccess;
+                        if (!access.ContainsKey(permission.Id)) access.Add(permission.Id, permissionItem);
+                    }
+                }
+
+            foreach (int key in access.Keys)
+                {
+                    mnuSection.Items.Add(access[key]);
+                }
+            }
+
+
+        }
+
+        private bool IsValidCapcha()
         {
-            LanguageManager languageManager = new LanguageManager();
-            dropLanguage.DataTextField = "Name";
-            dropLanguage.DataValueField = "Id";
-            dropLanguage.DataSource = languageManager.Get();
-            dropLanguage.DataBind();
+            bool result = false;
+            string captchaResponse = Request["g-recaptcha-response"];
+            string secretKey = ConfigurationManager.AppSettings["reCAPTCHA"];
+            string apiUrl = "https://www.google.com/recaptcha/api/siteverify?secret={0}&response={1}";
+            string requestUri = String.Format(apiUrl, secretKey, captchaResponse);
+
+            HttpWebRequest request = (HttpWebRequest) WebRequest.Create(requestUri);
+            WebResponse response = request.GetResponse();
+            StreamReader stream = new StreamReader(response.GetResponseStream());
+
+            JObject jResponse = JObject.Parse(stream.ReadToEnd());
+            result = jResponse.Value<Boolean>("success");
+
+            return result;
         }
 
         private bool IsValid(string username, string password)

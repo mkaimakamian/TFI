@@ -10,81 +10,70 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="Content/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+     <script type="text/javascript">
+          function googleTranslateElementInit() {
+              new google.translate.TranslateElement({ pageLanguage: 'es' }, 'google_translate_element');
 
+              if (typeof (document.querySelector) == 'function') {
+                  document.querySelector('.goog-logo-link').setAttribute('style', 'display: none');
+                  document.querySelector('.goog-te-gadget').setAttribute('style', 'font-size: 0');
+              }
+          }
+      </script>
+    <!-- Api Google Translate-->
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </head>
 <body>
+   
 <form runat="server">
 <header>
-    <nav class="navbar navbar-light bg-light">
-      <a class="navbar-brand" href="index.aspx">Ubiqui-city</a>
-       <%-- <div class="form-row form-inline">
-            <div class="form-group">
-                <input class="form-control form-control-sm mr-sm-2" type="search" placeholder="Buscar" aria-label="Buscar">
-                <button class="btn btn-outline-primary btn-sm my-2 my-sm-0" type="submit">Buscar</button>
-            </div>
-        </div>--%>
-        <ul class="nav justify-content-center">
-          <li class="nav-item">
-            <a class="nav-link" href="newsletter.aspx">Newsletter</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="about.aspx">Nosotros</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="privacy.aspx">Términos y condiciones</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="contact.aspx">Contactate</a>
-          </li>
-        </ul>
-        <div class="row">
-            <asp:DropDownList ID="dropLanguage" runat="server" CssClass="btn dropdown-toggle btn-sm"/>
-             <!-- Visibilidad controlada por backend -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="index.aspx">Ubiqui-city</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+        <a class="nav-link" href="shop.aspx">Catálogo</a>
+        </li>
+		<li class="nav-item">
+        <a class="nav-link" href="newsletter.aspx">Newsletter</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="about.aspx">Nosotros</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="privacy.aspx">Términos y condiciones</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="contact.aspx">Contactate</a>
+        </li>
+    </ul>
+              <!-- Visibilidad controlada por backend -->
             <asp:Panel ID="panelLogin" runat="server">
-                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#loginModal">Login</button>
-                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#ModalRegisterWebUser">¡Soy nuevo!</button>
+                <button type="button" class="btn btn-link" data-toggle="modal" data-target="#loginModal">
+                    <i class="fa fa-user"></i> Login</button>
+                |
+                <button type="button" class="btn btn-link" data-toggle="modal" data-target="#ModalRegisterWebUser">¡Soy nuevo!</button>
             </asp:Panel>
             <asp:Panel ID="panelAlreadyLogged" runat="server" >
-                <asp:Button ID="btnLogout" runat="server" CssClass="btn btn-secondary btn-sm" Text="Logout"  OnClick="btnLogout_Click"/>
+                <asp:Button ID="btnLogout" runat="server" CssClass="btn btn-link" Text="Logout"  OnClick="btnLogout_Click"/>
             </asp:Panel>
-        </div>
-    </nav>
-   <%-- <nav class="navbar navbar-light bg-light bg">
-        
-     </nav>--%>
+      |<div id="google_translate_element" class="btn btn-link btn-sm"></div>
+            <%--<asp:DropDownList ID="dropLanguage" runat="server" CssClass="btn btn-link dropdown-toggle btn-sm"/>--%>
+          
+  </div>
+</nav>
 </header>
-
-
   <nav>
     <div>
-   
-        <asp:Menu ID="mnuSection" runat="server" Orientation="Horizontal" SkipLinkText=""
-            CssClass="nav navbar-fix-top" DynamicMenuStyle-CssClass="dropdown-menu">
-            <DynamicMenuStyle CssClass="dropdown-menu" />
-            <Items>
-                <asp:MenuItem Text="Contenido" Value="Contenido" >
-                    <asp:MenuItem Text="Novedades" Value="Novedades"></asp:MenuItem>
-                    <asp:MenuItem Text="Artículos" Value="Artículos"></asp:MenuItem>
-                    <asp:MenuItem Text="Idiomas" Value="Idiomas" NavigateUrl="~/language_manager.aspx"></asp:MenuItem>
-                    <asp:MenuItem Text="Categoría de negocios" Value="Categoría de negocios"></asp:MenuItem>
-                    <asp:MenuItem Text="Marketing mix" Value="Marketing mix"></asp:MenuItem>
-                </asp:MenuItem>
-                <asp:MenuItem Text="Ventas" Value="Ventas">
-                    <asp:MenuItem Text="Créditos / débitos" Value="Créditos / débitos"></asp:MenuItem>
-                    <asp:MenuItem Text="Promoción" Value="Promoción"></asp:MenuItem>
-                    <asp:MenuItem Text="Códigos de canje" Value="Códigos de canje"></asp:MenuItem>
-                    <asp:MenuItem Text="Niveles de aprobación" Value="Niveles de aprobación"></asp:MenuItem>
-                </asp:MenuItem>
-                <asp:MenuItem Text="Seguridad" Value="Seguridad">
-                    <asp:MenuItem Text="Bitácora" Value="Bitácora" NavigateUrl="~/log_manager.aspx"></asp:MenuItem>
-                    <asp:MenuItem NavigateUrl="~/user_manager.aspx" Text="Usuarios" Value="Usuarios"></asp:MenuItem>
-                    <asp:MenuItem Text="Roles" Value="Roles" NavigateUrl="~/role_manager.aspx"></asp:MenuItem>
-                    <asp:MenuItem Text="Roles y usuarios" Value="Roles y usuarios" NavigateUrl="~/user_role_manager.aspx"></asp:MenuItem>
-                    <asp:MenuItem Text="Respaldo" Value="Respaldo"></asp:MenuItem>
-                </asp:MenuItem>
-                <asp:MenuItem Text="Perfil de usuario" Value="Perfil de usuario"></asp:MenuItem>
-            </Items>
-            </asp:Menu>
+   <asp:Menu ID="mnuSection" runat="server" MaximumDynamicDisplayLevels="2"  Orientation="Horizontal" 
+            SkipLinkText=""
+            CssClass="nav navbar-fix-top" DynamicMenuStyle-CssClass="dropdown-menu"></asp:Menu>
     </div>
   </nav>
 
@@ -139,13 +128,15 @@
             <div class="modal-content">
                 <UCmkc:UCModalTitle runat="server" id="UCModalTitle" title="Registro de usuario"  />
                 <ucmkc:ucformnewmember runat="server" ID="FormRegisterWebUser" />
+                <div class="form-check">
+                    <input id="chekCondition" runat="server" class="form-check-input" type="checkbox" >
+                    <label class="form-check-label" for="gridCheck">Acepto los términos y condiciones</label>
+                </div>
                 <div class="modal-footer">
-                    <div class="form-check">
-                        <input id="chekCondition" runat="server" class="form-check-input" type="checkbox" >
-                        <label class="form-check-label" for="gridCheck">Acepto los términos y condiciones</label>
-                    </div>
-                    <asp:Button ID="btnRegister" runat="server" CssClass="btn btn-primary" Text="Registrarse" OnClick="btnRegister_Click"/>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+
+                    <div class="g-recaptcha" data-sitekey="6LeaQG8UAAAAAJ6cES1CaqQA3C3Uh0FZBcjQOxdT"></div>
+                    <asp:Button ID="btnRegister" runat="server" CssClass="btn btn-primary btn-sm" Text="Registrarse" OnClick="btnRegister_Click"/>
+                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>
          </div>
