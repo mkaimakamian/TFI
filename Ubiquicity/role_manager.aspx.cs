@@ -184,16 +184,17 @@ namespace Ubiquicity
         protected override void PerformDeleteItem(object sender, EventArgs e) {
             if (Session["Ubiquicity_itemId"] != null)
             {
-                int id = int.Parse(Session["Ubiquicity_itemId"].ToString());
                 RoleManager rolManager = new RoleManager();
+                int id = int.Parse(Session["Ubiquicity_itemId"].ToString());
+                bool success = rolManager.Delete(id);
 
-                if (rolManager.Delete(id))
+                if (success)
                 {
                     LoadGridView();
                     Session.Remove("Ubiquicity_itemId");
                 }
 
-                if (rolManager.HasErrors) {
+                if (!success && rolManager.HasErrors) {
                     Alert.Show("Error", rolManager.Errors[0].description);
                 }
                 

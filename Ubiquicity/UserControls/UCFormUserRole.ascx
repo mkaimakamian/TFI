@@ -1,9 +1,9 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UCFormUserRole.ascx.cs" Inherits="Ubiquicity.UserControls.UCFormUserRole" %>
 <div class="modal-body">
-    <div class="form-group">
+ <%--   <div class="form-group">
     <label for="userDrop">Nombre</label>
     <asp:DropDownList ID="userDrop" runat="server"/>
-    </div>
+    </div>--%><asp:Label ID="lblUserName" runat="server"/>
     
     <div class="form-group">
         <label for="lstPermissionGranted">Obtenidos</label>

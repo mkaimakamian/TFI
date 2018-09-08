@@ -47,14 +47,16 @@ namespace BL
 
             if (!userRolMapper.InUse(id))
             {
+                //TODO - falta agregar control de error aquí
                 rolePermissionMapper.Delete(id);
                 rolMapper.Delete(id);
-                return true;
             } else
             {
-                AddError(new ResultBE(ResultBE.Type.RELATIONSHIP_ERROR, "El rol está en uso."));
-                return true;
+                string errorDescription = "El rol está en uso.";
+                log.AddLogCritical("Delete", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.RELATIONSHIP_ERROR, errorDescription));
             }
+            return true;
         }
 
         /// <summary>
@@ -112,20 +114,26 @@ namespace BL
 
             if (roleMapper.Exists(role))
             {
-                AddError(new ResultBE(ResultBE.Type.ALREADY_EXISTS, "Rol existente"));
+                string errorDescription = "Ya existe rol con ese nombre";
+                log.AddLogWarn("Edit", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.ALREADY_EXISTS, errorDescription));
                 return false;
             }
 
             if (!roleMapper.Edit(role))
             {
-                AddError(new ResultBE(ResultBE.Type.FAIL, "Error al grabar rol"));
+                string errorDescription = "No se pudo actualizar el rol.";
+                log.AddLogCritical("Edit", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.FAIL, errorDescription));
                 return false;
             }
 
-            // TODO - los roles tienen una lista de permisos
+            // TODO - los roles tienen una lista de permisos y deberían guardarse en la misma transacción
             if (!rolePermissionMapper.Edit(role))
             {
-                AddError(new ResultBE(ResultBE.Type.FAIL, "Error al editar permisos"));
+                string errorDescription = "No se ha podido guardar la nómina de permisos asociados al rol.";
+                log.AddLogCritical("Edit", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.FAIL, errorDescription));
                 return false;
             }
 
@@ -133,42 +141,44 @@ namespace BL
         }
 
         /// <summary>
-        /// Guarda los roles del usuario.
+        /// Guarda los roles que le han sido asignado a un usuario.
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
         public bool SaveRoleForUser(User user)
         {
+            if (!IsValidForUserAssignation(user)) return false;
+
             RolePermissionMapper rolePermissionMapper = new RolePermissionMapper();
             bool success = rolePermissionMapper.SaveRoleForUser(user);
 
             if (!success)
             {
-                AddError(new ResultBE(ResultBE.Type.FAIL, "No se pudo asignar el rol"));
+                string errorDescription = "No se han podido asgnar los roles.";
+                log.AddLogCritical("EditRoleForUser", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.FAIL, errorDescription));
             }
 
             return success;
         }
 
+        /// <summary>
+        /// Guarda los cambios que 
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         public bool EditRoleForUser(User user)
         {
-            //TODO validar que el usuairo posea roles
-
-            if (user.Roles == null || user.Roles.Count == 0)
-            {
-                string errorDescription = "Debe asignarse al menos un rol.";
-                log.AddLogWarn("EditRoleForUser", errorDescription, this);
-                AddError(new ResultBE(ResultBE.Type.EMPTY, errorDescription));
-                return false;
-            }
-
-
+            if (!IsValidForUserAssignation(user)) return false;
+           
             RolePermissionMapper rolePermissionMapper = new RolePermissionMapper();
             bool success = rolePermissionMapper.EditRoleForUser(user);
-
+            
             if (!success)
             {
-                AddError(new ResultBE(ResultBE.Type.FAIL, "No se pudo asignar el rol"));
+                string errorDescription = "No se han podido asignar los roles al usuario.";
+                log.AddLogCritical("EditRoleForUser", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.FAIL, errorDescription));
             }
 
             return success;
@@ -330,6 +340,19 @@ namespace BL
             }
 
             return isValid;
+        }
+
+        private bool IsValidForUserAssignation(User user)
+        {
+            if (user.Roles == null || user.Roles.Count == 0)
+            {
+                string errorDescription = "Debe asignarse al menos un rol.";
+                log.AddLogWarn("EditRoleForUser", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.EMPTY, errorDescription));
+                return false;
+            }
+
+            return true;
         }
 
     }

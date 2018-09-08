@@ -20,6 +20,7 @@ namespace ORM
 
             table.Add("@roleId", roleId);
             table.Add("@inUse", true);
+            table.Add("@userId", DBNull.Value);
 
             DataSet result = dal.Read(table, "spReadUserRole");
 

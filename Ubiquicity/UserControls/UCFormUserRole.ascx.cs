@@ -20,11 +20,11 @@ namespace Ubiquicity.UserControls
 
         public void InitializeForm(List<User> users, List<Role> granted, List<Role> toGrant)
         {
-            userDrop.Enabled = true;
-            userDrop.DataSource = users;
-            userDrop.DataTextField = "Username";
-            userDrop.DataValueField = "Id";
-            userDrop.DataBind();
+            //userDrop.Enabled = true;
+            //userDrop.DataSource = users;
+            //userDrop.DataTextField = "Username";
+            //userDrop.DataValueField = "Id";
+            //userDrop.DataBind();
 
             FillForm(granted, toGrant);
         }
@@ -37,13 +37,14 @@ namespace Ubiquicity.UserControls
 
         public void FillForm(User user, List<Role> toGrant)
         {
-            List<User> users = new List<User>();
-            users.Add(user);
-            userDrop.DataSource = users;
-            userDrop.DataTextField = "Username";
-            userDrop.DataValueField = "Id";
-            userDrop.DataBind();
-            userDrop.Enabled = false;
+            //List<User> users = new List<User>();
+            //users.Add(user);
+            //userDrop.DataSource = users;
+            //userDrop.DataTextField = "Username";
+            //userDrop.DataValueField = "Id";
+            //userDrop.DataBind();
+            //userDrop.Enabled = false;
+            lblUserName.Text = user.Name + " " + user.Lastname + "("+user.Username+")"; 
             FillForm(user.Roles, toGrant);
         }
 
@@ -65,7 +66,7 @@ namespace Ubiquicity.UserControls
             if (lstPermissionGranted.SelectedIndex > -1)
             {
                 Session["Ubiquicity_roleId"] = lstPermissionGranted.SelectedValue;
-                Session["Ubiquicity_userId"] = userDrop.SelectedValue;
+                //Session["Ubiquicity_userId"] = userDrop.SelectedValue;
                 if (UngrantAction != null) UngrantAction(this, e);
             }
         }
@@ -75,7 +76,7 @@ namespace Ubiquicity.UserControls
             if (lstPermissionToGrant.SelectedIndex > -1)
             {
                 Session["Ubiquicity_roleId"] = lstPermissionToGrant.SelectedValue;
-                Session["Ubiquicity_userId"] = userDrop.SelectedValue;
+                //Session["Ubiquicity_userId"] = userDrop.SelectedValue;
                 if (GrantAction != null) GrantAction(this, e);
             }
         }

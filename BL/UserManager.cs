@@ -140,7 +140,9 @@ namespace BL
 
             if (user == null)
             {
-                AddError(new ResultBE(ResultBE.Type.NULL, "Usuario no existe: " + id));
+                string errorDescription = "No se ha encontrado usuario con el id " +id+ ".";
+                log.AddLogCritical("Get", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.NULL, errorDescription));
                 return null;
             }
             //if (!user.Active) return new ResultBE(ResultBE.Type.INACTIVE_USER, "Usuario inactivo: " + username);

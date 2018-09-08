@@ -13,9 +13,9 @@ namespace Ubiquicity
     {
         protected override void PageLoad(object sender, EventArgs e)
         {
-            //Requerido por la clase padre
-            GridView = UCcrudGrid;
+            GridView = UCcrudGrid; //Requerido por la clase padre
             GridView.HideDeleteButton();
+            GridView.HideNewButton();
 
             UCFormUserRole.GrantAction += GrantPermission;
             UCFormUserRole.UngrantAction += UngrantPermission;
@@ -42,33 +42,39 @@ namespace Ubiquicity
                 int action = int.Parse(Session["Ubiquicity_action"].ToString());
 
                 //Negrada: se está obteniendo el valor desde la sesión y no debería ser así
-                int userId = int.Parse(Session["Ubiquicity_userId"].ToString());
+                int userId = int.Parse(Session["Ubiquicity_itemId"].ToString());
 
                 //TODO - Validar los campos
                 UserManager userManager = new UserManager();
                 RoleManager roleManager = new RoleManager();
                 User user = null;
+                bool success = false;
 
                 user = userManager.Get(userId);
+
+                if (user == null && userManager.HasErrors)
+                {
+                    Alert.Show("Error", userManager.ErrorDescription);
+                }
                 //UCFormUserRole.PopulateModel(user);
                 user.Roles = RetrieveFromSession("granted");
 
                 switch (action)
                 {
-                    case CREATE:
-                        roleManager.SaveRoleForUser(user);
-                        break;
+                    //case CREATE:
+                    //    success = roleManager.SaveRoleForUser(user);
+                    //    break;
 
                     case EDIT:
-                        roleManager.EditRoleForUser(user);
+                        success = roleManager.EditRoleForUser(user);
                         break;
                 }
 
                 Session.Remove("Ubiquicity_itemId");
 
-                if (roleManager.HasErrors || userManager.HasErrors )
+                if (!success && roleManager.HasErrors)
                 {
-                    Alert.Show("Error", roleManager.Errors[0].description + Environment.NewLine + userManager.Errors[0].description);
+                    Alert.Show("Error", roleManager.ErrorDescription);
                 }
                 else
                 {
@@ -111,22 +117,22 @@ namespace Ubiquicity
             }
         }
 
-        protected override void ShowNewForm(object sender, EventArgs e)
-        {
-            UserManager userManager = new UserManager();
-            RoleManager roleManager = new RoleManager();
-            List<User> users = userManager.GetUserWithoutRole();
-            List<Role> unassignedRol = roleManager.Get();
-            List<Role> assignedRol = new List<Role>();
+        //protected override void ShowNewForm(object sender, EventArgs e)
+        //{
+        //    UserManager userManager = new UserManager();
+        //    RoleManager roleManager = new RoleManager();
+        //    List<User> users = userManager.GetUserWithoutRole();
+        //    List<Role> unassignedRol = roleManager.Get();
+        //    List<Role> assignedRol = new List<Role>();
 
-            //Se guardan en sesión para su manejo posterior
-            KeepInSession("granted", assignedRol);
-            KeepInSession("toGrant", unassignedRol);
+        //    //Se guardan en sesión para su manejo posterior
+        //    KeepInSession("granted", assignedRol);
+        //    KeepInSession("toGrant", unassignedRol);
 
-            UCFormUserRole.InitializeForm(users, assignedRol, unassignedRol);
-            Session["Ubiquicity_action"] = CREATE;
-            ShowCrudForm();
-        }
+        //    UCFormUserRole.InitializeForm(users, assignedRol, unassignedRol);
+        //    Session["Ubiquicity_action"] = CREATE;
+        //    ShowCrudForm();
+        //}
 
         /// <summary>
         /// Ejecuta el pasaje de la lista de los disponibles a los asignados.
