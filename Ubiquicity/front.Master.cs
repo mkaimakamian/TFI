@@ -89,7 +89,7 @@ namespace Ubiquicity
                 
                 if (!IsValidCapcha())
                 {
-                    Alert.Show("Error", "Por el momento no estamos aceptando robots; mil disculpas.");
+                    Alert.Show("Error", "¡No te hemos podido identificar como humano!. \n Por favor, asegurate de ingresar el captcha adecuadamente.");
                     return;
                 }
 
@@ -117,7 +117,6 @@ namespace Ubiquicity
             {
                 Alert.Show("Exception", exception.Message);
             }
-
         }
 
         /// <summary>
@@ -130,7 +129,7 @@ namespace Ubiquicity
             {
                 panelLogin.Visible = false;
                 panelAlreadyLogged.Visible = true;
-                btnLogout.Text = user.Username + " (salir)";
+                btnLogout.InnerText += user.Username + " (salir)";
             } else
             {
                 panelLogin.Visible = true;
@@ -161,26 +160,31 @@ namespace Ubiquicity
                     mnuSection.Items.Add(access[key]);
                 }
             }
-
-
         }
 
         private bool IsValidCapcha()
         {
             bool result = false;
             string captchaResponse = Request["g-recaptcha-response"];
-            string secretKey = ConfigurationManager.AppSettings["reCAPTCHA"];
-            string apiUrl = "https://www.google.com/recaptcha/api/siteverify?secret={0}&response={1}";
-            string requestUri = String.Format(apiUrl, secretKey, captchaResponse);
+            if (!String.IsNullOrEmpty(captchaResponse))
+            {
 
-            HttpWebRequest request = (HttpWebRequest) WebRequest.Create(requestUri);
-            WebResponse response = request.GetResponse();
-            StreamReader stream = new StreamReader(response.GetResponseStream());
+                string secretKey = ConfigurationManager.AppSettings["reCAPTCHA"];
+                string apiUrl = "https://www.google.com/recaptcha/api/siteverify?secret={0}&response={1}";
+                string requestUri = String.Format(apiUrl, secretKey, captchaResponse);
 
-            JObject jResponse = JObject.Parse(stream.ReadToEnd());
-            result = jResponse.Value<Boolean>("success");
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(requestUri);
+                WebResponse response = request.GetResponse();
+                StreamReader stream = new StreamReader(response.GetResponseStream());
 
-            return result;
+                JObject jResponse = JObject.Parse(stream.ReadToEnd());
+                result = jResponse.Value<Boolean>("success");
+
+                return result;
+            } else
+            {
+                return false;
+            }
         }
 
         private bool IsValid(string username, string password)
@@ -198,7 +202,7 @@ namespace Ubiquicity
         protected void btnLogout_Click(object sender, EventArgs e)
         {
             Session.Remove("SessionCreated");
-            Response.Redirect(Request.RawUrl);
+            Response.Redirect("index.aspx");
         }
 
         // Obtiene el componente para mostrar los alertas y lo expone como variable de la master page 

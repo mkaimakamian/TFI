@@ -9,8 +9,8 @@
             <div class="modal-content">
                 <UCmkc:UCFormRolePermission runat="server" ID="UCFormRolePermission" />
                 <div class="modal-footer">
-                    <asp:Button ID="ucModalLanguage_btnAccept" runat="server" CssClass="btn btn-primary" Text="Aceptar" OnClick="modalRolePermission_btnAcceptClick"/>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <asp:Button ID="ucModalLanguage_btnAccept" runat="server" CssClass="btn btn-primary btn-sm" Text="Aceptar" OnClick="modalRolePermission_btnAcceptClick"/>
+                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>
          </div>

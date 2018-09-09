@@ -29,8 +29,9 @@
    
 <form runat="server">
 <header>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
   <a class="navbar-brand" href="index.aspx">Ubiqui-city</a>
+    <%--<img class="navbar-brand" src="Resources/ucity.png" />--%>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -47,6 +48,9 @@
         <a class="nav-link" href="about.aspx">Nosotros</a>
         </li>
         <li class="nav-item">
+        <a class="nav-link" href="privacy.aspx">F.A.Qs.</a>
+        </li>
+        <li class="nav-item">
         <a class="nav-link" href="privacy.aspx">Términos y condiciones</a>
         </li>
         <li class="nav-item">
@@ -55,16 +59,14 @@
     </ul>
               <!-- Visibilidad controlada por backend -->
             <asp:Panel ID="panelLogin" runat="server">
-                <button type="button" class="btn btn-link" data-toggle="modal" data-target="#loginModal">
-                    <i class="fa fa-user"></i> Login</button>
+                <button type="button" class="btn btn-link" data-toggle="modal" data-target="#loginModal"><i class="fa fa-user"></i> Login</button>
                 |
                 <button type="button" class="btn btn-link" data-toggle="modal" data-target="#ModalRegisterWebUser">¡Soy nuevo!</button>
             </asp:Panel>
             <asp:Panel ID="panelAlreadyLogged" runat="server" >
-                <asp:Button ID="btnLogout" runat="server" CssClass="btn btn-link" Text="Logout"  OnClick="btnLogout_Click"/>
+                <button id="btnLogout" runat="server" class="btn btn-link" onserverclick="btnLogout_Click"></button>
             </asp:Panel>
       |<div id="google_translate_element" class="btn btn-link btn-sm"></div>
-            <%--<asp:DropDownList ID="dropLanguage" runat="server" CssClass="btn btn-link dropdown-toggle btn-sm"/>--%>
           
   </div>
 </nav>
@@ -87,11 +89,9 @@
     </div>
 </div>
 
-
-
 <!-- Modal Login -->
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="loginModalTitle">Login</h5>
@@ -101,16 +101,20 @@
       </div>
 
       <div class="modal-body">
-            <div class="form-group">
-                <label for="txtUser">Usuario</label>
-                <input id="txtUser" runat="server" type="text" class="form-control form-control-sm"  placeholder="Ingrese usuario">
+          <div class="text-center">
+            <img src="Resources/id-card.svg" width="128" height="128" />
+            <p>¡Es bueno verte nuevamente!</p>
+        </div>
+        <div class="form-group">
+            <label for="txtUser">Usuario</label>
+            <input id="txtUser" runat="server" type="text" class="form-control form-control-sm"  placeholder="Ingrese usuario">
+        </div>
+        <%--<div class="panel-collapse collapse show" id="passwordCollpase" >--%>
+            <div id="passwordCollpase" class="form-group collapse show" >
+            <label for="txtPassword">Password</label>
+                <input id="txtPassword" runat="server" type="password" class="form-control form-control-sm"  placeholder="Ingrese password">
             </div>
-            <%--<div class="panel-collapse collapse show" id="passwordCollpase" >--%>
-                <div id="passwordCollpase" class="form-group collapse show" >
-                <label for="txtPassword">Password</label>
-                    <input id="txtPassword" runat="server" type="password" class="form-control form-control-sm"  placeholder="Ingrese password">
-                </div>
-            <%--</div>--%>
+        <%--</div>--%>
       </div>
       <div class="modal-footer">
           <asp:Button ID="btnLogin" runat="server" CssClass="btn btn-primary btn-sm" OnClick="btnLogin_Click" Text="Login"/>
@@ -127,13 +131,16 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <UCmkc:UCModalTitle runat="server" id="UCModalTitle" title="Registro de usuario"  />
+                <div class="text-center mt-3">
+                    <img src="Resources/id-card.svg" width="128" height="128" />
+                    <p>Nos encanta que hayas decidido formar parte de la familia.</p>
+                </div>
                 <ucmkc:ucformnewmember runat="server" ID="FormRegisterWebUser" />
-                <div class="form-check">
+                <div class="form-check ml-3">
                     <input id="chekCondition" runat="server" class="form-check-input" type="checkbox" >
-                    <label class="form-check-label" for="gridCheck">Acepto los términos y condiciones</label>
+                    <label class="form-check-label" for="gridCheck">Acepto los <a href="privacy.aspx" target="_blank">términos y condiciones</a></label>
                 </div>
                 <div class="modal-footer">
-
                     <div class="g-recaptcha" data-sitekey="6LeaQG8UAAAAAJ6cES1CaqQA3C3Uh0FZBcjQOxdT"></div>
                     <asp:Button ID="btnRegister" runat="server" CssClass="btn btn-primary btn-sm" Text="Registrarse" OnClick="btnRegister_Click"/>
                     <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cerrar</button>

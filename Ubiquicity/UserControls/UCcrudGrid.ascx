@@ -1,20 +1,23 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UCcrudGrid.ascx.cs" Inherits="Ubiquicity.UserControls.UCcrudGrid" %>
  
-<div class="row align-items-center justify-content-center p">   
-<asp:Button ID="btnNewItem" runat="server" CssClass="btn btn-primary btn-sm" Text="Crear nuevo" OnClick="btnNewItem_Click" />
+<div class="row border p-1 m-1 rounded">   
+<button ID="btnNewItem" runat="server" class="btn btn-primary btn-sm" onserverclick="btnNewItem_Click">
+    <i class="fa fa-plus" aria-hidden="true"></i> Crear nuevo</button>
 </div>
+<div class="row border p-1 m-1 rounded">
 <asp:GridView AllowPaging="true" PageSize="10" OnPageIndexChanging="gvItem_PageIndexChanging"
     ID="gvItem" runat="server" OnRowCommand="gvItem_OnRowCommand" class="table table-bordered bs-table table-striped table-sm" >
     <Columns>
         <asp:TemplateField ShowHeader="False">
             <ItemTemplate>
-                <asp:Button ID="btnDelete" runat="server"  CssClass="btn btn-secondary btn-sm" CausesValidation="false" CommandName="DeleteItem" Text="Eliminar" CommandArgument='<%# Eval("id") %>'/>
+                <asp:LinkButton ID="btnDelete" runat="server"  CssClass="btn btn-secondary btn-sm" CausesValidation="false" CommandName="DeleteItem" Text="<i class='fa fa-minus' aria-hidden='true'></i> Eliminar" CommandArgument='<%# Eval("id") %>'/>
             </ItemTemplate>
         </asp:TemplateField>
         <asp:TemplateField ShowHeader="False">
             <ItemTemplate>
-                <asp:Button ID="btnEdit" runat="server"  CssClass="btn btn-secondary btn-sm" CausesValidation="false" CommandName="EditItem" Text="Editar" CommandArgument='<%# Eval("id") %>'/>
+                <asp:LinkButton ID="btnEdit" runat="server" CssClass="btn btn-secondary btn-sm" CausesValidation="false" CommandName="EditItem" Text="<i class='fa fa-pencil-square-o' aria-hidden='true'></i> Editar" CommandArgument='<%# Eval("id") %>'/>
             </ItemTemplate>
         </asp:TemplateField>
         </Columns>
 </asp:GridView>
+</div>

@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/front.Master" AutoEventWireup="true" CodeBehind="index.aspx.cs" Inherits="Ubiquicity.index" %>
 <asp:Content ID="Content3" ContentPlaceHolderID="contentHolder" runat="server">
-    <div class="row">
+    <%--<div class="row">
         <div class="col-md-9">
          
         </div>
@@ -25,7 +25,7 @@
             </div>
         </div>
 
-    </div>
+    </div>--%>
  <%--   <div class="row">
 		<div class="col-md-6">
 			<div class="carousel slide" id="carousel-746455">
@@ -116,4 +116,5 @@
             </div>
 		</div>
 	</div>--%>
+
 </asp:Content>

@@ -3,7 +3,12 @@
 <%@ Register Src="~/UserControls/UCcrudGrid.ascx" TagPrefix="UCmkc" TagName="UCcrudGrid" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="contentHolder" runat="server">
-    Agregar barra de título 
+    
+<%--    <div class="row bg-secondary">
+        <div class="col-1"><img src="Resources/id-card.svg" width="32" height="32" /> </div>
+        <div class="col-11">Gestión de usuarios</div> 
+    </div>--%>
+<span class="border p-1 m-1 rounded">Se supone que esto tiene un borde</span>
 
     <UCmkc:UCcrudGrid runat="server" id="UCcrudGrid" />
 
@@ -13,8 +18,8 @@
             <div class="modal-content">
                 <ucmkc:ucformnewmember runat="server" ID="UCFormNewMember" />
                 <div class="modal-footer">
-                    <asp:Button ID="ucModalNewMember_btnAccept" runat="server" CssClass="btn btn-primary" Text="Aceptar" OnClick="ucModalNewMember_btnAcceptClick"/>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <asp:Button ID="ucModalNewMember_btnAccept" runat="server" CssClass="btn btn-primary btn-sm" Text="Aceptar" OnClick="ucModalNewMember_btnAcceptClick"/>
+                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>
          </div>

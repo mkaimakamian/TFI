@@ -12,9 +12,9 @@
         XXXXXXX
       </div>
       <div class="modal-footer">
-        <asp:Button ID="btnMainAction" runat="server" CssClass="btn btn-primary"  Text="xxx" OnClick="btnMainAction_Click" Visible="false"/>
-        <asp:Button ID="btnSecondAction" runat="server" CssClass="btn btn-primary"  Text="xxx" OnClick="btnSecondAction_Click" Visible =" false"/>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <asp:Button ID="btnMainAction" runat="server" CssClass="btn btn-primary btn-sm"  Text="xxx" OnClick="btnMainAction_Click" Visible="false"/>
+        <asp:Button ID="btnSecondAction" runat="server" CssClass="btn btn-primary btn-sm"  Text="xxx" OnClick="btnSecondAction_Click" Visible =" false"/>
+        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
