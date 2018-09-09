@@ -5,8 +5,8 @@
     <i class="fa fa-plus" aria-hidden="true"></i> Crear nuevo</button>
 </div>
 <div class="row border p-1 m-1 rounded">
-<asp:GridView AllowPaging="true" PageSize="10" OnPageIndexChanging="gvItem_PageIndexChanging"
-    ID="gvItem" runat="server" OnRowCommand="gvItem_OnRowCommand" class="table table-bordered bs-table table-striped table-sm" >
+<asp:GridView ID="gvItem" runat="server" AllowPaging="true" PageSize="10" OnPageIndexChanging="gvItem_PageIndexChanging"
+     OnRowCommand="gvItem_OnRowCommand" class="table table-bordered bs-table table-striped table-sm" Width="100%" >
     <Columns>
         <asp:TemplateField ShowHeader="False">
             <ItemTemplate>

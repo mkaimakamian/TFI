@@ -84,12 +84,15 @@
     <Content Include="register_action.aspx" />
     <Content Include="Resources\banne01.jpg" />
     <Content Include="Resources\banner.jpg" />
-    <Content Include="Resources\id-card.svg" />
+    <Content Include="Resources\login.svg" />
     <Content Include="Resources\mapa01.jpg" />
     <Content Include="Resources\mapa02.jpg" />
     <Content Include="Resources\mapa03.jpg" />
-    <Content Include="Resources\pass.svg" />
+    <Content Include="Resources\note.svg" />
+    <Content Include="Resources\registro.svg" />
+    <Content Include="Resources\roles_permisos.svg" />
     <Content Include="Resources\ucity.png" />
+    <Content Include="Resources\usuarios_roles.svg" />
     <Content Include="role_manager.aspx" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
@@ -146,6 +149,7 @@
     <Content Include="shop.aspx" />
     <Content Include="UserControls\UCFormRolePermission.ascx" />
     <Content Include="UserControls\UCFormUserRole.ascx" />
+    <Content Include="UserControls\UCHeaderBackOffice.ascx" />
     <Content Include="user_manager.aspx" />
     <Content Include="UserControls\UCcrudGrid.ascx" />
     <Content Include="UserControls\UCFormLanguage.ascx" />
@@ -266,6 +270,13 @@
     </Compile>
     <Compile Include="UserControls\UCFormUserRole.ascx.designer.cs">
       <DependentUpon>UCFormUserRole.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCHeaderBackOffice.ascx.cs">
+      <DependentUpon>UCHeaderBackOffice.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCHeaderBackOffice.ascx.designer.cs">
+      <DependentUpon>UCHeaderBackOffice.ascx</DependentUpon>
     </Compile>
     <Compile Include="user_manager.aspx.cs">
       <DependentUpon>user_manager.aspx</DependentUpon>

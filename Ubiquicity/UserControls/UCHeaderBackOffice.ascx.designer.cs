@@ -7,45 +7,45 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Ubiquicity {
+namespace Ubiquicity.UserControls {
     
     
-    public partial class user {
+    public partial class UCHeaderBackOffice {
         
         /// <summary>
-        /// UCHeaderBackOffice control.
+        /// UCImage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ubiquicity.UserControls.UCHeaderBackOffice UCHeaderBackOffice;
+        protected global::System.Web.UI.HtmlControls.HtmlImage UCImage;
         
         /// <summary>
-        /// UCcrudGrid control.
+        /// UCTitle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ubiquicity.UserControls.UCcrudGrid UCcrudGrid;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl UCTitle;
         
         /// <summary>
-        /// UCFormNewMember control.
+        /// UCSubtitle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ubiquicity.UserControls.UCModalNewMember UCFormNewMember;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl UCSubtitle;
         
         /// <summary>
-        /// ucModalNewMember_btnAccept control.
+        /// UCContent control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ucModalNewMember_btnAccept;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl UCContent;
     }
 }

@@ -71,7 +71,7 @@
   </div>
 </nav>
 </header>
-  <nav>
+  <nav class="alert-info">
     <div>
    <asp:Menu ID="mnuSection" runat="server" MaximumDynamicDisplayLevels="2"  Orientation="Horizontal" 
             SkipLinkText=""
@@ -102,7 +102,7 @@
 
       <div class="modal-body">
           <div class="text-center">
-            <img src="Resources/id-card.svg" width="128" height="128" />
+            <img src="Resources/login.svg" width="128" height="128" />
             <p>¡Es bueno verte nuevamente!</p>
         </div>
         <div class="form-group">
@@ -132,7 +132,7 @@
             <div class="modal-content">
                 <UCmkc:UCModalTitle runat="server" id="UCModalTitle" title="Registro de usuario"  />
                 <div class="text-center mt-3">
-                    <img src="Resources/id-card.svg" width="128" height="128" />
+                    <img src="Resources/registro.svg" width="128" height="128" />
                     <p>Nos encanta que hayas decidido formar parte de la familia.</p>
                 </div>
                 <ucmkc:ucformnewmember runat="server" ID="FormRegisterWebUser" />
@@ -152,25 +152,27 @@
     <UCmkc:UCModalMessageBox runat="server" ID="customAlertBox" />
 </form>
 
-    <div class=" container ">
-            <nav class="navbar navbar-expand-sm fixed-bottom navbar-light bg-light mx-auto">
-                Footer :D
-                <%--<ul class="navbar-nav mr-auto mx-auto ">
-                    <li class="nav-item ">
-                        <a class="nav-link" href="QuienesSomos.aspx">¿Quiénes Somos?</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="Terminos.aspx">Términos y Condiciones</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="Politicas.aspx">Políticas de Privacidad</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="Contactenos.aspx">Contáctenos</a>
-                    </li>
-                </ul>--%>
-            </nav>
-        </div>
+<footer class="row">
+                <div class="col-12 px-0">
+                    <nav class="navbar navbar-expand-sm navbar-light bg-light mx-auto">
+
+                        <ul class="navbar-nav mr-auto mx-auto ">
+                            <li class="nav-item ">
+                                <a class="nav-link" href="QuienesSomos.aspx">Nosotros</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="Terminos.aspx">F.A.Qs.</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="Politicas.aspx">Términos y Condiciones</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="Contactenos.aspx">Contactate</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </footer>
 
     <script src="Scripts/popper.js"></script>
     <script src="Scripts/jquery-3.3.1.js"></script>

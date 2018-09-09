@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/front.Master" AutoEventWireup="true" CodeBehind="user_role_manager.aspx.cs" Inherits="Ubiquicity.user_role_manager" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="contentHolder" runat="server">
-    Relación usuario roles
+
+    <UCmkc:UCHeaderBackOffice runat="server" ID="UCHeaderBackOffice" Content="Asignarle a cada usuario los roles, los que representan un conjunto de permisos." Image="~/Resources/usuarios_roles.svg" Subtitle="En este apartado podrás..." Title="Asignación de roles a usuarios" />
     <UCmkc:UCcrudGrid runat="server" ID="UCcrudGrid" />
 
     <!-- Role / Permission form -->

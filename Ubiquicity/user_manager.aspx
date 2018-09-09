@@ -1,14 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/front.Master" AutoEventWireup="true" CodeBehind="user_manager.aspx.cs" Inherits="Ubiquicity.user" %>
 
-<%@ Register Src="~/UserControls/UCcrudGrid.ascx" TagPrefix="UCmkc" TagName="UCcrudGrid" %>
-
 <asp:Content ID="Content2" ContentPlaceHolderID="contentHolder" runat="server">
-    
-<%--    <div class="row bg-secondary">
-        <div class="col-1"><img src="Resources/id-card.svg" width="32" height="32" /> </div>
-        <div class="col-11">Gestión de usuarios</div> 
-    </div>--%>
-<span class="border p-1 m-1 rounded">Se supone que esto tiene un borde</span>
+ 
+<UCmkc:UCHeaderBackOffice runat="server" ID="UCHeaderBackOffice" Image="~/Resources/note.svg" Title="Gestión de usuarios" Subtitle="En este apartado podrás..." Content="Crear nuevos usuarios, editar sus datos y eliminar registros." />
 
     <UCmkc:UCcrudGrid runat="server" id="UCcrudGrid" />
 
