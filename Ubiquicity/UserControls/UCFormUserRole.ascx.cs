@@ -51,12 +51,12 @@ namespace Ubiquicity.UserControls
         public void FillForm(List<Role> granted, List<Role> toGrant)
         {
             lstPermissionGranted.DataSource = granted;
-            lstPermissionGranted.DataTextField = "Description";
+            lstPermissionGranted.DataTextField = "Name";
             lstPermissionGranted.DataValueField = "Id";
             lstPermissionGranted.DataBind();
 
             lstPermissionToGrant.DataSource = toGrant;
-            lstPermissionToGrant.DataTextField = "Description";
+            lstPermissionToGrant.DataTextField = "Name";
             lstPermissionToGrant.DataValueField = "Id";
             lstPermissionToGrant.DataBind();
         }

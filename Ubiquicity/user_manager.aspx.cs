@@ -9,27 +9,15 @@ using BL;
 
 namespace Ubiquicity
 {
-    public partial class user : System.Web.UI.Page
+    public partial class user : BaseManager
     {
-        private const int CREATE = 1;
-        private const int EDIT = 2;
 
-        protected void Page_Load(object sender, EventArgs e)
+        protected override void PageLoad(object sender, EventArgs e)
         {
-            //Se asignó al botón principal la tarea de ejecutar la eliminación
-            Alert.PerformMainAction += PerformDeleteItem;
-
-            UCcrudGrid.DeleteActionClick += AskForDelete;
-            UCcrudGrid.EditActionClick += ShowEditForm;
-            UCcrudGrid.NewActionClick += ShowNewForm;
-
-            if (!IsPostBack)
-            {
-                LoadGrid();
-            }
+            GridView = UCcrudGrid;
         }
 
-        private void LoadGrid()
+        protected override void LoadGridView()
         {
             try {
                 UserManager userManager = new UserManager();
@@ -41,7 +29,8 @@ namespace Ubiquicity
                 }
                 else
                 {
-                    UCcrudGrid.LoadGrid(users);
+                    GridView.LoadGrid(users);
+                    //GridView.TranslateAndShow(ColumnsToShowAndTranslate());
                 }
             }
             catch (Exception exception)
@@ -90,20 +79,20 @@ namespace Ubiquicity
                 Alert.Show("Exception", exception.Message);
             }
         }
-        
-        private void AskForDelete(object sender, EventArgs e)
+
+        protected override void AskForDelete(object sender, EventArgs e)
         {
             //Session["Ubiquicity_itemId"] = id;
             Alert.Show("Eliminar registro", "¿Está seguro de querer eliminar el registro?", "Si");
         }
 
-        private void PerformDeleteItem(object sender, EventArgs e)
+        protected override void PerformDeleteItem(object sender, EventArgs e)
         {
             if (Session["Ubiquicity_itemId"] != null)
             {
                 UserManager userManager = new UserManager();
                 userManager.Delete(Convert.ToInt32(Session["Ubiquicity_itemId"]));
-                LoadGrid();
+                LoadGridView();
                 Session.Remove("Ubiquicity_itemId");
             }
         }
@@ -113,19 +102,19 @@ namespace Ubiquicity
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ShowNewForm(object sender, EventArgs e)
+        protected override void ShowNewForm(object sender, EventArgs e)
         {
             UCFormNewMember.CleanForm();
             Session["Ubiquicity_action"] = CREATE;
             Page.ClientScript.RegisterStartupScript(this.GetType(), "openModalCreate", "window.onload = function() { $('#ucModalNewMember').modal('show'); }", true);
         }
-            
+
         /// <summary>
         /// Muestra el formulario para la edición de un usuario existente.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ShowEditForm(object sender, EventArgs e)
+        protected override void ShowEditForm(object sender, EventArgs e)
         {
             int id = Convert.ToInt32(Session["Ubiquicity_itemId"]);
 
@@ -145,10 +134,23 @@ namespace Ubiquicity
             }
         }
 
-        //Para simplificar un poco, recupero el componente a través de la propiedad
-        public UserControls.UCModalMessageBox Alert
+        /// <summary>
+        /// Se establece la traducción de las columnas que quieren ser mostradas.
+        /// </summary>
+        /// <returns></returns>
+        private Dictionary<string, string> ColumnsToShowAndTranslate()
         {
-            get { return ((front)Master).Alert; }
+            Dictionary<string, string> columns = new Dictionary<string, string>();
+            columns.Add("Active", "Activo");
+            columns.Add("Locked", "Bloqueado");
+            columns.Add("Username", "Usuario");
+            columns.Add("Firstname", "Nombre");
+            columns.Add("Lastname", "Apellido");
+            columns.Add("Mail", "Mail");
+            columns.Add("Lastupdate", "Atualizado");
+            columns.Add("Permission", "Roles");
+
+            return columns;
         }
     }
 }

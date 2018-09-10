@@ -26,8 +26,8 @@
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </head>
 <body>
-   
 <form runat="server">
+<div class="container-fluid">
 <header>
 <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
   <a class="navbar-brand" href="index.aspx">Ubiqui-city</a>
@@ -79,7 +79,7 @@
     </div>
   </nav>
 
-<div class="container-fluid">
+
     <div class="row">
         <div class="col-12 col-md-12">
             <asp:ContentPlaceHolder ID="contentHolder" runat="server">
@@ -87,7 +87,7 @@
             </asp:ContentPlaceHolder>         
         </div>
     </div>
-</div>
+
 
 <!-- Modal Login -->
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
@@ -150,29 +150,35 @@
     </div>
 
     <UCmkc:UCModalMessageBox runat="server" ID="customAlertBox" />
-</form>
 
 <footer class="row">
-                <div class="col-12 px-0">
-                    <nav class="navbar navbar-expand-sm navbar-light bg-light mx-auto">
+    <div class="col-12">
+        <nav class="navbar navbar-expand-sm navbar-light bg-light mx-auto">
 
-                        <ul class="navbar-nav mr-auto mx-auto ">
-                            <li class="nav-item ">
-                                <a class="nav-link" href="QuienesSomos.aspx">Nosotros</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="Terminos.aspx">F.A.Qs.</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="Politicas.aspx">Términos y Condiciones</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="Contactenos.aspx">Contactate</a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </footer>
+            <ul class="navbar-nav mr-auto mx-auto ">
+                <li class="nav-item ">
+                    <a class="nav-link" href="QuienesSomos.aspx">Nosotros</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="Terminos.aspx">F.A.Qs.</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="Politicas.aspx">Términos y Condiciones</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="Contactenos.aspx">Contactate</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</footer>
+
+</div>
+</form>
+
+
+
+
 
     <script src="Scripts/popper.js"></script>
     <script src="Scripts/jquery-3.3.1.js"></script>

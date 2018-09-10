@@ -84,6 +84,7 @@
     <Content Include="register_action.aspx" />
     <Content Include="Resources\banne01.jpg" />
     <Content Include="Resources\banner.jpg" />
+    <Content Include="Resources\log.svg" />
     <Content Include="Resources\login.svg" />
     <Content Include="Resources\mapa01.jpg" />
     <Content Include="Resources\mapa02.jpg" />

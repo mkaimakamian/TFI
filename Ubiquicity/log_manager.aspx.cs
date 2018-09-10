@@ -25,16 +25,16 @@ namespace Ubiquicity
         private void LoadGrid()
         {
             
-            try
-            {
+            //try
+            //{
                 LogManager logManager = new LogManager();
                 UCcrudGrid.LoadGrid(logManager.Get());
 
-            }
-            catch (Exception exception)
-            {
-
-            }
+            //}
+            //catch (Exception exception)
+            //{
+                
+            //}
 
         }
     }

@@ -13,9 +13,35 @@ namespace Ubiquicity.UserControls
         public event EventHandler EditActionClick;
         public event EventHandler DeleteActionClick;
         public event EventHandler NewActionClick;
+        private Dictionary<string, string> columnsToShow;
 
         protected void Page_Load(object sender, EventArgs e)
         {
+        }
+
+        /// <summary>
+        /// Settea el diccionario de las columnas cuyos encabezados se traducirán y a los que se acotará la 
+        /// grilla a través del método ShowTranslateColumns.
+        /// </summary>
+
+        ///// <summary>
+        ///// Deja visible únicamente las columnas definidas por la propiedad ColumnsToTranslateAndShow
+        ///// </summary>
+        public void TranslateAndShow(Dictionary<string, string> columns)
+        {
+            //TODO - REVISAR
+            //stand by
+            //foreach (DataControlField column in gvItem.Columns)
+            //{
+            //    if (columns.ContainsKey(column.HeaderText))
+            //    {
+            //        column.HeaderText = columnsToShow[column.HeaderText];
+            //    }
+            //    else if (!String.IsNullOrEmpty(column.HeaderText))
+            //    {
+            //        column.Visible = false;
+            //    }
+            //}
         }
 
         public void HideDeleteButton()
@@ -86,6 +112,21 @@ namespace Ubiquicity.UserControls
                 gvItem.UseAccessibleHeader = true;
                 gvItem.HeaderRow.TableSection = TableRowSection.TableHeader;
             }
+        }
+
+        protected void gvItem_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            //TODO - REVISAR
+            //stand by
+            //if (columnsToShow == null || columnsToShow.Count == 0) return;
+
+            //if (e.Row.RowType == DataControlRowType.Header)
+            //{
+            //    foreach (TableCell cell in e.Row.Cells)
+            //    {
+            //        if (columnsToShow.ContainsKey(cell.Text)) cell.Text = columnsToShow[cell.Text];
+            //    }
+            //}
         }
     }
 }

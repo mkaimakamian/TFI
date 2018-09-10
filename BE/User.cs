@@ -27,19 +27,6 @@ namespace BE
             Person = new PersonalInformation();
         }
 
-        public bool Active
-        {
-            get
-            {
-                return active;
-            }
-
-            set
-            {
-                active = value;
-            }
-        }
-
         public int Id
         {
             get
@@ -53,16 +40,16 @@ namespace BE
             }
         }
 
-        public string Lastname
+        public bool Active
         {
             get
             {
-                return lastname;
+                return active;
             }
 
             set
             {
-                lastname = value;
+                active = value;
             }
         }
 
@@ -79,16 +66,16 @@ namespace BE
             }
         }
 
-        public string Mail
+        public string Username
         {
             get
             {
-                return mail;
+                return username;
             }
 
             set
             {
-                mail = value;
+                username = value;
             }
         }
 
@@ -105,6 +92,34 @@ namespace BE
             }
         }
 
+        public string Lastname
+        {
+            get
+            {
+                return lastname;
+            }
+
+            set
+            {
+                lastname = value;
+            }
+        }
+
+
+
+        public string Mail
+        {
+            get
+            {
+                return mail;
+            }
+
+            set
+            {
+                mail = value;
+            }
+        }
+
         public string Password
         {
             get
@@ -115,19 +130,6 @@ namespace BE
             set
             {
                 password = value;
-            }
-        }
-
-        public string Username
-        {
-            get
-            {
-                return username;
-            }
-
-            set
-            {
-                username = value;
             }
         }
 

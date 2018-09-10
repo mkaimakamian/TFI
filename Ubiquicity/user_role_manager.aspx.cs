@@ -117,23 +117,6 @@ namespace Ubiquicity
             }
         }
 
-        //protected override void ShowNewForm(object sender, EventArgs e)
-        //{
-        //    UserManager userManager = new UserManager();
-        //    RoleManager roleManager = new RoleManager();
-        //    List<User> users = userManager.GetUserWithoutRole();
-        //    List<Role> unassignedRol = roleManager.Get();
-        //    List<Role> assignedRol = new List<Role>();
-
-        //    //Se guardan en sesión para su manejo posterior
-        //    KeepInSession("granted", assignedRol);
-        //    KeepInSession("toGrant", unassignedRol);
-
-        //    UCFormUserRole.InitializeForm(users, assignedRol, unassignedRol);
-        //    Session["Ubiquicity_action"] = CREATE;
-        //    ShowCrudForm();
-        //}
-
         /// <summary>
         /// Ejecuta el pasaje de la lista de los disponibles a los asignados.
         /// </summary>

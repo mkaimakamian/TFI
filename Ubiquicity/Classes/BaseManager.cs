@@ -15,7 +15,9 @@ namespace Ubiquicity
         private UserControls.UCcrudGrid gridView = null;
 
         protected virtual void PageLoad(object sender, EventArgs e) { }
+        protected virtual void PreLoadGridView() { }
         protected virtual void LoadGridView() { }
+        protected virtual void PosLoadGridView() { }
         protected virtual void PerformDeleteItem(object sender, EventArgs e) { }
         protected virtual void AskForDelete(object sender, EventArgs e) { }
         protected virtual void ShowEditForm(object sender, EventArgs e) { }
@@ -32,7 +34,9 @@ namespace Ubiquicity
             if (!IsPostBack)
             {
                 //Los hijos deben implementar este método para cargar la grilla
+                PreLoadGridView();
                 LoadGridView();
+                PosLoadGridView();
             }
 
             //Setteo de handlers que deben ser implementados por las clases hijo
