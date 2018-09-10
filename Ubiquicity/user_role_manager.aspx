@@ -5,8 +5,8 @@
     <UCmkc:UCcrudGrid runat="server" ID="UCcrudGrid" />
 
     <!-- Role / Permission form -->
-    <div class="modal fade" id="modalUserRole" tabindex="-1" role="dialog"  aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div id="modalUserRole" class="modal fade"  tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <UCmkc:UCFormUserRole runat="server" id="UCFormUserRole" />
                 <div class="modal-footer">

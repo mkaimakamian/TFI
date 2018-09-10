@@ -140,11 +140,12 @@ namespace Ubiquicity
         // TODO - revisar la performance (la idea es evitar duplicados)
         //Eventualmente crear un método que recupere los permisos directamente de la base, sin duplicados.
         private void LoadMenu(User user) {
-            if (user != null) {
+            if (user != null)
+            {
                 mnuSection.Items.Clear();
                 Dictionary<int, MenuItem> access = new Dictionary<int, MenuItem>();
 
-            foreach (Role role in user.Roles)
+                foreach (Role role in user.Roles)
                 {
                     foreach (Permission permission in role.Permissions)
                     {
@@ -155,7 +156,7 @@ namespace Ubiquicity
                     }
                 }
 
-            foreach (int key in access.Keys)
+                foreach (int key in access.Keys)
                 {
                     mnuSection.Items.Add(access[key]);
                 }
