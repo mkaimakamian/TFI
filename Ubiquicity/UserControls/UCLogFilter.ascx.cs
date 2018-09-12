@@ -69,6 +69,7 @@ namespace Ubiquicity.UserControls
 
             LogManager logManager = new LogManager();
             List<LogEntry> logs = logManager.Get(filters);
+            Gridview.ColumnsToShow = ColumnsToShowAndTranslate();
             Gridview.LoadGrid(logs);
         }
 
@@ -77,6 +78,23 @@ namespace Ubiquicity.UserControls
         {
             set { gridView = value; }
             get { return gridView; }
+        }
+
+        /// <summary>
+        /// Se establece la traducción de las columnas que quieren ser mostradas.
+        /// </summary>
+        /// <returns></returns>
+        private Dictionary<string, string> ColumnsToShowAndTranslate()
+        {
+            Dictionary<string, string> columns = new Dictionary<string, string>();
+            columns.Add("Action", "Acción");
+            columns.Add("Entity", "Entidad");
+            columns.Add("Username", "Usuario");
+            columns.Add("Loglevel", "Criticidad");
+            columns.Add("Description", "Descripción");
+            columns.Add("Created", "Fecha");
+
+            return columns;
         }
     }
 }

@@ -3,7 +3,8 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="contentHolder" runat="server">
  
 <UCmkc:UCHeaderBackOffice runat="server" ID="UCHeaderBackOffice" Image="~/Resources/note.svg" Title="Gestión de usuarios" Subtitle="En este apartado podrás..." Content="Crear nuevos usuarios, editar sus datos y eliminar registros." />
-
+<asp:UpdatePanel ID="UpdatePanel1" runat="server">
+<ContentTemplate>
     <UCmkc:UCcrudGrid runat="server" id="UCcrudGrid" />
 
     <!-- Register form -->
@@ -18,4 +19,6 @@
             </div>
          </div>
     </div>
+</ContentTemplate>
+</asp:UpdatePanel>
 </asp:Content>
