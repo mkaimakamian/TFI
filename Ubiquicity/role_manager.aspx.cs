@@ -25,6 +25,7 @@ namespace Ubiquicity
             {
                 RoleManager roleManager = new RoleManager();
                 List<Role> roles = roleManager.Get();
+                GridView.ColumnsToShow = ColumnsToShowAndTranslate();
                 GridView.LoadGrid(roles);
             }
             catch (Exception exception)
@@ -216,5 +217,18 @@ namespace Ubiquicity
         {
             return (List < Permission > ) Session[key];
         }
-    }   
+
+        /// <summary>
+        /// Se establece la traducción de las columnas que quieren ser mostradas.
+        /// </summary>
+        /// <returns></returns>
+        private Dictionary<string, string> ColumnsToShowAndTranslate()
+        {
+            Dictionary<string, string> columns = new Dictionary<string, string>();
+            columns.Add("Name", "Nombre");
+            columns.Add("Description", "Descripción");
+
+            return columns;
+        }
+    } 
 }

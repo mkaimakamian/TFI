@@ -148,7 +148,6 @@ namespace Ubiquicity
             columns.Add("Lastname", "Apellido");
             columns.Add("Mail", "Mail");
             columns.Add("Lastupdate", "Atualizado");
-            columns.Add("Permission", "Roles");
 
             return columns;
         }

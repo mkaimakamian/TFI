@@ -27,6 +27,7 @@ namespace Ubiquicity
             {
                 UserManager userManager = new UserManager();
                 List<User> users = userManager.Get();
+                GridView.ColumnsToShow = ColumnsToShowAndTranslate();
                 GridView.LoadGrid(users);
             }
             catch (Exception exception)
@@ -182,7 +183,22 @@ namespace Ubiquicity
         private List<Role> RetrieveFromSession(string key)
         {
             return (List<Role>)Session[key];
+        }
 
+        /// <summary>
+        /// Se establece la traducción de las columnas que quieren ser mostradas.
+        /// </summary>
+        /// <returns></returns>
+        private Dictionary<string, string> ColumnsToShowAndTranslate()
+        {
+            Dictionary<string, string> columns = new Dictionary<string, string>();
+            columns.Add("Username", "Usuario");
+            columns.Add("Name", "Nombre");
+            columns.Add("Lastname", "Apellido");
+            columns.Add("Mail", "Mail");
+            columns.Add("Permission", "Roles");
+
+            return columns;
         }
     }
 }
