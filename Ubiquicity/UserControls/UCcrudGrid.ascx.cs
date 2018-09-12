@@ -13,7 +13,7 @@ namespace Ubiquicity.UserControls
         public event EventHandler EditActionClick;
         public event EventHandler DeleteActionClick;
         public event EventHandler NewActionClick;
-        private Dictionary<string, string> columnsToShow;
+        //private Dictionary<string, string> columnsToShow;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -23,27 +23,12 @@ namespace Ubiquicity.UserControls
         /// Settea el diccionario de las columnas cuyos encabezados se traducirán y a los que se acotará la 
         /// grilla a través del método ShowTranslateColumns.
         /// </summary>
-
-        ///// <summary>
-        ///// Deja visible únicamente las columnas definidas por la propiedad ColumnsToTranslateAndShow
-        ///// </summary>
-        public void TranslateAndShow(Dictionary<string, string> columns)
+        public Dictionary<string, string> ColumnsToShow
         {
-            //TODO - REVISAR
-            //stand by
-            //foreach (DataControlField column in gvItem.Columns)
-            //{
-            //    if (columns.ContainsKey(column.HeaderText))
-            //    {
-            //        column.HeaderText = columnsToShow[column.HeaderText];
-            //    }
-            //    else if (!String.IsNullOrEmpty(column.HeaderText))
-            //    {
-            //        column.Visible = false;
-            //    }
-            //}
+            set { Session["gvItemcolumnsToShow"] = value; }
+            get { return (Dictionary < string, string> ) Session["gvItemcolumnsToShow"]; }
         }
-
+        
         public void HideDeleteButton()
         {
             gvItem.Columns[0].Visible = false;
@@ -51,6 +36,7 @@ namespace Ubiquicity.UserControls
 
         public void HideNewButton()
         {
+            divBtnNew.Visible = false;
             btnNewItem.Visible = false;
         }
 
@@ -114,19 +100,37 @@ namespace Ubiquicity.UserControls
             }
         }
 
+        private HashSet<Int32> toRemove = new HashSet<int>();
         protected void gvItem_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            //TODO - REVISAR
-            //stand by
-            //if (columnsToShow == null || columnsToShow.Count == 0) return;
+                        
+            if (ColumnsToShow == null || ColumnsToShow.Count == 0) return;
 
-            //if (e.Row.RowType == DataControlRowType.Header)
-            //{
-            //    foreach (TableCell cell in e.Row.Cells)
-            //    {
-            //        if (columnsToShow.ContainsKey(cell.Text)) cell.Text = columnsToShow[cell.Text];
-            //    }
-            //}
+            for (int i = 0; i < e.Row.Cells.Count; ++i)
+            {
+                TableCell cell = e.Row.Cells[i];
+
+                // En lo particular, si es el encabeado, traduzco
+                if (e.Row.RowType == DataControlRowType.Header)
+                {
+                    if (ColumnsToShow.ContainsKey(cell.Text))
+                    {
+                        cell.Text = ColumnsToShow[cell.Text];
+                    }
+                    else if (cell.Text != "&nbsp;") // las dos columnas templates de eliminación y edición
+                    {
+                        //Si no se traduce, entonces no interesa y debe ser eliminado, razón por la que guardo los indices de columna
+                        toRemove.Add(i);
+                    }
+                }
+
+                // Las celdas pertenecientes a columnas no mostrables, se ocultan.
+                if (toRemove.Contains(i))
+                {
+                    cell.Visible = false;
+                }
+            }
+            
         }
     }
 }

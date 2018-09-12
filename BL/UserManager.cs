@@ -88,8 +88,8 @@ namespace BL
             if (!IsValidForSave(user)) return false;
 
             user.Lastupdate = DateTime.Now;
-            user.Locked = true;
-            user.Active = false;
+            //user.Locked = true;
+            //user.Active = false;
 
             if (!mapper.Edit(user))
             {

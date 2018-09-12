@@ -29,8 +29,8 @@ namespace Ubiquicity
                 }
                 else
                 {
+                    GridView.ColumnsToShow = ColumnsToShowAndTranslate();
                     GridView.LoadGrid(users);
-                    //GridView.TranslateAndShow(ColumnsToShowAndTranslate());
                 }
             }
             catch (Exception exception)
@@ -144,7 +144,7 @@ namespace Ubiquicity
             columns.Add("Active", "Activo");
             columns.Add("Locked", "Bloqueado");
             columns.Add("Username", "Usuario");
-            columns.Add("Firstname", "Nombre");
+            columns.Add("Name", "Nombre");
             columns.Add("Lastname", "Apellido");
             columns.Add("Mail", "Mail");
             columns.Add("Lastupdate", "Atualizado");

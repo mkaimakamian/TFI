@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UCcrudGrid.ascx.cs" Inherits="Ubiquicity.UserControls.UCcrudGrid" %>
  
-<div class="row border p-1 m-1 rounded">   
+<div id="divBtnNew" runat="server" class="row border p-1 m-1 rounded" >   
 <button ID="btnNewItem" runat="server" class="btn btn-primary btn-sm" onserverclick="btnNewItem_Click">
     <i class="fa fa-plus" aria-hidden="true"></i> Crear nuevo</button>
 </div>
