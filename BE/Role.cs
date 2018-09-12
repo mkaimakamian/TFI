@@ -26,19 +26,6 @@ namespace BE
             }
         }
 
-        public string Description
-        {
-            get
-            {
-                return description;
-            }
-
-            set
-            {
-                description = value;
-            }
-        }
-
         public string Name
         {
             get
@@ -49,6 +36,19 @@ namespace BE
             set
             {
                 name = value;
+            }
+        }
+
+        public string Description
+        {
+            get
+            {
+                return description;
+            }
+
+            set
+            {
+                description = value;
             }
         }
 

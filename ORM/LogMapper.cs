@@ -26,11 +26,41 @@ namespace ORM
             return dal.Write(table, "spWriteLog") > 0;
         }
 
+        /// <summary>
+        /// Recupera todos los registros de la bitácora.
+        /// </summary>
+        /// <returns></returns>
         public List<LogEntry> Get()
         {
             Dal dal = new Dal();
             Hashtable table = new Hashtable();
             List<LogEntry> logEntries = null;
+
+            DataSet result = dal.Read(table, "spReadLog");
+
+            if (result != null && result.Tables[0].Rows.Count > 0)
+            {
+                logEntries = new List<LogEntry>();
+
+                foreach (DataRow data in result.Tables[0].Rows)
+                {
+                    logEntries.Add(ConvertToModel(data));
+                }
+            }
+
+            return logEntries;
+        }
+
+        public List<LogEntry> Get(List<QueryFilter> filters)
+        {
+            Dal dal = new Dal();
+            Hashtable table = new Hashtable();
+            List<LogEntry> logEntries = null;
+
+            foreach(QueryFilter qf in filters)
+            {
+                table.Add(qf.Key, qf.Value);
+            }
 
             DataSet result = dal.Read(table, "spReadLog");
 

@@ -70,6 +70,12 @@ namespace BL
             return logMapper.Get();
         }
 
+        public List<LogEntry> Get(List<QueryFilter> filters)
+        {
+            LogMapper logMapper = new LogMapper();
+            return logMapper.Get(filters);
+        }
+
         //private LogBM ConvertIntoBusinessModel(LogDTO log)
         //{
         //    LogBM result = new LogBM();
@@ -82,7 +88,7 @@ namespace BL
         //    return result;
         //}
 
-      
+
         //private List<LogBM> ConvertIntoBusinessModel(List<LogDTO> logs)
         //{
         //    List<LogBM> result = new List<LogBM>();

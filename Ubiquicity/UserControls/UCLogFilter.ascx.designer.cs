@@ -10,60 +10,78 @@
 namespace Ubiquicity.UserControls {
     
     
-    public partial class UCFormUserRole {
+    public partial class UCLogFilter {
         
         /// <summary>
-        /// UpdatePanel1 control.
+        /// inputLogLevel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText inputLogLevel;
         
         /// <summary>
-        /// lblUserName control.
+        /// inputAction control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblUserName;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText inputAction;
         
         /// <summary>
-        /// lstPermissionGranted control.
+        /// inputDescription control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox lstPermissionGranted;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText inputDescription;
         
         /// <summary>
-        /// btnUngrant control.
+        /// inputEntity control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnUngrant;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText inputEntity;
         
         /// <summary>
-        /// btnGrant control.
+        /// dateSince control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnGrant;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText dateSince;
         
         /// <summary>
-        /// lstPermissionToGrant control.
+        /// dateUntil control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox lstPermissionToGrant;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText dateUntil;
+        
+        /// <summary>
+        /// inputUser control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText inputUser;
+        
+        /// <summary>
+        /// btnSearch control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnSearch;
     }
 }

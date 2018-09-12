@@ -45,6 +45,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AjaxControlToolkit, Version=18.1.0.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <HintPath>..\packages\AjaxControlToolkit.18.1.0\lib\net40\AjaxControlToolkit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -82,13 +86,11 @@
     <Content Include="privacy.aspx" />
     <Content Include="recovery_action.aspx" />
     <Content Include="register_action.aspx" />
-    <Content Include="Resources\banne01.jpg" />
-    <Content Include="Resources\banner.jpg" />
+    <Content Include="Resources\document.svg" />
+    <Content Include="Resources\folder.svg" />
     <Content Include="Resources\log.svg" />
     <Content Include="Resources\login.svg" />
-    <Content Include="Resources\mapa01.jpg" />
-    <Content Include="Resources\mapa02.jpg" />
-    <Content Include="Resources\mapa03.jpg" />
+    <Content Include="Resources\map.svg" />
     <Content Include="Resources\note.svg" />
     <Content Include="Resources\registro.svg" />
     <Content Include="Resources\roles_permisos.svg" />
@@ -151,6 +153,7 @@
     <Content Include="UserControls\UCFormRolePermission.ascx" />
     <Content Include="UserControls\UCFormUserRole.ascx" />
     <Content Include="UserControls\UCHeaderBackOffice.ascx" />
+    <Content Include="UserControls\UCLogFilter.ascx" />
     <Content Include="user_manager.aspx" />
     <Content Include="UserControls\UCcrudGrid.ascx" />
     <Content Include="UserControls\UCFormLanguage.ascx" />
@@ -278,6 +281,13 @@
     </Compile>
     <Compile Include="UserControls\UCHeaderBackOffice.ascx.designer.cs">
       <DependentUpon>UCHeaderBackOffice.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCLogFilter.ascx.cs">
+      <DependentUpon>UCLogFilter.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCLogFilter.ascx.designer.cs">
+      <DependentUpon>UCLogFilter.ascx</DependentUpon>
     </Compile>
     <Compile Include="user_manager.aspx.cs">
       <DependentUpon>user_manager.aspx</DependentUpon>

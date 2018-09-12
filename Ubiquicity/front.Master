@@ -29,6 +29,8 @@
 
 <body>
     <form runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server" EnableScriptGlobalization="true" EnableScriptLocalization="true">
+            </asp:ScriptManager>
         <div class="container-fluid">
 
             <nav class="navbar navbar-expand-md fixed-top navbar-light bg-light shadow-sm">
@@ -107,16 +109,14 @@
                         <label for="txtUser">Usuario</label>
                         <input id="txtUser" runat="server" type="text" class="form-control form-control-sm"  placeholder="Ingrese usuario">
                     </div>
-                    <%--<div class="panel-collapse collapse show" id="passwordCollpase" >--%>
                         <div id="passwordCollpase" class="form-group collapse show" >
                         <label for="txtPassword">Password</label>
                             <input id="txtPassword" runat="server" type="password" class="form-control form-control-sm"  placeholder="Ingrese password">
                         </div>
-                    <%--</div>--%>
                   </div>
                   <div class="modal-footer">
                       <asp:Button ID="btnLogin" runat="server" CssClass="btn btn-primary btn-sm" OnClick="btnLogin_Click" Text="Login"/>
-                      <button type="button" class="btn btn-primary btn-sm" data-toggle="collapse" data-target="#passwordCollpase" >Olvidé contraseña</button>
+                      <button type="button" class="btn btn-primary btn-sm disabled" >Olvidé contraseña</button>
                       <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cerrar</button>
                   </div>
 
@@ -157,16 +157,22 @@
 
                         <ul class="navbar-nav mr-auto mx-auto ">
                             <li class="nav-item ">
-                                <a class="nav-link" href="QuienesSomos.aspx">Nosotros</a>
+                                <a class="nav-link" href="shop.aspx">Catálogo</a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link" href="newsletter.aspx">Newsletter</a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link" href="about.aspx">Nosotros</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="Terminos.aspx">F.A.Qs.</a>
+                                <a class="nav-link" href="faq.aspx">F.A.Qs.</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="Politicas.aspx">Términos y Condiciones</a>
+                                <a class="nav-link" href="privacy.aspx">Términos y Condiciones</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="Contactenos.aspx">Contactate</a>
+                                <a class="nav-link" href="contact.aspx">Contactate</a>
                             </li>
                         </ul>
                     </nav>
@@ -174,9 +180,12 @@
             </footer>
 
         </div>
+
     </form>
     <script src="Scripts/popper.js"></script>
     <script src="Scripts/jquery-3.3.1.js"></script>
     <script src="Scripts/bootstrap.js"></script>
+
+  
 </body>
 </html>

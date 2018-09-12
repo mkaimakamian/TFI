@@ -10,12 +10,12 @@
     <Columns>
         <asp:TemplateField ShowHeader="False">
             <ItemTemplate>
-                <asp:LinkButton ID="btnDelete" runat="server"  CssClass="btn btn-secondary btn-sm" CausesValidation="false" CommandName="DeleteItem" Text="<i class='fa fa-minus' aria-hidden='true'></i> Eliminar" CommandArgument='<%# Eval("id") %>'/>
+                <asp:LinkButton ID="btnDelete" runat="server"  CssClass="btn btn-danger btn-sm" CausesValidation="false" CommandName="DeleteItem" Text="<i class='fa fa-minus' aria-hidden='true'></i> Eliminar" CommandArgument='<%# Eval("id") %>'/>
             </ItemTemplate>
         </asp:TemplateField>
         <asp:TemplateField ShowHeader="False">
             <ItemTemplate>
-                <asp:LinkButton ID="btnEdit" runat="server" CssClass="btn btn-secondary btn-sm" CausesValidation="false" CommandName="EditItem" Text="<i class='fa fa-pencil-square-o' aria-hidden='true'></i> Editar" CommandArgument='<%# Eval("id") %>'/>
+                <asp:LinkButton ID="btnEdit" runat="server" CssClass="btn btn-warning btn-sm" CausesValidation="false" CommandName="EditItem" Text="<i class='fa fa-pencil-square-o' aria-hidden='true'></i> Editar" CommandArgument='<%# Eval("id") %>'/>
             </ItemTemplate>
         </asp:TemplateField>
         </Columns>

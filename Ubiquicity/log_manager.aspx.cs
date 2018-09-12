@@ -17,6 +17,7 @@ namespace Ubiquicity
                 LoadGrid();
             }
 
+            UCLogFilter.Gridview = UCcrudGrid;
             UCcrudGrid.HideDeleteButton();
             UCcrudGrid.HideEditButton();
             UCcrudGrid.HideNewButton();
@@ -24,18 +25,8 @@ namespace Ubiquicity
 
         private void LoadGrid()
         {
-            
-            //try
-            //{
-                LogManager logManager = new LogManager();
-                UCcrudGrid.LoadGrid(logManager.Get());
-
-            //}
-            //catch (Exception exception)
-            //{
-                
-            //}
-
+                //LogManager logManager = new LogManager();
+                //UCcrudGrid.LoadGrid(logManager.Get());
         }
     }
 }
