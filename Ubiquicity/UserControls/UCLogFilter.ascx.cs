@@ -90,7 +90,7 @@ namespace Ubiquicity.UserControls
             columns.Add("Action", "Acción");
             columns.Add("Entity", "Entidad");
             columns.Add("Username", "Usuario");
-            columns.Add("Loglevel", "Criticidad");
+            columns.Add("LogLevel", "Criticidad");
             columns.Add("Description", "Descripción");
             columns.Add("Created", "Fecha");
 

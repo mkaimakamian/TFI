@@ -19,6 +19,8 @@ namespace Ubiquicity
        
         protected void Page_Load(object sender, EventArgs e)
         {
+            //Session["SessionCreated"]
+
             if (!IsPostBack) {
                     // Todo - ver si en vez de usuario es Session
                     User user = (User) Session["SessionCreated"];

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Text;
 using System.Security.Cryptography;
+using BE;
+using System.Collections.Generic;
 
 namespace Helper
 {
@@ -41,6 +43,30 @@ namespace Helper
         {
             string hash = SecurityHelper.Encrypt(seed);
             return hash == hashedValue;
+        }
+
+
+        /// <summary>
+        /// Devuelve true si posee el permiso para la página; false en otro caso.
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="page"></param>
+        /// <returns></returns>
+        public static bool HasPermission(User user, string page)
+        {
+            bool found = false;
+            page = page.Substring(1);
+            for (int i = 0; i < user.Roles.Count && !found; ++i)
+            {
+                List<Permission> permissions = user.Roles[i].Permissions;
+
+                for (int p = 0; p < permissions.Count && !found; ++p)
+                {
+                    found = permissions[p].UrlAccess == page;
+                }
+            }
+
+            return found;
         }
     }
 }

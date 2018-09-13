@@ -34,7 +34,7 @@ namespace ORM
             Hashtable table = new Hashtable();
 
             table.Add("@roleId", id);
-            return dal.Write(table, "spDeleteRolePermission") > 0;
+            return dal.Write(table, "spDeleteRolePermission") > -1;
         }
 
         /// <summary>

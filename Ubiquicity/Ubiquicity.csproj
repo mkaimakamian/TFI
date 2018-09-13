@@ -77,15 +77,26 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="about.aspx" />
+    <Content Include="approval_manager.aspx" />
+    <Content Include="backup_manager.aspx" />
+    <Content Include="business_manager.aspx" />
     <Content Include="contact.aspx" />
+    <Content Include="credit_manager.aspx" />
+    <Content Include="dashboard.aspx" />
     <Content Include="faq.aspx" />
     <Content Include="language_manager.aspx" />
     <Content Include="log_manager.aspx" />
+    <Content Include="map_manager.aspx" />
+    <Content Include="marketing_manager.aspx" />
     <Content Include="newsletter.aspx" />
+    <Content Include="news_manager.aspx" />
     <Content Include="packages.config" />
     <Content Include="front.Master" />
+    <Content Include="password_recovery.aspx" />
     <Content Include="privacy.aspx" />
+    <Content Include="promotion_manager.aspx" />
     <Content Include="recovery_action.aspx" />
+    <Content Include="redeem_manager.aspx" />
     <Content Include="register_action.aspx" />
     <Content Include="Resources\document.svg" />
     <Content Include="Resources\folder.svg" />
@@ -151,6 +162,7 @@
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="shop.aspx" />
+    <Content Include="suscription_manager.aspx" />
     <Content Include="UserControls\UCFormRolePermission.ascx" />
     <Content Include="UserControls\UCFormUserRole.ascx" />
     <Content Include="UserControls\UCHeaderBackOffice.ascx" />
@@ -161,6 +173,7 @@
     <Content Include="UserControls\UCModalMessageBox.ascx" />
     <Content Include="UserControls\UCFormNewMember.ascx" />
     <Content Include="UserControls\UCModalTitle.ascx" />
+    <Content Include="user_profile.aspx" />
     <Content Include="user_role_manager.aspx" />
     <Content Include="Web.config" />
     <Content Include="Scripts\umd\popper.min.js.map" />
@@ -181,6 +194,27 @@
     <Compile Include="about.aspx.designer.cs">
       <DependentUpon>about.aspx</DependentUpon>
     </Compile>
+    <Compile Include="approval_manager.aspx.cs">
+      <DependentUpon>approval_manager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="approval_manager.aspx.designer.cs">
+      <DependentUpon>approval_manager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="backup_manager.aspx.cs">
+      <DependentUpon>backup_manager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="backup_manager.aspx.designer.cs">
+      <DependentUpon>backup_manager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="business_manager.aspx.cs">
+      <DependentUpon>business_manager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="business_manager.aspx.designer.cs">
+      <DependentUpon>business_manager.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Classes\BaseManager.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -190,6 +224,20 @@
     </Compile>
     <Compile Include="contact.aspx.designer.cs">
       <DependentUpon>contact.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="credit_manager.aspx.cs">
+      <DependentUpon>credit_manager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="credit_manager.aspx.designer.cs">
+      <DependentUpon>credit_manager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="dashboard.aspx.cs">
+      <DependentUpon>dashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="dashboard.aspx.designer.cs">
+      <DependentUpon>dashboard.aspx</DependentUpon>
     </Compile>
     <Compile Include="faq.aspx.cs">
       <DependentUpon>faq.aspx</DependentUpon>
@@ -226,12 +274,40 @@
     <Compile Include="log_manager.aspx.designer.cs">
       <DependentUpon>log_manager.aspx</DependentUpon>
     </Compile>
+    <Compile Include="map_manager.aspx.cs">
+      <DependentUpon>map_manager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="map_manager.aspx.designer.cs">
+      <DependentUpon>map_manager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="marketing_manager.aspx.cs">
+      <DependentUpon>marketing_manager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="marketing_manager.aspx.designer.cs">
+      <DependentUpon>marketing_manager.aspx</DependentUpon>
+    </Compile>
     <Compile Include="newsletter.aspx.cs">
       <DependentUpon>newsletter.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="newsletter.aspx.designer.cs">
       <DependentUpon>newsletter.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="news_manager.aspx.cs">
+      <DependentUpon>news_manager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="news_manager.aspx.designer.cs">
+      <DependentUpon>news_manager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="password_recovery.aspx.cs">
+      <DependentUpon>password_recovery.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="password_recovery.aspx.designer.cs">
+      <DependentUpon>password_recovery.aspx</DependentUpon>
     </Compile>
     <Compile Include="privacy.aspx.cs">
       <DependentUpon>privacy.aspx</DependentUpon>
@@ -240,6 +316,13 @@
     <Compile Include="privacy.aspx.designer.cs">
       <DependentUpon>privacy.aspx</DependentUpon>
     </Compile>
+    <Compile Include="promotion_manager.aspx.cs">
+      <DependentUpon>promotion_manager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="promotion_manager.aspx.designer.cs">
+      <DependentUpon>promotion_manager.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="recovery_action.aspx.cs">
       <DependentUpon>recovery_action.aspx</DependentUpon>
@@ -247,6 +330,13 @@
     </Compile>
     <Compile Include="recovery_action.aspx.designer.cs">
       <DependentUpon>recovery_action.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="redeem_manager.aspx.cs">
+      <DependentUpon>redeem_manager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="redeem_manager.aspx.designer.cs">
+      <DependentUpon>redeem_manager.aspx</DependentUpon>
     </Compile>
     <Compile Include="register_action.aspx.cs">
       <DependentUpon>register_action.aspx</DependentUpon>
@@ -268,6 +358,13 @@
     </Compile>
     <Compile Include="shop.aspx.designer.cs">
       <DependentUpon>shop.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="suscription_manager.aspx.cs">
+      <DependentUpon>suscription_manager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="suscription_manager.aspx.designer.cs">
+      <DependentUpon>suscription_manager.aspx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\UCFormRolePermission.ascx.cs">
       <DependentUpon>UCFormRolePermission.ascx</DependentUpon>
@@ -338,6 +435,13 @@
     </Compile>
     <Compile Include="UserControls\UCModalTitle.ascx.designer.cs">
       <DependentUpon>UCModalTitle.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="user_profile.aspx.cs">
+      <DependentUpon>user_profile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="user_profile.aspx.designer.cs">
+      <DependentUpon>user_profile.aspx</DependentUpon>
     </Compile>
     <Compile Include="user_role_manager.aspx.cs">
       <DependentUpon>user_role_manager.aspx</DependentUpon>

@@ -8,25 +8,16 @@ using BL;
 
 namespace Ubiquicity
 {
-    public partial class logManager : System.Web.UI.Page
+    public partial class logManager : BaseManager
     {
-        protected void Page_Load(object sender, EventArgs e)
+        protected override void PageLoad(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-                LoadGrid();
-            }
-
             UCLogFilter.Gridview = UCcrudGrid;
             UCcrudGrid.HideDeleteButton();
             UCcrudGrid.HideEditButton();
             UCcrudGrid.HideNewButton();
         }
 
-        private void LoadGrid()
-        {
-                //LogManager logManager = new LogManager();
-                //UCcrudGrid.LoadGrid(logManager.Get());
-        }
+        
     }
 }
