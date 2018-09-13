@@ -132,7 +132,7 @@ namespace ORM
 
             table.Add("@id", user.Id);
             table.Add("@username", user.Username);
-            table.Add("@password", user.Password);
+            //table.Add("@password", user.Password);
             table.Add("@mail", user.Mail);
             table.Add("@active", user.Active);
             table.Add("@locked", user.Locked);

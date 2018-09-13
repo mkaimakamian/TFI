@@ -338,7 +338,7 @@ namespace BL
                 string errorDescription = "Debe completarse el nombre del rol.";
                 log.AddLogCritical("IsValid", errorDescription, this);
                 AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
-                isValid = false;
+                isValid = isValid & false;
             }
 
             if(role.Permissions.Count == 0)
@@ -346,7 +346,7 @@ namespace BL
                 string errorDescription = "El rol debe estar asociado a almenos un permiso.";
                 log.AddLogCritical("IsValid", errorDescription, this);
                 AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
-                isValid = false;
+                isValid = isValid & false;
             }
 
             return isValid;

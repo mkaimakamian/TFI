@@ -49,6 +49,15 @@ namespace Ubiquicity.UserControls {
         protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl mailInput;
         
         /// <summary>
+        /// passwordControls control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl passwordControls;
+        
+        /// <summary>
         /// passwordInput control.
         /// </summary>
         /// <remarks>

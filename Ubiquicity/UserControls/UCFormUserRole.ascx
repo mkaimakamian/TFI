@@ -4,7 +4,8 @@
 <ContentTemplate>
     <div class="row justify-content-center">
         <div class="col-12">
-            <asp:Label ID="lblUserName" runat="server" />
+            <asp:Label ID="lblUserName" runat="server" CssClass="font-weight-bold" />
+            <br />
         </div>
         <div class="col-5 form-group">
             <label for="lstPermissionGranted">Obtenidos</label>

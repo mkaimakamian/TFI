@@ -51,7 +51,7 @@
                         <a class="nav-link" href="about.aspx">Nosotros</a>
                         </li>
                         <li class="nav-item">
-                        <a class="nav-link" href="privacy.aspx">F.A.Qs.</a>
+                        <a class="nav-link" href="faq.aspx">F.A.Qs.</a>
                         </li>
                         <li class="nav-item">
                         <a class="nav-link" href="privacy.aspx">Términos y condiciones</a>

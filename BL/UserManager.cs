@@ -85,9 +85,11 @@ namespace BL
         {
             UserMapper mapper = new UserMapper();
             
-            if (!IsValidForSave(user)) return false;
+            if (!IsValidForEdit(user)) return false;
 
             user.Lastupdate = DateTime.Now;
+
+            //Deberían ser opciones que el administrador pudiera seleccionar
             //user.Locked = true;
             //user.Active = false;
 
@@ -171,18 +173,6 @@ namespace BL
             return user;
         }
 
-        //public User Get(string username)
-        //{
-
-        //    return null;
-        //}
-
-        //public List<User> Get(List<QueryFilter> queryFilter)
-        //{
-
-        //    return null;
-        //}
-
         /// <summary>
         /// Creates a user for backoffice.
         /// </summary>
@@ -216,9 +206,6 @@ namespace BL
             user.Lastupdate = DateTime.Now;
             user.Locked = true;
             user.Active = false;
-
-            
-
 
             // Asignar permisos de usuario web (recién cuando se loguea)
             if (mapper.Save(user))
@@ -290,7 +277,7 @@ namespace BL
         }
 
         //TODO - agregar en ea
-        private bool IsValidForSave(User user)
+        private bool IsValidForEdit(User user)
         {
             bool isValid = true;
 
@@ -307,7 +294,7 @@ namespace BL
                 string errorDescription = "Debe completarse el apellido.";
                 log.AddLogWarn("IsValidForSave", errorDescription, this);
                 AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
-                isValid = false;
+                isValid = isValid & false;
             }
 
             if (String.IsNullOrEmpty(user.Username))
@@ -315,7 +302,7 @@ namespace BL
                 string errorDescription = "Debe completarse el usuario.";
                 log.AddLogWarn("IsValidForSave", errorDescription, this);
                 AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
-                isValid = false;
+                isValid = isValid & false;
             }
 
             if (String.IsNullOrEmpty(user.Mail))
@@ -323,20 +310,27 @@ namespace BL
                 string errorDescription = "Debe completarse el correo electrónico.";
                 log.AddLogWarn("IsValidForSave", errorDescription, this);
                 AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
-                isValid = false;
-            }
-
-            if (String.IsNullOrEmpty(user.Password))
-            {
-                string errorDescription = "Debe completarse el password.";
-                log.AddLogWarn("IsValidForSave", errorDescription, this);
-                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
-                isValid = false;
+                isValid = isValid & false;
             }
 
             return isValid;
         }
 
-       
+
+        //TODO - agregar en ea
+        private bool IsValidForSave(User user)
+        {
+            bool isValid = IsValidForEdit(user);
+            
+            if (String.IsNullOrEmpty(user.Password))
+            {
+                string errorDescription = "Debe completarse el password.";
+                log.AddLogWarn("IsValidForSave", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
+                isValid = isValid & false;
+            }
+
+            return isValid;
+        }
     }
 }

@@ -32,14 +32,16 @@ namespace BL
 
             if (!IsValidAfterRetrieve(user)) return null;
             
-            user.Language = languageManager.Get(user.Language.Id);
+          /*  
+             user.Language = languageManager.Get(user.Language.Id);
 
             if (languageManager.HasErrors)
             {
                 Errors.AddRange(languageManager.Errors);
                 return null;
             }
-            
+            */
+
             List<Role> roles = roleManager.Get(user);
             
             // Si no posee permisos asociados, debería poder navegar igual aunque a los efectos prácticos
@@ -66,7 +68,7 @@ namespace BL
                 string errorDescription = "Nombre de usuario incompleto";
                 log.AddLogWarn("IsValid", errorDescription, this);
                 AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
-                isValid = false;
+                isValid = isValid & false;
             }
 
             if (String.IsNullOrEmpty(password))
@@ -74,7 +76,7 @@ namespace BL
                 string errorDescription = "Password incompleto";
                 log.AddLogWarn("IsValid", errorDescription, this);
                 AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
-                isValid = false;
+                isValid = isValid & false;
             }
 
             return isValid;

@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using BE;
 using BL;
+using Helper;
 
 namespace Ubiquicity
 {
@@ -48,13 +49,22 @@ namespace Ubiquicity
                
                 //TODO - Validar los campos
                 UserManager userManager = new UserManager();
-                User user = null;                
+                User user = null;
+                bool success = true;
 
                 switch (action) {
                     case CREATE:
+                        
                         user = new User();
                         UCFormNewMember.PopulateModel(user);
-                        userManager.Save(user);
+
+                        //TODO - LA VALIDACIÓN DEL PASSWORD Y LA REPETICIÓN, DEBERÍA HACERSE POR OTRO FRONT
+                        //Por otro lado, notar que como está el break, el mensaje no se muestra y debe implementarse un workaround
+                        success = IsValidForSave();
+                        if(success) {
+                            user.Password = SecurityHelper.Encrypt(user.Password);
+                            userManager.Save(user);
+                        }                         
                         break;
 
                     case EDIT:
@@ -71,7 +81,12 @@ namespace Ubiquicity
                 if (userManager.HasErrors)
                 {
                     Alert.Show("Error", userManager.ErrorDescription);
-                } else {
+                }
+                else if (!success) {
+                    Alert.Show("Error", "El password y su verificación, deben coincidir.");
+                }
+                else
+                {
                     Response.Redirect(Request.RawUrl);
                 }
             } catch (Exception exception)
@@ -104,6 +119,8 @@ namespace Ubiquicity
         /// <param name="e"></param>
         protected override void ShowNewForm(object sender, EventArgs e)
         {
+            UCFormNewMember.ShowPasswordFields();
+            UCFormNewMember.EnableUserField();
             UCFormNewMember.CleanForm();
             Session["Ubiquicity_action"] = CREATE;
             Page.ClientScript.RegisterStartupScript(this.GetType(), "openModalCreate", "window.onload = function() { $('#ucModalNewMember').modal('show'); }", true);
@@ -117,7 +134,7 @@ namespace Ubiquicity
         protected override void ShowEditForm(object sender, EventArgs e)
         {
             int id = Convert.ToInt32(Session["Ubiquicity_itemId"]);
-
+                        
             UserManager userManager = new UserManager();
             User user = userManager.Get(id);
 
@@ -127,6 +144,8 @@ namespace Ubiquicity
             }
             else
             {
+                UCFormNewMember.HidePasswordFields();
+                UCFormNewMember.DisableUserField();
                 UCFormNewMember.FillForm(user);
                 Session["Ubiquicity_action"] = EDIT;
                 //Session["Ubiquicity_itemId"] = id;
@@ -150,6 +169,11 @@ namespace Ubiquicity
             columns.Add("Lastupdate", "Atualizado");
 
             return columns;
+        }
+
+        public bool IsValidForSave()
+        {
+            return UCFormNewMember.PasswordVerification == UCFormNewMember.Password;
         }
     }
 }

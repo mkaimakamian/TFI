@@ -28,6 +28,26 @@ namespace Ubiquicity.UserControls
         //    dropLanguageInput.DataBind();
         //}
 
+        public void HidePasswordFields()
+        {
+            passwordControls.Visible = false;
+        }
+
+        public void ShowPasswordFields()
+        {
+            passwordControls.Visible = true;
+        }
+
+        public void DisableUserField()
+        {
+            userInput.Disabled = true;
+        }
+
+        public void EnableUserField()
+        {
+            userInput.Disabled = false;
+        }
+
         public void FillForm(User user)
         {
             FirstName = user.Name;
@@ -97,7 +117,7 @@ namespace Ubiquicity.UserControls
             user.Lastname = LastName;
             user.Password = Password;
             user.Username = UserName;
-            //user.Language.Id = int.Parse(dropLanguageInput.SelectedValue);
+            user.Language.Id = 1; // int.Parse(dropLanguageInput.SelectedValue);
             user.Mail = Mail;
         }
     }

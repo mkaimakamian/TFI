@@ -20,7 +20,7 @@
                 <input id="mailInput" runat="server" type="email" class="form-control form-control-sm"  placeholder="Ingresá tu correo electrónico">
               </div>
             </div>
-           <div class="form-row">
+           <div id="passwordControls" runat="server" class="form-row">
               <div class="form-group col-md-6">
                 <label for="passwordInput">Password</label>
                 <input id="passwordInput" runat="server" type="password" class="form-control form-control-sm"  placeholder="Ingresá tu password">
