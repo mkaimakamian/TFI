@@ -197,7 +197,7 @@ namespace BL
 
             if (roles == null)
             {
-                string errorDescription = "El usuario " + user.Username + " no posee permisos asociados.";
+                string errorDescription = "El usuario " + user.Mail + " no posee permisos asociados.";
                 log.AddLogInfo("IsValid", errorDescription, this);
                 AddError(new ResultBE(ResultBE.Type.EMPTY, errorDescription));
             } else

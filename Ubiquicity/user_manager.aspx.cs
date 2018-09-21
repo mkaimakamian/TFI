@@ -166,7 +166,7 @@ namespace Ubiquicity
             columns.Add("Name", "Nombre");
             columns.Add("Lastname", "Apellido");
             columns.Add("Mail", "Mail");
-            columns.Add("Lastupdate", "Atualizado");
+            columns.Add("Lastupdate", "Actualizado");
 
             return columns;
         }

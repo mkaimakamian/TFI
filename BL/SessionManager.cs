@@ -18,15 +18,15 @@ namespace BL
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        public User LogIn(string username, string password)
+        public User LogIn(string mail, string password)
         {
-            if (!IsValid(username, password)) return null;
+            if (!IsValid(mail, password)) return null;
 
             UserMapper mapper = new UserMapper();
             RoleManager roleManager = new RoleManager();
             LanguageManager languageManager = new LanguageManager();
             
-            User user = mapper.Get(username, password);
+            User user = mapper.Get(mail, password);
             
             // TODO - APLICAR CONTROL DE LOCKEO
 
@@ -54,18 +54,18 @@ namespace BL
 
             user.Roles = roles;
             
-            log.AddLogInfo("LogIn", "Usuaerio " + user.Username + " identificado exitosamente.", this);
+            log.AddLogInfo("LogIn", "Usuario " + user.Mail + " identificado exitosamente.", this);
             return user; 
         }
 
         //TODO - Agregar en EA
-        private bool IsValid(string username, string password)
+        private bool IsValid(string mail, string password)
         {
             bool isValid = true;
 
-            if (String.IsNullOrEmpty(username))
+            if (String.IsNullOrEmpty(mail))
             {
-                string errorDescription = "Nombre de usuario incompleto";
+                string errorDescription = "Nombre de usuario (mail) incompleto";
                 log.AddLogWarn("IsValid", errorDescription, this);
                 AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
                 isValid = isValid & false;
@@ -95,7 +95,7 @@ namespace BL
 
             if (!user.Active)
             {
-                string errorDescription = "El usuario " + user.Username + " no está activo.";
+                string errorDescription = "El usuario " + user.Mail + " no está activo.";
                 log.AddLogWarn("LogIn", errorDescription, this);
                 AddError(new ResultBE(ResultBE.Type.INACTIVE_USER, errorDescription));
                 return false;
@@ -103,7 +103,7 @@ namespace BL
 
             if (user.Locked)
             {
-                string errorDescription = "El usuario " + user.Username + " está bloqueado.";
+                string errorDescription = "El usuario " + user.Mail + " está bloqueado.";
                 log.AddLogWarn("LogIn", errorDescription, this);
                 AddError(new ResultBE(ResultBE.Type.LOCKED_USER, errorDescription));
                 return false;

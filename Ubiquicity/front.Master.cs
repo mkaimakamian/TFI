@@ -26,7 +26,6 @@ namespace Ubiquicity
                     User user = (User) Session["SessionCreated"];
                     ManageLoginPanel(user);
                     LoadMenu(user);
-                  //  LoadLanguages();
             }
 
         }
@@ -47,13 +46,13 @@ namespace Ubiquicity
                 //    userManager.SendRecovery(txtUser.Value);
                 //}
                
-                if (IsValid(txtUser.Value, txtPassword.Value))
+                if (IsValid(txtUserMail.Value, txtPassword.Value))
                 {
                     // El password se encrypta antes de enviarse al back
                     txtPassword.Value = String.IsNullOrEmpty(txtPassword.Value) ? "" : SecurityHelper.Encrypt(txtPassword.Value);
 
                     SessionManager sessionManager = new SessionManager();
-                    User user = sessionManager.LogIn(txtUser.Value, txtPassword.Value);
+                    User user = sessionManager.LogIn(txtUserMail.Value, txtPassword.Value);
 
                     if (user == null && sessionManager.HasErrors)
                     {
@@ -98,7 +97,6 @@ namespace Ubiquicity
                 User user = new User();
                 user.Name = FormRegisterWebUser.FirstName;
                 user.Lastname = FormRegisterWebUser.LastName;
-                user.Username = FormRegisterWebUser.UserName;
                 user.Mail = FormRegisterWebUser.Mail;
 
                 if (!String.IsNullOrEmpty(FormRegisterWebUser.Password))
@@ -131,7 +129,7 @@ namespace Ubiquicity
             {
                 panelLogin.Visible = false;
                 panelAlreadyLogged.Visible = true;
-                btnLogout.InnerText += user.Username + " (salir)";
+                btnLogout.InnerText += user.Name + " " + user.Lastname + " (salir)";
             } else
             {
                 panelLogin.Visible = true;

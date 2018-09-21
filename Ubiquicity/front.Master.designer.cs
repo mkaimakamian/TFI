@@ -67,13 +67,13 @@ namespace Ubiquicity {
         protected global::System.Web.UI.WebControls.ContentPlaceHolder contentHolder;
         
         /// <summary>
-        /// txtUser control.
+        /// txtUserMail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtUser;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txtUserMail;
         
         /// <summary>
         /// txtPassword control.

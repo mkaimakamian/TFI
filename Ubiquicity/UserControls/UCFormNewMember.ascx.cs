@@ -40,12 +40,12 @@ namespace Ubiquicity.UserControls
 
         public void DisableUserField()
         {
-            userInput.Disabled = true;
+            mailInput.Disabled = true;
         }
 
         public void EnableUserField()
         {
-            userInput.Disabled = false;
+            mailInput.Disabled = false;
         }
 
         public void FillForm(User user)
@@ -53,7 +53,6 @@ namespace Ubiquicity.UserControls
             FirstName = user.Name;
             LastName = user.Lastname;
             Mail = user.Mail;
-            UserName = user.Username;
             Password = user.Password;
             PasswordVerification = user.Password;
             //dropLanguageInput.SelectedValue = user.Language.Id.ToString();
@@ -77,12 +76,6 @@ namespace Ubiquicity.UserControls
             set { mailInput.Value = value; }
         }
 
-        public string UserName
-        {
-            get { return userInput.Value; }
-            set { userInput.Value = value; }
-        }
-
         public string Password
         {
             get { return passwordInput.Value; }
@@ -95,19 +88,12 @@ namespace Ubiquicity.UserControls
             set { passwordVerificationInput.Value = value; }
         }
 
-        //public string Language
-        //{
-        //    get { return dropLanguageInput.SelectedValue; }
-        //    set { dropLanguageInput.SelectedValue = value; }
-        //}
-
         public void CleanForm()
         {
             FirstName = "";
             LastName = "";
             Password = "";
             PasswordVerification = "";
-            UserName = "";
             Mail = "";
         }
 
@@ -116,7 +102,6 @@ namespace Ubiquicity.UserControls
             user.Name = FirstName;
             user.Lastname = LastName;
             user.Password = Password;
-            user.Username = UserName;
             user.Language.Id = 1; // int.Parse(dropLanguageInput.SelectedValue);
             user.Mail = Mail;
         }

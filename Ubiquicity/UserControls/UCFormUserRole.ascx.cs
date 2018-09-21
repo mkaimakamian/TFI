@@ -44,7 +44,7 @@ namespace Ubiquicity.UserControls
             //userDrop.DataValueField = "Id";
             //userDrop.DataBind();
             //userDrop.Enabled = false;
-            lblUserName.Text = user.Name + " " + user.Lastname + " ("+user.Username+")"; 
+            lblUserName.Text = user.Name + " " + user.Lastname + " ("+user.Mail+")"; 
             FillForm(user.Roles, toGrant);
         }
 

@@ -96,7 +96,6 @@ namespace ORM
         {
             User user = new User();
             user.Id = int.Parse(data["id"].ToString());
-            user.Username = data["username"].ToString();
             user.Password = data["password"].ToString();
             user.Mail = data["mail"].ToString();
             user.Active = Convert.ToBoolean(data["active"]);

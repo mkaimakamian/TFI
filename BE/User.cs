@@ -66,18 +66,18 @@ namespace BE
             }
         }
 
-        public string Username
-        {
-            get
-            {
-                return username;
-            }
+        //public string Username
+        //{
+        //    get
+        //    {
+        //        return username;
+        //    }
 
-            set
-            {
-                username = value;
-            }
-        }
+        //    set
+        //    {
+        //        username = value;
+        //    }
+        //}
 
         public string Name
         {

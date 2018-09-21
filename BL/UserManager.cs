@@ -22,7 +22,7 @@ namespace BL
             UserMapper userMapper = new UserMapper();
             User user = userMapper.Get(userId);
 
-            if (SecurityHelper.IsEquivalent(user.Username + user.Lastupdate.Minute, activation))
+            if (SecurityHelper.IsEquivalent(user.Mail + user.Lastupdate.Minute, activation))
             {
                 //activo!
                 user.Locked = false;
@@ -186,7 +186,7 @@ namespace BL
             if (!IsValidForSave(user)) return false;
 
             // Existencia del user name
-            if (mapper.Get(user.Username) != null)
+            if (mapper.Get(user.Mail) != null)
             {
                 string errorDescription = "El usuario ya existe.";
                 log.AddLogWarn("SaveForWeb", errorDescription, this);
@@ -218,7 +218,7 @@ namespace BL
 
                 //se recupera de nuevo el usuario porque hay discrepancia entre la fecha de la base y la del sistema
                 user = mapper.Get(user.Id);
-                string activationHash = SecurityHelper.Encrypt(user.Username + user.Lastupdate.Minute) + user.Id;
+                string activationHash = SecurityHelper.Encrypt(user.Mail + user.Lastupdate.Minute) + user.Id;
                 MailerHelper.SendWelcomeMail(user, activationHash);
             }
             else
@@ -261,7 +261,7 @@ namespace BL
                 return false;
             } else
             {
-                string recoveryHash = SecurityHelper.Encrypt(user.Username + user.Lastupdate.Minute);
+                string recoveryHash = SecurityHelper.Encrypt(user.Mail + user.Lastupdate.Minute);
                 
                 //TODO - Confeccionar plantillas para el envío de mail
                 MailerHelper.Send(
@@ -292,14 +292,6 @@ namespace BL
             if (String.IsNullOrEmpty(user.Lastname))
             {
                 string errorDescription = "Debe completarse el apellido.";
-                log.AddLogWarn("IsValidForSave", errorDescription, this);
-                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
-                isValid = isValid & false;
-            }
-
-            if (String.IsNullOrEmpty(user.Username))
-            {
-                string errorDescription = "Debe completarse el usuario.";
                 log.AddLogWarn("IsValidForSave", errorDescription, this);
                 AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
                 isValid = isValid & false;

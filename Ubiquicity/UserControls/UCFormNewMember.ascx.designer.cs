@@ -13,6 +13,15 @@ namespace Ubiquicity.UserControls {
     public partial class UCModalNewMember {
         
         /// <summary>
+        /// mailInput control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl mailInput;
+        
+        /// <summary>
         /// firstNameInput control.
         /// </summary>
         /// <remarks>
@@ -29,24 +38,6 @@ namespace Ubiquicity.UserControls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText lastNameInput;
-        
-        /// <summary>
-        /// userInput control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText userInput;
-        
-        /// <summary>
-        /// mailInput control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl mailInput;
         
         /// <summary>
         /// passwordControls control.

@@ -17,7 +17,7 @@ namespace ORM
             Hashtable table = new Hashtable();
             User user = null;
 
-            table.Add("@username", username);
+            table.Add("@mail", username);
             table.Add("@password", password);
 
             DataSet result = dal.Read(table, "spLoginUser");
@@ -37,7 +37,6 @@ namespace ORM
             User user = null;
 
             table.Add("@id", id);
-            table.Add("@userName", DBNull.Value);
             table.Add("@mail", DBNull.Value);
 
             DataSet result = dal.Read(table, "spReadUser");
@@ -63,7 +62,6 @@ namespace ORM
             Hashtable table = new Hashtable();
 
             table.Add("@id", DBNull.Value);
-            table.Add("@userName", DBNull.Value);
             table.Add("@mail", mail);
 
             DataSet result = dal.Read(table, "spReadUser");
@@ -78,7 +76,6 @@ namespace ORM
             User user = null;
 
             table.Add("@id", DBNull.Value);
-            table.Add("@userName", username);
             table.Add("@mail", DBNull.Value);
 
             DataSet result = dal.Read(table, "spReadUser");
@@ -98,7 +95,6 @@ namespace ORM
             List<User> users = null;
 
             table.Add("@id", DBNull.Value);
-            table.Add("@userName", DBNull.Value);
             table.Add("@mail", DBNull.Value);
 
             DataSet result = dal.Read(table, "spReadUser");
@@ -131,8 +127,6 @@ namespace ORM
             Hashtable table = new Hashtable();
 
             table.Add("@id", user.Id);
-            table.Add("@username", user.Username);
-            //table.Add("@password", user.Password);
             table.Add("@mail", user.Mail);
             table.Add("@active", user.Active);
             table.Add("@locked", user.Locked);
@@ -154,7 +148,6 @@ namespace ORM
         {
             User user = new User();
             user.Id = int.Parse(data["id"].ToString());
-            user.Username = data["username"].ToString();
             user.Password = data["password"].ToString();
             user.Mail = data["mail"].ToString();
             user.Active = Convert.ToBoolean(data["active"]);
@@ -188,7 +181,6 @@ namespace ORM
             Dal dal = new Dal();
             Hashtable table = new Hashtable();
 
-            table.Add("@username", user.Username);
             table.Add("@password", user.Password);
             table.Add("@mail", user.Mail);
             table.Add("@active", user.Active);
