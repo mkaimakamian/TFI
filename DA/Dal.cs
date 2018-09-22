@@ -2,37 +2,50 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Collections;
-using System.IO;
 
 namespace DA
 {
     public class Dal
     {
-        private static string DATABASE = String.Empty;
+        private string databaseName = String.Empty;
+        private string serverInstance = String.Empty;
         private static string connStr = String.Empty;
 
         public Dal()
         {
-            if (String.IsNullOrEmpty(connStr))
-            {
-                string serverInstance = String.Empty;
-                try
-                {
-                    //TODO - Preguntar si leemos desde un archivo de configuración
-                    
-                    StreamReader st = new StreamReader(Directory.GetCurrentDirectory() + "\\dbconfig.txt");
-                    serverInstance = st.ReadLine();
-                    DATABASE = st.ReadLine();
-                    
-                }
-                catch
-                {
-                    DATABASE = "ubiquicity";
-                    serverInstance = "SQLEXPRESS";
-                }
-
-                connStr = "Data Source=.\\" + serverInstance + "; Initial Catalog=" + DATABASE + "; Integrated Security=True";
+            try {
+                //databaseName = Mana ConfigurationManager.AppSettings["reCAPTCHA"];
+                //serverInstance = Configuration.WebConfigurationManager.AppSettings["ApiUserName"];
+                databaseName = "ubiquicity";
+                serverInstance = "SQLEXPRESS";
             }
+            catch {
+                databaseName = "ubiquicity";
+                serverInstance = "SQLEXPRESS";
+            }
+
+            connStr = "Data Source=.\\" + serverInstance + "; Initial Catalog=" + databaseName + "; Integrated Security=True";
+
+            //if (String.IsNullOrEmpty(connStr))
+            //{
+            //    string SERVERINSTANCE = String.Empty;
+            //    try
+            //    {
+            //        //TODO - Preguntar si leemos desde un archivo de configuración
+
+            //        StreamReader st = new StreamReader(Directory.GetCurrentDirectory() + "\\dbconfig.txt");
+            //        serverInstance = st.ReadLine();
+            //        DATABASE = st.ReadLine();
+
+            //    }
+            //    catch
+            //    {
+            //        DATABASE = "ubiquicity";
+            //        SERVERINSTANCE = "SQLEXPRESS";
+            //    }
+
+            //    connStr = "Data Source=.\\" + SERVERINSTANCE + "; Initial Catalog=" + DATABASE + "; Integrated Security=True";
+            //}
 
         }
 
@@ -51,7 +64,7 @@ namespace DA
 
             try
             {
-               connection = new SqlConnection(connStr);
+                connection = new SqlConnection(connStr);
                 connection.Open();
                 transaction = connection.BeginTransaction();
                 command = new SqlCommand(sql, connection);
@@ -107,6 +120,47 @@ namespace DA
             {
                 throw e;
             } finally
+            {
+                connection.Close();
+            }
+        }
+
+        public bool Backup(string path)
+        {
+            string sql = "BACKUP DATABASE " + databaseName + " TO DISK = '" + path + "'";
+            return ExecuteQuery(sql);
+        }
+
+        public bool Restore(string path)
+        {
+            string sql = "USE MASTER ALTER DATABASE " + databaseName + " SET SINGLE_USER WITH ROLLBACK IMMEDIATE RESTORE DATABASE " + databaseName + " FROM DISK = '" + path + "' WITH REPLACE";
+            return ExecuteQuery(sql);
+        }
+
+        //TODO - Actualizar ea
+        private bool ExecuteQuery(string sql)
+        {
+            SqlConnection connection = new SqlConnection(connStr);
+            SqlCommand command = new SqlCommand(sql, connection);
+            int result = -1;
+
+            try { 
+                connection.Open();
+                object row = command.ExecuteScalar();
+
+                if (row != null)
+                {
+                    result = int.Parse(row.ToString());
+                }
+                connection.Close();
+
+                return result > 0;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
             {
                 connection.Close();
             }

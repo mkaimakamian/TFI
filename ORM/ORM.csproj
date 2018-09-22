@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BackupMapper.cs" />
     <Compile Include="LabelMapper.cs" />
     <Compile Include="LanguageMapper.cs" />
     <Compile Include="LogMapper.cs" />

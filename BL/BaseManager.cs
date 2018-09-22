@@ -48,6 +48,10 @@ namespace BL
             }
         }
 
+        /// <summary>
+        /// Permite agregar errores al listado.
+        /// </summary>
+        /// <param name="error"></param>
         protected void AddError(ResultBE error)
         {
             Errors.Add(error);
