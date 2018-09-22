@@ -54,5 +54,15 @@ namespace Helper
             "Por favor, accedé a la siguiente url: http://localhost:50551/register_action.aspx?a=" + activationHash,
             new string[] { user.Mail });
         }
+
+        public static void SendResetPassword(User user, String activationHash)
+        {
+            Send(
+            "Recupero de password - Ubiquicity",
+            "Estás recibiendo este mail porque nos informaste que te olvidaste tu password." +
+            Environment.NewLine +
+            "Por favor, accedé a la siguiente url para resetear el password: http://localhost:50551/recovery_action.aspx?a=" + activationHash,
+            new string[] { user.Mail });
+        }
     }
 }

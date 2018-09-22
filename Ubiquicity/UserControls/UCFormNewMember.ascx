@@ -25,5 +25,5 @@
                 <label for="passwordConfirmInput">Confirmar password</label>
                 <input id="passwordVerificationInput" runat="server" type="password" class="form-control form-control-sm" placeholder="Reingresá tu password">
               </div>
-              </div>
+           </div>
       </div>

@@ -212,5 +212,16 @@ namespace Ubiquicity
         {
             get { return customAlertBox; }
         }
+
+        protected void btnPassword_Click(object sender, EventArgs e)
+        {
+            //Controlar que el password no esté vacío.
+            if (!String.IsNullOrEmpty(txtPasswordMail.Value))
+            {
+                UserManager userManager = new UserManager();
+                userManager.ResetPassword(txtPasswordMail.Value);
+            }
+
+        }
     }
 }

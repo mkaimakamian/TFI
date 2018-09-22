@@ -17,7 +17,6 @@ namespace BL
         {
             string activation = hash.Substring(0, 32);
             int userId = int.Parse(hash.Substring(32, hash.Length - 32));
-            string errorDescription = "";
 
             UserMapper userMapper = new UserMapper();
             User user = userMapper.Get(userId);
@@ -32,28 +31,68 @@ namespace BL
                 if (!userMapper.Edit(user))
                 {
                     // Siempre se devuelve true para ofuscar
-                    errorDescription = "Quizá quieras solicitar la contraseña de nuevo... el sistema no está actualmente disponible (solo es momentáneo!)";
+                    string errorDescription = "Quizá quieras solicitar la contraseña de nuevo... el sistema no está actualmente disponible (solo es momentáneo!)";
                     log.AddLogCritical("ActivateAccount", errorDescription, this);
                     AddError(new ResultBE(ResultBE.Type.FAIL, errorDescription));
                     return false;
                 } 
 
                 return true;
-            } 
-
-            // Siempre se devuelve true para ofuscar // bería mostrar el formulario? cuando?
-            errorDescription = "Excelente! gracias por recuperar tu password :D";
-            log.AddLogWarn("Edit", errorDescription, this);
-            AddError(new ResultBE(ResultBE.Type.FAIL, errorDescription));
-            return true;
+            } else
+            {
+                // Siempre se devuelve true para ofuscar // bería mostrar el formulario? cuando?
+                string errorDescription = "Excelente! gracias por recuperar tu password :D";
+                log.AddLogWarn("Edit", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.FAIL, errorDescription));
+                return true;
+            }
         }
 
+        public bool ChangePassword(String password, string passwordHash)
+        {
+            string recovery = passwordHash.Substring(0, 32);
+            int userId = int.Parse(passwordHash.Substring(32, passwordHash.Length - 32));
+            UserMapper userMapper = new UserMapper();
+            User user = userMapper.Get(userId);
+
+            if (SecurityHelper.IsEquivalent(user.Mail + user.Lastupdate.Minute, recovery))
+            {
+                user.Password = password;
+                return Edit(user);
+            } else
+            {
+                // Siempre se devuelve true para ofuscar // bería mostrar el formulario? cuando?
+                string errorDescription = "Excelente! gracias por recuperar tu password :D";
+                log.AddLogWarn("Edit", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.FAIL, errorDescription));
+                return true;
+            }
+        }
 
         //public bool CheckExistence(string username)
         //{
 
         //    return true;
         //}
+
+        public void ResetPassword(string mail)
+        {
+            UserMapper mapper = new UserMapper();
+
+            User user = mapper.Get(mail);
+
+            if (user == null)
+            {
+                // Si no se encuentra, no se informa para ofuscar posibles ataques
+                string errorDescription = "No se ha encontrado usuario "+ mail +".";
+                log.AddLogCritical("ResetPassword", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.NULL, errorDescription));
+            } else
+            {
+                string activationHash = SecurityHelper.Encrypt(user.Mail + user.Lastupdate.Minute) + user.Id;
+                MailerHelper.SendResetPassword(user, activationHash);
+            }
+        }
 
         public List<User> GetUserWithoutRole()
         {

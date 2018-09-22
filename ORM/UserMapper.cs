@@ -56,27 +56,27 @@ namespace ORM
         /// </summary>
         /// <param name="mail"></param>
         /// <returns></returns>
-        public bool GetByMail(string mail)
-        {
-            Dal dal = new Dal();
-            Hashtable table = new Hashtable();
+        //public bool GetByMail(string mail)
+        //{
+        //    Dal dal = new Dal();
+        //    Hashtable table = new Hashtable();
 
-            table.Add("@id", DBNull.Value);
-            table.Add("@mail", mail);
+        //    table.Add("@id", DBNull.Value);
+        //    table.Add("@mail", mail);
 
-            DataSet result = dal.Read(table, "spReadUser");
+        //    DataSet result = dal.Read(table, "spReadUser");
 
-            return result != null && result.Tables[0].Rows.Count > 0;
-        }
+        //    return result != null && result.Tables[0].Rows.Count > 0;
+        //}
 
-        public User Get(string username)
+        public User Get(string mail)
         {
             Dal dal = new Dal();
             Hashtable table = new Hashtable();
             User user = null;
 
             table.Add("@id", DBNull.Value);
-            table.Add("@mail", DBNull.Value);
+            table.Add("@mail", mail);
 
             DataSet result = dal.Read(table, "spReadUser");
 

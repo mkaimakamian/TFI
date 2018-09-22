@@ -69,7 +69,7 @@
                 <asp:Menu ID="mnuSection" runat="server" MaximumDynamicDisplayLevels="2"  Orientation="Vertical" 
                         SkipLinkText="" DynamicMenuStyle-CssClass="dropdown-menu"></asp:Menu>
                 </div>
-                <div class="col-10">
+                <div class="col">
                     <!-- contenedor de las páginas -->
                     <asp:ContentPlaceHolder ID="contentHolder" runat="server">
         
@@ -104,7 +104,38 @@
                   </div>
                   <div class="modal-footer">
                       <asp:Button ID="btnLogin" runat="server" CssClass="btn btn-primary btn-sm" OnClick="btnLogin_Click" Text="Login"/>
-                      <button type="button" class="btn btn-primary btn-sm disabled" >Olvidé contraseña</button>
+                      <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#ModalForgotPassword">Olvidé contraseña</button>
+                      <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cerrar</button>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <!-- Modal password -->
+            <div class="modal fade" id="ModalForgotPassword" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="passwordModalTitle">Login</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+
+                  <div class="modal-body">
+                    <!--<div class="text-center">
+                        <img src="Resources/login.svg" width="128" height="128" />
+                        <p>¡Es bueno verte nuevamente!</p>
+					</div>-->
+                    <div class="form-group">
+                        <label for="txtPasswordMail">Mail</label>
+                        <input id="txtPasswordMail" runat="server" type="email" class="form-control form-control-sm"  placeholder="Ingrese mail">
+                    </div>
+
+                  </div>
+                  <div class="modal-footer">
+                      <asp:Button ID="btnPassword" runat="server" CssClass="btn btn-primary btn-sm" OnClick="btnPassword_Click" Text="Enviar"/>
                       <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cerrar</button>
                   </div>
 

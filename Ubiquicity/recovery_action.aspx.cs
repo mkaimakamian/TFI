@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BL;
+using Helper;
 
 namespace Ubiquicity
 {
@@ -12,22 +13,22 @@ namespace Ubiquicity
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            PerformRecovery(Request["a"]);
         }
 
-        private void PerformRecovery(string activationHash)
+        protected void btnPassword_Click(object sender, EventArgs e)
         {
-            UserManager userManager = new UserManager();
-            //bool success = userManager.Edit(activationHash);
-            bool success = true;
-            if (!success)
+            if (passwordInput.Value == passwordVerificationInput.Value && !String.IsNullOrEmpty(passwordInput.Value))
             {
-                //mensaje de "intentalo de nuevo manualmente"
-            }
-            else
+                String passwordHash = Request["a"];
+                UserManager userManager = new UserManager();
+                string password = SecurityHelper.Encrypt(passwordInput.Value);
+                userManager.ChangePassword(password, passwordHash);
+            } else
             {
-                //Joya!
+
+                ((front)Master).Alert.Show("Error", "El password y la verificación deben coincidir.");
             }
+            
         }
     }
 }
