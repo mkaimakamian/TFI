@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using BE;
 using BL;
+using Ubiquicity.Classes;
 
 namespace Ubiquicity
 {
@@ -57,7 +58,7 @@ namespace Ubiquicity
                 {
                     Alert.Show("Error", userManager.ErrorDescription);
                 }
-                //UCFormUserRole.PopulateModel(user);
+
                 user.Roles = RetrieveFromSession("granted");
 
                 switch (action)
@@ -71,8 +72,6 @@ namespace Ubiquicity
                         break;
                 }
 
-                Session.Remove("Ubiquicity_itemId");
-
                 if (!success && roleManager.HasErrors)
                 {
                     Alert.Show("Error", roleManager.ErrorDescription);
@@ -81,6 +80,8 @@ namespace Ubiquicity
                 {
                     Response.Redirect(Request.RawUrl);
                 }
+
+                Session.Remove("Ubiquicity_itemId");
             }
             catch (Exception exception)
             {
@@ -88,8 +89,9 @@ namespace Ubiquicity
             }
         }
 
-        protected override void ShowEditForm(object sender, EventArgs e) {
-            int id = Convert.ToInt32(Session["Ubiquicity_itemId"]);
+        protected override void ShowEditForm(object sender, UbiquicityEventArg e) {
+            int id = Convert.ToInt32(e.TheObject);
+            Session["Ubiquicity_itemId"] = id;
 
             UserManager userManager = new UserManager();
             User user = userManager.Get(id);

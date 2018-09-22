@@ -5,15 +5,18 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BL;
+using Ubiquicity.Classes;
 
 namespace Ubiquicity.UserControls
 {
     public partial class UCcrudGrid : System.Web.UI.UserControl
     {
-        public event EventHandler EditActionClick;
-        public event EventHandler DeleteActionClick;
-        public event EventHandler NewActionClick;
-        public event EventHandler GenericActionClick;
+        public delegate void UCcrudGridEvent(object sender, UbiquicityEventArg arg);
+
+        public event UCcrudGridEvent EditActionClick;
+        public event UCcrudGridEvent DeleteActionClick;
+        public event UCcrudGridEvent NewActionClick;
+        public event UCcrudGridEvent GenericActionClick;
         private HashSet<Int32> cellsToRemove = new HashSet<int>();
         private string genericActionButtonName = "Genérico";
 
@@ -71,18 +74,19 @@ namespace Ubiquicity.UserControls
         /// <param name="e"></param>
         protected void gvItem_OnRowCommand(object sender, GridViewCommandEventArgs e)
         {
-            Session["Ubiquicity_itemId"] = e.CommandArgument;
+            //Session["Ubiquicity_itemId"] = e.CommandArgument;
+            
             if (e.CommandName == "EditItem")
             {
-                if (EditActionClick != null) EditActionClick(this, e);
+                if (EditActionClick != null) EditActionClick(this, new UbiquicityEventArg(e.CommandArgument));
             }
             else if (e.CommandName == "DeleteItem")
             {
-                if (DeleteActionClick != null) DeleteActionClick(this, e);
+                if (DeleteActionClick != null) DeleteActionClick(this, new UbiquicityEventArg(e.CommandArgument));
             }
             else if (e.CommandName == "GenericActionItem")
             {
-                if (GenericActionClick != null) GenericActionClick(this, e);
+                if (GenericActionClick != null) GenericActionClick(this, new UbiquicityEventArg(e.CommandArgument));
             }
 
         }
@@ -94,7 +98,7 @@ namespace Ubiquicity.UserControls
         /// <param name="e"></param>
         protected void btnNewItem_Click(object sender, EventArgs e)
         {
-            if (NewActionClick != null) NewActionClick(this, e);
+            if (NewActionClick != null) NewActionClick(this, new UbiquicityEventArg(e));
         }
 
         /// <summary>

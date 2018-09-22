@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using BL;
 using BE;
+using Ubiquicity.Classes;
 
 namespace Ubiquicity
 {
@@ -50,13 +51,14 @@ namespace Ubiquicity
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        protected override void ShowNewForm(object sender, EventArgs e)
+        protected override void ShowNewForm(object sender, UbiquicityEventArg e)
         {
             Alert.Show("Crear respaldo", "¿Está seguro de querer crear el respaldo? El sistema se inhabilitará durante la ejecución.", "Si, crear respaldo");
         }
 
-        protected override void PerformGenericAction(object sender, EventArgs e)
+        protected override void PerformGenericAction(object sender, UbiquicityEventArg e)
         {
+            Session["Ubiquicity_itemId"] = e.TheObject.ToString();
             Alert.Show("Restaurar respaldo", "¿Está seguro de querer restaurar el respaldo? El sistema se inhabilitará y se perderán los datos posteriores al punto de restauración.", null, "Si, restaurar respaldo");
         }
 
@@ -65,7 +67,7 @@ namespace Ubiquicity
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        protected void PerformBackup(object sender, EventArgs e)
+        protected void PerformBackup(object sender, UbiquicityEventArg e)
         {
             try
             {
@@ -87,7 +89,7 @@ namespace Ubiquicity
             }
         }
 
-        protected void PerformRestore(object sender, EventArgs e)
+        protected void PerformRestore(object sender, UbiquicityEventArg e)
         {
             try
             {
@@ -108,6 +110,8 @@ namespace Ubiquicity
             {
                 Alert.Show("Exception", exception.Message);
             }
+
+            Session.Remove("Ubiquicity_itemId");
         }
 
         /// <summary>

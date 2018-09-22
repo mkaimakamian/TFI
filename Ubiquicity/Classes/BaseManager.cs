@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using Helper;
 using BE;
+using Ubiquicity.Classes;
 
 namespace Ubiquicity
 {
@@ -20,11 +21,11 @@ namespace Ubiquicity
         protected virtual void PreLoadGridView() { }
         protected virtual void LoadGridView() { }
         protected virtual void PosLoadGridView() { }
-        protected virtual void PerformDeleteItem(object sender, EventArgs e) { }
-        protected virtual void AskForDelete(object sender, EventArgs e) { }
-        protected virtual void ShowEditForm(object sender, EventArgs e) { }
-        protected virtual void ShowNewForm(object sender, EventArgs e) { }
-        protected virtual void PerformGenericAction(object sender, EventArgs e) { }
+        protected virtual void PerformDeleteItem(object sender, UbiquicityEventArg e) { }
+        protected virtual void AskForDelete(object sender, UbiquicityEventArg e) { }
+        protected virtual void ShowEditForm(object sender, UbiquicityEventArg e) { }
+        protected virtual void ShowNewForm(object sender, UbiquicityEventArg e) { }
+        protected virtual void PerformGenericAction(object sender, UbiquicityEventArg e) { }
 
         protected void Page_Load(object sender, EventArgs e)
         {

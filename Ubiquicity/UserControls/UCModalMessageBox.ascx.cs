@@ -4,14 +4,17 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Ubiquicity.Classes;
 
 namespace Ubiquicity.UserControls
 {
     public partial class UCModalMessageBox : System.Web.UI.UserControl
     {
 
-        public event EventHandler PerformMainAction;
-        public event EventHandler PerformSecondAction;
+        public delegate void UCMessageBoxEvent(object sender, UbiquicityEventArg arg);
+
+        public event UCMessageBoxEvent PerformMainAction;
+        public event UCMessageBoxEvent PerformSecondAction;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -51,13 +54,13 @@ namespace Ubiquicity.UserControls
         protected void btnMainAction_Click(object sender, EventArgs e)
         {
             //Se propaga el evento para el consumo por parte del parent
-            if (PerformMainAction != null) PerformMainAction(this, e);
+            if (PerformMainAction != null) PerformMainAction(this, new UbiquicityEventArg(e));
         }
 
         protected void btnSecondAction_Click(object sender, EventArgs e)
         {
             //Se propaga el evento para el consumo por parte del parent
-            if (PerformSecondAction != null) PerformSecondAction(this, e);
+            if (PerformSecondAction != null) PerformSecondAction(this, new UbiquicityEventArg(e));
         }
 
         /// <summary>

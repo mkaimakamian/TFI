@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using BE;
 using BL;
 using Helper;
+using Ubiquicity.Classes;
 
 namespace Ubiquicity
 {
@@ -74,10 +75,12 @@ namespace Ubiquicity
                             user = userManager.Get(Convert.ToInt32(Session["Ubiquicity_itemId"]));
                             UCFormNewMember.PopulateModel(user);
                             userManager.Edit(user);
-                            Session.Remove("Ubiquicity_itemId");
+                            
                         }
                         break;
                 }
+
+                Session.Remove("Ubiquicity_itemId");
 
                 if (userManager.HasErrors)
                 {
@@ -88,7 +91,8 @@ namespace Ubiquicity
                 }
                 else
                 {
-                    Response.Redirect(Request.RawUrl);
+                    //Response.Redirect(Request.RawUrl);
+                    LoadGridView();
                 }
             } catch (Exception exception)
             {
@@ -96,12 +100,12 @@ namespace Ubiquicity
             }
         }
 
-        protected override void AskForDelete(object sender, EventArgs e)
+        protected override void AskForDelete(object sender, UbiquicityEventArg e)
         {
             Alert.Show("Eliminar registro", "¿Está seguro de querer eliminar el registro?", "Si");
         }
 
-        protected override void PerformDeleteItem(object sender, EventArgs e)
+        protected override void PerformDeleteItem(object sender, UbiquicityEventArg e)
         {
             if (Session["Ubiquicity_itemId"] != null)
             {
@@ -117,7 +121,7 @@ namespace Ubiquicity
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        protected override void ShowNewForm(object sender, EventArgs e)
+        protected override void ShowNewForm(object sender, UbiquicityEventArg e)
         {
             UCFormNewMember.ShowPasswordFields();
             UCFormNewMember.EnableUserField();
@@ -131,10 +135,11 @@ namespace Ubiquicity
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        protected override void ShowEditForm(object sender, EventArgs e)
+        protected override void ShowEditForm(object sender, UbiquicityEventArg e)
         {
-            int id = Convert.ToInt32(Session["Ubiquicity_itemId"]);
-                        
+            int id = Convert.ToInt32(e.TheObject);
+            Session["Ubiquicity_itemId"] = id;
+
             UserManager userManager = new UserManager();
             User user = userManager.Get(id);
 
@@ -148,7 +153,6 @@ namespace Ubiquicity
                 UCFormNewMember.DisableUserField();
                 UCFormNewMember.FillForm(user);
                 Session["Ubiquicity_action"] = EDIT;
-                //Session["Ubiquicity_itemId"] = id;
                 Page.ClientScript.RegisterStartupScript(this.GetType(), "openModalEdit", "window.onload = function() { $('#ucModalNewMember').modal('show'); }", true);
             }
         }

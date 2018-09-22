@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using BL;
 using BE;
+using Ubiquicity.Classes;
 
 namespace Ubiquicity
 {
@@ -50,7 +51,7 @@ namespace Ubiquicity
                     case CREATE:
                         role = new Role();
                         UCFormRolePermission.PopulateModel(role);
-                        role.Permissions = RetrieveFromSession("granted");
+                        role.Permissions = RetrievePermissionFromSession("granted");
                         success = rolManager.Save(role);
                         break;
 
@@ -59,9 +60,9 @@ namespace Ubiquicity
                         {
                             role = rolManager.Get(Convert.ToInt32(Session["Ubiquicity_itemId"]));
                             UCFormRolePermission.PopulateModel(role);
-                            role.Permissions = RetrieveFromSession("granted");
+                            role.Permissions = RetrievePermissionFromSession("granted");
                             success = rolManager.Edit(role);
-                            Session.Remove("Ubiquicity_itemId");
+                            
                         }
                         break;
                 }
@@ -74,6 +75,8 @@ namespace Ubiquicity
                 {
                     Response.Redirect(Request.RawUrl);
                 }
+
+                Session.Remove("Ubiquicity_itemId");
             }
             catch (Exception exception)
             {
@@ -81,9 +84,10 @@ namespace Ubiquicity
             }
         }
 
-        protected override void ShowEditForm(object sender, EventArgs e) {
+        protected override void ShowEditForm(object sender, UbiquicityEventArg e) {
 
-            int id = Convert.ToInt32(Session["Ubiquicity_itemId"]);
+            int id = Convert.ToInt32(e.TheObject);
+            Session["Ubiquicity_itemId"] = id;
 
             RoleManager roleManager = new RoleManager();
             Role role = roleManager.Get(id);
@@ -100,8 +104,8 @@ namespace Ubiquicity
                 }
 
                 //Se guardan en sesión para su manejo posterior
-                KeepInSession("granted", role.Permissions);
-                KeepInSession("toGrant", unassignedPermission);
+                KeepPermissionInSession("granted", role.Permissions);
+                KeepPermissionInSession("toGrant", unassignedPermission);
 
                 UCFormRolePermission.FillForm(role, unassignedPermission);
                 Session["Ubiquicity_action"] = EDIT;
@@ -114,14 +118,14 @@ namespace Ubiquicity
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        protected override void ShowNewForm(object sender, EventArgs e) {
+        protected override void ShowNewForm(object sender, UbiquicityEventArg e) {
             RoleManager roleManager = new RoleManager();
             List<Permission> unassignedPermission = roleManager.GetAllPermission();
             List<Permission> granted = new List<Permission>();
 
             //Se guardan en sesión para su manejo posterior
-            KeepInSession("granted", granted);
-            KeepInSession("toGrant", unassignedPermission);
+            KeepPermissionInSession("granted", granted);
+            KeepPermissionInSession("toGrant", unassignedPermission);
 
             UCFormRolePermission.InitializeForm(granted, unassignedPermission);
             Session["Ubiquicity_action"] = CREATE;
@@ -134,8 +138,8 @@ namespace Ubiquicity
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void GrantPermission(object sender, EventArgs e) {
-            List<Permission> granted = RetrieveFromSession("granted");
-            List<Permission> toGrant = RetrieveFromSession("toGrant");
+            List<Permission> granted = RetrievePermissionFromSession("granted");
+            List<Permission> toGrant = RetrievePermissionFromSession("toGrant");
 
             int id = int.Parse(Session["Ubiquicity_permissionId"].ToString());
             SwitchPermission(id, "toGrant", toGrant, "granted", granted);
@@ -148,8 +152,8 @@ namespace Ubiquicity
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void UngrantPermission(object sender, EventArgs e) {
-            List<Permission> granted = RetrieveFromSession("granted");
-            List<Permission> toGrant = RetrieveFromSession("toGrant");
+            List<Permission> granted = RetrievePermissionFromSession("granted");
+            List<Permission> toGrant = RetrievePermissionFromSession("toGrant");
 
             int id = int.Parse(Session["Ubiquicity_permissionId"].ToString());
             SwitchPermission(id, "granted", granted, "toGrant", toGrant);
@@ -171,18 +175,19 @@ namespace Ubiquicity
                 }
             }
 
-            KeepInSession(keyfrom, from);
-            KeepInSession(keyTo, to);
+            KeepPermissionInSession(keyfrom, from);
+            KeepPermissionInSession(keyTo, to);
             Session.Remove("Ubiquicity_permissionId");
             ShowCrudForm();
         }
 
-        protected override void AskForDelete(object sender, EventArgs e)
+        protected override void AskForDelete(object sender, UbiquicityEventArg e)
         {
+            Session["Ubiquicity_itemId"] = Convert.ToInt32(e.TheObject);
             Alert.Show("Eliminar registro", "¿Está seguro de querer eliminar el registro?", "Si");
         }
 
-        protected override void PerformDeleteItem(object sender, EventArgs e) {
+        protected override void PerformDeleteItem(object sender, UbiquicityEventArg e) {
             if (Session["Ubiquicity_itemId"] != null)
             {
                 RoleManager rolManager = new RoleManager();
@@ -192,13 +197,12 @@ namespace Ubiquicity
                 if (success)
                 {
                     LoadGridView();
-                    Session.Remove("Ubiquicity_itemId");
                 }
 
                 if (!success && rolManager.HasErrors) {
                     Alert.Show("Error", rolManager.Errors[0].description);
                 }
-                
+                Session.Remove("Ubiquicity_itemId");
             }
         }
 
@@ -208,12 +212,12 @@ namespace Ubiquicity
         }
 
         //estrategia para manejar las listas: el uso de la sesión
-        private void KeepInSession(string key, List<Permission> value)
+        private void KeepPermissionInSession(string key, List<Permission> value)
         {
             Session[key] = value;
         }
         
-        private List<Permission> RetrieveFromSession(string key)
+        private List<Permission> RetrievePermissionFromSession(string key)
         {
             return (List < Permission > ) Session[key];
         }

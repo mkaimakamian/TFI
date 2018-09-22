@@ -92,7 +92,6 @@
     <Content Include="news_manager.aspx" />
     <Content Include="packages.config" />
     <Content Include="front.Master" />
-    <Content Include="password_recovery.aspx" />
     <Content Include="privacy.aspx" />
     <Content Include="promotion_manager.aspx" />
     <Content Include="recovery_action.aspx" />
@@ -218,6 +217,7 @@
     <Compile Include="Classes\BaseManager.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Classes\UbiquicityEventArg.cs" />
     <Compile Include="contact.aspx.cs">
       <DependentUpon>contact.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -301,13 +301,6 @@
     </Compile>
     <Compile Include="news_manager.aspx.designer.cs">
       <DependentUpon>news_manager.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="password_recovery.aspx.cs">
-      <DependentUpon>password_recovery.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="password_recovery.aspx.designer.cs">
-      <DependentUpon>password_recovery.aspx</DependentUpon>
     </Compile>
     <Compile Include="privacy.aspx.cs">
       <DependentUpon>privacy.aspx</DependentUpon>
