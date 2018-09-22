@@ -24,6 +24,7 @@ namespace Ubiquicity
         protected virtual void AskForDelete(object sender, EventArgs e) { }
         protected virtual void ShowEditForm(object sender, EventArgs e) { }
         protected virtual void ShowNewForm(object sender, EventArgs e) { }
+        protected virtual void PerformGenericAction(object sender, EventArgs e) { }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -39,9 +40,7 @@ namespace Ubiquicity
             if (!IsPostBack)
             {
                 //Los hijos deben implementar este método para cargar la grilla
-                PreLoadGridView();
                 LoadGridView();
-                PosLoadGridView();
             }
 
             //Setteo de handlers que deben ser implementados por las clases hijo si se pretende manipular alguna de estas acciones.
@@ -49,6 +48,7 @@ namespace Ubiquicity
                 GridView.DeleteActionClick += AskForDelete;
                 GridView.EditActionClick += ShowEditForm;
                 GridView.NewActionClick += ShowNewForm;
+                GridView.GenericActionClick += PerformGenericAction;
             }
         }
 

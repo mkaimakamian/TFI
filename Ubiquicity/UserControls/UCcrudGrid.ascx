@@ -21,6 +21,11 @@
                 <asp:LinkButton ID="btnEdit" runat="server" CssClass="btn btn-warning btn-sm" CausesValidation="false" CommandName="EditItem" Text="<i class='fa fa-pencil-square-o' aria-hidden='true'></i> Editar" CommandArgument='<%# Eval("id") %>'/>
             </ItemTemplate>
         </asp:TemplateField>
+        <asp:TemplateField ShowHeader="False" Visible="false">
+            <ItemTemplate>
+                <asp:LinkButton ID="btnGenericAction" runat="server" CssClass="btn btn-primary btn-sm" CausesValidation="false" CommandName="GenericActionItem" CommandArgument='<%# Eval("id") %>'/>
+            </ItemTemplate>
+        </asp:TemplateField>
         </Columns>
 </asp:GridView>
 <%--    </ContentTemplate>

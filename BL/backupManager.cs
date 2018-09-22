@@ -19,11 +19,11 @@ namespace BL
         /// <returns></returns>
         public bool PerformBackup()
         {
-            string folder = ConfigurationManager.AppSettings["BACKUP_PATH"];
-            string fullPath = folder + "/" + DateTime.Now.Ticks + ".bkp";
-
             try
             {
+                string folder = ConfigurationManager.AppSettings["BACKUP_PATH"];
+                string fullPath = folder + "/" + DateTime.Now.Ticks + ".bkp";
+
                 BackupMapper backupMapper = new BackupMapper();
                 log.AddLogInfo("PerformBackup", "Creando respaldo...", this);
 
@@ -52,14 +52,17 @@ namespace BL
         /// Restaura la copia de respaldo
         /// </summary>
         /// <returns></returns>
-        public bool PerformRestore()
+        public bool PerformRestore(string name)
         {
             try
             {
+                string folder = ConfigurationManager.AppSettings["BACKUP_PATH"];
+                string fullPath = folder + "/" + name;
+
                 BackupMapper backupMapper = new BackupMapper();
                 log.AddLogInfo("PerformRestore", "Restaurando respaldo...", this);
 
-                if (backupMapper.Backup(""))
+                if (backupMapper.Restore(fullPath))
                 {
                     log.AddLogInfo("PerformRestore", "El respaldo se ha restaurado exitosamente.", this);
                     return true;

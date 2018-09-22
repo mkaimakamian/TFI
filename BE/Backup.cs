@@ -8,24 +8,23 @@ namespace BE
 {
     public class Backup
     {
-        private int id;
+        private string id;
         private string path;
-        private string name;
         private long size;
         private DateTime created;
 
-        public Backup(string name, string path, long size, DateTime created)
+        public Backup(string id, string path, long size, DateTime created)
         {
-            Name = name;
+            Id = id;
             Path = path;
             Size = size;
             Created = created;
         }
 
-        // No es necesario pero mantiene compatibilidad con la grilla.
-        public int Id
+        public string Id
         {
-            get { return 0; }
+            get { return id; }
+            set { id = value; }
         }
 
         public string Path
@@ -34,12 +33,7 @@ namespace BE
             set { path = value; }
         }
 
-        public string Name
-        {
-            get { return name; }
-            set { name = value; }
-        }
-
+      
         public long Size
         {
             get { return size; }

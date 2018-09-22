@@ -13,7 +13,9 @@ namespace Ubiquicity.UserControls
         public event EventHandler EditActionClick;
         public event EventHandler DeleteActionClick;
         public event EventHandler NewActionClick;
-        //private Dictionary<string, string> columnsToShow;
+        public event EventHandler GenericActionClick;
+        private HashSet<Int32> cellsToRemove = new HashSet<int>();
+        private string genericActionButtonName = "Genérico";
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -45,6 +47,12 @@ namespace Ubiquicity.UserControls
             gvItem.Columns[1].Visible = false;
         }
 
+        public void ShowGenericActionButton(string buttonName)
+        {
+            gvItem.Columns[2].Visible = true;
+            genericActionButtonName = buttonName;
+        }
+
         /// <summary>
         /// Carga el datasource y establece el binding con los objetos a mostrar
         /// </summary>
@@ -71,6 +79,10 @@ namespace Ubiquicity.UserControls
             else if (e.CommandName == "DeleteItem")
             {
                 if (DeleteActionClick != null) DeleteActionClick(this, e);
+            }
+            else if (e.CommandName == "GenericActionItem")
+            {
+                if (GenericActionClick != null) GenericActionClick(this, e);
             }
 
         }
@@ -105,7 +117,11 @@ namespace Ubiquicity.UserControls
             }
         }
 
-        private HashSet<Int32> toRemove = new HashSet<int>();
+        /// <summary>
+        /// Muestra las columnas traducidas, ocultando las que no han recibido traducción.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void gvItem_RowDataBound(object sender, GridViewRowEventArgs e)
         {
                         
@@ -121,16 +137,22 @@ namespace Ubiquicity.UserControls
                     if (ColumnsToShow.ContainsKey(cell.Text))
                     {
                         cell.Text = ColumnsToShow[cell.Text];
-                    }
-                    else if (cell.Text != "&nbsp;") // las dos columnas templates de eliminación y edición
+                    }                    
+                    else if (cell.Text != "&nbsp;")
                     {
-                        //Si no se traduce, entonces no interesa y debe ser eliminado, razón por la que guardo los indices de columna
-                        toRemove.Add(i);
+                        //Si no se traduce, entonces no interesa y debe ser eliminado, razón por la que se guarda
+                        //el índice para poder remover luego la celda
+                        cellsToRemove.Add(i);
                     }
+                } else if (i == 2 && e.Row.RowType == DataControlRowType.DataRow) //el 2 es por el orden; poco feliz 
+                {
+                    //Se necesita para identificar el botón de acción genérica
+                    LinkButton button = (LinkButton)e.Row.FindControl("btnGenericAction");
+                    if (button != null) button.Text = genericActionButtonName;
                 }
 
                 // Las celdas pertenecientes a columnas no mostrables, se ocultan.
-                if (toRemove.Contains(i))
+                if (cellsToRemove.Contains(i))
                 {
                     cell.Visible = false;
                 }

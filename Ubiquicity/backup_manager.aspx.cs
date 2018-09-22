@@ -14,7 +14,11 @@ namespace Ubiquicity
         protected override void PageLoad(object sender, EventArgs e)
         {
             GridView = UCcrudGrid;
+            GridView.HideDeleteButton();
+            GridView.HideEditButton();
+            GridView.ShowGenericActionButton("Restaurar");
             Alert.PerformMainAction += PerformBackup;
+            Alert.PerformSecondAction += PerformRestore;
         }
 
 
@@ -51,6 +55,11 @@ namespace Ubiquicity
             Alert.Show("Crear respaldo", "¿Está seguro de querer crear el respaldo? El sistema se inhabilitará durante la ejecución.", "Si, crear respaldo");
         }
 
+        protected override void PerformGenericAction(object sender, EventArgs e)
+        {
+            Alert.Show("Restaurar respaldo", "¿Está seguro de querer restaurar el respaldo? El sistema se inhabilitará y se perderán los datos posteriores al punto de restauración.", null, "Si, restaurar respaldo");
+        }
+
         /// <summary>
         /// Atiende la petición de creación lanzada desde al alert creado por ShowNewForm.
         /// </summary>
@@ -68,7 +77,31 @@ namespace Ubiquicity
                 }
                 else
                 {
+                    LoadGridView();
                     Alert.Show("Éxtito", "El respaldo se ha generado exitosamente.");
+                }
+            }
+            catch (Exception exception)
+            {
+                Alert.Show("Exception", exception.Message);
+            }
+        }
+
+        protected void PerformRestore(object sender, EventArgs e)
+        {
+            try
+            {
+                string fileName = Session["Ubiquicity_itemId"].ToString();
+
+                BackupManager backupManager = new BackupManager();
+
+                if (!backupManager.PerformRestore(fileName) && backupManager.HasErrors)
+                {
+                    Alert.Show("Error", backupManager.ErrorDescription);
+                }
+                else
+                {
+                    Alert.Show("Éxtito", "La restauración se ha generado exitosamente.");
                 }
             }
             catch (Exception exception)
@@ -84,7 +117,7 @@ namespace Ubiquicity
         private Dictionary<string, string> ColumnsToShowAndTranslate()
         {
             Dictionary<string, string> columns = new Dictionary<string, string>();
-            columns.Add("Name", "Nombre");
+            columns.Add("Id", "Nombre");
             columns.Add("Size", "Tamaño");
             columns.Add("Created", "Creado");
             
