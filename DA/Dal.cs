@@ -2,7 +2,7 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Collections;
-
+using System.Configuration;
 namespace DA
 {
     public class Dal
@@ -14,10 +14,11 @@ namespace DA
         public Dal()
         {
             try {
-                //databaseName = Mana ConfigurationManager.AppSettings["reCAPTCHA"];
-                //serverInstance = Configuration.WebConfigurationManager.AppSettings["ApiUserName"];
-                databaseName = "ubiquicity";
-                serverInstance = "SQLEXPRESS";
+
+                databaseName = ConfigurationManager.AppSettings["DATABASE"];
+                serverInstance = ConfigurationManager.AppSettings["SERVERINSTANCE"];
+                //databaseName = "ubiquicity";
+                //serverInstance = "SQLEXPRESS";
             }
             catch {
                 databaseName = "ubiquicity";
@@ -142,19 +143,13 @@ namespace DA
         {
             SqlConnection connection = new SqlConnection(connStr);
             SqlCommand command = new SqlCommand(sql, connection);
-            int result = -1;
 
             try { 
                 connection.Open();
                 object row = command.ExecuteScalar();
-
-                if (row != null)
-                {
-                    result = int.Parse(row.ToString());
-                }
                 connection.Close();
 
-                return result > 0;
+                return true;
             }
             catch (Exception e)
             {

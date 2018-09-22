@@ -75,6 +75,10 @@ namespace BL
         //    return true;
         //}
 
+        /// <summary>
+        /// Da inicio al proceso para el cambio de password.
+        /// </summary>
+        /// <param name="mail"></param>
         public void ResetPassword(string mail)
         {
             UserMapper mapper = new UserMapper();

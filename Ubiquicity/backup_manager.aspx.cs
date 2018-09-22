@@ -14,6 +14,7 @@ namespace Ubiquicity
         protected override void PageLoad(object sender, EventArgs e)
         {
             GridView = UCcrudGrid;
+            Alert.PerformMainAction += PerformBackup;
         }
 
 
@@ -33,19 +34,42 @@ namespace Ubiquicity
                     GridView.ColumnsToShow = ColumnsToShowAndTranslate();
                     GridView.LoadGrid(backups);
                 }
+            }
+            catch (Exception exception)
+            {
+                Alert.Show("Exception", exception.Message);
+            }
+        }
 
-                //UserManager userManager = new UserManager();
-                //List<User> users = userManager.Get();
+        /// <summary>
+        /// Muestra el formulairo para el alta de un nuevo usuario
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected override void ShowNewForm(object sender, EventArgs e)
+        {
+            Alert.Show("Crear respaldo", "¿Está seguro de querer crear el respaldo? El sistema se inhabilitará durante la ejecución.", "Si, crear respaldo");
+        }
 
-                //if (userManager.HasErrors)
-                //{
-                //    Alert.Show("Error", userManager.ErrorDescription);
-                //}
-                //else
-                //{
-                //    GridView.ColumnsToShow = ColumnsToShowAndTranslate();
-                //    GridView.LoadGrid(users);
-                //}
+        /// <summary>
+        /// Atiende la petición de creación lanzada desde al alert creado por ShowNewForm.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void PerformBackup(object sender, EventArgs e)
+        {
+            try
+            {
+                BackupManager backupManager = new BackupManager();
+
+                if (!backupManager.PerformBackup() && backupManager.HasErrors)
+                {
+                    Alert.Show("Error", backupManager.ErrorDescription);
+                }
+                else
+                {
+                    Alert.Show("Éxtito", "El respaldo se ha generado exitosamente.");
+                }
             }
             catch (Exception exception)
             {
@@ -61,7 +85,7 @@ namespace Ubiquicity
         {
             Dictionary<string, string> columns = new Dictionary<string, string>();
             columns.Add("Name", "Nombre");
-            columns.Add("Path", "Ruta");
+            columns.Add("Size", "Tamaño");
             columns.Add("Created", "Creado");
             
             return columns;

@@ -85,6 +85,11 @@ namespace Ubiquicity.UserControls
             if (NewActionClick != null) NewActionClick(this, e);
         }
 
+        /// <summary>
+        /// Realiza la paginación de la grilla.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void gvItem_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             if (gvItem.EditIndex != -1)

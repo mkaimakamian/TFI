@@ -60,12 +60,15 @@ namespace Ubiquicity.UserControls
             if (PerformSecondAction != null) PerformSecondAction(this, e);
         }
 
+        /// <summary>
+        /// Muestra en pantalla el mensaje; si los labels fueron asignados, se muestran los botones.
+        /// </summary>
+        /// <param name="title"></param>
+        /// <param name="message"></param>
+        /// <param name="button1Label"></param>
+        /// <param name="button2Label"></param>
         public void Show(string title, string message, String button1Label = "", String button2Label = "")
         {
-            //customAlertBox.title = title;
-            //customAlertBox.message = message;
-            //Page.ClientScript.RegisterStartupScript(this.GetType(), "openModal", "window.onload = function() { $('#ucModalMessageBox').modal('show'); }", true);
-
             this.title = title;
             this.message = message;
             this.MainActionLabel = button1Label;

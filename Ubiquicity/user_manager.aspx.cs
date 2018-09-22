@@ -40,7 +40,8 @@ namespace Ubiquicity
             }
         }
 
-        // Atiende la llamada del botón aceptar del form de creación de usuario
+        // Atiende la llamada del botón aceptar del form de creación de usuario.
+        //En lo particular, como la edición y la creación usan el mismo botón, los dos eventos son atendidos por este handler.
         protected void ucModalNewMember_btnAcceptClick(object sender, EventArgs e)
         {
             try
@@ -97,7 +98,6 @@ namespace Ubiquicity
 
         protected override void AskForDelete(object sender, EventArgs e)
         {
-            //Session["Ubiquicity_itemId"] = id;
             Alert.Show("Eliminar registro", "¿Está seguro de querer eliminar el registro?", "Si");
         }
 

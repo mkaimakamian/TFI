@@ -11,12 +11,14 @@ namespace BE
         private int id;
         private string path;
         private string name;
+        private long size;
         private DateTime created;
 
-        public Backup(string name, string path, DateTime created)
+        public Backup(string name, string path, long size, DateTime created)
         {
             Name = name;
             Path = path;
+            Size = size;
             Created = created;
         }
 
@@ -36,6 +38,12 @@ namespace BE
         {
             get { return name; }
             set { name = value; }
+        }
+
+        public long Size
+        {
+            get { return size; }
+            set { size = value; }
         }
 
         public DateTime Created

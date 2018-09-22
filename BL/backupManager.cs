@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using ORM;
 using System.IO;
 using BE;
+using System.Web;
+using System.Configuration;
 
 namespace BL
 {
@@ -17,24 +19,31 @@ namespace BL
         /// <returns></returns>
         public bool PerformBackup()
         {
+            string folder = ConfigurationManager.AppSettings["BACKUP_PATH"];
+            string fullPath = folder + "/" + DateTime.Now.Ticks + ".bkp";
+
             try
             {
                 BackupMapper backupMapper = new BackupMapper();
                 log.AddLogInfo("PerformBackup", "Creando respaldo...", this);
 
-                if (backupMapper.Backup(""))
+                if (backupMapper.Backup(fullPath))
                 {
                     log.AddLogInfo("PerformBackup", "El respaldo se ha generado exitosamente.", this);
                     return true;
                 } else
                 {
-                    log.AddLogInfo("PerformBackup", "No se ha podido generar el respaldo.", this);
+                    string errorDescription = "No se ha podido generar el respaldo.";
+                    log.AddLogCritical("PerformBackup", errorDescription, this);
+                    AddError(new ResultBE(ResultBE.Type.FAIL, errorDescription));
                     return false;
                 }
             }
             catch (Exception exception)
             {
-                log.AddLogCritical("PerformBackup", exception.Message, this);
+                string errorDescription = exception.Message;
+                log.AddLogCritical("PerformBackup", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.FAIL, errorDescription));
                 return false;
             }
         }
@@ -73,13 +82,13 @@ namespace BL
         {
             List<Backup> backups = new List<Backup>();
 
-            string path = System.Web.HttpContext.Current.Server.MapPath(("~/Resources"));
+            string path = ConfigurationManager.AppSettings["BACKUP_PATH"];
 
             DirectoryInfo Dir = new DirectoryInfo(path);
-            FileInfo[] FileList = Dir.GetFiles("*.*", SearchOption.AllDirectories);
+            FileInfo[] FileList = Dir.GetFiles("*.bkp", SearchOption.AllDirectories);
             foreach (FileInfo backupFile in FileList)
             {
-                backups.Add(new Backup(backupFile.Name, backupFile.FullName, backupFile.CreationTime));
+                backups.Add(new Backup(backupFile.Name, backupFile.FullName, backupFile.Length, backupFile.CreationTime));
             }
 
             return backups;

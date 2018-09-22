@@ -44,7 +44,7 @@ namespace Ubiquicity
                 PosLoadGridView();
             }
 
-            //Setteo de handlers que deben ser implementados por las clases hijo
+            //Setteo de handlers que deben ser implementados por las clases hijo si se pretende manipular alguna de estas acciones.
             if (GridView != null) {
                 GridView.DeleteActionClick += AskForDelete;
                 GridView.EditActionClick += ShowEditForm;
