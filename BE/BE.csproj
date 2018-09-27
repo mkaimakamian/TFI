@@ -47,6 +47,7 @@
     <Compile Include="Permission.cs" />
     <Compile Include="PersonalInformation.cs" />
     <Compile Include="QueryFilter.cs" />
+    <Compile Include="Resource.cs" />
     <Compile Include="ResultBE.cs" />
     <Compile Include="Role.cs" />
     <Compile Include="Translation.cs" />
