@@ -11,6 +11,7 @@ namespace BE
         private int id;
         private string name;
         private string description;
+        private string image;
 
         public int Id
         {
@@ -48,6 +49,19 @@ namespace BE
             set
             {
                 description = value;
+            }
+        }
+
+        public string Image
+        {
+            get
+            {
+                return image;
+            }
+
+            set
+            {
+                image = value;
             }
         }
     }

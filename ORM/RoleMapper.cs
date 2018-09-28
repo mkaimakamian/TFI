@@ -148,7 +148,7 @@ namespace ORM
             table.Add("@name", role.Name);
             table.Add("@description", role.Description);
             role.Id = dal.Write(table, "spWriteRole");
-            return true;
+            return role.Id > 0;
         }
 
         private Role ConvertToModel(DataRow data)
@@ -160,13 +160,5 @@ namespace ORM
                 Description = data["description"].ToString()
             };
         }
-
-         //      /// 
-        //      /// <param name="user"></param>
-        //      public boolean SaveWebUserRol(User user)
-        //      {
-
-        //          return null;
-        //      }
     }
 }

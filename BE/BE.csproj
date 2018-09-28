@@ -41,9 +41,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Backup.cs" />
+    <Compile Include="Item.cs" />
     <Compile Include="Label.cs" />
     <Compile Include="Language.cs" />
     <Compile Include="LogEntry.cs" />
+    <Compile Include="Map.cs" />
     <Compile Include="Permission.cs" />
     <Compile Include="PersonalInformation.cs" />
     <Compile Include="QueryFilter.cs" />

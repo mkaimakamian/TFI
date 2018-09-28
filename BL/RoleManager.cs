@@ -10,30 +10,6 @@ namespace BL
 {
     public class RoleManager: BaseManager
     {
-        //      /// 
-        ///// <param name="user"></param>
-        //public boolean AssignWebUserRole(User user)
-        //      {
-
-        //          return null;
-        //      }
-
-        //      /// 
-        //      /// <param name="role"></param>
-        //      public boolean CheckExistence(string role)
-        //      {
-
-        //          return null;
-        //      }
-
-        //      /// 
-        //      /// <param name="id"></param>
-        //      public boolean CheckUsage(int id)
-        //      {
-
-        //          return null;
-        //      }
-
         /// <summary>
         /// Elimina el rol cuyo id es pasado por parámetro.
         /// </summary>
@@ -231,13 +207,6 @@ namespace BL
             }
 
             List<Permission> permissions = rolePermissionMapper.Get(role);
-
-            //if (role == null)
-            //{
-            //    AddError(new ResultBE(ResultBE.Type.EMPTY, "El rol no posee permisos asociados."));
-            //    return null;
-            //}
-
             role.Permissions = permissions;
 
             return role;
@@ -286,14 +255,7 @@ namespace BL
         public List<Permission> GetUnassignedPermission(Role role)
         {
             RolePermissionMapper rolePermissionMapper = new RolePermissionMapper();
-            List<Permission> permissions = rolePermissionMapper.GetUnassignedPermission(role);
-
-            //if (permissions == null)
-            //{
-            //    AddError(new ResultBE(ResultBE.Type.EMPTY, "Sin permisos sin asignar."));
-            //}
-
-            return permissions;
+            return rolePermissionMapper.GetUnassignedPermission(role);
         }
 
         // TODO - Agregar en ea
@@ -319,14 +281,7 @@ namespace BL
         public List<Role> GetUnassignedRole(User user)
         {
             RolePermissionMapper rolePermissionMapper = new RolePermissionMapper();
-            List<Role> roles = rolePermissionMapper.GetUnassignedRole(user);
-
-            //if (permissions == null)
-            //{
-            //    AddError(new ResultBE(ResultBE.Type.EMPTY, "Sin permisos sin asignar."));
-            //}
-
-            return roles;
+            return rolePermissionMapper.GetUnassignedRole(user);
         }
 
         private bool IsValid(Role role)

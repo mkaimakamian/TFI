@@ -117,7 +117,7 @@ namespace Ubiquicity
         }
 
         /// <summary>
-        /// Muestra el formulairo para el alta de un nuevo usuario
+        /// Muestra el formulairo para el alta de un nuevo usuario.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

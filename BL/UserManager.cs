@@ -69,12 +69,6 @@ namespace BL
             }
         }
 
-        //public bool CheckExistence(string username)
-        //{
-
-        //    return true;
-        //}
-
         /// <summary>
         /// Da inicio al proceso para el cambio de password.
         /// </summary>

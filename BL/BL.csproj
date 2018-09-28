@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="BackupManager.cs" />
     <Compile Include="BaseManager.cs" />
+    <Compile Include="MapManager.cs" />
     <Compile Include="LanguageManager.cs" />
     <Compile Include="LogManager.cs" />
     <Compile Include="RoleManager.cs" />

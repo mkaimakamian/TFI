@@ -138,39 +138,6 @@ namespace ORM
             return dal.Write(table, "spModifyUser") > 0;
         }
 
-        // TODO - Agregar en EA
-        /// <summary>
-        /// Convierte el dataset al modelo de datos correspondiente.
-        /// </summary>
-        /// <param name="data"></param>
-        /// <returns></returns>
-        private User ConvertToModel(DataRow data)
-        {
-            User user = new User();
-            user.Id = int.Parse(data["id"].ToString());
-            user.Password = data["password"].ToString();
-            user.Mail = data["mail"].ToString();
-            user.Active = Convert.ToBoolean(data["active"]);
-            user.Locked = Convert.ToBoolean(data["locked"]);
-            user.Language.Id = int.Parse(data["languageId"].ToString());
-            user.Name = data["name"].ToString();
-            user.Lastname = data["lastname"].ToString();
-            user.Lastupdate = Convert.ToDateTime(data["lastupdate"]);
-            return user;
-        }
-
-        //      public bool Exists(string username)
-        //      {
-
-        //          return true;
-        //      }
-
-        //      public List<User> Get(List<QueryFilter> queryFilter)
-        //      {
-
-        //          return null;
-        //      }
-
         /// <summary>
         /// Save an user into database.
         /// </summary>
@@ -192,6 +159,27 @@ namespace ORM
 
             user.Id = dal.Write(table, "spWriteUser");
             return user.Id > 0;
+        }
+
+        // TODO - Agregar en EA
+        /// <summary>
+        /// Convierte el dataset al modelo de datos correspondiente.
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        private User ConvertToModel(DataRow data)
+        {
+            User user = new User();
+            user.Id = int.Parse(data["id"].ToString());
+            user.Password = data["password"].ToString();
+            user.Mail = data["mail"].ToString();
+            user.Active = Convert.ToBoolean(data["active"]);
+            user.Locked = Convert.ToBoolean(data["locked"]);
+            user.Language.Id = int.Parse(data["languageId"].ToString());
+            user.Name = data["name"].ToString();
+            user.Lastname = data["lastname"].ToString();
+            user.Lastupdate = Convert.ToDateTime(data["lastupdate"]);
+            return user;
         }
     }
 }

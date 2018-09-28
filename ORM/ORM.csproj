@@ -44,6 +44,7 @@
     <Compile Include="LabelMapper.cs" />
     <Compile Include="LanguageMapper.cs" />
     <Compile Include="LogMapper.cs" />
+    <Compile Include="MapMapper.cs" />
     <Compile Include="PermissionMapper.cs" />
     <Compile Include="RoleMapper.cs" />
     <Compile Include="RolePermissionMapper.cs" />

@@ -7,45 +7,45 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Ubiquicity {
+namespace Ubiquicity.UserControls {
     
     
-    public partial class map_manager {
+    public partial class UCFormMap {
         
         /// <summary>
-        /// UCHeaderBackOffice control.
+        /// nameInput control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ubiquicity.UserControls.UCHeaderBackOffice UCHeaderBackOffice;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText nameInput;
         
         /// <summary>
-        /// UCcrudGrid control.
+        /// descriptionInput control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ubiquicity.UserControls.UCcrudGrid UCcrudGrid;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText descriptionInput;
         
         /// <summary>
-        /// UCFormMap control.
+        /// resourceInput control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ubiquicity.UserControls.UCFormMap UCFormMap;
+        protected global::System.Web.UI.HtmlControls.HtmlInputFile resourceInput;
         
         /// <summary>
-        /// modalMap_btnAccept control.
+        /// imageInput control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button modalMap_btnAccept;
+        protected global::System.Web.UI.HtmlControls.HtmlInputFile imageInput;
     }
 }

@@ -78,10 +78,10 @@ namespace DA
                     }
                 }
             
-                object affected = command.ExecuteScalar();
+                object returned = command.ExecuteScalar();
                 transaction.Commit();
 
-                return int.Parse(affected.ToString());
+                return int.Parse(returned.ToString());
             } catch (Exception e)
             {
                 transaction.Rollback();
