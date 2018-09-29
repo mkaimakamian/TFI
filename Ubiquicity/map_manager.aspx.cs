@@ -105,7 +105,6 @@ namespace Ubiquicity
                             map = mapManager.Get(Convert.ToInt32(Session["Ubiquicity_itemId"]));
                             UCFormMap.PopulateModel(map);
                             success = mapManager.Edit(map);
-
                         }
                         break;
                 }
@@ -152,6 +151,7 @@ namespace Ubiquicity
             Dictionary<string, string> columns = new Dictionary<string, string>();
             columns.Add("Name", "Nombre");
             columns.Add("Description", "Descripción");
+            columns.Add("Resource", "Recurso");
             return columns;
         }
     }

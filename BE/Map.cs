@@ -8,18 +8,18 @@ namespace BE
 {
     public class Map: Resource
     {
-        string sourcePath;
+        string resource;
 
-        public string SourcePath
+        public string Resource
         {
             get
             {
-                return sourcePath;
+                return resource;
             }
 
             set
             {
-                sourcePath = value;
+                resource = value;
             }
         }
     }

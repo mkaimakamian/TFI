@@ -30,7 +30,7 @@ namespace BL
 
         public bool Edit(Map map)
         {
-            if (!IsValid(map)) return false;
+            if (!IsValidForEdit(map)) return false;
 
             MapMapper mapMapper = new MapMapper();
 
@@ -87,6 +87,20 @@ namespace BL
 
         private bool IsValid(Map map)
         {
+            bool isValid = IsValidForEdit(map);
+
+            if (String.IsNullOrEmpty(map.Resource))
+            {
+                string errorDescription = "Debe asociarse un archivo al mapa.";
+                log.AddLogWarn("IsValid", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
+                isValid = isValid & false;
+            }
+
+            return isValid;
+        }
+        private bool IsValidForEdit(Map map)
+        {
             bool isValid = true;
 
             if (String.IsNullOrEmpty(map.Name))
@@ -100,14 +114,6 @@ namespace BL
             if (String.IsNullOrEmpty(map.Description))
             {
                 string errorDescription = "Debe completarse la descripción.";
-                log.AddLogWarn("IsValid", errorDescription, this);
-                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
-                isValid = isValid & false;
-            }
-
-            if (String.IsNullOrEmpty(map.SourcePath))
-            {
-                string errorDescription = "Debe asociarse un archivo al mapa.";
                 log.AddLogWarn("IsValid", errorDescription, this);
                 AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
                 isValid = isValid & false;

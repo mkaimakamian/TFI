@@ -14,27 +14,32 @@
 </script>
 
 <div class="modal-body">
-    <div class="form-row">
-        <div class="form-group col-md-6">
-        <label for="nameInput">Nombre</label>
-        <input id="nameInput" runat="server" type="text" class="form-control form-control-sm"  placeholder="Ingresá el nombre">
+  
+        <div class="form-row col-md-6">
+            <div class="form-group">
+                <label for="nameInput">Nombre</label>
+                <input id="nameInput" runat="server" type="text" class="form-control form-control-sm"  placeholder="Ingresá el nombre">
+            </div>
+
+            <div class="form-group">
+                <label for="descriptionInput">Descripción</label>
+                <input id="descriptionInput" runat="server" type="text" class="form-control form-control-sm"  placeholder="Ingresa la descripción">
+            </div>
+
+            <div class="form-group">
+                <label id="lblResource" runat="server" for="resourceInput" >Recurso</label>
+<%--                <input id="resourceInput" runat="server" type="file" class="form-control form-control-sm btn-choose">--%>
+                <asp:FileUpload ID="resourceInput" runat="server" class="form-control form-control-sm btn-choose"/>
+            </div>
         </div>
-        <div class="form-group col-md-6">
-            <label for="descriptionInput">Descripción</label>
-            <input id="descriptionInput" runat="server" type="text" class="form-control form-control-sm"  placeholder="Ingresa la descripción">
+        <div class="form-row col-md-6">
+            <div class="form-group">
+                <label for="imageInput">Imagen</label>
+                <input id="imageInput" runat="server" type="file" onchange="readURL(this)">
+                <input id="imageInputBase64" runat="server" type="hidden">
+                <img id="mapFileImage" runat="server" width="200" />
+            </div>
         </div>
-    </div>
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            <label for="resourceInput">Mapa (recurso)</label>
-            <input id="resourceInput" runat="server" type="file" class="form-control form-control-sm btn-choose">
-        </div>
-        <div class="form-group col-md-6">
-            <label for="imageInput">Imagen</label>
-            <input id="imageInput" runat="server" type="file" onchange="readURL(this)">
-            <input id="imageInputBase64" runat="server" type="hidden">
-            <img id="mapFileImage" runat="server" width="200" />
-       </div>
-    </div>
  
+    
 </div>
