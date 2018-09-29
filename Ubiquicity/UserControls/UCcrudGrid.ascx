@@ -26,6 +26,11 @@
                 <asp:LinkButton ID="btnGenericAction" runat="server" CssClass="btn btn-primary btn-sm" CausesValidation="false" CommandName="GenericActionItem" CommandArgument='<%# Eval("id") %>'/>
             </ItemTemplate>
         </asp:TemplateField>
+        <asp:TemplateField ShowHeader="False" Visible="false">
+            <ItemTemplate>
+                <img src="<%# EvalProperty("Image") %>" width="96" height="96" />
+            </ItemTemplate>
+        </asp:TemplateField>
         </Columns>
 </asp:GridView>
 <%--    </ContentTemplate>

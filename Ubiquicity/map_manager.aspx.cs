@@ -15,6 +15,7 @@ namespace Ubiquicity
         protected override void PageLoad(object sender, EventArgs e)
         {
             GridView = UCcrudGrid;
+            GridView.ShowThumbnail();
         }
 
         protected override void LoadGridView()
@@ -151,7 +152,6 @@ namespace Ubiquicity
             Dictionary<string, string> columns = new Dictionary<string, string>();
             columns.Add("Name", "Nombre");
             columns.Add("Description", "Descripción");
-            columns.Add("Image", "Imagen");
             return columns;
         }
     }

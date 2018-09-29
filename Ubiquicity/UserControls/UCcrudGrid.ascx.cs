@@ -56,6 +56,11 @@ namespace Ubiquicity.UserControls
             genericActionButtonName = buttonName;
         }
 
+        public void ShowThumbnail()
+        {
+            gvItem.Columns[3].Visible = true;
+        }
+
         /// <summary>
         /// Carga el datasource y establece el binding con los objetos a mostrar
         /// </summary>
@@ -119,6 +124,24 @@ namespace Ubiquicity.UserControls
                 gvItem.UseAccessibleHeader = true;
                 gvItem.HeaderRow.TableSection = TableRowSection.TableHeader;
             }
+        }
+
+        /// <summary>
+        /// Evalúa la existencia de la columna para hacer el binding; si no existe, devuelve un string vacío.
+        /// </summary>
+        /// <param name="columnName"></param>
+        /// <returns></returns>
+        public object EvalProperty(string columnName)
+        {
+            object toReturn;
+            try {
+                toReturn = Eval(columnName);
+
+            }
+            catch {
+                toReturn = "";
+            }
+            return toReturn;
         }
 
         /// <summary>
