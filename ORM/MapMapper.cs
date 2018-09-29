@@ -22,7 +22,22 @@ namespace ORM
             table.Add("@imagePath", map.Image);
             table.Add("@sourcePath", map.SourcePath);
             map.Id = dal.Write(table, "spWriteMap");
-            //test if the id coul be more than  < -1
+
+            return map.Id > 0;
+        }
+
+        public bool Edit(Map map)
+        {
+            Dal dal = new Dal();
+            Hashtable table = new Hashtable();
+
+            table.Add("@id", map.Id);
+            table.Add("@name", map.Name);
+            table.Add("@description", map.Description);
+            table.Add("@imagePath", map.Image);
+            table.Add("@sourcePath", map.SourcePath);
+            map.Id = dal.Write(table, "spModifyMap");
+
             return map.Id > 0;
         }
 
@@ -65,6 +80,14 @@ namespace ORM
             }
 
             return map;
+        }
+
+        public bool Delete(int id)
+        {
+            Dal dal = new Dal();
+            Hashtable table = new Hashtable();
+            table.Add("@id", id);
+            return dal.Write(table, "spDeleteMap") > 0;
         }
 
         private Map ConvertToModel(DataRow data)

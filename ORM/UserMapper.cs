@@ -49,26 +49,6 @@ namespace ORM
             return user;
         }
 
-        //TODO - Agregar a ea
-
-        /// <summary>
-        /// Chequea si algún usuario ya está usando el correo
-        /// </summary>
-        /// <param name="mail"></param>
-        /// <returns></returns>
-        //public bool GetByMail(string mail)
-        //{
-        //    Dal dal = new Dal();
-        //    Hashtable table = new Hashtable();
-
-        //    table.Add("@id", DBNull.Value);
-        //    table.Add("@mail", mail);
-
-        //    DataSet result = dal.Read(table, "spReadUser");
-
-        //    return result != null && result.Tables[0].Rows.Count > 0;
-        //}
-
         public User Get(string mail)
         {
             Dal dal = new Dal();

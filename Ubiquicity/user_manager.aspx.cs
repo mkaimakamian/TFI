@@ -102,6 +102,7 @@ namespace Ubiquicity
 
         protected override void AskForDelete(object sender, UbiquicityEventArg e)
         {
+            Session["Ubiquicity_itemId"] = Convert.ToInt32(e.TheObject);
             Alert.Show("Eliminar registro", "¿Está seguro de querer eliminar el registro?", "Si");
         }
 
@@ -145,7 +146,7 @@ namespace Ubiquicity
 
             if (userManager.HasErrors)
             {
-                Alert.Show("Error", userManager.Errors[0].description);
+                Alert.Show("Error", userManager.ErrorDescription);
             }
             else
             {

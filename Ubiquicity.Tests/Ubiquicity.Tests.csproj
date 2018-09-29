@@ -82,6 +82,9 @@
   <ItemGroup>
     <Content Include="script.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="636738028451112809.bkp" />
+  </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

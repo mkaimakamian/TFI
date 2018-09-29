@@ -28,6 +28,23 @@ namespace BL
             return true;
         }
 
+        public bool Edit(Map map)
+        {
+            if (!IsValid(map)) return false;
+
+            MapMapper mapMapper = new MapMapper();
+
+            if (!mapMapper.Edit(map))
+            {
+                string errorDescription = "No se ha podido modificar el mapa.";
+                log.AddLogCritical("Edit", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.FAIL, errorDescription));
+                return false;
+            }
+
+            return true;
+        }
+
         public Map Get(int id)
         {
             MapMapper mapMapper = new MapMapper();
@@ -51,6 +68,21 @@ namespace BL
         {
             MapMapper mapMapper = new MapMapper();
             return mapMapper.Get();
+        }
+
+        public bool Delete(int id)
+        {
+            MapMapper mapMapprer = new MapMapper();
+
+            if (!mapMapprer.Delete(id))
+            {
+                string errorDescription = "No se ha podido eliminar el mapa con id " + id + ".";
+                log.AddLogCritical("Delete", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.FAIL, errorDescription));
+                return false;
+            }
+
+            return true;
         }
 
         private bool IsValid(Map map)

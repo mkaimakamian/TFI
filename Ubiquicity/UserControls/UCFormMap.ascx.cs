@@ -23,6 +23,14 @@ namespace Ubiquicity.UserControls
             //imageInput.Value = "";
         }
 
+        public void FillForm(Map map)
+        {
+            nameInput.Value = map.Name;
+            descriptionInput.Value = map.Description;
+            //imageInput.Value = map.Image;
+            //resourceInput.Value = map.SourcePath;
+        }
+
         public void PopulateModel(Map map)
         {
             map.Name = nameInput.Value;
