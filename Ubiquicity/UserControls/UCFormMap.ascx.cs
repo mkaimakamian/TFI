@@ -19,15 +19,17 @@ namespace Ubiquicity.UserControls
         {
             nameInput.Value = "";
             descriptionInput.Value = "";
+            mapFileImage.Src = "";
+            imageInputBase64.Value = "";
             //resourceInput.Value = "";
-            //imageInput.Value = "";
         }
 
         public void FillForm(Map map)
         {
             nameInput.Value = map.Name;
             descriptionInput.Value = map.Description;
-            //imageInput.Value = map.Image;
+            mapFileImage.Src = map.Image;
+            imageInputBase64.Value = "";
             //resourceInput.Value = map.SourcePath;
         }
 
@@ -36,8 +38,7 @@ namespace Ubiquicity.UserControls
             map.Name = nameInput.Value;
             map.Description = descriptionInput.Value;
             map.SourcePath = resourceInput.Value;
-            map.Image = imageInput.Value;
-            //deberíamos capturar el base 64
+            map.Image = imageInputBase64.Value;
         }
     }
 }

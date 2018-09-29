@@ -19,7 +19,7 @@ namespace ORM
 
             table.Add("@name", map.Name);
             table.Add("@description", map.Description);
-            table.Add("@imagePath", map.Image);
+            table.Add("@imageB64", map.Image);
             table.Add("@sourcePath", map.SourcePath);
             map.Id = dal.Write(table, "spWriteMap");
 
@@ -34,7 +34,7 @@ namespace ORM
             table.Add("@id", map.Id);
             table.Add("@name", map.Name);
             table.Add("@description", map.Description);
-            table.Add("@imagePath", map.Image);
+            table.Add("@imageB64", map.Image);
             table.Add("@sourcePath", map.SourcePath);
             map.Id = dal.Write(table, "spModifyMap");
 

@@ -5,7 +5,8 @@
             var reader = new FileReader();
             
             reader.onload = function (e) {
-                $('#mapFileImage').attr('src', e.target.result);
+                document.getElementById("contentHolder_UCFormMap_mapFileImage").src = e.target.result;
+                document.getElementById("contentHolder_UCFormMap_imageInputBase64").value = e.target.result;
             }
             reader.readAsDataURL(input.files[0]);
         }
@@ -31,7 +32,8 @@
         <div class="form-group col-md-6">
             <label for="imageInput">Imagen</label>
             <input id="imageInput" runat="server" type="file" onchange="readURL(this)">
-            <img id="mapFileImage" width="200px" />
+            <input id="imageInputBase64" runat="server" type="hidden">
+            <img id="mapFileImage" runat="server" width="200" />
        </div>
     </div>
  
