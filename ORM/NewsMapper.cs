@@ -23,10 +23,44 @@ namespace ORM
             table.Add("@since", news.Since);
             table.Add("@until", news.Until);
             table.Add("@sent", news.Sent);
+            table.Add("@categoryId", news.Category.Id);
 
             news.Id = dal.Write(table, "spWriteNews");
 
             return news.Id > 0;
+        }
+
+        public bool Edit(News news)
+        {
+            Dal dal = new Dal();
+            Hashtable table = new Hashtable();
+
+            table.Add("@id", news.Id);
+            table.Add("@title", news.Title);
+            table.Add("@body", news.Body);
+            table.Add("@image", news.Image);
+            table.Add("@since", news.Since);
+            table.Add("@until", news.Until);
+            table.Add("@sent", news.Sent);
+            table.Add("@categoryId", news.Category.Id);
+            return dal.Write(table, "spModifyNews") > 0;
+        }
+
+        public News Get(int id)
+        {
+            Dal dal = new Dal();
+            Hashtable table = new Hashtable();
+            News news = null;
+
+            table.Add("@id", id);
+            DataSet result = dal.Read(table, "spReadNews");
+
+            if (result != null && result.Tables[0].Rows.Count > 0)
+            {
+                news = ConvertToModel(result.Tables[0].Rows[0]);
+            }
+
+            return news;
         }
 
         public List<News> Get()
@@ -50,18 +84,27 @@ namespace ORM
             return news;
         }
 
+        public bool Delete(int id)
+        {
+            Dal dal = new Dal();
+            Hashtable table = new Hashtable();
+            table.Add("@id", id);
+            return dal.Write(table, "spDeleteNews") > 0;
+        }
+
         private News ConvertToModel(DataRow data)
         {
-            return new News
-            {
-                Id = int.Parse(data["id"].ToString()),
-                Title = data["title"].ToString(),
-                Body = data["body"].ToString(),
-                Image = data["image"].ToString(),
-                Since = Convert.ToDateTime(data["since"].ToString()),
-                Until = Convert.ToDateTime(data["until"].ToString()),
-                Sent = Convert.ToBoolean(data["sent"].ToString())
-            };
+            News news = new News();
+            news.Id = Convert.ToInt32(data["id"]);
+            news.Title = data["title"].ToString();
+            news.Body = data["body"].ToString();
+            news.Image = data["image"].ToString();
+            news.Since = Convert.ToDateTime(data["since"]);
+            news.Until = Convert.ToDateTime(data["until"]);
+            news.Sent = Convert.ToBoolean(data["sent"]);
+            news.Category.Id = Convert.ToInt32(data["id"]);
+
+            return news;
         }
     }
 }

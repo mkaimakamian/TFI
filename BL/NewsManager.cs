@@ -8,7 +8,7 @@ using ORM;
 
 namespace BL
 {
-    public class NewsManager: BaseManager
+    public class NewsManager : BaseManager
     {
 
         public bool Save(News news)
@@ -27,10 +27,72 @@ namespace BL
             return true;
         }
 
+        public bool Edit(News news)
+        {
+            if (!IsValid(news)) return false;
+
+            NewsMapper newsMapper = new NewsMapper();
+
+            if (!newsMapper.Edit(news))
+            {
+                string errorDescription = "No se ha podido modificar la noticia.";
+                log.AddLogCritical("Edit", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.FAIL, errorDescription));
+                return false;
+            }
+
+            return true;
+        }
+
+        public News Get(int id)
+        {
+            NewsMapper newsMapper = new NewsMapper();
+            News news = newsMapper.Get(id);
+
+            if (news == null)
+            {
+                string errorDescription = "No se ha encontrado la noticia con id " + id + ".";
+                log.AddLogCritical("Get", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.NULL, errorDescription));
+            }
+
+            return news;
+        }
+
+
+        /// <summary>
+        /// Devuelve el listado de novedades de la base.
+        /// </summary>
+        /// <returns></returns>
         public List<News> Get()
         {
             NewsMapper newsMapper = new NewsMapper();
-            return newsMapper.Get();
+            List<News> newsList = newsMapper.Get();
+
+            NewsCategoryManager newscategoryManager = new NewsCategoryManager();
+            Dictionary<int, NewsCategory> newsCategories = newscategoryManager.GetDictinoray();
+
+            foreach (News news in newsList)
+            {
+                news.Category = newsCategories[news.Category.Id];
+            }
+
+            return newsList;
+        }
+
+        public bool Delete(int id)
+        {
+            NewsMapper newsMapper = new NewsMapper();
+
+            if (!newsMapper.Delete(id))
+            {
+                string errorDescription = "No se ha podido eliminar la noticia con id " + id + ".";
+                log.AddLogCritical("Delete", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.FAIL, errorDescription));
+                return false;
+            }
+
+            return true;
         }
 
         public bool IsValid(News news)

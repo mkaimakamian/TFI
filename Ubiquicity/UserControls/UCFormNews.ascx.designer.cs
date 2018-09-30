@@ -58,13 +58,13 @@ namespace Ubiquicity.UserControls {
         protected global::System.Web.UI.HtmlControls.HtmlInputHidden imageInputBase64;
         
         /// <summary>
-        /// categoryInput control.
+        /// dropCategoryInput control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect categoryInput;
+        protected global::System.Web.UI.WebControls.DropDownList dropCategoryInput;
         
         /// <summary>
         /// sinceInput control.

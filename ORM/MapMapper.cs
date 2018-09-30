@@ -36,9 +36,7 @@ namespace ORM
             table.Add("@description", map.Description);
             table.Add("@imageB64", map.Image);
             table.Add("@sourcePath", map.Resource);
-            map.Id = dal.Write(table, "spModifyMap");
-
-            return map.Id > 0;
+            return dal.Write(table, "spModifyMap") > 0;
         }
 
         public List<Map> Get()

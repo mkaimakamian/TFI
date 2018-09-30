@@ -32,14 +32,8 @@
             <input id="imageInputBase64" runat="server" type="hidden">
         </div>
         <div class="form-group col-4">
-            <label for="categoryInput">Categoría</label>
-            <select id="categoryInput" runat="server" class="form-control form-control-sm">
-                <option selected>Lanzamientos</option>
-                <option>Mapas</option>
-                <option>Servicios</option>
-                <option>RA</option>
-                <option>RV</option>
-            </select>
+            <label for="dropCategoryInput">Categoría</label>
+            <asp:DropDownList ID="dropCategoryInput" runat="server" cclass="btn btn-secondary dropdown-toggle form-control form-control-sm"/>
         </div>
         <div class="form-group col-4">
             <label for="sinceInput">Activación</label>

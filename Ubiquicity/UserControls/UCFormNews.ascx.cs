@@ -15,13 +15,16 @@ namespace Ubiquicity.UserControls
 
         }
 
-        public void CleanForm()
+        public void CleanForm(List<NewsCategory> newsCategories)
         {
             titleInput.Value = "";
             bodyInput.InnerText = "";
             fileImage.Src = "";
             imageInputBase64.Value = "";
-            categoryInput.SelectedIndex = 0;
+            dropCategoryInput.DataTextField = "Name";
+            dropCategoryInput.DataValueField = "Id";
+            dropCategoryInput.DataSource = newsCategories;
+            dropCategoryInput.DataBind();
             sinceInput.Value = "";
             untilInput.Value = "";
         }
@@ -32,7 +35,7 @@ namespace Ubiquicity.UserControls
             bodyInput.InnerText = news.Body;
             fileImage.Src = news.Image;
             imageInputBase64.Value = news.Image;
-            categoryInput.SelectedIndex = 0; //el que corresponda
+            dropCategoryInput.SelectedValue = news.Category.Id.ToString();
             sinceInput.Value = news.Since.ToString();
             untilInput.Value = news.Until.ToString();
         }
@@ -42,7 +45,7 @@ namespace Ubiquicity.UserControls
             news.Title = titleInput.Value;
             news.Body = bodyInput.InnerText;
             news.Image = imageInputBase64.Value;
-            //news.Category = categoryInput.Items[categoryInput.SelectedIndex];
+            news.Category.Id = Convert.ToInt32(dropCategoryInput.SelectedValue);
             news.Since = Convert.ToDateTime(sinceInput.Value);
             news.Until= Convert.ToDateTime(untilInput.Value);
         }

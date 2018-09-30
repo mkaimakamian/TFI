@@ -15,6 +15,7 @@ namespace BE
         private DateTime since;
         private DateTime until;
         private bool sent;
+        private NewsCategory category;
 
         public int Id
         {
@@ -98,7 +99,7 @@ namespace BE
         {
             get
             {
-                return body.Substring(0,246) + " ...";
+                return body.Length > 250 ? body.Substring(0, 246) + " ..." : body;
             }
         }
 
@@ -112,6 +113,20 @@ namespace BE
             set
             {
                 sent = value;
+            }
+        }
+
+        public NewsCategory Category
+        {
+            get
+            {
+                if (category == null) category = new NewsCategory();
+                return category;
+            }
+
+            set
+            {
+                category = value;
             }
         }
     }

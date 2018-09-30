@@ -26,7 +26,9 @@ namespace Ubiquicity
         /// <param name="e"></param>
         protected override void ShowNewForm(object sender, UbiquicityEventArg e)
         {
-            UCFormNews.CleanForm();
+            NewsCategoryManager newsCategoryManager = new NewsCategoryManager();
+            List<NewsCategory> newsCategories = newsCategoryManager.Get();
+            UCFormNews.CleanForm(newsCategories);
             Session["Ubiquicity_action"] = CREATE;
             Page.ClientScript.RegisterStartupScript(this.GetType(), "openModalCreate", "window.onload = function() { $('#modalNews').modal('show'); }", true);
         }
@@ -38,12 +40,41 @@ namespace Ubiquicity
             return ((NewsManager)manager).Save(news);
         }
 
-        //protected override bool AcceptModify(BL.BaseManager manager, int id)
-        //{
-        //    Map map = ((MapManager)manager).Get(id);
-        //    UCFormMap.PopulateModel(map);
-        //    return ((MapManager)manager).Edit(map);
-        //}
+
+        /// <summary>
+        /// Muestra el formulario para la edición de un elemento existente.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected override void ShowEditForm(object sender, UbiquicityEventArg e)
+        {
+            int id = Convert.ToInt32(e.TheObject);
+            Session["Ubiquicity_itemId"] = id;
+
+            NewsManager newsManager = new NewsManager();
+            News news = newsManager.Get(id);
+
+            if (news == null && newsManager.HasErrors)
+            {
+                Alert.Show("Error", newsManager.ErrorDescription);
+            }
+            else
+            {
+                NewsCategoryManager newsCategoryManager = new NewsCategoryManager();
+                List<NewsCategory> newsCategories = newsCategoryManager.Get();
+                UCFormNews.CleanForm(newsCategories);
+                UCFormNews.FillForm(news);
+                Session["Ubiquicity_action"] = EDIT;
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "openModalEdit", "window.onload = function() { $('#modalNews').modal('show'); }", true);
+            }
+        }
+
+        protected override bool AcceptModify(BL.BaseManager manager, int id)
+        {
+            News news = ((NewsManager)manager).Get(id);
+            UCFormNews.PopulateModel(news);
+            return ((NewsManager)manager).Edit(news);
+        }
 
         /// <summary>
         /// Se establece la traducción de las columnas que quieren ser mostradas.
