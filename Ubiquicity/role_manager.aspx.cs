@@ -19,69 +19,23 @@ namespace Ubiquicity
             GridView = UCcrudGrid;
             UCFormRolePermission.GrantAction += GrantPermission;
             UCFormRolePermission.UngrantAction += UngrantPermission;
+            Manager = new RoleManager(); ;
         }
 
-        protected override void LoadGridView() {
-            try
-            {
-                RoleManager roleManager = new RoleManager();
-                List<Role> roles = roleManager.Get();
-                GridView.ColumnsToShow = ColumnsToShowAndTranslate();
-                GridView.LoadGrid(roles);
-            }
-            catch (Exception exception)
-            {
-                Alert.Show("Exception", exception.Message);
-            }
-        }
-
-        protected void modalRolePermission_btnAcceptClick(object sender, EventArgs e)
+        protected override bool AcceptCreate(BL.BaseManager manager)
         {
-            try
-            {
-                int action = Convert.ToInt32(Session["Ubiquicity_action"]);
+            Role role = new Role();
+            UCFormRolePermission.PopulateModel(role);
+            role.Permissions = RetrievePermissionFromSession("granted");
+            return ((RoleManager) manager).Save(role);
+        }
 
-                //TODO - Validar los campos
-                RoleManager rolManager = new RoleManager();
-                Role role = null;
-                bool success = false;
-
-                switch (action)
-                {
-                    case CREATE:
-                        role = new Role();
-                        UCFormRolePermission.PopulateModel(role);
-                        role.Permissions = RetrievePermissionFromSession("granted");
-                        success = rolManager.Save(role);
-                        break;
-
-                    case EDIT:
-                        if (Session["Ubiquicity_itemId"] != null)
-                        {
-                            role = rolManager.Get(Convert.ToInt32(Session["Ubiquicity_itemId"]));
-                            UCFormRolePermission.PopulateModel(role);
-                            role.Permissions = RetrievePermissionFromSession("granted");
-                            success = rolManager.Edit(role);
-                            
-                        }
-                        break;
-                }
-
-                if (!success && rolManager.HasErrors)
-                {
-                    Alert.Show("Error", rolManager.ErrorDescription);
-                }
-                else
-                {
-                    Response.Redirect(Request.RawUrl);
-                }
-
-                Session.Remove("Ubiquicity_itemId");
-            }
-            catch (Exception exception)
-            {
-                Alert.Show("Exception", exception.Message);
-            }
+        protected override bool AcceptModify(BL.BaseManager manager, int id)
+        {
+            Role role = ((RoleManager) manager).Get(id);
+            UCFormRolePermission.PopulateModel(role);
+            role.Permissions = RetrievePermissionFromSession("granted");
+            return ((RoleManager)manager).Edit(role);
         }
 
         protected override void ShowEditForm(object sender, UbiquicityEventArg e) {
@@ -179,31 +133,6 @@ namespace Ubiquicity
             KeepPermissionInSession(keyTo, to);
             Session.Remove("Ubiquicity_permissionId");
             ShowCrudForm();
-        }
-
-        protected override void AskForDelete(object sender, UbiquicityEventArg e)
-        {
-            Session["Ubiquicity_itemId"] = Convert.ToInt32(e.TheObject);
-            Alert.Show("Eliminar registro", "¿Está seguro de querer eliminar el registro?", "Si");
-        }
-
-        protected override void PerformDeleteItem(object sender, UbiquicityEventArg e) {
-            if (Session["Ubiquicity_itemId"] != null)
-            {
-                RoleManager rolManager = new RoleManager();
-                int id = int.Parse(Session["Ubiquicity_itemId"].ToString());
-                bool success = rolManager.Delete(id);
-
-                if (success)
-                {
-                    LoadGridView();
-                }
-
-                if (!success && rolManager.HasErrors) {
-                    Alert.Show("Error", rolManager.Errors[0].description);
-                }
-                Session.Remove("Ubiquicity_itemId");
-            }
         }
 
         private void ShowCrudForm()

@@ -9,7 +9,7 @@
             <div class="modal-content">
                 <UCmkc:UCFormMap runat="server" ID="UCFormMap" />
                 <div class="modal-footer">
-                    <asp:Button ID="modalMap_btnAccept" runat="server" CssClass="btn btn-primary btn-sm" Text="Aceptar" OnClick="modalMap_btnAccept_Click"/>
+                    <asp:Button ID="modalMap_btnAccept" runat="server" CssClass="btn btn-primary btn-sm" Text="Aceptar" OnClick="AccepCreateOrModify"/>
                     <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>

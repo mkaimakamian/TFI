@@ -5,6 +5,8 @@ using System.Web;
 using Helper;
 using BE;
 using Ubiquicity.Classes;
+using BL;
+using System.Reflection;
 
 namespace Ubiquicity
 {
@@ -16,13 +18,16 @@ namespace Ubiquicity
         protected const int CREATE = 1;
         protected const int EDIT = 2;
         private UserControls.UCcrudGrid gridView = null;
+        private BL.BaseManager manager = null;
 
         protected virtual void PageLoad(object sender, EventArgs e) { }
         protected virtual void PreLoadGridView() { }
-        protected virtual void LoadGridView() { }
         protected virtual void PosLoadGridView() { }
-        protected virtual void PerformDeleteItem(object sender, UbiquicityEventArg e) { }
-        protected virtual void AskForDelete(object sender, UbiquicityEventArg e) { }
+
+        protected virtual bool AcceptCreate(BL.BaseManager manager) { return true; }
+        protected virtual bool AcceptModify(BL.BaseManager manager, int id) { return true; }
+
+        protected virtual Dictionary<string, string> ColumnsToShowAndTranslate() { return null; }
         protected virtual void ShowEditForm(object sender, UbiquicityEventArg e) { }
         protected virtual void ShowNewForm(object sender, UbiquicityEventArg e) { }
         protected virtual void PerformGenericAction(object sender, UbiquicityEventArg e) { }
@@ -53,6 +58,95 @@ namespace Ubiquicity
             }
         }
 
+        protected virtual void LoadGridView() {
+            try
+            {
+                Type type = Manager.GetType();
+                MethodInfo info = type.GetMethod("Get", Type.EmptyTypes);
+                object elements = info.Invoke(Manager, null);
+
+                if (Manager.HasErrors)
+                {
+                    Alert.Show("Error", Manager.ErrorDescription);
+                }
+                else
+                {
+                    GridView.ColumnsToShow = ColumnsToShowAndTranslate();
+                    GridView.LoadGrid(elements);
+                }
+            }
+            catch (Exception exception)
+            {
+                Alert.Show("Exception", exception.Message);
+            }
+        }
+
+        protected virtual void AskForDelete(object sender, UbiquicityEventArg e)
+        {
+            Session["Ubiquicity_itemId"] = Convert.ToInt32(e.TheObject);
+            Alert.Show("Eliminar registro", "¿Está seguro de querer eliminar el registro?", "Si, eliminarlo");
+        }
+
+        protected virtual void PerformDeleteItem(object sender, UbiquicityEventArg e) {
+            if (Session["Ubiquicity_itemId"] != null)
+            {
+                Type type = Manager.GetType();
+                MethodInfo info = type.GetMethod("Delete", new[] { typeof(int) });
+                object[] value = { Convert.ToInt32(Session["Ubiquicity_itemId"]) };
+                object success = info.Invoke(Manager, value);
+
+                if (!Boolean.Parse(success.ToString()) && Manager.HasErrors)
+                {
+                    Alert.Show("Error", Manager.ErrorDescription);
+                } else
+                {
+                    Session.Remove("Ubiquicity_itemId");
+                    LoadGridView();
+                }
+            }
+        }
+
+        // Atiende la llamada del botón aceptar del form de creación.
+        //En lo particular, como la edición y la creación usan el mismo botón, los dos eventos son atendidos por este handler.
+        protected void AccepCreateOrModify(object sender, EventArgs e)
+        {
+            try
+            {
+                int action = Convert.ToInt32(Session["Ubiquicity_action"]);
+                //TODO - Validar los campos
+                bool success = false;
+
+                switch (action)
+                {
+                    case CREATE:
+                        success = AcceptCreate(Manager);
+                        break;
+
+                    case EDIT:
+                        if (Session["Ubiquicity_itemId"] != null)
+                        {
+                            success = AcceptModify(Manager, Convert.ToInt32(Session["Ubiquicity_itemId"]));
+                        }
+                        break;
+                }
+
+                Session.Remove("Ubiquicity_itemId");
+
+                if (!success && Manager.HasErrors)
+                {
+                    Alert.Show("Error", Manager.ErrorDescription);
+                }
+                else
+                {
+                    LoadGridView();
+                }
+            }
+            catch (Exception exception)
+            {
+                Alert.Show("Exception", exception.Message);
+            }
+        }
+
         //Pone a disposición el componente para mostrar los mensajes de error
         protected UserControls.UCModalMessageBox Alert
         {
@@ -66,5 +160,10 @@ namespace Ubiquicity
             set { gridView = value;  }
         }
 
+        protected BL.BaseManager Manager
+        {
+            get { return manager; }
+            set { manager = value; }
+        }
     }
 }

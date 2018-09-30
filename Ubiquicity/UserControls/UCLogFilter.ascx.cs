@@ -22,8 +22,6 @@ namespace Ubiquicity.UserControls
         {
             List<QueryFilter> filters = new List<QueryFilter>();
 
-            
-
             if (!String.IsNullOrEmpty(inputLogLevel.Value))
             {
                 QueryFilter qf = new QueryFilter();

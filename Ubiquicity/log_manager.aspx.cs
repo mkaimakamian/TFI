@@ -18,6 +18,10 @@ namespace Ubiquicity
             UCcrudGrid.HideNewButton();
         }
 
-        
+        protected override void LoadGridView()
+        {
+            //Evita que se ejecute la carga inicial.
+        }
+
     }
 }

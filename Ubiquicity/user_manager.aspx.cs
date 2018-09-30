@@ -19,104 +19,36 @@ namespace Ubiquicity
             GridView = UCcrudGrid;
             GridView.ShowGenericActionButton("Password");
             Alert.PerformSecondAction += SendPasswordReset;
+            Manager = new UserManager();
         }
 
-        protected override void LoadGridView()
+        protected override bool AcceptCreate(BL.BaseManager manager)
         {
-            try {
-                UserManager userManager = new UserManager();
-                List<User> users = userManager.Get();
+            User user = new User();
+            UCFormNewMember.PopulateModel(user);
 
-                if (userManager.HasErrors)
-                {
-                    Alert.Show("Error", userManager.ErrorDescription);
-                }
-                else
-                {
-                    GridView.ColumnsToShow = ColumnsToShowAndTranslate();
-                    GridView.LoadGrid(users);
-                }
-            }
-            catch (Exception exception)
+            //TODO - LA VALIDACIÓN DEL PASSWORD Y LA REPETICIÓN, DEBERÍA HACERSE POR FRONT
+            //Por otro lado, notar que como está el break, el mensaje no se muestra y debe implementarse un workaround
+            bool success = true;
+
+            if (IsValidForSave())
             {
-                Alert.Show("Exception", exception.Message);
+                user.Password = SecurityHelper.Encrypt(user.Password);
+                success = ((UserManager) manager).Save(user);
+            } else
+            {
+                success = false;
+                Alert.Show("Error", "El password y su verificación, deben coincidir.");
             }
+
+            return success;
         }
 
-        // Atiende la llamada del botón aceptar del form de creación de usuario.
-        //En lo particular, como la edición y la creación usan el mismo botón, los dos eventos son atendidos por este handler.
-        protected void ucModalNewMember_btnAcceptClick(object sender, EventArgs e)
+        protected override bool AcceptModify(BL.BaseManager manager, int id)
         {
-            try
-            {
-                int action = Convert.ToInt32(Session["Ubiquicity_action"]);
-               
-                //TODO - Validar los campos
-                UserManager userManager = new UserManager();
-                User user = null;
-                bool success = true;
-
-                switch (action) {
-                    case CREATE:
-                        
-                        user = new User();
-                        UCFormNewMember.PopulateModel(user);
-
-                        //TODO - LA VALIDACIÓN DEL PASSWORD Y LA REPETICIÓN, DEBERÍA HACERSE POR OTRO FRONT
-                        //Por otro lado, notar que como está el break, el mensaje no se muestra y debe implementarse un workaround
-                        success = IsValidForSave();
-                        if(success) {
-                            user.Password = SecurityHelper.Encrypt(user.Password);
-                            userManager.Save(user);
-                        }                         
-                        break;
-
-                    case EDIT:
-                        if (Session["Ubiquicity_itemId"] != null)
-                        {
-                            user = userManager.Get(Convert.ToInt32(Session["Ubiquicity_itemId"]));
-                            UCFormNewMember.PopulateModel(user);
-                            userManager.Edit(user);
-                            
-                        }
-                        break;
-                }
-
-                Session.Remove("Ubiquicity_itemId");
-
-                if (userManager.HasErrors)
-                {
-                    Alert.Show("Error", userManager.ErrorDescription);
-                }
-                else if (!success) {
-                    Alert.Show("Error", "El password y su verificación, deben coincidir.");
-                }
-                else
-                {
-                    //Response.Redirect(Request.RawUrl);
-                    LoadGridView();
-                }
-            } catch (Exception exception)
-            {
-                Alert.Show("Exception", exception.Message);
-            }
-        }
-
-        protected override void AskForDelete(object sender, UbiquicityEventArg e)
-        {
-            Session["Ubiquicity_itemId"] = e.TheObject.ToString();
-            Alert.Show("Eliminar registro", "¿Está seguro de querer eliminar el registro?", "Si");
-        }
-
-        protected override void PerformDeleteItem(object sender, UbiquicityEventArg e)
-        {
-            if (Session["Ubiquicity_itemId"] != null)
-            {
-                UserManager userManager = new UserManager();
-                userManager.Delete(Convert.ToInt32(Session["Ubiquicity_itemId"]));
-                LoadGridView();
-                Session.Remove("Ubiquicity_itemId");
-            }
+            User user = ((UserManager) manager).Get(id);
+            UCFormNewMember.PopulateModel(user);
+            return ((UserManager) manager).Edit(user);
         }
 
         /// <summary>
@@ -189,7 +121,7 @@ namespace Ubiquicity
         /// Se establece la traducción de las columnas que quieren ser mostradas.
         /// </summary>
         /// <returns></returns>
-        private Dictionary<string, string> ColumnsToShowAndTranslate()
+        protected override Dictionary<string, string> ColumnsToShowAndTranslate()
         {
             Dictionary<string, string> columns = new Dictionary<string, string>();
             columns.Add("Active", "Activo");

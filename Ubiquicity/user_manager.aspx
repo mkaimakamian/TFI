@@ -12,7 +12,7 @@
             <div class="modal-content">
                 <ucmkc:ucformnewmember runat="server" ID="UCFormNewMember" />
                 <div class="modal-footer">
-                    <asp:Button ID="ucModalNewMember_btnAccept" runat="server" CssClass="btn btn-primary btn-sm" Text="Aceptar" OnClick="ucModalNewMember_btnAcceptClick"/>
+                    <asp:Button ID="ucModalNewMember_btnAccept" runat="server" CssClass="btn btn-primary btn-sm" Text="Aceptar" OnClick="AccepCreateOrModify"/>
                     <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>

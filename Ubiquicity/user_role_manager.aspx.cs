@@ -20,73 +20,25 @@ namespace Ubiquicity
 
             UCFormUserRole.GrantAction += GrantPermission;
             UCFormUserRole.UngrantAction += UngrantPermission;
+            Manager = new UserManager();
         }
 
-        protected override void LoadGridView()
+        protected override bool AcceptModify(BL.BaseManager manager, int id)
         {
-            try
+            RoleManager roleManager = new RoleManager();
+            User user = ((UserManager) manager).Get(id);
+
+            if (user == null && manager.HasErrors) return false;
+
+            user.Roles = RetrieveFromSession("granted");
+            bool success = roleManager.EditRoleForUser(user);
+
+            if (!success && roleManager.HasErrors)
             {
-                UserManager userManager = new UserManager();
-                List<User> users = userManager.Get();
-                GridView.ColumnsToShow = ColumnsToShowAndTranslate();
-                GridView.LoadGrid(users);
+                Alert.Show("Error", roleManager.ErrorDescription);
             }
-            catch (Exception exception)
-            {
-                Alert.Show("Exception", exception.Message);
-            }
-        }
 
-        protected void modalUserRole_btnAcceptClick(object sender, EventArgs e)
-        {
-            try
-            {
-                int action = int.Parse(Session["Ubiquicity_action"].ToString());
-
-                //Negrada: se está obteniendo el valor desde la sesión y no debería ser así
-                int userId = int.Parse(Session["Ubiquicity_itemId"].ToString());
-
-                //TODO - Validar los campos
-                UserManager userManager = new UserManager();
-                RoleManager roleManager = new RoleManager();
-                User user = null;
-                bool success = false;
-
-                user = userManager.Get(userId);
-
-                if (user == null && userManager.HasErrors)
-                {
-                    Alert.Show("Error", userManager.ErrorDescription);
-                }
-
-                user.Roles = RetrieveFromSession("granted");
-
-                switch (action)
-                {
-                    //case CREATE:
-                    //    success = roleManager.SaveRoleForUser(user);
-                    //    break;
-
-                    case EDIT:
-                        success = roleManager.EditRoleForUser(user);
-                        break;
-                }
-
-                if (!success && roleManager.HasErrors)
-                {
-                    Alert.Show("Error", roleManager.ErrorDescription);
-                }
-                else
-                {
-                    Response.Redirect(Request.RawUrl);
-                }
-
-                Session.Remove("Ubiquicity_itemId");
-            }
-            catch (Exception exception)
-            {
-                Alert.Show("Exception", exception.Message);
-            }
+            return success;
         }
 
         protected override void ShowEditForm(object sender, UbiquicityEventArg e) {
@@ -191,7 +143,7 @@ namespace Ubiquicity
         /// Se establece la traducción de las columnas que quieren ser mostradas.
         /// </summary>
         /// <returns></returns>
-        private Dictionary<string, string> ColumnsToShowAndTranslate()
+        protected override Dictionary<string, string> ColumnsToShowAndTranslate()
         {
             Dictionary<string, string> columns = new Dictionary<string, string>();
             columns.Add("Username", "Usuario");

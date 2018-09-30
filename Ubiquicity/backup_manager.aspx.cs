@@ -20,30 +20,7 @@ namespace Ubiquicity
             GridView.ShowGenericActionButton("Restaurar");
             Alert.PerformMainAction += PerformBackup;
             Alert.PerformSecondAction += PerformRestore;
-        }
-
-
-        protected override void LoadGridView()
-        {
-            try
-            {
-                BackupManager backupManager = new BackupManager();
-                List<Backup> backups = backupManager.Get();
-
-                if (backupManager.HasErrors)
-                {
-                    Alert.Show("Error", backupManager.ErrorDescription);
-                }
-                else
-                {
-                    GridView.ColumnsToShow = ColumnsToShowAndTranslate();
-                    GridView.LoadGrid(backups);
-                }
-            }
-            catch (Exception exception)
-            {
-                Alert.Show("Exception", exception.Message);
-            }
+            Manager = new BackupManager();
         }
 
         /// <summary>
@@ -118,7 +95,7 @@ namespace Ubiquicity
         /// Se establece la traducción de las columnas que quieren ser mostradas.
         /// </summary>
         /// <returns></returns>
-        private Dictionary<string, string> ColumnsToShowAndTranslate()
+        protected override Dictionary<string, string> ColumnsToShowAndTranslate()
         {
             Dictionary<string, string> columns = new Dictionary<string, string>();
             columns.Add("Id", "Nombre");
