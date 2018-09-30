@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using System.Net.Mail;
 using System.Net;
 using BE;
+using System.IO;
+using System.Configuration;
+using System.Web;
 
 namespace Helper
 {
@@ -33,7 +36,7 @@ namespace Helper
                 }
 
                 //Formatted mail body
-                mail.IsBodyHtml = false;
+                mail.IsBodyHtml = true;
                 mail.Subject = subject;
                 mail.Body = body;
                 smtp.Send(mail);
@@ -46,7 +49,7 @@ namespace Helper
             }
 
         public static void SendWelcomeMail(User user, String activationHash)
-        {
+        {           
             Send(
             "Gracias por registrarte, " + user.Name + "!",
             "Estás recibiendo este mail porque te has registrado y queremos verificar tu identidad." +
@@ -57,12 +60,19 @@ namespace Helper
 
         public static void SendResetPassword(User user, String activationHash)
         {
-            Send(
-            "Recupero de password - Ubiquicity",
-            "Estás recibiendo este mail porque nos informaste que te olvidaste tu password." +
-            Environment.NewLine +
-            "Por favor, accedé a la siguiente url para resetear el password: http://localhost:50551/recovery_action.aspx?a=" + activationHash,
-            new string[] { user.Mail });
+            string path = ConfigurationManager.AppSettings["MAIL_TEMPLATE_PATH"];
+            string fullPath = HttpContext.Current.Server.MapPath(path);
+
+            StreamReader streamReader = new StreamReader(fullPath);
+            String body = streamReader.ReadToEnd();
+            streamReader.Dispose();
+
+            body = body.Replace("@usuario", user.Name).Replace(
+                "@motivo",
+                "Estás recibiendo este mail porque nos informaste que te olvidaste tu password."
+                ).Replace("@web", "http://localhost:50551/recovery_action.aspx?a=" + activationHash);
+
+            Send("Recupero de password - Ubiquicity", body, new string[] { user.Mail });
         }
 
         public static void SendResetPasswordByAdmin(User user, String activationHash)

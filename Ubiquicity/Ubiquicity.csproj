@@ -102,6 +102,7 @@
     <Content Include="Resources\folder.svg" />
     <Content Include="Resources\log.svg" />
     <Content Include="Resources\login.svg" />
+    <Content Include="Resources\mail.htm" />
     <Content Include="Resources\map.svg" />
     <Content Include="Resources\note.svg" />
     <Content Include="Resources\registro.svg" />
