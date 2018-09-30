@@ -28,7 +28,6 @@
 
             <div class="form-group">
                 <label id="lblResource" runat="server" for="resourceInput" >Recurso</label>
-<%--                <input id="resourceInput" runat="server" type="file" class="form-control form-control-sm btn-choose">--%>
                 <asp:FileUpload ID="resourceInput" runat="server" class="form-control form-control-sm btn-choose"/>
             </div>
         </div>

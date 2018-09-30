@@ -17,6 +17,8 @@ namespace Ubiquicity
         protected override void PageLoad(object sender, EventArgs e)
         {
             GridView = UCcrudGrid;
+            GridView.ShowGenericActionButton("Password");
+            Alert.PerformSecondAction += SendPasswordReset;
         }
 
         protected override void LoadGridView()
@@ -102,7 +104,7 @@ namespace Ubiquicity
 
         protected override void AskForDelete(object sender, UbiquicityEventArg e)
         {
-            Session["Ubiquicity_itemId"] = Convert.ToInt32(e.TheObject);
+            Session["Ubiquicity_itemId"] = e.TheObject.ToString();
             Alert.Show("Eliminar registro", "¿Está seguro de querer eliminar el registro?", "Si");
         }
 
@@ -155,6 +157,31 @@ namespace Ubiquicity
                 UCFormNewMember.FillForm(user);
                 Session["Ubiquicity_action"] = EDIT;
                 Page.ClientScript.RegisterStartupScript(this.GetType(), "openModalEdit", "window.onload = function() { $('#ucModalNewMember').modal('show'); }", true);
+            }
+        }
+
+        /// <summary>
+        /// Se emplea el alert con uno de los eventos genéricos para solicitar que el administrador
+        /// confirme si envía el reseteo de password al usuario.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected override void PerformGenericAction(object sender, UbiquicityEventArg e) {
+            Session["Ubiquicity_itemId"] = e.TheObject.ToString();
+            Alert.Show("resetear password", "Estás a punto de iniciar el proceso de reseteo de password. Estás seguro?", null, "Si, resetear");
+        }
+
+        protected void SendPasswordReset(object sender, UbiquicityEventArg e)
+        {
+            if (Session["Ubiquicity_itemId"] != null)
+            {
+                int id = Convert.ToInt32(Session["Ubiquicity_itemId"]);
+
+                UserManager userManager = new UserManager();
+                userManager.ResetPasswordRequest(id);
+                Session.Remove("Ubiquicity_itemId");
+
+                //TODO - debería mostrar un mensaje de "trabajo hecho"
             }
         }
 

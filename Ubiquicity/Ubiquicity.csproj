@@ -92,6 +92,7 @@
     <Content Include="news_manager.aspx" />
     <Content Include="packages.config" />
     <Content Include="front.Master" />
+    <Content Include="password_reset.aspx" />
     <Content Include="privacy.aspx" />
     <Content Include="promotion_manager.aspx" />
     <Content Include="recovery_action.aspx" />
@@ -162,7 +163,10 @@
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="shop.aspx" />
     <Content Include="suscription_manager.aspx" />
+    <Content Include="UserControls\UCCompareGrid.ascx" />
+    <Content Include="UserControls\sub\UCCompareItem.ascx" />
     <Content Include="UserControls\UCFormMap.ascx" />
+    <Content Include="UserControls\UCFormPassword.ascx" />
     <Content Include="UserControls\UCFormRolePermission.ascx" />
     <Content Include="UserControls\UCFormUserRole.ascx" />
     <Content Include="UserControls\UCHeaderBackOffice.ascx" />
@@ -218,6 +222,7 @@
     <Compile Include="Classes\BaseManager.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Classes\CompareItem.cs" />
     <Compile Include="Classes\UbiquicityEventArg.cs" />
     <Compile Include="contact.aspx.cs">
       <DependentUpon>contact.aspx</DependentUpon>
@@ -303,6 +308,13 @@
     <Compile Include="news_manager.aspx.designer.cs">
       <DependentUpon>news_manager.aspx</DependentUpon>
     </Compile>
+    <Compile Include="password_reset.aspx.cs">
+      <DependentUpon>password_reset.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="password_reset.aspx.designer.cs">
+      <DependentUpon>password_reset.aspx</DependentUpon>
+    </Compile>
     <Compile Include="privacy.aspx.cs">
       <DependentUpon>privacy.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -360,12 +372,33 @@
     <Compile Include="suscription_manager.aspx.designer.cs">
       <DependentUpon>suscription_manager.aspx</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\UCCompareGrid.ascx.cs">
+      <DependentUpon>UCCompareGrid.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCCompareGrid.ascx.designer.cs">
+      <DependentUpon>UCCompareGrid.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\sub\UCCompareItem.ascx.cs">
+      <DependentUpon>UCCompareItem.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\sub\UCCompareItem.ascx.designer.cs">
+      <DependentUpon>UCCompareItem.ascx</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\UCFormMap.ascx.cs">
       <DependentUpon>UCFormMap.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UserControls\UCFormMap.ascx.designer.cs">
       <DependentUpon>UCFormMap.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCFormPassword.ascx.cs">
+      <DependentUpon>UCFormPassword.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCFormPassword.ascx.designer.cs">
+      <DependentUpon>UCFormPassword.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\UCFormRolePermission.ascx.cs">
       <DependentUpon>UCFormRolePermission.ascx</DependentUpon>

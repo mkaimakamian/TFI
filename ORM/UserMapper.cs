@@ -102,7 +102,6 @@ namespace ORM
 
         public bool Edit(User user)
         {
-
             Dal dal = new Dal();
             Hashtable table = new Hashtable();
 
@@ -113,6 +112,19 @@ namespace ORM
             table.Add("@languageId", user.Language.Id);
             table.Add("@name", user.Name);
             table.Add("@lastname", user.Lastname);
+            table.Add("@lastupdate", user.Lastupdate);
+            table.Add("@password", user.Password);
+
+            return dal.Write(table, "spModifyUser") > 0;
+        }
+
+        public bool SavePassword(User user)
+        {
+            Dal dal = new Dal();
+            Hashtable table = new Hashtable();
+
+            table.Add("@id", user.Id);
+            table.Add("@password", user.Password);
             table.Add("@lastupdate", user.Lastupdate);
 
             return dal.Write(table, "spModifyUser") > 0;

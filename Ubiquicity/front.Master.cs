@@ -219,7 +219,7 @@ namespace Ubiquicity
             if (!String.IsNullOrEmpty(txtPasswordMail.Value))
             {
                 UserManager userManager = new UserManager();
-                userManager.ResetPassword(txtPasswordMail.Value);
+                userManager.ResetPasswordRequest(txtPasswordMail.Value);
             }
 
         }

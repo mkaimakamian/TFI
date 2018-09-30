@@ -53,8 +53,8 @@ namespace Ubiquicity.UserControls
             FirstName = user.Name;
             LastName = user.Lastname;
             Mail = user.Mail;
-            Password = user.Password;
-            PasswordVerification = user.Password;
+            //Password = user.Password;
+            //PasswordVerification = user.Password;
             //dropLanguageInput.SelectedValue = user.Language.Id.ToString();
         }
 

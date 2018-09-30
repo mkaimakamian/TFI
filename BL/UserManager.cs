@@ -48,7 +48,7 @@ namespace BL
             }
         }
 
-        public bool ChangePassword(String password, string passwordHash)
+        public bool ResetPasswordAction(String password, string passwordHash)
         {
             string recovery = passwordHash.Substring(0, 32);
             int userId = int.Parse(passwordHash.Substring(32, passwordHash.Length - 32));
@@ -70,13 +70,13 @@ namespace BL
         }
 
         /// <summary>
-        /// Da inicio al proceso para el cambio de password.
+        /// Envía un mail para informarle al usuario que inició el proceso de cambio de contraseña.
+        /// acorde.
         /// </summary>
         /// <param name="mail"></param>
-        public void ResetPassword(string mail)
+        public void ResetPasswordRequest(string mail)
         {
             UserMapper mapper = new UserMapper();
-
             User user = mapper.Get(mail);
 
             if (user == null)
@@ -90,6 +90,50 @@ namespace BL
                 string activationHash = SecurityHelper.Encrypt(user.Mail + user.Lastupdate.Minute) + user.Id;
                 MailerHelper.SendResetPassword(user, activationHash);
             }
+        }
+
+        /// <summary>
+        /// Fuerza el cambio de password de un usuario, anulando la contraseña actual.
+        /// </summary>
+        /// <param name="userId"></param>
+        public void ResetPasswordRequest(int userId)
+        {
+            UserMapper mapper = new UserMapper();
+            User user = mapper.Get(userId);
+
+            if (user == null)
+            {
+                // Si no se encuentra, no se informa para ofuscar posibles ataques
+                string errorDescription = "No se ha encontrado usuario con id " + userId + ".";
+                log.AddLogCritical("ResetPassword", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.NULL, errorDescription));
+            }
+            else
+            {
+                //Se asigna un password cualquiera para invalidar el acceso
+                user.Password = DateTime.Now.Ticks.ToString();
+
+                // TODO - controlar errores
+                Edit(user);
+
+                //Se recupera porque a veces hay problemas con el hash
+                user = Get(userId);
+
+                string activationHash = SecurityHelper.Encrypt(user.Mail + user.Lastupdate.Minute) + user.Id;
+                MailerHelper.SendResetPasswordByAdmin(user, activationHash);
+            }
+        }
+
+        /// <summary>
+        /// Realiza el reseteo solicitado por el usuario desde la sección profile o apartado correspondiente.
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        public bool RestPassword(User user)
+        {
+            bool success = Edit(user);
+            if (success) MailerHelper.SendResetPasswordConfirmation(user);
+            return success;
         }
 
         public List<User> GetUserWithoutRole()
