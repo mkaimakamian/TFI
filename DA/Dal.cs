@@ -17,8 +17,6 @@ namespace DA
 
                 databaseName = ConfigurationManager.AppSettings["DATABASE"];
                 serverInstance = ConfigurationManager.AppSettings["SERVERINSTANCE"];
-                //databaseName = "ubiquicity";
-                //serverInstance = "SQLEXPRESS";
             }
             catch {
                 databaseName = "ubiquicity";
@@ -26,28 +24,6 @@ namespace DA
             }
 
             connStr = "Data Source=.\\" + serverInstance + "; Initial Catalog=" + databaseName + "; Integrated Security=True";
-
-            //if (String.IsNullOrEmpty(connStr))
-            //{
-            //    string SERVERINSTANCE = String.Empty;
-            //    try
-            //    {
-            //        //TODO - Preguntar si leemos desde un archivo de configuración
-
-            //        StreamReader st = new StreamReader(Directory.GetCurrentDirectory() + "\\dbconfig.txt");
-            //        serverInstance = st.ReadLine();
-            //        DATABASE = st.ReadLine();
-
-            //    }
-            //    catch
-            //    {
-            //        DATABASE = "ubiquicity";
-            //        SERVERINSTANCE = "SQLEXPRESS";
-            //    }
-
-            //    connStr = "Data Source=.\\" + SERVERINSTANCE + "; Initial Catalog=" + DATABASE + "; Integrated Security=True";
-            //}
-
         }
 
         /// <summary>

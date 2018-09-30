@@ -20,7 +20,7 @@ namespace Ubiquicity
         private UserControls.UCcrudGrid gridView = null;
         private BL.BaseManager manager = null;
 
-        protected virtual void PageLoad(object sender, EventArgs e) { }
+        protected virtual void PageLoad(object sender, EventArgs e) { throw new Exception("La subclase no ha implementado el método PageLoad"); }
         protected virtual void PreLoadGridView() { }
         protected virtual void PosLoadGridView() { }
 

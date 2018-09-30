@@ -46,6 +46,7 @@
     <Compile Include="MapManager.cs" />
     <Compile Include="LanguageManager.cs" />
     <Compile Include="LogManager.cs" />
+    <Compile Include="NewsManager.cs" />
     <Compile Include="RoleManager.cs" />
     <Compile Include="SessionManager.cs" />
     <Compile Include="UserManager.cs" />

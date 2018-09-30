@@ -48,13 +48,11 @@ namespace ORM
             List<Map> maps = null;
 
             table.Add("@id", DBNull.Value);
-
             DataSet result = dal.Read(table, "spReadMap");
 
             if (result != null && result.Tables[0].Rows.Count > 0)
             {
                 maps = new List<Map>();
-
                 foreach (DataRow data in result.Tables[0].Rows)
                 {
                     maps.Add(ConvertToModel(data));

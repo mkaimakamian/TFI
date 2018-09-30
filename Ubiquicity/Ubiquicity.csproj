@@ -167,6 +167,7 @@
     <Content Include="UserControls\UCCompareGrid.ascx" />
     <Content Include="UserControls\sub\UCCompareItem.ascx" />
     <Content Include="UserControls\UCFormMap.ascx" />
+    <Content Include="UserControls\UCFormNews.ascx" />
     <Content Include="UserControls\UCFormPassword.ascx" />
     <Content Include="UserControls\UCFormRolePermission.ascx" />
     <Content Include="UserControls\UCFormUserRole.ascx" />
@@ -393,6 +394,13 @@
     </Compile>
     <Compile Include="UserControls\UCFormMap.ascx.designer.cs">
       <DependentUpon>UCFormMap.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCFormNews.ascx.cs">
+      <DependentUpon>UCFormNews.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCFormNews.ascx.designer.cs">
+      <DependentUpon>UCFormNews.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\UCFormPassword.ascx.cs">
       <DependentUpon>UCFormPassword.ascx</DependentUpon>
