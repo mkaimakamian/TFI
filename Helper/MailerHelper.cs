@@ -92,6 +92,19 @@ namespace Helper
             Send("Password cambiado - Ubiquicity", body, new string[] { user.Mail });
         }
 
+        public static void SendNewsletterWelcome(NewsAddressee addressee)
+        {
+            string body = GetTemplate(
+                addressee.Name,
+                "Estás recibiendo este mail para recordarte que te has suscripto al newsletter." +
+                Environment.NewLine + "Esperamos que lo disfrutes.",
+                "http://localhost:50551/index.aspx"
+                );
+
+            Send("Suscripción al newsletter - Ubiquicity", body, new string[] { addressee.Email });
+        }
+        
+
         /// <summary>
         /// Lee el archivo html y procede al reemplazo de las variables internas con el contenido.
         /// </summary>

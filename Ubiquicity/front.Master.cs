@@ -223,5 +223,38 @@ namespace Ubiquicity
             }
 
         }
+
+        /// <summary>
+        /// Ajecuta la suscripción
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void btnSuscription_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                NewsAddresseeManager manager = new NewsAddresseeManager();
+                NewsAddressee addressee = new NewsAddressee();
+
+                //TODO - debería haber dos mails... ?
+                addressee.Name = nameSuscriptorInput.Value;
+                addressee.Email = mailSuscriptorInput.Value;
+
+                bool success = manager.Suscribe(addressee);
+
+                if (!success && manager.HasErrors)
+                {
+                    Alert.Show("Exception", manager.ErrorDescription);
+                }
+                else
+                {
+                    Alert.Show("Registro", "¡El registro fue un éxito! te enviamos un mail para recordarte sobre esto.");
+                }
+            }
+            catch (Exception exception)
+            {
+                Alert.Show("Exception", exception.Message);
+            }
+        }
     }
 }

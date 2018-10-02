@@ -99,6 +99,7 @@ namespace BL
 
             return isValid;
         }
+
         private bool IsValidForEdit(Map map)
         {
             bool isValid = true;

@@ -94,6 +94,33 @@ namespace Ubiquicity {
         protected global::System.Web.UI.WebControls.Button btnLogin;
         
         /// <summary>
+        /// nameSuscriptorInput control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText nameSuscriptorInput;
+        
+        /// <summary>
+        /// mailSuscriptorInput control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl mailSuscriptorInput;
+        
+        /// <summary>
+        /// btnSuscription control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSuscription;
+        
+        /// <summary>
         /// txtPasswordMail control.
         /// </summary>
         /// <remarks>

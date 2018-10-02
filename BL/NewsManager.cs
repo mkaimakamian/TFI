@@ -94,7 +94,7 @@ namespace BL
 
             return true;
         }
-
+        
         public bool IsValid(News news)
         {
             bool isValid = true;

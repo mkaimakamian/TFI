@@ -45,6 +45,7 @@
     <Compile Include="LanguageMapper.cs" />
     <Compile Include="LogMapper.cs" />
     <Compile Include="MapMapper.cs" />
+    <Compile Include="NewsAddresseeMapper.cs" />
     <Compile Include="NewsCategoryMapper.cs" />
     <Compile Include="NewsMapper.cs" />
     <Compile Include="PermissionMapper.cs" />
