@@ -17,8 +17,8 @@ namespace Ubiquicity
             {
                 MapManager mapManager = new MapManager();
                 List<Map> maps = mapManager.Get();
-                //shopRepeater.DataSource = maps;
-                //shopRepeater.DataBind();
+                shopRepeater.DataSource = maps;
+                shopRepeater.DataBind();
             }
         }
     }

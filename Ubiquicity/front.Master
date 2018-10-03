@@ -32,7 +32,7 @@
     <form runat="server">
         <asp:ScriptManager ID="ScriptManager1" runat="server" EnableScriptGlobalization="true" EnableScriptLocalization="true">
         </asp:ScriptManager>
-        <div class="container-fluid">
+        <div class="container-fluid" style="background-image: url(&quot;Resources/cover_silver.jpg&quot;); background-size: cover;">
 
             <nav class="navbar navbar-expand-md fixed-top navbar-light bg-light shadow-sm">
                 <a class="navbar-brand" href="index.aspx">Ubiqui-city</a>
@@ -64,7 +64,7 @@
                     |<div id="google_translate_element" class="btn btn-link btn-sm"></div>
                 </div>
             </nav>
-
+<%--            <div class="pt-5 text-left" style="background-image: url(&quot;Resources/cover_silver.jpg&quot;); background-size: cover; background-position: center top;"/>--%>
             <!-- Menu permisos -->
             <div class="row">
                 <div class="col-2">

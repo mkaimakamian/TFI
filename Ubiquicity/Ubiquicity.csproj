@@ -98,12 +98,14 @@
     <Content Include="recovery_action.aspx" />
     <Content Include="redeem_manager.aspx" />
     <Content Include="register_action.aspx" />
+    <Content Include="Resources\cover_silver.jpg" />
     <Content Include="Resources\document.svg" />
     <Content Include="Resources\folder.svg" />
     <Content Include="Resources\log.svg" />
     <Content Include="Resources\login.svg" />
     <Content Include="Resources\mail.htm" />
     <Content Include="Resources\map.svg" />
+    <Content Include="Resources\mapa_vect.png" />
     <Content Include="Resources\note.svg" />
     <Content Include="Resources\registro.svg" />
     <Content Include="Resources\roles_permisos.svg" />

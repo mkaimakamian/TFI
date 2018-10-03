@@ -1,20 +1,19 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/front.Master" AutoEventWireup="true" CodeBehind="shop.aspx.cs" Inherits="Ubiquicity.shop" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="contentHolder" runat="server">
-   <%-- <asp:Repeater ID="shopRepeater" runat="server">
-        <ItemTemplate>
-            <div class="row">
-                <div class="col col-4 ml-0 mt-2 mb-2">
-                    <div class="card" style="width: 18rem;">
-                        <asp:Image ImageUrl="~/Resources/map.svg" runat="server" CssClass=" img-fluid" />
-                        <div class="card-body">
-                            <asp:Label ID="lblNombre" CssClass="card-title" Text='<%# Eval("Name") %>' runat="server"></asp:Label>
-                            <asp:Label ID="lblMarca" CssClass="card-subtitle text-muted mb-2" Text='<%# Eval("Description")%>' runat="server"></asp:Label>
-                        </div>
+    <div class="row">
+        <asp:Repeater ID="shopRepeater" runat="server">
+            <ItemTemplate>
+                <div class="card" style="width: 14rem; margin: 4px">
+                    <img class="card-img-top" src="Resources/mapa_vect.png">
+                    <div class="card-body">
+                        <h4 class="card-title"><%# Eval("Name") %></h4>
+                        <%--<h6 class="card-subtitle mb-2 text-muted"><%# Eval("Category.Name") %></h6>--%>
+                        <p class="card-text"><%# Eval("Description") %></p>
+                        <a href="#" class="card-link">Card link</a>
                     </div>
                 </div>
-            </div>
-        </ItemTemplate>
-    </asp:Repeater>--%>
-
+            </ItemTemplate>
+        </asp:Repeater>
+    </div>
 </asp:Content>

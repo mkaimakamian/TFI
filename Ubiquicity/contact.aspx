@@ -6,11 +6,11 @@
         <div class="col-4">
             <div class="form-group col-md-12">
                 <label for="firstNameInput">Nombre</label>
-                <input id="firstNameInput" runat="server" type="text" class="form-control form-control-sm"  placeholder="Ingresa tu nombre">
+                <input id="firstNameInput" runat="server" type="text" class="form-control form-control-sm"  placeholder="Ingresá tu nombre">
               </div>
               <div class="form-group col-md-12">
                 <label for="lastNameInput">Apellido</label>
-                <input id="lastNameInput" runat="server" type="text" class="form-control form-control-sm"  placeholder="Ingresa tu apellido">
+                <input id="lastNameInput" runat="server" type="text" class="form-control form-control-sm"  placeholder="Ingresá tu apellido">
               </div>
               <div class="form-group col-md-12">
                 <label for="mailInput">Dirección de correo</label>
@@ -18,7 +18,7 @@
               </div>
               <div class="form-group col-md-12">
                 <label for="textArea">Mensaje</label>
-                <textarea  id="textArea" runat="server" type="text" class="form-control form-control-sm"  placeholder="Ingresá tu mensaje"></textarea>
+                <textarea  id="textArea" runat="server" type="text" class="form-control form-control-sm" rows="8"  placeholder="Ingresá tu mensaje"></textarea>
               </div>
               <div class="form-group col-md-12 ali">
                 <button type="button" class="btn btn-primary btn-sm">Enviar</button>
