@@ -102,7 +102,7 @@ namespace ORM
             news.Since = Convert.ToDateTime(data["since"]);
             news.Until = Convert.ToDateTime(data["until"]);
             news.Sent = Convert.ToBoolean(data["sent"]);
-            news.Category.Id = Convert.ToInt32(data["id"]);
+            news.Category.Id = Convert.ToInt32(data["newsCategoryId"]);
 
             return news;
         }

@@ -13,7 +13,7 @@
     <Columns>
         <asp:TemplateField ShowHeader="False">
             <ItemTemplate>
-                <asp:LinkButton ID="btnDelete" runat="server"  CssClass="btn btn-danger btn-sm" CausesValidation="false" CommandName="DeleteItem" Text="<i class='fa fa-minus' aria-hidden='true'></i> Eliminar" CommandArgument='<%# Eval("id") %>'/>
+                <asp:LinkButton ID="btnDelete" runat="server" CssClass="btn btn-danger btn-sm" CausesValidation="false" CommandName="DeleteItem" Text="<i class='fa fa-minus' aria-hidden='true'></i> Eliminar" CommandArgument='<%# Eval("id") %>'/>
             </ItemTemplate>
         </asp:TemplateField>
         <asp:TemplateField ShowHeader="False">

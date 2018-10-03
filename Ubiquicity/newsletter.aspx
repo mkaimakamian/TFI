@@ -1,16 +1,20 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/front.Master" AutoEventWireup="true" CodeBehind="newsletter.aspx.cs" Inherits="Ubiquicity.newsletter" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="contentHolder" runat="server">
-    <br /><br /><br />
-        <div class="row">
-        <div class="col-12 text-center">
-            <img src="Resources/document.svg" width="400" height="400" />
-        </div>
-        <div class="col-12">
-           <blockquote class="blockquote text-center">
-              <p class="mb-0">Estamos preparando el newsletter para vos.</p>
-              <footer class="blockquote-footer">Ser único requiere paciencia.</footer>
-            </blockquote>
-        </div>
-        <br /><br /><br /><br /><br /><br />
+    <div class="row">
+        <asp:Repeater ID="newsRepeater" runat="server" OnItemCommand="newsRepeater_ItemCommand">
+            <ItemTemplate>
+                <div class="card" style="width: 18rem; margin:4px">
+                    <div class="card-body">
+                        <h4 class="card-title"><%# Eval("Title") %></h4>
+                        <h6 class="card-subtitle mb-2 text-muted"><%# Eval("Category.Name") %></h6>
+                        <p class="card-text"><%# Eval("Resume").ToString().Substring(0, 50) %></p>
+                        <asp:LinkButton runat="server" CssClass="btn btn-primary btn-sm" Text="Leer más" CommandArgument='<%# Eval("id") %>'/>
+                    </div>
+                </div>
+            </ItemTemplate>
+        </asp:Repeater>
     </div>
+
+    <UCmkc:UCModalNews runat="server" ID="ModalNewsletter" />
 </asp:Content>

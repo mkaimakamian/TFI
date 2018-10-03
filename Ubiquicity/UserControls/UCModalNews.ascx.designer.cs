@@ -7,27 +7,27 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Ubiquicity {
+namespace Ubiquicity.UserControls {
     
     
-    public partial class newsletter {
+    public partial class UCModalNews {
         
         /// <summary>
-        /// newsRepeater control.
+        /// ucModalNewsLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater newsRepeater;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ucModalNewsLabel;
         
         /// <summary>
-        /// ModalNewsletter control.
+        /// ucModalNewsMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ubiquicity.UserControls.UCModalNews ModalNewsletter;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ucModalNewsMessage;
     }
 }

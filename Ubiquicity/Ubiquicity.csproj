@@ -173,6 +173,7 @@
     <Content Include="UserControls\UCFormUserRole.ascx" />
     <Content Include="UserControls\UCHeaderBackOffice.ascx" />
     <Content Include="UserControls\UCLogFilter.ascx" />
+    <Content Include="UserControls\UCModalNews.ascx" />
     <Content Include="user_manager.aspx" />
     <Content Include="UserControls\UCcrudGrid.ascx" />
     <Content Include="UserControls\UCFormLanguage.ascx" />
@@ -436,6 +437,13 @@
     </Compile>
     <Compile Include="UserControls\UCLogFilter.ascx.designer.cs">
       <DependentUpon>UCLogFilter.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCModalNews.ascx.cs">
+      <DependentUpon>UCModalNews.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCModalNews.ascx.designer.cs">
+      <DependentUpon>UCModalNews.ascx</DependentUpon>
     </Compile>
     <Compile Include="user_manager.aspx.cs">
       <DependentUpon>user_manager.aspx</DependentUpon>
