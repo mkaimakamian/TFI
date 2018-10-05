@@ -64,6 +64,14 @@ namespace BL
                 isValid = false;
             }
 
+            if (String.IsNullOrEmpty(newsAddressee.Categories))
+            {
+                string errorDescription = "Debe elegir la menos una categoría.";
+                log.AddLogWarn("IsValid", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
+                isValid = false;
+            }
+
             return isValid;
         }
     }

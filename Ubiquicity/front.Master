@@ -12,7 +12,7 @@
     <link href="Content/bootstrap.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src='https://www.google.com/recaptcha/api.js'></script>
-    <script type="text/javascript">
+<%--    <script type="text/javascript">
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({ pageLanguage: 'es' }, 'google_translate_element');
 
@@ -21,11 +21,11 @@
                 document.querySelector('.goog-te-gadget').setAttribute('style', 'font-size: 0');
             }
         }
-    </script>
+    </script>--%>
 
     <!-- Api Google Translate-->
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+    <%--<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>--%>
+    <%--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>--%>
 </head>
 
 <body>
@@ -134,13 +134,15 @@
                                 <label for="mailSuscriptorInput">Mail</label>
                                 <input id="mailSuscriptorInput" runat="server" type="email" class="form-control form-control-sm" placeholder="Ingresá tu mail">
                             </div>
-
+                            <div class="form-group">
+                                <label for="checkCategory">Categorías</label>
+                                <asp:CheckBoxList ID="checkCategory" runat="server"/>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <asp:Button ID="btnSuscription" runat="server" CssClass="btn btn-primary btn-sm" OnClick="btnSuscription_Click" Text="Suscribirme" />
                             <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cerrar</button>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -224,7 +226,7 @@
                                 <a class="nav-link" href="faq.aspx">F.A.Qs.</a>
                             </li>
                             <li class="nav-item">
-                                <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalNewsSuscription">Newsletter</button>
+                                <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalNewsSuscription">¡Suscribite al newsletter!</button>
                             </li>
                             
                         </ul>

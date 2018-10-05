@@ -166,6 +166,7 @@
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="shop.aspx" />
     <Content Include="suscription_manager.aspx" />
+    <Content Include="UserControls\sub\UCCalendar.ascx" />
     <Content Include="UserControls\UCCompareGrid.ascx" />
     <Content Include="UserControls\sub\UCCompareItem.ascx" />
     <Content Include="UserControls\UCFormMap.ascx" />
@@ -376,6 +377,13 @@
     </Compile>
     <Compile Include="suscription_manager.aspx.designer.cs">
       <DependentUpon>suscription_manager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\sub\UCCalendar.ascx.cs">
+      <DependentUpon>UCCalendar.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\sub\UCCalendar.ascx.designer.cs">
+      <DependentUpon>UCCalendar.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\UCCompareGrid.ascx.cs">
       <DependentUpon>UCCompareGrid.ascx</DependentUpon>

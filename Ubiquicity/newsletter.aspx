@@ -2,6 +2,16 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="contentHolder" runat="server">
     <div class="row">
+        <div class="form-group col-2">
+            <label for="checksCategoryInput">Categoría</label>
+
+        <%--<asp:CheckBoxList ID="checksCategoryInput" runat="server"/>--%>
+            <asp:DropDownList ID="dropCategoryInput" runat="server"
+                cclass="btn btn-secondary dropdown-toggle form-control form-control-sm"
+                OnSelectedIndexChanged="ChangeNewsCategory" AutoPostBack="True" />
+        </div>
+    </div>
+    <div class="row">
         <asp:Repeater ID="newsRepeater" runat="server" OnItemCommand="newsRepeater_ItemCommand">
             <ItemTemplate>
                 <div class="card" style="width: 18rem; margin: 4px">

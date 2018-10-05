@@ -59,6 +59,11 @@ namespace BL
             return news;
         }
 
+        public List<News> GetByCategory(int categoryId)
+        {
+            NewsMapper newsMapper = new NewsMapper();
+            return newsMapper.GetByCategory(categoryId);
+        }
 
         /// <summary>
         /// Devuelve el listado de novedades de la base.

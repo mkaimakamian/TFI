@@ -5,10 +5,10 @@
         <asp:Repeater ID="shopRepeater" runat="server">
             <ItemTemplate>
                 <div class="card" style="width: 14rem; margin: 4px">
-                    <img class="card-img-top" src="Resources/mapa_vect.png">
+                    <img class="card-img-top" src="<%# Eval("Image") %>">
                     <div class="card-body">
                         <h4 class="card-title"><%# Eval("Name") %></h4>
-                        <%--<h6 class="card-subtitle mb-2 text-muted"><%# Eval("Category.Name") %></h6>--%>
+                        <h6 class="card-subtitle mb-2 text-muted">Categoría de producto</h6>
                         <p class="card-text"><%# Eval("Description") %></p>
                         <a href="#" class="card-link">Card link</a>
                     </div>

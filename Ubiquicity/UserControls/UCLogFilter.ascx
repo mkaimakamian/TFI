@@ -18,11 +18,13 @@
     </div>
     <div class="form-group col-2">
         <label for="dateSince">Desde</label>
-        <input id="dateSince" runat="server" type="text" class="form-control form-control-sm" placeholder="Desde">
+        <%--<input id="dateSince" runat="server" type="text" class="form-control form-control-sm" placeholder="Desde">--%>
+        <UCmkc:UCCalendar id="dateSince" runat="server" />
     </div>
     <div class="form-group col-2">
         <label for="dateUntil">Hasta</label>
-        <input id="dateUntil" runat="server" type="text" class="form-control form-control-sm" placeholder="Hasta">
+        <%--<input id="dateUntil" runat="server" type="text" class="form-control form-control-sm" placeholder="Hasta">--%>
+        <UCmkc:UCCalendar id="dateUntil" runat="server" />
     </div>
     <div class="form-group col-2">
         <label for="inputUser">Usuario</label>

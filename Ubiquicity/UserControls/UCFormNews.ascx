@@ -43,11 +43,5 @@
             <label for="untilInput">Vencimiento</label>
             <input id="untilInput" runat="server" type="text" class="form-control form-control-sm" placeholder="Hasta">
         </div>
-
-        <%--        Para la carga de las imágenes (repeater?)
-        <div class="form-group col-12">
-            <asp:Button ID="btnUngrant" runat="server" Text=">>" OnClick="btnUngrant_Click" CssClass="form-control btn-sm" />
-            <asp:Button ID="btnGrant" runat="server" Text="<<" OnClick="btnGrant_Click" CssClass="form-control btn-sm" />
-        </div>--%>
     </div>
 </div>

@@ -21,6 +21,7 @@ namespace ORM
             table.Add("@mail", addressee.Email);
             table.Add("@active", addressee.Active);
             table.Add("@singup", addressee.Singup);
+            table.Add("@categories", addressee.Categories);
             addressee.Id = dal.Write(table, "spWriteNewsAddressee");
 
             return addressee.Id > 0;
@@ -72,6 +73,8 @@ namespace ORM
             addressee.Email = data["email"].ToString();
             addressee.Singup = Convert.ToDateTime(data["singup"]);
             addressee.Active = Convert.ToBoolean(data["active"]);
+            addressee.Categories = data["categories"].ToString();
+
             if (data["dropout"] != DBNull.Value)
             {
                 addressee.Dropout = Convert.ToDateTime(data["dropout"]);

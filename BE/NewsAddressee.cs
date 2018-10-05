@@ -14,6 +14,8 @@ namespace BE
         private bool active;
         private DateTime dropout;
         private DateTime singup;
+        private string categories;
+
 
         public int Id
         {
@@ -93,6 +95,17 @@ namespace BE
             }
         }
 
+        public string Categories
+        {
+            get
+            {
+                return categories;
+            }
 
+            set
+            {
+                categories = value;
+            }
+        }
     }
 }

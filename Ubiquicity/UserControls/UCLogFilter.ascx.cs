@@ -62,8 +62,22 @@ namespace Ubiquicity.UserControls
                 filters.Add(qf);
             }
 
-            //desde
-            //hasta
+            if (!String.IsNullOrEmpty(dateSince.Date))
+            {
+                QueryFilter qf = new QueryFilter();
+                qf.Key = "@since";
+                qf.Value = dateSince.Date;
+                filters.Add(qf);
+            }
+
+            if (!String.IsNullOrEmpty(dateUntil.Date))
+            {
+                QueryFilter qf = new QueryFilter();
+                qf.Key = "@until";
+                qf.Value = dateUntil.Date;
+                filters.Add(qf);
+            }
+
 
             LogManager logManager = new LogManager();
             List<LogEntry> logs = logManager.Get(filters);

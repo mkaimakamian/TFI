@@ -16,16 +16,19 @@ namespace Ubiquicity
 {
     public partial class front : System.Web.UI.MasterPage
     {
-       
+
         protected void Page_Load(object sender, EventArgs e)
         {
             //Session["SessionCreated"]
 
-            if (!IsPostBack) {
-                    // Todo - ver si en vez de usuario es Session
-                    User user = (User) Session["SessionCreated"];
-                    ManageLoginPanel(user);
-                    LoadMenu(user);
+            if (!IsPostBack)
+            {
+                // Todo - ver si en vez de usuario es Session
+                User user = (User)Session["SessionCreated"];
+                ManageLoginPanel(user);
+                LoadMenu(user);
+                //No está bueno... ver la performance.
+                LoadNewsletterCategory();
             }
 
         }
@@ -45,7 +48,7 @@ namespace Ubiquicity
                 //    UserManager userManager = new UserManager();
                 //    userManager.SendRecovery(txtUser.Value);
                 //}
-               
+
                 if (IsValid(txtUserMail.Value, txtPassword.Value))
                 {
                     // El password se encrypta antes de enviarse al back
@@ -87,7 +90,7 @@ namespace Ubiquicity
                     Alert.Show("Error", "Debes leer y aceptar los términos para poder registrarte");
                     return;
                 }
-                
+
                 if (!IsValidCapcha())
                 {
                     Alert.Show("Error", "¡No te hemos podido identificar como humano!. \n Por favor, asegurate de ingresar el captcha adecuadamente.");
@@ -113,7 +116,8 @@ namespace Ubiquicity
                     Alert.Show("Error", userManager.ErrorDescription);
                 }
 
-            } catch (Exception exception)
+            }
+            catch (Exception exception)
             {
                 Alert.Show("Exception", exception.Message);
             }
@@ -123,14 +127,16 @@ namespace Ubiquicity
         /// Según el valor pasado, muestra los paneles que permiten el acceso al botón de login + registro, o logout.
         /// </summary>
         /// <param name="logged"></param>
-        private void ManageLoginPanel(User user) {
+        private void ManageLoginPanel(User user)
+        {
 
             if (user != null)
             {
                 panelLogin.Visible = false;
                 panelAlreadyLogged.Visible = true;
                 btnLogout.InnerText += user.Name + " " + user.Lastname + " (salir)";
-            } else
+            }
+            else
             {
                 panelLogin.Visible = true;
                 panelAlreadyLogged.Visible = false;
@@ -139,7 +145,8 @@ namespace Ubiquicity
 
         // TODO - revisar la performance (la idea es evitar duplicados)
         //Eventualmente crear un método que recupere los permisos directamente de la base, sin duplicados.
-        private void LoadMenu(User user) {
+        private void LoadMenu(User user)
+        {
             if (user != null)
             {
                 mnuSection.Items.Clear();
@@ -182,7 +189,8 @@ namespace Ubiquicity
                 result = jResponse.Value<Boolean>("success");
 
                 return result;
-            } else
+            }
+            else
             {
                 return false;
             }
@@ -194,7 +202,7 @@ namespace Ubiquicity
             return true;
 
         }
-        
+
         /// <summary>
         /// Finaliza la sesión del usuario y lo devuelve a la misma página en la que estaba.
         /// </summary>
@@ -233,12 +241,25 @@ namespace Ubiquicity
         {
             try
             {
+                //La estrategia consta de concatenar con @ los ids de las categorías para poder guardarlas un campo
+                string categoryIds = "";
+                foreach (ListItem item in checkCategory.Items)
+                {
+                    categoryIds += item.Selected? item.Value + "@" : "";
+                }
+
                 NewsAddresseeManager manager = new NewsAddresseeManager();
                 NewsAddressee addressee = new NewsAddressee();
 
-                //TODO - debería haber dos mails... ?
+                //TODO - deberían solicitarse mail y comprobación?
                 addressee.Name = nameSuscriptorInput.Value;
                 addressee.Email = mailSuscriptorInput.Value;
+
+                if (!String.IsNullOrEmpty(categoryIds))
+                {
+                    addressee.Categories = categoryIds.Substring(0, categoryIds.Length - 1);
+
+                }
 
                 bool success = manager.Suscribe(addressee);
 
@@ -255,6 +276,19 @@ namespace Ubiquicity
             {
                 Alert.Show("Exception", exception.Message);
             }
+        }
+
+        /// <summary>
+        /// Carga las categorías del news letter; no es óptimo porque las carga siempre y debería ser bajo demanda.
+        /// </summary>
+        private void LoadNewsletterCategory()
+        {
+            NewsCategoryManager newsCategoryManager = new NewsCategoryManager();
+            List<NewsCategory> newsCategories = newsCategoryManager.Get();
+            checkCategory.DataSource = newsCategories;
+            checkCategory.DataTextField = "Name";
+            checkCategory.DataValueField = "Id";
+            checkCategory.DataBind();
         }
     }
 }

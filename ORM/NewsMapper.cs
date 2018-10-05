@@ -53,6 +53,7 @@ namespace ORM
             News news = null;
 
             table.Add("@id", id);
+            table.Add("@categoryId", DBNull.Value);
             DataSet result = dal.Read(table, "spReadNews");
 
             if (result != null && result.Tables[0].Rows.Count > 0)
@@ -70,6 +71,7 @@ namespace ORM
             List<News> news = null;
 
             table.Add("@id", DBNull.Value);
+            table.Add("@categoryId", DBNull.Value);
             DataSet result = dal.Read(table, "spReadNews");
 
             if (result != null && result.Tables[0].Rows.Count > 0)
@@ -83,6 +85,35 @@ namespace ORM
 
             return news;
         }
+
+        /// <summary>
+        /// Recupera el listado filtrando por categoría
+        /// </summary>
+        /// <returns></returns>
+        public List<News> GetByCategory(int categoryId)
+        {
+            Dal dal = new Dal();
+            Hashtable table = new Hashtable();
+            List<News> news = null;
+
+            //string categoryIds = String.Join(",", ids);
+
+            table.Add("@id", DBNull.Value);
+            table.Add("@categoryId", categoryId);
+            DataSet result = dal.Read(table, "spReadNews");
+
+            if (result != null && result.Tables[0].Rows.Count > 0)
+            {
+                news = new List<News>();
+                foreach (DataRow data in result.Tables[0].Rows)
+                {
+                    news.Add(ConvertToModel(data));
+                }
+            }
+
+            return news;
+        }
+        
 
         public bool Delete(int id)
         {
