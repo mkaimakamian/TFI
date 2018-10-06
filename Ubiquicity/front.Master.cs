@@ -283,12 +283,19 @@ namespace Ubiquicity
         /// </summary>
         private void LoadNewsletterCategory()
         {
-            NewsCategoryManager newsCategoryManager = new NewsCategoryManager();
-            List<NewsCategory> newsCategories = newsCategoryManager.Get();
-            checkCategory.DataSource = newsCategories;
-            checkCategory.DataTextField = "Name";
-            checkCategory.DataValueField = "Id";
-            checkCategory.DataBind();
+            try
+            {
+                NewsCategoryManager newsCategoryManager = new NewsCategoryManager();
+                List<NewsCategory> newsCategories = newsCategoryManager.Get();
+                checkCategory.DataSource = newsCategories;
+                checkCategory.DataTextField = "Name";
+                checkCategory.DataValueField = "Id";
+                checkCategory.DataBind();
+            } catch (Exception exception)
+            {
+                Alert.Show("Exception", exception.Message);
+            }
+
         }
     }
 }

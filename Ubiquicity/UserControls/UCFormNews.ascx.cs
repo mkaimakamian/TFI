@@ -25,8 +25,8 @@ namespace Ubiquicity.UserControls
             dropCategoryInput.DataValueField = "Id";
             dropCategoryInput.DataSource = newsCategories;
             dropCategoryInput.DataBind();
-            sinceInput.Value = "";
-            untilInput.Value = "";
+            sinceInput.Date = DateTime.Now.ToShortDateString();
+            untilInput.Date = DateTime.Now.AddDays(1).ToShortDateString();
         }
 
         public void FillForm(News news)
@@ -36,8 +36,8 @@ namespace Ubiquicity.UserControls
             fileImage.Src = news.Image;
             imageInputBase64.Value = news.Image;
             dropCategoryInput.SelectedValue = news.Category.Id.ToString();
-            sinceInput.Value = news.Since.ToString();
-            untilInput.Value = news.Until.ToString();
+            sinceInput.Date = news.Since.ToString();
+            untilInput.Date = news.Until.ToString();
         }
 
         public void PopulateModel(News news)
@@ -46,8 +46,8 @@ namespace Ubiquicity.UserControls
             news.Body = bodyInput.InnerText;
             news.Image = imageInputBase64.Value;
             news.Category.Id = Convert.ToInt32(dropCategoryInput.SelectedValue);
-            news.Since = Convert.ToDateTime(sinceInput.Value);
-            news.Until= Convert.ToDateTime(untilInput.Value);
+            news.Since = Convert.ToDateTime(sinceInput.Date);
+            news.Until= Convert.ToDateTime(untilInput.Date);
         }
     }
 }

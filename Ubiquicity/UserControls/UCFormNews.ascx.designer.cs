@@ -73,7 +73,7 @@ namespace Ubiquicity.UserControls {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText sinceInput;
+        protected global::Ubiquicity.UserControls.UCCalendar sinceInput;
         
         /// <summary>
         /// untilInput control.
@@ -82,6 +82,6 @@ namespace Ubiquicity.UserControls {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText untilInput;
+        protected global::Ubiquicity.UserControls.UCCalendar untilInput;
     }
 }

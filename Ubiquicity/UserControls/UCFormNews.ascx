@@ -37,11 +37,11 @@
         </div>
         <div class="form-group col-4">
             <label for="sinceInput">Activación</label>
-            <input id="sinceInput" runat="server" type="text" class="form-control form-control-sm" placeholder="Desde">
+            <UCmkc:UCCalendar runat="server" ID="sinceInput" />
         </div>
         <div class="form-group col-4">
             <label for="untilInput">Vencimiento</label>
-            <input id="untilInput" runat="server" type="text" class="form-control form-control-sm" placeholder="Hasta">
+            <UCmkc:UCCalendar runat="server" ID="untilInput" />
         </div>
     </div>
 </div>

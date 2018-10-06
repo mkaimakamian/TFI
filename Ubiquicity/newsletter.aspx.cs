@@ -16,47 +16,52 @@ namespace Ubiquicity
             if (!IsPostBack)
             {
                 LoadNews(LoadCategory());
-            }
+            } 
         }
 
-        private int LoadCategory()
+        /// <summary>
+        /// Craga las categorías y devuelve el listado con todos los elementos seleccionados
+        /// </summary>
+        /// <returns></returns>
+        private ListItemCollection LoadCategory()
         {
             try
             {
                 NewsCategoryManager newsCategoryManager = new NewsCategoryManager();
                 List<NewsCategory> newsCategories = newsCategoryManager.Get();
-                dropCategoryInput.DataSource = newsCategories;
-                dropCategoryInput.DataTextField = "Name";
-                dropCategoryInput.DataValueField = "Id";
-                dropCategoryInput.DataBind();
+                checksCategoryInput.DataSource = newsCategories;
+                checksCategoryInput.DataTextField = "Name";
+                checksCategoryInput.DataValueField = "Id";
+                checksCategoryInput.DataBind();
 
-                //foreach (ListItem item in checksCategoryInput.Items)
-                //{
-                //    item.Selected = true;
-                //}
+                // Selección de todos los check para que el filtrado inicial muestre todos los items
+                foreach (ListItem item in checksCategoryInput.Items)
+                {
+                    item.Selected = true;
+                }
             }
             catch (Exception exception)
             {
                 ((front)Master).Alert.Show("Excepción", exception.Message);
             }
 
-            return Convert.ToInt32(dropCategoryInput.SelectedValue);
+            return checksCategoryInput.Items;
         }
 
-        private void LoadNews(int categoryId)
+        private void LoadNews(ListItemCollection categories)
         {
             try
             {
-                //Se traspasa a una coleccion genérica
-                //string[] ids = new string[items.Count];
+                //Se traspasa a un array para que la capa de negocios reciba una etsructura más genérica.
+                int[] categoriesId = new int[categories.Count];
 
-                //for(int i=0; i < items.Count; ++i)
-                //{
-                //    ids[i] = items[i].Value;
-                //}
-   
+                for (int i = 0; i < categories.Count; ++i)
+                {
+                    if (categories[i].Selected) categoriesId[i] = Convert.ToInt32(categories[i].Value);
+                }
+
                 NewsManager newsmanager = new NewsManager();
-                newsRepeater.DataSource = newsmanager.GetByCategory(categoryId);
+                newsRepeater.DataSource = newsmanager.GetByCategory(categoriesId);
                 newsRepeater.DataBind();
             }
             catch (Exception exception)
@@ -77,8 +82,8 @@ namespace Ubiquicity
 
         protected void ChangeNewsCategory(object sender, EventArgs e)
         {
-            int categoryId = Convert.ToInt32(((DropDownList)sender).SelectedValue);
-            LoadNews(categoryId);
+            //int categoryId = Convert.ToInt32(((DropDownList)sender).SelectedValue);
+            LoadNews(checksCategoryInput.Items);
         }
     }
 }

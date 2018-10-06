@@ -16,6 +16,7 @@ namespace Ubiquicity.UserControls
 
         public string Date
         {
+            set { txtCalendar.Text = value; }
             get { return txtCalendar.Text; }
 
         }

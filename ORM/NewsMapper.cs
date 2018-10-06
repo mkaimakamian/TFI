@@ -134,7 +134,7 @@ namespace ORM
             news.Until = Convert.ToDateTime(data["until"]);
             news.Sent = Convert.ToBoolean(data["sent"]);
             news.Category.Id = Convert.ToInt32(data["newsCategoryId"]);
-
+            news.Created = Convert.ToDateTime(data["created"]);
             return news;
         }
     }

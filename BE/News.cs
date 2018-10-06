@@ -16,6 +16,7 @@ namespace BE
         private DateTime until;
         private bool sent;
         private NewsCategory category;
+        private DateTime created;
 
         public int Id
         {
@@ -127,6 +128,19 @@ namespace BE
             set
             {
                 category = value;
+            }
+        }
+
+        public DateTime Created
+        {
+            get
+            {
+                return created;
+            }
+
+            set
+            {
+                created = value;
             }
         }
     }

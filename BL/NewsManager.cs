@@ -59,10 +59,22 @@ namespace BL
             return news;
         }
 
-        public List<News> GetByCategory(int categoryId)
+        public List<News> GetByCategory(int[] categoriesId)
         {
             NewsMapper newsMapper = new NewsMapper();
-            return newsMapper.GetByCategory(categoryId);
+            List<News> categories = new List<News>();
+
+            //Rever como pasar un listado a la base para evitar realizar tantas llamadas.
+            for (int i = 0; i < categoriesId.Length; ++i)
+            {
+                List<News> currentCategories = newsMapper.GetByCategory(categoriesId[i]);
+
+                if (currentCategories != null) categories.AddRange(newsMapper.GetByCategory(categoriesId[i]));
+            }
+
+
+
+            return categories;
         }
 
         /// <summary>

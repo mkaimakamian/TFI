@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UCLogFilter.ascx.cs" Inherits="Ubiquicity.UserControls.UCLogFilter" %>
-<div class="row row border p-1 m-1 rounded">
+<div class="row border p-1 m-1 rounded">
     <div class="form-group col-2">
         <label for="inputLogLevel">Criticidad</label>
         <input id="inputLogLevel" runat="server" type="text" class="form-control form-control-sm" placeholder="Criticidad">
@@ -18,19 +18,17 @@
     </div>
     <div class="form-group col-2">
         <label for="dateSince">Desde</label>
-        <%--<input id="dateSince" runat="server" type="text" class="form-control form-control-sm" placeholder="Desde">--%>
         <UCmkc:UCCalendar id="dateSince" runat="server" />
     </div>
     <div class="form-group col-2">
         <label for="dateUntil">Hasta</label>
-        <%--<input id="dateUntil" runat="server" type="text" class="form-control form-control-sm" placeholder="Hasta">--%>
         <UCmkc:UCCalendar id="dateUntil" runat="server" />
     </div>
     <div class="form-group col-2">
         <label for="inputUser">Usuario</label>
         <input id="inputUser" runat="server" type="text" class="form-control form-control-sm" placeholder="Usuario">
     </div>
-    <div class="form-group col-10 align-bottom">
+    <div class="form-group col-10 align-content-bottom">
         <button ID="btnSearch" runat="server" class="btn btn-primary btn-sm" onserverclick="btnSearch_PerformSearch" >
     <i class="fa fa-search" aria-hidden="true"></i> Buscar</button>
     </div>
