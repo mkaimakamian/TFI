@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="Resources/ubiquicity.css" />
 
     <script src='https://www.google.com/recaptcha/api.js'></script>
-        <script type="text/javascript">
+    <script type="text/javascript">
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({ pageLanguage: 'es' }, 'google_translate_element');
 
@@ -31,7 +31,7 @@
 </head>
 
 <body>
-    <form runat="server">
+    <form runat="server" class="wrapper">
         <asp:ScriptManager ID="ScriptManager1" runat="server" EnableScriptGlobalization="true" EnableScriptLocalization="true" />
         <div class="container-fluid">
 
@@ -68,7 +68,7 @@
 
             <!-- Menu permisos -->
             <div class="row">
-                <div id="menuDiv" runat="server" class="col-2 mkcMenu" style="display:none" >
+                <div id="menuDiv" runat="server" class="col-2 mkcMenu" style="display: none">
                     <asp:Menu ID="mnuSection" runat="server" MaximumDynamicDisplayLevels="2" Orientation="Vertical"
                         SkipLinkText="" StaticMenuItemStyle-ForeColor="#fefefe" StaticHoverStyle-ForeColor="#ffc107">
                     </asp:Menu>
@@ -206,8 +206,43 @@
             <UCmkc:UCModalMessageBox runat="server" ID="customAlertBox" />
 
             <!-- footer -->
-            <footer class="row">
+            <%--<footer class="row">
                 <div class="col-12">
+                    <nav class="navbar navbar-expand-sm mx-auto navbar-dark mkcColorNavbar">
+
+                        <ul class="navbar-nav mr-auto mx-auto ">
+                            <li class="nav-item ">
+                                <a class="nav-link" href="about.aspx">Nosotros</a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link" href="newsletter.aspx">Newsletter</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="privacy.aspx">Términos y Condiciones</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="contact.aspx">Contactate</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="faq.aspx">F.A.Qs.</a>
+                            </li>
+                            <li class="nav-item">
+                                <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalNewsSuscription">¡Suscribite al newsletter!</button>
+                            </li>
+
+                        </ul>
+                    </nav>
+                </div>
+            </footer>--%>
+
+
+        </div>
+        <div class='push'></div>
+    </form>
+
+     <!-- footer -->
+            <footer class="row mkcFooter" style="padding:0px; margin:0px">
+                <div class="col-12" style="padding:0px; margin:0px">
                     <nav class="navbar navbar-expand-sm mx-auto navbar-dark mkcColorNavbar">
 
                         <ul class="navbar-nav mr-auto mx-auto ">
@@ -235,11 +270,9 @@
                 </div>
             </footer>
 
-        </div>
-
-    </form>
     <script src="Scripts/jquery-3.3.1.js"></script>
     <script src="Scripts/bootstrap.js"></script>
     <script src="Scripts/umd/popper.js"></script>
+
 </body>
 </html>

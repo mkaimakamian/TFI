@@ -42,8 +42,10 @@
     color:#ffc107;
 }
 
-body {
+html, body {
     background-color:#fefefe;
+    height: 100%;
+    margin: 0px;
 }
 
 .btn-link {
@@ -63,4 +65,17 @@ body {
   text-decoration: none;
   border-color: transparent;
   box-shadow: none;
+}
+
+.wrapper {
+  min-height: 100%;
+  /* This is the same as the height of the footer */
+  margin-bottom: -56px; 
+  
+}
+
+/* The height of the footer and push must be the same */
+.footer,
+.push {
+  height: 56px;
 }
