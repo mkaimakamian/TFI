@@ -68,9 +68,9 @@
 
             <!-- Menu permisos -->
             <div class="row">
-                <div id="menuDiv" runat="server" class="col-2" style="display:none">
+                <div id="menuDiv" runat="server" class="col-2 mkcMenu" style="display:none" >
                     <asp:Menu ID="mnuSection" runat="server" MaximumDynamicDisplayLevels="2" Orientation="Vertical"
-                        SkipLinkText="" DynamicMenuStyle-CssClass="dropdown-menu">
+                        SkipLinkText="" StaticMenuItemStyle-ForeColor="#fefefe" StaticHoverStyle-ForeColor="#ffc107">
                     </asp:Menu>
                 </div>
                 <div class="col">
