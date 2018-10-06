@@ -149,6 +149,7 @@ namespace Ubiquicity
         {
             if (user != null)
             {
+                menuDiv.Style.Remove("display");
                 mnuSection.Items.Clear();
                 Dictionary<int, MenuItem> access = new Dictionary<int, MenuItem>();
 

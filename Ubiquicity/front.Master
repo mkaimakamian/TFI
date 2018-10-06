@@ -68,13 +68,11 @@
 
             <!-- Menu permisos -->
             <div class="row">
-                <div class="col-2">
+                <div id="menuDiv" runat="server" class="col-2" style="display:none">
                     <asp:Menu ID="mnuSection" runat="server" MaximumDynamicDisplayLevels="2" Orientation="Vertical"
                         SkipLinkText="" DynamicMenuStyle-CssClass="dropdown-menu">
                     </asp:Menu>
                 </div>
-            </div>
-            <div class="row">
                 <div class="col">
                     <!-- contenedor de las páginas -->
                     <asp:ContentPlaceHolder ID="contentHolder" runat="server">
