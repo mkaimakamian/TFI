@@ -1,0 +1,50 @@
+﻿.mkcColorNavbar {
+   background-color:#434c6d;
+}
+
+.mkcColorNews {
+   /*background-color:#434c6d;*/
+   border-color:#434c6d;
+}
+
+.mkcColorFooter {
+   background-color:#3e3e3e;
+}
+
+.mkcIndexCarrousel {
+   background-color:#8e7a89;
+}
+
+.mkcLetraGris {
+    color:dimgrey;
+}
+
+.mkcLetraGrisClaro {
+    color:darkgrey;
+}
+
+.mkcLetraNaranja {
+    color:#ffc107;
+}
+body {
+    background-color:#fefefe;
+}
+
+.btn-link {
+  font-weight: 400;
+  color: #fefefe;
+  background-color: transparent;
+}
+
+.btn-link:hover {
+  color: #ffc107;
+  text-decoration: none;
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.btn-link:focus, .btn-link.focus {
+  text-decoration: none;
+  border-color: transparent;
+  box-shadow: none;
+}

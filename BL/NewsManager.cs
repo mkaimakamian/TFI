@@ -61,20 +61,27 @@ namespace BL
 
         public List<News> GetByCategory(int[] categoriesId)
         {
+            NewsCategoryManager newscategoryManager = new NewsCategoryManager();
             NewsMapper newsMapper = new NewsMapper();
-            List<News> categories = new List<News>();
+            List<News> newsList = new List<News>();
 
             //Rever como pasar un listado a la base para evitar realizar tantas llamadas.
             for (int i = 0; i < categoriesId.Length; ++i)
             {
-                List<News> currentCategories = newsMapper.GetByCategory(categoriesId[i]);
+                List<News> news = newsMapper.GetByCategory(categoriesId[i]);
 
-                if (currentCategories != null) categories.AddRange(newsMapper.GetByCategory(categoriesId[i]));
+                if (news != null) newsList.AddRange(newsMapper.GetByCategory(categoriesId[i]));
             }
 
 
+            Dictionary<int, NewsCategory> newsCategories = newscategoryManager.GetDictinoray();
 
-            return categories;
+            foreach (News news in newsList)
+            {
+                news.Category = newsCategories[news.Category.Id];
+            }
+
+            return newsList;
         }
 
         /// <summary>

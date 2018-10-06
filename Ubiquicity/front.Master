@@ -11,8 +11,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="Content/bootstrap.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="Resources/ubiquicity.css" />
+
     <script src='https://www.google.com/recaptcha/api.js'></script>
-<%--    <script type="text/javascript">
+        <script type="text/javascript">
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({ pageLanguage: 'es' }, 'google_translate_element');
 
@@ -21,20 +23,19 @@
                 document.querySelector('.goog-te-gadget').setAttribute('style', 'font-size: 0');
             }
         }
-    </script>--%>
+    </script>
 
     <!-- Api Google Translate-->
-    <%--<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>--%>
-    <%--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>--%>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
 </head>
 
 <body>
     <form runat="server">
-        <asp:ScriptManager ID="ScriptManager1" runat="server" EnableScriptGlobalization="true" EnableScriptLocalization="true">
-        </asp:ScriptManager>
-        <div class="container-fluid" style="background-image: url(&quot;Resources/cover_silver.jpg&quot;); background-size: cover;">
+        <asp:ScriptManager ID="ScriptManager1" runat="server" EnableScriptGlobalization="true" EnableScriptLocalization="true" />
+        <div class="container-fluid">
 
-            <nav class="navbar navbar-expand-md fixed-top navbar-light bg-light shadow-sm">
+            <nav class="navbar navbar-expand-md fixed-top shadow-sm navbar-dark mkcColorNavbar">
                 <a class="navbar-brand" href="index.aspx">Ubiqui-city</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -64,7 +65,7 @@
                     |<div id="google_translate_element" class="btn btn-link btn-sm"></div>
                 </div>
             </nav>
-<%--            <div class="pt-5 text-left" style="background-image: url(&quot;Resources/cover_silver.jpg&quot;); background-size: cover; background-position: center top;"/>--%>
+
             <!-- Menu permisos -->
             <div class="row">
                 <div class="col-2">
@@ -72,6 +73,8 @@
                         SkipLinkText="" DynamicMenuStyle-CssClass="dropdown-menu">
                     </asp:Menu>
                 </div>
+            </div>
+            <div class="row">
                 <div class="col">
                     <!-- contenedor de las páginas -->
                     <asp:ContentPlaceHolder ID="contentHolder" runat="server">
@@ -136,7 +139,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="checkCategory">Categorías</label>
-                                <asp:CheckBoxList ID="checkCategory" runat="server"/>
+                                <asp:CheckBoxList ID="checkCategory" runat="server" />
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -207,7 +210,7 @@
             <!-- footer -->
             <footer class="row">
                 <div class="col-12">
-                    <nav class="navbar navbar-expand-sm navbar-light bg-light mx-auto">
+                    <nav class="navbar navbar-expand-sm mx-auto navbar-dark mkcColorNavbar">
 
                         <ul class="navbar-nav mr-auto mx-auto ">
                             <li class="nav-item ">
@@ -228,7 +231,7 @@
                             <li class="nav-item">
                                 <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalNewsSuscription">¡Suscribite al newsletter!</button>
                             </li>
-                            
+
                         </ul>
                     </nav>
                 </div>
@@ -237,7 +240,6 @@
         </div>
 
     </form>
-    <%--<script src="Scripts/popper.js"></script>--%>
     <script src="Scripts/jquery-3.3.1.js"></script>
     <script src="Scripts/bootstrap.js"></script>
     <script src="Scripts/umd/popper.js"></script>
