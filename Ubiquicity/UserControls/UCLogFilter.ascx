@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UCLogFilter.ascx.cs" Inherits="Ubiquicity.UserControls.UCLogFilter" %>
-<div class="row border p-1 m-1 rounded">
+<div class="row border p-1 m-1 rounded align-items-end">
     <div class="form-group col-2">
         <label for="inputLogLevel">Criticidad</label>
         <input id="inputLogLevel" runat="server" type="text" class="form-control form-control-sm" placeholder="Criticidad">
