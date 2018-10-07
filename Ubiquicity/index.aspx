@@ -19,12 +19,12 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img class="d-block w-100" src="Resources/carousel01.jpg" alt="Second slide">
-                    <div class="carousel-caption d-none d-md-block text-left">
+                    <img class="d-block w-100" src="Resources/carousel02.jpg" alt="Second slide">
+                    <%--<div class="carousel-caption d-none d-md-block text-left">
                         <h1 class="mkcLetraGris">¡Ubicarse nunca fue tan fácil!</h1>
                         <p class="mkcLetraGris">Desarrollado con tecnlogía Sniper&reg; ubicarse nunca fue tan fácil: ¡apuntá tu móvil hacia el horizonte!</p>
                         <p><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalRegisterWebUser">Registrate :D</button></p>
-                    </div>
+                    </div>--%>
                 </div>
                 <div class="carousel-item">
                     <img class="d-block w-100" src="Resources/carousel01.jpg" alt="Third slide">

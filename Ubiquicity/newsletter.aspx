@@ -1,10 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/front.Master" AutoEventWireup="true" CodeBehind="newsletter.aspx.cs" Inherits="Ubiquicity.newsletter" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="contentHolder" runat="server">
-    <div class="container">
+    <div class="container-fluid">
         <UCmkc:UCHeaderWeb runat="server" Label="Novedades" Imgsource="~/Resources/news01.svg" />
         <div class="row">
-            <div class="col-3">
+            <div class="col-2">
                 <div class="card bg-light mb-3" style="max-width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title">Filtros</h5>
@@ -19,10 +19,11 @@
                 </div>
             </div>
 
-            <div class="col">
+            <div class="col-10">
+                <div class="card-deck"> 
                 <asp:Repeater ID="newsRepeater" runat="server" OnItemCommand="newsRepeater_ItemCommand">
                     <ItemTemplate>
-                        <div class="col-md-4">
+                        <div class="col-4">
                             <div class="card flex-md-row mb-4 box-shadow h-md-250">
                                 <div class="card-body d-flex flex-column align-items-start">
                                     <strong class="d-inline-block mb-2 mkcLetraNaranja"><%# Eval("Category.Name") %></strong>
@@ -39,6 +40,7 @@
                         </div>
                     </ItemTemplate>
                 </asp:Repeater>
+                    </div>
             </div>
         </div>
     </div>

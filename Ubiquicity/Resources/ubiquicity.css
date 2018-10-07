@@ -2,6 +2,20 @@
    background-color:#434c6d;
 }
 
+/*.headerBackOffice {
+    margin-bottom:100px;
+}*/
+
+.btn-primary {
+    background-color:#909abb;
+    border-color: #909abb;
+}
+
+.btn-warning {
+    background-color:#ffd24d;
+    border-color: #ffd24d;
+}
+
 /*.mkcColorHeader {
    background-color:#434c6d;
 }*/
@@ -22,13 +36,13 @@
    border-color:#434c6d;
 }*/
 
-.mkcColorFooter {
+/*.mkcColorFooter {
    background-color:#3e3e3e;
-}
+}*/
 
-.mkcIndexCarrousel {
+/*.mkcIndexCarrousel {
    background-color:#8e7a89;
-}
+}*/
 
 .mkcLetraGris {
     color:dimgrey;

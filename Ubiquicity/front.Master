@@ -36,7 +36,9 @@
         <div class="container-fluid">
 
             <nav class="navbar navbar-expand-md fixed-top shadow-sm navbar-dark mkcColorNavbar">
-                <a class="navbar-brand" href="index.aspx">Ubiqui-city</a>
+                <a class="navbar-brand" href="index.aspx">
+                    <img src="/Resources/logo.png" width="32" height="21" class="d-inline-block align-top" alt="" />
+                    Ubiqui-city</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>

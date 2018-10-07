@@ -22,15 +22,6 @@ namespace Ubiquicity.UserControls {
         protected global::System.Web.UI.HtmlControls.HtmlImage UCImage;
         
         /// <summary>
-        /// UCTitle control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl UCTitle;
-        
-        /// <summary>
         /// UCSubtitle control.
         /// </summary>
         /// <remarks>
@@ -38,6 +29,15 @@ namespace Ubiquicity.UserControls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl UCSubtitle;
+        
+        /// <summary>
+        /// UCTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl UCTitle;
         
         /// <summary>
         /// UCContent control.
