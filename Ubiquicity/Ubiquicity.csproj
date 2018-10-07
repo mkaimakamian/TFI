@@ -115,6 +115,7 @@
     <Content Include="Resources\mail.htm" />
     <Content Include="Resources\map.svg" />
     <Content Include="Resources\mapa_vect.png" />
+    <Content Include="Resources\news01.svg" />
     <Content Include="Resources\note.svg" />
     <Content Include="Resources\privacy01.svg" />
     <Content Include="Resources\registro.svg" />

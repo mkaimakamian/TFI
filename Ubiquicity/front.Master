@@ -204,38 +204,6 @@
 
             <!-- alert de uso múltiple -->
             <UCmkc:UCModalMessageBox runat="server" ID="customAlertBox" />
-
-            <!-- footer -->
-            <%--<footer class="row">
-                <div class="col-12">
-                    <nav class="navbar navbar-expand-sm mx-auto navbar-dark mkcColorNavbar">
-
-                        <ul class="navbar-nav mr-auto mx-auto ">
-                            <li class="nav-item ">
-                                <a class="nav-link" href="about.aspx">Nosotros</a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="newsletter.aspx">Newsletter</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="privacy.aspx">Términos y Condiciones</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="contact.aspx">Contactate</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="faq.aspx">F.A.Qs.</a>
-                            </li>
-                            <li class="nav-item">
-                                <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalNewsSuscription">¡Suscribite al newsletter!</button>
-                            </li>
-
-                        </ul>
-                    </nav>
-                </div>
-            </footer>--%>
-
-
         </div>
         <div class='push'></div>
     </form>
