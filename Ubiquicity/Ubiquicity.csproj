@@ -98,8 +98,12 @@
     <Content Include="recovery_action.aspx" />
     <Content Include="redeem_manager.aspx" />
     <Content Include="register_action.aspx" />
+    <Content Include="Resources\about01.svg" />
     <Content Include="Resources\carousel01.jpg" />
+    <Content Include="Resources\contact01.svg" />
+    <Content Include="Resources\contact_map.jpg" />
     <Content Include="Resources\document.svg" />
+    <Content Include="Resources\faq01.svg" />
     <Content Include="Resources\folder.svg" />
     <Content Include="Resources\fondo.jpg" />
     <Content Include="Resources\fondo2.jpg" />
@@ -112,6 +116,7 @@
     <Content Include="Resources\map.svg" />
     <Content Include="Resources\mapa_vect.png" />
     <Content Include="Resources\note.svg" />
+    <Content Include="Resources\privacy01.svg" />
     <Content Include="Resources\registro.svg" />
     <Content Include="Resources\roles_permisos.svg" />
     <Content Include="Resources\ubiquicity.css" />
@@ -181,6 +186,7 @@
     <Content Include="UserControls\UCFormRolePermission.ascx" />
     <Content Include="UserControls\UCFormUserRole.ascx" />
     <Content Include="UserControls\UCHeaderBackOffice.ascx" />
+    <Content Include="UserControls\UCHeaderWeb.ascx" />
     <Content Include="UserControls\UCLogFilter.ascx" />
     <Content Include="UserControls\UCModalNews.ascx" />
     <Content Include="user_manager.aspx" />
@@ -446,6 +452,13 @@
     </Compile>
     <Compile Include="UserControls\UCHeaderBackOffice.ascx.designer.cs">
       <DependentUpon>UCHeaderBackOffice.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCHeaderWeb.ascx.cs">
+      <DependentUpon>UCHeaderWeb.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCHeaderWeb.ascx.designer.cs">
+      <DependentUpon>UCHeaderWeb.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\UCLogFilter.ascx.cs">
       <DependentUpon>UCLogFilter.ascx</DependentUpon>

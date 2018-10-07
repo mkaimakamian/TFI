@@ -7,18 +7,27 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Ubiquicity {
+namespace Ubiquicity.UserControls {
     
     
-    public partial class about {
+    public partial class UCHeaderWeb {
         
         /// <summary>
-        /// UCHeaderWeb control.
+        /// imgSource control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ubiquicity.UserControls.UCHeaderWeb UCHeaderWeb;
+        protected global::System.Web.UI.HtmlControls.HtmlImage imgSource;
+        
+        /// <summary>
+        /// h2Label control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl h2Label;
     }
 }

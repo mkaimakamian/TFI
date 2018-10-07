@@ -1,12 +1,15 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/front.Master" AutoEventWireup="true" CodeBehind="contact.aspx.cs" Inherits="Ubiquicity.contact" %>
 
+
 <asp:Content ID="Content2" ContentPlaceHolderID="contentHolder" runat="server">
     <div class="container">
+        <UCmkc:UCHeaderWeb runat="server" Label="Centro de contacto" Imgsource="~/Resources/contact01.svg" />
+
         <div class="row justify-content-center">
             <div class="col-5">
                 <div class="row">
                     <div class="feature-description">
-                        <h2>¿Si tenés alguna inquietud o querés compartir algo con nosotros?... ¡que nada te detenga!</h2>
+                        <h4>¡Gracias por contactarte!</h4>
                         <hr>
 
                         <div class="feature-left">
@@ -31,7 +34,7 @@
                         </div>
 
                         <hr>
-                        <%--                        <p>Note : you can write whatever you want to describe here.</p>--%>
+                        <img src="Resources/contact_map.jpg" width="475" height="140" />
                     </div>
                 </div>
             </div>
@@ -39,9 +42,6 @@
             <!-- /.feature-sections -->
             <div class="col-5">
                 <div class="row">
-                    <%--                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb10 ">
-                            <h3>Ubiqui-city</h3>
-                        </div>--%>
                     <div class="form-group col-md-12">
                         <label for="firstNameInput">Nombre</label>
                         <input id="firstNameInput" runat="server" type="text" class="form-control form-control-sm" placeholder="Ingresá tu nombre">

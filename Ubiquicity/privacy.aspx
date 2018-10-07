@@ -1,11 +1,14 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/front.Master" AutoEventWireup="true" CodeBehind="privacy.aspx.cs" Inherits="Ubiquicity.privacy" %>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="contentHolder" runat="server">
-        <div class="row">
-            <div class="col-3">
-            </div>
-            <div class="col-6 text-justify">
-                <p class="h2"> Políticas de privacidad<p />
-                En La Empresa, su privacidad es importante para nosotros. Esta declaración establece las prácticas de privacidad con respecto a la compilación, uso y divulgación de información personal en este sitio web de carreras profesionales.</p>
+    <div class="container">
+        <UCmkc:UCHeaderWeb runat="server" ID="UCHeaderWeb" Label="Políticas de privacidad" Imgsource="~/Resources/privacy01.svg" />
+        <div class="row justify-content-center">
+            <div class="col-10 text-justify">
+                <p class="h2">
+                    Políticas de privacidad<p />
+                    En La Empresa, su privacidad es importante para nosotros. Esta declaración establece las prácticas de privacidad con respecto a la compilación, uso y divulgación de información personal en este sitio web de carreras profesionales.
+                </p>
                 La información personal es aquella información que lo identifica a usted personalmente. La información personal podrá incluir su nombre, dirección de correo electrónico y dirección postal, según sea el caso. Los visitantes del sitio web no podrán solicitar la revelación de ningún dato personal. Sin embargo, en forma voluntaria, podrá usted proporcionarnos y divulgar cualquier información personal, mediante el uso de ciertas características de nuestro sitio tales como la de la sección del seguimiento (Follow us), y de la sección de carreras (Careers) de este sitio.</p>
                 Sin su permiso, La Empresa jamás revelará, venderá o arrendará a terceros distintos a los pertenecientes a nuestras subsidiarias, la información personal que usted nos haya proporcionado a través del sitio, a menos que la ley nos obligue a hacerlo.</p>
                     
@@ -40,10 +43,8 @@
                 
                 Procederemos a efectuar las verificaciones de antecedentes suficientes para determinar si sus calificaciones resultan adecuadas para ocupar la posición postulada, o para la que usted ha sido seleccionado/a. Ello podrá incluir la obtención de referencias penales, criterios de elegibilidad de empleo, y calificaciones.</p>
             </div>
-            <div class="col-3">
-            </div>
-
         </div>
+    </div>
 
 
 </asp:Content>
