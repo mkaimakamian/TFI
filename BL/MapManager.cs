@@ -70,6 +70,21 @@ namespace BL
             return mapMapper.Get();
         }
 
+
+        public List<Map> GetToCompare(string[] ids)
+        {
+            List<Map> maps = new List<Map>();
+
+            //feo... pero funciona por ahora
+            foreach (string id in ids)
+            {
+                maps.Add(Get(Convert.ToInt32(id)));
+            }
+            return maps;
+        }
+        
+
+
         public bool Delete(int id)
         {
             MapMapper mapMapprer = new MapMapper();

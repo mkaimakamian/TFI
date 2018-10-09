@@ -8,9 +8,9 @@ namespace BE
 {
     public class Item
     {
-        private int id;
-        private float price;
-        private Resource resource;
-        private bool available;
+        //private int id;
+        //private float price;
+        //private Resource resource;
+        //private bool available;
     }
 }
