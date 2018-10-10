@@ -7,36 +7,36 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Ubiquicity {
+namespace Ubiquicity.UserControls {
     
     
-    public partial class shop {
+    public partial class UCModalCompare {
         
         /// <summary>
-        /// selectedItemsInput control.
+        /// ucModalNewsLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputHidden selectedItemsInput;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ucModalNewsLabel;
         
         /// <summary>
-        /// shopRepeater control.
+        /// ucModalNewsMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater shopRepeater;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ucModalNewsMessage;
         
         /// <summary>
-        /// ModalCompare control.
+        /// compareRepeater control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ubiquicity.UserControls.UCModalCompare ModalCompare;
+        protected global::System.Web.UI.WebControls.Repeater compareRepeater;
     }
 }

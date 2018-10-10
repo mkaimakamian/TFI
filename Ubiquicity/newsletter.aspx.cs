@@ -70,19 +70,23 @@ namespace Ubiquicity
             }
         }
 
-
+        /// <summary>
+        /// Muestra la noticia en un modal para que pueda ser leída.
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="e"></param>
         protected void newsRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             NewsManager newsmanager = new NewsManager();
             int id = Convert.ToInt32(e.CommandArgument);
             News news = newsmanager.Get(id);
-            //
+            
+            //Ejecuta el modal
             ModalNewsletter.Show(news.Title, news.Body, news.Image);
         }
 
         protected void ChangeNewsCategory(object sender, EventArgs e)
         {
-            //int categoryId = Convert.ToInt32(((DropDownList)sender).SelectedValue);
             LoadNews(checksCategoryInput.Items);
         }
     }

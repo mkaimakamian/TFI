@@ -42,7 +42,7 @@ namespace Ubiquicity
                     ((front)Master).Alert.Show("Error", mapManager.ErrorDescription);
                 } else
                 {
-                    //disparar ventana comparativa
+                    ModalCompare.Show("Comparador", maps);
                 }
             } catch (Exception exception)
             {

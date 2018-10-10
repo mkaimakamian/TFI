@@ -20,27 +20,27 @@
             </div>
 
             <div class="col-10">
-                <div class="card-deck"> 
-                <asp:Repeater ID="newsRepeater" runat="server" OnItemCommand="newsRepeater_ItemCommand">
-                    <ItemTemplate>
-                        <div class="col-4">
-                            <div class="card flex-md-row mb-4 box-shadow h-md-250">
-                                <div class="card-body d-flex flex-column align-items-start">
-                                    <strong class="d-inline-block mb-2 mkcLetraNaranja"><%# Eval("Category.Name") %></strong>
-                                    <h5 class="mb-0">
-                                        <a class="text-dark" href="#"><%# Eval("Title") %></a>
-                                    </h5>
-                                    <div class="mb-1 text-muted"><%# Eval("Created") %></div>
-                                    <p class="card-text mb-auto"><%# Eval("Resume").ToString().Substring(0, 50) %></p>
-                                    <a href="#">Leer más</a>
+                <div class="card-deck">
+                    <asp:Repeater ID="newsRepeater" runat="server" OnItemCommand="newsRepeater_ItemCommand">
+                        <ItemTemplate>
+                            <div class="col-4">
+                                <div class="card flex-md-row mb-4 box-shadow h-md-250">
+                                    <div class="card-body d-flex flex-column align-items-start">
+                                        <strong class="d-inline-block mb-2 mkcLetraNaranja"><%# Eval("Category.Name") %></strong>
+                                        <h5 class="mb-0">
+                                            <a class="text-dark" href="#"><%# Eval("Title") %></a>
+                                        </h5>
+                                        <div class="mb-1 text-muted"><%# Eval("Created") %></div>
+                                        <p class="card-text mb-auto"><%# Eval("Resume").ToString().Substring(0, 50) %></p>
+                                        <asp:LinkButton runat="server" CssClass="btn btn-primary btn-sm" Text="Leer más" CommandArgument='<%# Eval("id") %>' />
+                                    </div>
+                                    <img class="card-img-right flex-auto d-none d-md-block"
+                                        data-src="holder.js/200x250?theme=thumb" alt="Thumbnail [200x250]" style="width: 150px; height: 150px;" src="<%# Eval("Image") %>" data-holder-rendered="true">
                                 </div>
-                                <img class="card-img-right flex-auto d-none d-md-block"
-                                    data-src="holder.js/200x250?theme=thumb" alt="Thumbnail [200x250]" style="width: 150px; height: 150px;" src="<%# Eval("Image") %>" data-holder-rendered="true">
                             </div>
-                        </div>
-                    </ItemTemplate>
-                </asp:Repeater>
-                    </div>
+                        </ItemTemplate>
+                    </asp:Repeater>
+                </div>
             </div>
         </div>
     </div>

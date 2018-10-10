@@ -194,6 +194,7 @@
     <Content Include="UserControls\UCHeaderBackOffice.ascx" />
     <Content Include="UserControls\UCHeaderWeb.ascx" />
     <Content Include="UserControls\UCLogFilter.ascx" />
+    <Content Include="UserControls\UCModalCompare.ascx" />
     <Content Include="UserControls\UCModalNews.ascx" />
     <Content Include="user_manager.aspx" />
     <Content Include="UserControls\UCcrudGrid.ascx" />
@@ -472,6 +473,13 @@
     </Compile>
     <Compile Include="UserControls\UCLogFilter.ascx.designer.cs">
       <DependentUpon>UCLogFilter.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCModalCompare.ascx.cs">
+      <DependentUpon>UCModalCompare.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCModalCompare.ascx.designer.cs">
+      <DependentUpon>UCModalCompare.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\UCModalNews.ascx.cs">
       <DependentUpon>UCModalNews.ascx</DependentUpon>
