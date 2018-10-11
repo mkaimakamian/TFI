@@ -27,24 +27,6 @@
             hidden.value = itemList;
         }
     </script>
-
-    <%--    <div class="row">
-        <asp:Repeater ID="shopRepeater" runat="server">
-            <ItemTemplate>
-                <div class="card" style="width: 14rem; margin: 4px">
-                    <button id="<%# Eval("Id") %>" type="button" class="btn btn-primary" data-toggle="button"  
-                        onclick="AddToCompare(this.id)">Comparar</button>
-                    <img class="card-img-top" src="<%# Eval("Image") %>">
-                    <div class="card-body">
-                        <h4 class="card-title"><%# Eval("Name") %></h4>
-                        <h6 class="card-subtitle mb-2 text-muted">Categoría de producto</h6>
-                        <p class="card-text"><%# Eval("Description") %></p>
-                        <a href="#" class="card-link">Card link</a>
-                    </div>
-                </div>
-            </ItemTemplate>
-        </asp:Repeater>
-    </div>--%>
     <div class="container-fluid">
         <UCmkc:UCHeaderWeb runat="server" Label="Catálogo" Imgsource="~/Resources/shop01.svg" />
         <div class="row">
@@ -67,7 +49,7 @@
                 <div class="card-deck">
                     <asp:Repeater ID="shopRepeater" runat="server">
                         <ItemTemplate>
-                            <div class="card" style="width: 14rem; margin: 4px">
+                            <%--<div class="card" style="width: 14rem; margin: 4px">
                                 <button id="<%# Eval("Id") %>" type="button" class="btn btn-primary" data-toggle="button"
                                     onclick="AddToCompare(this.id)">
                                     Comparar</button>
@@ -78,6 +60,26 @@
                                     <p class="card-text"><%# Eval("Description") %></p>
                                     <a href="#" class="card-link">Card link</a>
                                 </div>
+                            </div>--%>
+
+                            <div class="card" style="width: 18rem;">
+                                <div class="card-body justify-content-center text-center" style="padding-bottom: 1px;">
+                                    <h5 class="card-title"><%# Eval("Name") %></h5>
+                                    <%--<h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>--%>
+                                    <img src="<%# Eval("Image") %>" class="rounded-circle" width="128" height="128" />
+                                    <p class="card-text text-truncate"><%# Eval("Description") %></p>
+                                    <hr />
+                                    $$$
+                                    <hr />
+                                    <asp:LinkButton runat="server" CssClass="btn btn-primary btn-sm" Text="Adquirir"/>
+                                    <%--<span class="badge badge-pill badge-info">Categoría</span>--%>
+                                <div class="row text-left " style="padding-top: 20px;">
+                                    <div class="col">
+                                        <input type="checkbox" value="<%# Eval("Id") %>" onclick="AddToCompare(this.value)" />Comparar
+                                    </div>
+                                </div>
+                                </div>
+                                
                             </div>
                         </ItemTemplate>
                     </asp:Repeater>

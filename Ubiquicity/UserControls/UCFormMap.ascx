@@ -22,7 +22,8 @@
 
         <div class="form-group">
             <label for="descriptionInput">Descripción</label>
-            <input id="descriptionInput" runat="server" type="text" class="form-control form-control-sm" placeholder="Ingresa la descripción">
+            <textarea id="descriptionInput" runat="server" class="form-control form-control-sm" rows="5"></textarea>
+            <%--<input id="descriptionInput" runat="server" type="text" class="form-control form-control-sm" placeholder="Ingresa la descripción">--%>
         </div>
 
         <div class="form-group">
