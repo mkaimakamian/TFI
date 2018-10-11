@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/front.Master" AutoEventWireup="true" CodeBehind="map_manager.aspx.cs" Inherits="Ubiquicity.map_manager" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="contentHolder" runat="server">
-    <UCmkc:UCHeaderBackOffice runat="server" ID="UCHeaderBackOffice" Image="~/Resources/roles_permisos.svg" Title="Gestión de mapas" Subtitle="En este apartado podrás..." Content="Agregar mapas al sistema, editar sus datos y eliminar registros." />
+    <UCmkc:UCHeaderBackOffice runat="server" ID="UCHeaderBackOffice" Image="~/Resources/global.svg" Title="Gestión de mapas" Subtitle="En este apartado podrás..." Content="Agregar mapas al sistema, editar sus datos y eliminar registros." />
     <UCmkc:UCcrudGrid runat="server" ID="UCcrudGrid" />
 
     <!-- Map form -->

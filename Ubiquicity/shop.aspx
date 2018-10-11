@@ -46,7 +46,7 @@
         </asp:Repeater>
     </div>--%>
     <div class="container-fluid">
-        <UCmkc:UCHeaderWeb runat="server" Label="Novedades" Imgsource="~/Resources/news01.svg" />
+        <UCmkc:UCHeaderWeb runat="server" Label="Catálogo" Imgsource="~/Resources/shop01.svg" />
         <div class="row">
             <div class="col-2">
                 <div class="card bg-light mb-3" style="max-width: 18rem;">

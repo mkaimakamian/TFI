@@ -15,7 +15,7 @@
     </div>--%>
 
     <div class="form-inline">
-        <img id="UCImage" runat="server" class="pt-1" height="64" width="64" />
+        <img id="UCImage" runat="server" class="pt-1 pb-1" height="64" width="64" />
         
             <div class="card-body" style="margin:0px; padding:5px">
                 <h5 id="UCSubtitle" runat="server" class="card-title" style="margin:0px; display:none" ></h5>

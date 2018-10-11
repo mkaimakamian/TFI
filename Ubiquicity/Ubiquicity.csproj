@@ -109,9 +109,12 @@
     <Content Include="Resources\folder.svg" />
     <Content Include="Resources\fondo.jpg" />
     <Content Include="Resources\fondo2.jpg" />
+    <Content Include="Resources\global.svg" />
     <Content Include="Resources\home01.svg" />
     <Content Include="Resources\home02.svg" />
     <Content Include="Resources\home03.svg" />
+    <Content Include="Resources\infinity.svg" />
+    <Content Include="Resources\lock.svg" />
     <Content Include="Resources\log.svg" />
     <Content Include="Resources\login.svg" />
     <Content Include="Resources\logo.png" />
@@ -123,6 +126,7 @@
     <Content Include="Resources\privacy01.svg" />
     <Content Include="Resources\registro.svg" />
     <Content Include="Resources\roles_permisos.svg" />
+    <Content Include="Resources\shop01.svg" />
     <Content Include="Resources\ubiquicity.css" />
     <Content Include="Resources\ucity.png" />
     <Content Include="Resources\user_manager01.svg" />

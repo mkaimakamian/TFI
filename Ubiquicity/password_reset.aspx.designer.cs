@@ -13,6 +13,15 @@ namespace Ubiquicity {
     public partial class password_reset {
         
         /// <summary>
+        /// UCHeaderBackOffice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ubiquicity.UserControls.UCHeaderBackOffice UCHeaderBackOffice;
+        
+        /// <summary>
         /// passwordControls control.
         /// </summary>
         /// <remarks>

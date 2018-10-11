@@ -95,7 +95,7 @@
 
                         <div class="modal-body">
                             <div class="text-center">
-                                <img src="Resources/login.svg" width="128" height="128" />
+                                <img src="Resources/infinity.svg" width="128" height="128" />
                                 <p>¡Es bueno verte nuevamente!</p>
                             </div>
                             <div class="form-group">
