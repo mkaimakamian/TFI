@@ -38,5 +38,14 @@ namespace Ubiquicity {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Ubiquicity.UserControls.UCModalCompare ModalCompare;
+        
+        /// <summary>
+        /// ModalItemShop control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ubiquicity.UserControls.UCModalItemShop ModalItemShop;
     }
 }

@@ -19,6 +19,7 @@ namespace ORM
 
             table.Add("@name", map.Name);
             table.Add("@description", map.Description);
+            table.Add("@price", map.Price);
             table.Add("@imageB64", map.Image);
             table.Add("@sourcePath", map.Resource);
             map.Id = dal.Write(table, "spWriteMap");
@@ -31,9 +32,10 @@ namespace ORM
             Dal dal = new Dal();
             Hashtable table = new Hashtable();
 
-            table.Add("@id", map.Id);
+            table.Add("@resourceId", map.Id);
             table.Add("@name", map.Name);
             table.Add("@description", map.Description);
+            table.Add("@price", map.Price);
             table.Add("@imageB64", map.Image);
             table.Add("@sourcePath", map.Resource);
             return dal.Write(table, "spModifyMap") > 0;
@@ -45,7 +47,7 @@ namespace ORM
             Hashtable table = new Hashtable();
             List<Map> maps = null;
 
-            table.Add("@id", DBNull.Value);
+            table.Add("@resourceId", DBNull.Value);
             DataSet result = dal.Read(table, "spReadMap");
 
             if (result != null && result.Tables[0].Rows.Count > 0)
@@ -66,7 +68,7 @@ namespace ORM
             Hashtable table = new Hashtable();
             Map map = null;
 
-            table.Add("@id", id);
+            table.Add("@resourceId", id);
 
             DataSet result = dal.Read(table, "spReadMap");
 
@@ -82,7 +84,7 @@ namespace ORM
         {
             Dal dal = new Dal();
             Hashtable table = new Hashtable();
-            table.Add("@id", id);
+            table.Add("@resourceId", id);
             return dal.Write(table, "spDeleteMap") > 0;
         }
 
@@ -90,9 +92,10 @@ namespace ORM
         {
             return new Map
             {
-                Id = int.Parse(data["id"].ToString()),
+                Id = int.Parse(data["sourceId"].ToString()),
                 Name = data["name"].ToString(),
                 Description = data["description"].ToString(),
+                Price = Convert.ToDouble(data["price"]),
                 Image = data["image"].ToString(),
                 Resource = data["sourcePath"].ToString()
             };

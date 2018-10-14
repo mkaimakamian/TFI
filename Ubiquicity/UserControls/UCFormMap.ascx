@@ -14,29 +14,30 @@
 </script>
 
 <div class="modal-body">
-    <div class="form-row col-md-6">
-        <div class="form-group">
+    <div class="row justify-content-center">
+        <div class="form-group col-12">
             <label for="nameInput">Nombre</label>
             <input id="nameInput" runat="server" type="text" class="form-control form-control-sm" placeholder="Ingresá el nombre">
         </div>
-
-        <div class="form-group">
+        <div class="form-group col-8">
             <label for="descriptionInput">Descripción</label>
-            <textarea id="descriptionInput" runat="server" class="form-control form-control-sm" rows="5"></textarea>
-            <%--<input id="descriptionInput" runat="server" type="text" class="form-control form-control-sm" placeholder="Ingresa la descripción">--%>
+            <textarea id="descriptionInput" runat="server" class="form-control form-control-sm" rows="6"></textarea>
         </div>
+        <div class="form-group col-4">
+            <label for="imageInput">Imagen</label>
+            <img id="mapFileImage" runat="server" width="128" />
 
-        <div class="form-group">
+        </div>
+        <div class="form-group col-12">
+            <input id="imageInput" runat="server" type="file" onchange="readURL(this)">
+            <input id="imageInputBase64" runat="server" type="hidden">
+        </div>
+        <div class="form-group col-12">
             <label id="lblResource" runat="server" for="resourceInput">Recurso</label>
             <asp:FileUpload ID="resourceInput" runat="server" class="form-control form-control-sm btn-choose" />
         </div>
     </div>
-    <div class="form-row col-md-6">
-        <div class="form-group">
-            <label for="imageInput">Imagen</label>
-            <input id="imageInput" runat="server" type="file" onchange="readURL(this)">
-            <input id="imageInputBase64" runat="server" type="hidden">
-            <img id="mapFileImage" runat="server" width="200" />
-        </div>
-    </div>
+
+</div>
+--%>
 </div>

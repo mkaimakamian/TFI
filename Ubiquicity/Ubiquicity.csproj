@@ -102,6 +102,7 @@
     <Content Include="Resources\backup_manager01.svg" />
     <Content Include="Resources\carousel01.jpg" />
     <Content Include="Resources\carousel02.jpg" />
+    <Content Include="Resources\commentMessage.css" />
     <Content Include="Resources\contact01.svg" />
     <Content Include="Resources\contact_map.jpg" />
     <Content Include="Resources\document.svg" />
@@ -199,6 +200,7 @@
     <Content Include="UserControls\UCHeaderWeb.ascx" />
     <Content Include="UserControls\UCLogFilter.ascx" />
     <Content Include="UserControls\UCModalCompare.ascx" />
+    <Content Include="UserControls\UCModalItemShop.ascx" />
     <Content Include="UserControls\UCModalNews.ascx" />
     <Content Include="user_manager.aspx" />
     <Content Include="UserControls\UCcrudGrid.ascx" />
@@ -484,6 +486,13 @@
     </Compile>
     <Compile Include="UserControls\UCModalCompare.ascx.designer.cs">
       <DependentUpon>UCModalCompare.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCModalItemShop.ascx.cs">
+      <DependentUpon>UCModalItemShop.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCModalItemShop.ascx.designer.cs">
+      <DependentUpon>UCModalItemShop.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\UCModalNews.ascx.cs">
       <DependentUpon>UCModalNews.ascx</DependentUpon>

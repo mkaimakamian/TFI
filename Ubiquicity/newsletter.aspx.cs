@@ -77,12 +77,19 @@ namespace Ubiquicity
         /// <param name="e"></param>
         protected void newsRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
-            NewsManager newsmanager = new NewsManager();
-            int id = Convert.ToInt32(e.CommandArgument);
-            News news = newsmanager.Get(id);
-            
-            //Ejecuta el modal
-            ModalNewsletter.Show(news.Title, news.Body, news.Image);
+            try
+            {
+                NewsManager newsmanager = new NewsManager();
+                int id = Convert.ToInt32(e.CommandArgument);
+                News news = newsmanager.Get(id);
+
+                //Ejecuta el modal
+                ModalNewsletter.Show(news.Title, news.Body, news.Image);
+            } catch (Exception exception)
+            {
+                ((front)Master).Alert.Show("Exception", exception.Message);
+            }
+
         }
 
         protected void ChangeNewsCategory(object sender, EventArgs e)

@@ -50,5 +50,26 @@ namespace Ubiquicity
             }
         }
 
+        protected void shopRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            try
+            {
+                int id = Convert.ToInt32(e.CommandArgument);
+                MapManager mapManager = new MapManager();
+                Map map = mapManager.Get(id);
+                ModalItemShop.Show(map);
+            }
+            catch(Exception exception)
+            {
+                ((front)Master).Alert.Show("Exception", exception.Message);
+            }
+            //NewsManager newsmanager = new NewsManager();
+            //int id = Convert.ToInt32(e.CommandArgument);
+            //News news = newsmanager.Get(id);
+
+            ////Ejecuta el modal
+            //ModalNewsletter.Show(news.Title, news.Body, news.Image);
+        }
+
     }
 }

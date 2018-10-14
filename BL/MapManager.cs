@@ -132,7 +132,7 @@ namespace BL
                 string errorDescription = "Debe completarse la descripción.";
                 log.AddLogWarn("IsValid", errorDescription, this);
                 AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
-                isValid = isValid & false;
+                isValid = false;
             }
 
             if (String.IsNullOrEmpty(map.Image))
@@ -140,7 +140,7 @@ namespace BL
                 string errorDescription = "Debe asociarse una imagen al mapa.";
                 log.AddLogWarn("IsValid", errorDescription, this);
                 AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
-                isValid = isValid & false;
+                isValid = false;
             }
 
             return isValid;

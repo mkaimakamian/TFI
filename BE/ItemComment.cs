@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace BE
 {
-    public class Resource
+    public class ItemComment
     {
         private int id;
-        private string name;
-        private string description;
-        private string image;
-        private double price;
+        private Resource resource;
+        private User user;
+        private DateTime date;
+        private string comment;
 
         public int Id
         {
@@ -27,55 +27,57 @@ namespace BE
             }
         }
 
-        public string Name
+        public Resource Resource
         {
             get
             {
-                return name;
+                if (resource == null) resource = new Resource();
+                return resource;
             }
 
             set
             {
-                name = value;
+                resource = value;
             }
         }
 
-        public string Description
+        public User User
         {
             get
             {
-                return description;
+                if (user == null) user = new User();
+                return user;
             }
 
             set
             {
-                description = value;
+                user = value;
             }
         }
 
-        public string Image
+        public DateTime Date
         {
             get
             {
-                return image;
+                return date;
             }
 
             set
             {
-                image = value;
+                date = value;
             }
         }
 
-        public double Price
+        public string Comment
         {
             get
             {
-                return price;
+                return comment;
             }
 
             set
             {
-                price = value;
+                comment = value;
             }
         }
     }

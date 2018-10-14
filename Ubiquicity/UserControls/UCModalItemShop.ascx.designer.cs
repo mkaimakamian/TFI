@@ -10,69 +10,60 @@
 namespace Ubiquicity.UserControls {
     
     
-    public partial class UCFormMap {
+    public partial class UCModalItemShop {
         
         /// <summary>
-        /// nameInput control.
+        /// ucModalItemShopLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText nameInput;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ucModalItemShopLabel;
         
         /// <summary>
-        /// descriptionInput control.
+        /// ucModalItemShopMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTextArea descriptionInput;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ucModalItemShopMessage;
         
         /// <summary>
-        /// mapFileImage control.
+        /// itemRepeater control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage mapFileImage;
+        protected global::System.Web.UI.WebControls.Repeater itemRepeater;
         
         /// <summary>
-        /// imageInput control.
+        /// commentInputDiv control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputFile imageInput;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl commentInputDiv;
         
         /// <summary>
-        /// imageInputBase64 control.
+        /// commentInput control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputHidden imageInputBase64;
+        protected global::System.Web.UI.HtmlControls.HtmlTextArea commentInput;
         
         /// <summary>
-        /// lblResource control.
+        /// btnComentar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblResource;
-        
-        /// <summary>
-        /// resourceInput control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload resourceInput;
+        protected global::System.Web.UI.WebControls.Button btnComentar;
     }
 }
