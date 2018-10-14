@@ -6,22 +6,35 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using BE;
 using BL;
+using Helper;
 
 namespace Ubiquicity
 {
     public partial class shop : System.Web.UI.Page
     {
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                MapManager mapManager = new MapManager();
-                List<Map> maps = mapManager.Get();
-                shopRepeater.DataSource = maps;
-                shopRepeater.DataBind();
+                LoadRepeater();
             }
+
         }
+
+
+        private void LoadRepeater()
+        {
+            MapManager mapManager = new MapManager();
+            List<Map> maps = mapManager.Get();
+            shopRepeater.DataSource = maps;
+            shopRepeater.DataBind();
+        }
+
+        private void UpdateCartButton()
+        {
+            btnCart.Text = "<i class='fa fa-tags' aria-hidden='true'></i> Elementos: " + ShopHelper.GetQuantity(Session);
+        }
+
 
         /// <summary>
         /// Toma los valores que están almacenados en el input selectedItemsInput del tipo hidden
@@ -50,25 +63,34 @@ namespace Ubiquicity
             }
         }
 
+        /// <summary>
+        /// Atiende los botones del repeater: agregar a la plataforma de venta & ver detalle
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="e"></param>
         protected void shopRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             try
             {
                 int id = Convert.ToInt32(e.CommandArgument);
-                MapManager mapManager = new MapManager();
-                Map map = mapManager.Get(id);
-                ModalItemShop.Show(map);
+
+                if (e.CommandName == "AddToCart")
+                {
+                    ShopHelper.AddToCart(id, Session);
+                    UpdateCartButton();
+                }
+                else if (e.CommandName == "ShowDetail")
+                {
+                    
+                    MapManager mapManager = new MapManager();
+                    Map map = mapManager.Get(id);
+                    ModalItemShop.Show(map);
+                }
             }
             catch(Exception exception)
             {
                 ((front)Master).Alert.Show("Exception", exception.Message);
             }
-            //NewsManager newsmanager = new NewsManager();
-            //int id = Convert.ToInt32(e.CommandArgument);
-            //News news = newsmanager.Get(id);
-
-            ////Ejecuta el modal
-            //ModalNewsletter.Show(news.Title, news.Body, news.Image);
         }
 
     }

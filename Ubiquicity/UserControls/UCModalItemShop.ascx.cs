@@ -83,7 +83,7 @@ namespace Ubiquicity.UserControls
                 commentManager.Save(itemComment);
             }catch
             {
-
+                //((front)Master).Alert.Show("Exception", exception.Message);
             }
         }
     }

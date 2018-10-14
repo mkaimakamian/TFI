@@ -37,7 +37,4 @@
             <asp:FileUpload ID="resourceInput" runat="server" class="form-control form-control-sm btn-choose" />
         </div>
     </div>
-
-</div>
---%>
 </div>

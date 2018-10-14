@@ -30,21 +30,27 @@
     <div class="container-fluid">
         <UCmkc:UCHeaderWeb runat="server" Label="Catálogo" Imgsource="~/Resources/shop01.svg" />
         <div class="row">
+
+            <!-- filtros & carrito -->
             <div class="col-2">
                 <div class="card bg-light mb-3" style="max-width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title">Filtros</h5>
                         <p class="card-text">Utilizá los filtros para acotar la búsqueda.</p>
                         <hr />
-                        <h6 class="card-title">Categoría</h6>
+                        <%--<h6 class="card-title">Categoría</h6>--%>
 
                         <asp:LinkButton runat="server" CssClass="btn btn-primary btn-sm" Text="Comparar" OnClick="PerformCompare" />
                         <input id="selectedItemsInput" type="hidden" runat="server" />
                         <hr />
+
+                        <asp:LinkButton ID="btnCart" runat="server" CssClass="btn btn-warning btn-sm" Text="<i class='fa fa-tags' aria-hidden='true'></i> Sin elementos"/>
+                        
                     </div>
                 </div>
             </div>
 
+            <!-- Galeria de elementos -->
             <div class="col-10">
                 <div class="card-deck">
                     <asp:Repeater ID="shopRepeater" runat="server" OnItemCommand="shopRepeater_ItemCommand">
@@ -57,8 +63,8 @@
                                     <hr />
                                     <p class="text-muted" style="font-family: Courier New, Courier, monospace; font-size: xx-large">$AR <%# Eval("Price") %></p>
                                     <hr />
-                                    <asp:LinkButton runat="server" CssClass="btn btn-primary btn-sm" Text="Adquirir" />
-                                    <asp:LinkButton runat="server" CssClass="btn btn-primary btn-sm" Text="Ver detalle" CommandArgument='<%# Eval("id") %>' />
+                                    <asp:LinkButton runat="server" CssClass="btn btn-primary btn-sm" Text="Adquirir" CommandName="AddToCart" CommandArgument='<%# Eval("id") %>' />
+                                    <asp:LinkButton runat="server" CssClass="btn btn-primary btn-sm" Text="Ver detalle" CommandName="ShowDetail" CommandArgument='<%# Eval("id") %>' />
                                     <%--<span class="badge badge-pill badge-info">Categoría</span>--%>
                                     <div class="row text-left " style="padding-top: 20px;">
                                         <div class="col">
@@ -71,6 +77,8 @@
                     </asp:Repeater>
                 </div>
             </div>
+
+
         </div>
     </div>
     <UCmkc:UCModalCompare runat="server" ID="ModalCompare" />
