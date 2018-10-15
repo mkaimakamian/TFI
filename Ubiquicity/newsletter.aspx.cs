@@ -54,7 +54,7 @@ namespace Ubiquicity
             {
                 //Se traspasa a un array para que la capa de negocios reciba una etsructura más genérica.
                 int[] categoriesId = new int[categories.Count];
-
+                //List<ListItem> selected = checkCreditNotes.Items.Cast<ListItem>().Where(li => li.Selected).ToArray();
                 for (int i = 0; i < categories.Count; ++i)
                 {
                     if (categories[i].Selected) categoriesId[i] = Convert.ToInt32(categories[i].Value);

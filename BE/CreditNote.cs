@@ -14,6 +14,7 @@ namespace BE
         private string observation;
         private int status; //quizá enumerado?
         private User user;
+        //todo - debería estar asociado a un invoice o directamente eso lo pongo como observación?
 
         public int Id
         {
@@ -84,6 +85,7 @@ namespace BE
         {
             get
             {
+                if (user == null) user = new User();
                 return user;
             }
 

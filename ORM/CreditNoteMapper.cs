@@ -23,8 +23,8 @@ namespace ORM
             Hashtable table = new Hashtable();
             List<CreditNote> creditNotes = null;
 
-            //table.Add("@resourceId", DBNull.Value);
-            DataSet result = dal.Read(table, "spReadMap");
+            table.Add("@userId", user.Id);
+            DataSet result = dal.Read(table, "spReadCreditNote");
 
             if (result != null && result.Tables[0].Rows.Count > 0)
             {
@@ -36,6 +36,24 @@ namespace ORM
             }
 
             return creditNotes;
+        }
+
+        public CreditNote Get(int id)
+        {
+            Dal dal = new Dal();
+            Hashtable table = new Hashtable();
+            CreditNote creditNote = null;
+
+            table.Add("@id", id);
+
+            DataSet result = dal.Read(table, "spReadCreditNote");
+
+            if (result != null && result.Tables[0].Rows.Count > 0)
+            {
+                creditNote = ConvertToModel(result.Tables[0].Rows[0]);
+            }
+
+            return creditNote;
         }
 
         /// <summary>

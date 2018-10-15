@@ -8,7 +8,7 @@ namespace Helper
     /// <summary>
     /// La intención de la clase es encapsular el modo en el que se crea la sesión y se opera sobre ella.
     /// </summary>
-    public class SessionHelper
+    public static class SessionHelper
     {
         private static HttpSessionState sessionState;
 
@@ -42,7 +42,7 @@ namespace Helper
         }
 
         /// <summary>
-        /// Devuelve true cuando existe un usuario en sesión..
+        /// Devuelve true cuando existe un usuario en sesión.
         /// </summary>
         /// <returns></returns>
         public static bool IsSessionAlive()

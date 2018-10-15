@@ -10,21 +10,22 @@ namespace BL
 {
     public class CreditNoteManager
     {
-
+        /// <summary>
+        /// Devuelve el listado de notas de créditos disponibles para el usuario pasado por parámetro.
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         public List<CreditNote> Get(User user)
         {
-            //Mock
-            List<CreditNote> lst = new List<CreditNote>();
-            CreditNote cn = new CreditNote();
-            cn.Amount = 11.2;
-            cn.Date = DateTime.Now;
-            cn.Observation = "Esta nota de crédito se expide porque si";
-            cn.User = user;
-            lst.Add(cn);
-            return lst;
-
             CreditNoteMapper creditNoteMapper = new CreditNoteMapper();
             return creditNoteMapper.Get(user);
+        }
+
+
+        public CreditNote Get(int id)
+        {
+            CreditNoteMapper creditNoteMapper = new CreditNoteMapper();
+            return creditNoteMapper.Get(id);
         }
     }
 }

@@ -54,8 +54,9 @@ namespace Ubiquicity
                 //El input pasa el array como una cadena de texto con los ids separados por comas.
                 //A continuación se crea un array de strings a través del split y se convierten los elementos en enteros
                 //para crear el mismo array pero del tipo entero.
-                int[] itemsId = Array.ConvertAll(selectedItemsInput.Value.Split(','), item => Convert.ToInt32(item));
-                
+                //int[] itemsId = Array.ConvertAll(selectedItemsInput.Value.Split(','), item => Convert.ToInt32(item));
+                int[] itemsId = UtilsHelper.ToIntArray(selectedItemsInput.Value);
+
                 MapManager mapManager = new MapManager();
                 List<Map> maps = mapManager.GetBySeveralIds(itemsId);
 

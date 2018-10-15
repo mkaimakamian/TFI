@@ -43,7 +43,10 @@
   <ItemGroup>
     <Compile Include="BackupManager.cs" />
     <Compile Include="BaseManager.cs" />
+    <Compile Include="CardPayment.cs" />
     <Compile Include="CreditNoteManager.cs" />
+    <Compile Include="CreditNotePayment.cs" />
+    <Compile Include="InvoiceManager.cs" />
     <Compile Include="ItemCommentManager.cs" />
     <Compile Include="MapManager.cs" />
     <Compile Include="LanguageManager.cs" />
@@ -51,6 +54,7 @@
     <Compile Include="NewsAddresseeManager.cs" />
     <Compile Include="NewsCategoryManager.cs" />
     <Compile Include="NewsManager.cs" />
+    <Compile Include="PaymentMethod.cs" />
     <Compile Include="RoleManager.cs" />
     <Compile Include="SessionManager.cs" />
     <Compile Include="UserManager.cs" />

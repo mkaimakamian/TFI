@@ -47,6 +47,7 @@
     <Compile Include="SecurityHelper.cs" />
     <Compile Include="SessionHelper.cs" />
     <Compile Include="ShopHelper.cs" />
+    <Compile Include="UtilsHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BE\BE.csproj">

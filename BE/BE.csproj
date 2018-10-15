@@ -41,6 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Backup.cs" />
+    <Compile Include="CreditCard.cs" />
+    <Compile Include="CreditCardType.cs" />
     <Compile Include="CreditNote.cs" />
     <Compile Include="ItemComment.cs" />
     <Compile Include="Label.cs" />
