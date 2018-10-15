@@ -18,12 +18,17 @@ namespace Helper
         /// <param name="state"></param>
         public static void AddToCart(int resourceId, HttpSessionState session)
         {
-            GetSessionVault(session).Add(resourceId);
+            GetSessionState(session).Add(resourceId);
         }
 
+        /// <summary>
+        /// Devuelve la cantidad de ítems almacenados
+        /// </summary>
+        /// <param name="session"></param>
+        /// <returns></returns>
         public static int GetQuantity(HttpSessionState session)
         {
-           return GetSessionVault(session).Count();
+           return GetSessionState(session).Count();
         }
      
         /// <summary>
@@ -31,7 +36,7 @@ namespace Helper
         /// </summary>
         /// <param name="session"></param>
         /// <returns></returns>
-        private static HashSet<int> GetSessionVault(HttpSessionState session)
+        private static HashSet<int> GetSessionState(HttpSessionState session)
         {
             if (session["ItemShopsCheckout"] == null) session["ItemShopsCheckout"] = new HashSet<int>();
             return (HashSet<int>)session["ItemShopsCheckout"];

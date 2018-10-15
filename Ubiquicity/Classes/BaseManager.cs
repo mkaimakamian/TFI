@@ -34,8 +34,8 @@ namespace Ubiquicity
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["SessionCreated"] == null) Response.Redirect("/index.aspx");
-            if (!SecurityHelper.HasPermission(Session["SessionCreated"] as User, Request.RawUrl)) Response.Redirect("/index.aspx");
+            if (!SessionHelper.IsSessionAlive()) Response.Redirect("/index.aspx");
+            if (!SecurityHelper.HasPermission(SessionHelper.GetUserFromSession(), Request.RawUrl)) Response.Redirect("/index.aspx");
 
             //Se asignó al botón principal la tarea de ejecutar la eliminación
             Alert.PerformMainAction += PerformDeleteItem;

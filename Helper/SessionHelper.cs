@@ -1,133 +1,53 @@
 ﻿using System;
 using System.Collections.Generic;
 using BE;
+using System.Web.SessionState;
 
 namespace Helper
 {
-    // TODO - agregar a EA || YA NO TIENE SENTIDO, PORQUE LAS TRADUCCIONES ERA LO MÁS IMPORTANTE QUE HACÍA.
+    /// <summary>
+    /// La intención de la clase es encapsular el modo en el que se crea la sesión y se opera sobre ella.
+    /// </summary>
     public class SessionHelper
     {
-
-        private static SessionHelper instance;
-        private User user;
-
-       // private ProfileBM profileMdl;
-        //private LanguageBM languageBm;
-        private Dictionary<int, String> translations;
-        private Dictionary<object, int> suscriptorsToTranslate;
-
-        private SessionHelper()
-        {
-        }
+        private static HttpSessionState sessionState;
 
         /// <summary>
-        /// Inicia la sesión, lo que implica almacenar los datos del usuario y su configuración (idioma y permisos).
+        /// Inicia la sesión al guardar el usuario en HttpSessionState.
         /// </summary>
         /// <param name="user"></param>
-        /// <returns></returns>
-        public static SessionHelper StartSession(User user)
+        /// <param name="session"></param>
+        public static void StarSession(User user, HttpSessionState session)
         {
-            if (instance == null)
-            {
-                instance = new SessionHelper();
-                instance.user = user;
-                //instance.profileMdl = profileMdl;
-                //instance.languageBm = languageBm;
-                instance.suscriptorsToTranslate = new Dictionary<object, int>();
-                ConvertIntoList(user.Language);
-            }
-
-            //No sé si se necesita porque no opero actualmente con la sesion
-            return instance;
-        }
-
-
-        private static void ConvertIntoList(Language language)
-        {
-            instance.translations = new Dictionary<int, String>();
-            foreach (Translation translation in language.Translations)
-            {
-                instance.translations.Add(translation.Id, translation.Translate);
-            }
+            if (sessionState == null) sessionState = session;
+            sessionState["SessionCreated"] = user;
         }
 
         /// <summary>
-        /// Devuelve el Business Model perteneciente al usuario loggeado
+        /// Devuelve el usuario guardado en sesión.
         /// </summary>
         /// <returns></returns>
-        public static User GetLoggedUser()
+        public static User GetUserFromSession()
         {
-            return instance.user;
+            
+            return sessionState == null? null: (User)sessionState["SessionCreated"];
         }
+
         /// <summary>
-        /// Finaliza la sesión.
+        /// Elimina la referencia del usuario en sesión para finalizarla.
         /// </summary>
         public static void EndSession()
         {
-            instance = null;
+            sessionState.Remove("SessionCreated");
         }
 
         /// <summary>
-        /// Devuelve true si el usuario en sesión tiene permisos sobre el objeto cuyo código es pasado por parámetro.
+        /// Devuelve true cuando existe un usuario en sesión..
         /// </summary>
-        /// <param name="code"></param>
         /// <returns></returns>
-        //public static bool HasPermission(string code)
-        //{
-        //    return instance.profileMdl.HasPermission(code);
-        //}
-
-        /// <summary>
-        /// Suscribe al componente de no estar registrado y le asigna la traducción correspondiente.
-        /// Aunque no se define inerfaz, se espera que el objeto tenga propiedad text.
-        /// </summary>
-        /// <param name="suscriptor"></param>
-        /// <param name="code"></param>
-        public static void RegisterForTranslation(object suscriptor, int code)
+        public static bool IsSessionAlive()
         {
-            if (!instance.suscriptorsToTranslate.ContainsKey(suscriptor))
-            {
-                instance.suscriptorsToTranslate.Add(suscriptor, code);
-            }
-
-            System.Reflection.PropertyInfo propertyText = suscriptor.GetType().GetProperty("Text");
-            propertyText.SetValue(suscriptor, GetTranslation(code));
-        }
-
-        /// <summary>
-        /// Settea el lenguage y actualiza los suscriptores con el nuevo idioma.
-        /// </summary>
-        /// <param name="languageBm"></param>
-        //public static void SetLanguage(Language language)
-        //{
-        //    instance.user.Language = language;
-        //    ConvertIntoList(language);
-
-        //    foreach (KeyValuePair<object, string> obj in instance.suscriptorsToTranslate)
-        //    {
-        //        RegisterForTranslation(obj.Key, obj.Value);
-        //    }
-        //}
-
-        /// <summary>
-        /// Para un código en particular, devuelve las traducciones.
-        /// </summary>
-        /// <param name="code"></param>
-        /// <returns></returns>
-        public static string GetTranslation(int code)
-        {
-            string value;
-            instance.translations.TryGetValue(code, out value);
-
-            // El valor default debería estar definido en la tabla de traducciones.
-            if (value == null || value.Length == 0)
-            {
-                return "UNDEFINED";
-            }
-            else
-            {
-                return value;
-            }
+            return GetUserFromSession() != null;
         }
     }
 }

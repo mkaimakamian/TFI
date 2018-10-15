@@ -19,12 +19,9 @@ namespace Ubiquicity
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //Session["SessionCreated"]
-
             if (!IsPostBack)
             {
-                // Todo - ver si en vez de usuario es Session
-                User user = (User)Session["SessionCreated"];
+                User user = SessionHelper.GetUserFromSession();
                 ManageLoginPanel(user);
                 LoadMenu(user);
                 //No está bueno... ver la performance.
@@ -63,7 +60,7 @@ namespace Ubiquicity
                     }
                     else
                     {
-                        Session["SessionCreated"] = user;
+                        SessionHelper.StarSession(user, Session);
                         Response.Redirect(Request.RawUrl);
                     }
                 }
@@ -211,7 +208,7 @@ namespace Ubiquicity
         /// <param name="e"></param>
         protected void btnLogout_Click(object sender, EventArgs e)
         {
-            Session.Remove("SessionCreated");
+            SessionHelper.EndSession();
             Response.Redirect("index.aspx");
         }
 
