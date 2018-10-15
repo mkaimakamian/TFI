@@ -44,7 +44,10 @@
                         <input id="selectedItemsInput" type="hidden" runat="server" />
                         <hr />
 
-                        <asp:LinkButton ID="btnCart" runat="server" CssClass="btn btn-warning btn-sm" Text="<i class='fa fa-tags' aria-hidden='true'></i> Sin elementos"/>
+                        <asp:LinkButton ID="btnCart" runat="server" CssClass="btn btn-warning btn-sm" 
+                            Text="<i class='fa fa-tags' aria-hidden='true'></i> Sin elementos"
+                            OnClick="GoToInvoice"
+                            />
                         
                     </div>
                 </div>

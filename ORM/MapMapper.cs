@@ -12,6 +12,11 @@ namespace ORM
 {
     public class MapMapper
     {
+        /// <summary>
+        /// Guarda los datos modelados, en la base.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <returns></returns>
         public bool Save(Map map)
         {
             Dal dal = new Dal();
@@ -27,6 +32,11 @@ namespace ORM
             return map.Id > 0;
         }
 
+        /// <summary>
+        /// Guarda los datos modelados, en la base.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <returns></returns>
         public bool Edit(Map map)
         {
             Dal dal = new Dal();
@@ -88,6 +98,11 @@ namespace ORM
             return dal.Write(table, "spDeleteMap") > 0;
         }
 
+        /// <summary>
+        /// Devuelve un objeto modelado con los valores del dataRow que recibe por parámetro.
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         private Map ConvertToModel(DataRow data)
         {
             return new Map

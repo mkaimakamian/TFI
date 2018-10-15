@@ -21,7 +21,9 @@ namespace Ubiquicity
 
         }
 
-
+        /// <summary>
+        /// Carga el repeater con los artículos a mostrar en el shop.
+        /// </summary>
         private void LoadRepeater()
         {
             MapManager mapManager = new MapManager();
@@ -30,9 +32,12 @@ namespace Ubiquicity
             shopRepeater.DataBind();
         }
 
+        /// <summary>
+        /// Actualiza la etiqueta del botón, mostrando las cantidades de los artículos escogidos para comprar.
+        /// </summary>
         private void UpdateCartButton()
         {
-            btnCart.Text = "<i class='fa fa-tags' aria-hidden='true'></i> Elementos: " + ShopHelper.GetQuantity(Session);
+            btnCart.Text = "<i class='fa fa-tags' aria-hidden='true'></i> Elementos: " + ShopHelper.GetQuantity();
         }
 
 
@@ -46,9 +51,13 @@ namespace Ubiquicity
         {
             try
             {
-                string[] itemsId = selectedItemsInput.Value.ToString().Split(',');
+                //El input pasa el array como una cadena de texto con los ids separados por comas.
+                //A continuación se crea un array de strings a través del split y se convierten los elementos en enteros
+                //para crear el mismo array pero del tipo entero.
+                int[] itemsId = Array.ConvertAll(selectedItemsInput.Value.Split(','), item => Convert.ToInt32(item));
+                
                 MapManager mapManager = new MapManager();
-                List<Map> maps = mapManager.GetToCompare(itemsId);
+                List<Map> maps = mapManager.GetBySeveralIds(itemsId);
 
                 if ((maps == null || maps.Count == 0) && mapManager.HasErrors )
                 {
@@ -93,5 +102,9 @@ namespace Ubiquicity
             }
         }
 
+        protected void GoToInvoice(object sender, EventArgs e)
+        {
+            Response.Redirect("/invoice.aspx");
+        }
     }
 }

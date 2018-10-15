@@ -60,7 +60,7 @@ namespace Ubiquicity
                     }
                     else
                     {
-                        SessionHelper.StarSession(user, Session);
+                        SessionHelper.StartSession(user, Session);
                         Response.Redirect(Request.RawUrl);
                     }
                 }

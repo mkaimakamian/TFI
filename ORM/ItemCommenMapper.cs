@@ -53,6 +53,11 @@ namespace ORM
             return comments;
         }
 
+        /// <summary>
+        /// Devuelve un objeto modelado con los valores del dataRow que recibe por parámetro.
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         private ItemComment ConvertToModel(DataRow data)
         {
             ItemComment itemComment = new ItemComment();

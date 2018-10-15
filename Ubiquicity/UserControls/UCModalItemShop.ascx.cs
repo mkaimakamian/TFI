@@ -43,7 +43,7 @@ namespace Ubiquicity.UserControls
             itemRepeater.DataSource = GetComments(map);
             itemRepeater.DataBind();
             //super turbio: almaceno el id para saber, al momento de comentar, a qué producto le pertenece.
-            btnComentar.AccessKey = map.Id.ToString();
+            btnComentar.CommandArgument = map.Id.ToString();
             this.title = map.Name;
             this.message = map.Description;
             Page.ClientScript.RegisterStartupScript(this.GetType(), "openModalItemShop", "window.onload = function() { $('#ucModalItemShop').modal('show'); }", true);
@@ -78,7 +78,7 @@ namespace Ubiquicity.UserControls
                 ItemComment itemComment = new ItemComment();
                 itemComment.Comment = commentInput.InnerText;
                 itemComment.User =(User)Session["SessionCreated"];
-                itemComment.Resource.Id = Convert.ToInt32(((Button)sender).AccessKey);
+                itemComment.Resource.Id = Convert.ToInt32(((Button)sender).CommandArgument);
 
                 commentManager.Save(itemComment);
             }catch

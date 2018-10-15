@@ -17,7 +17,7 @@ namespace Helper
         /// </summary>
         /// <param name="user"></param>
         /// <param name="session"></param>
-        public static void StarSession(User user, HttpSessionState session)
+        public static void StartSession(User user, HttpSessionState session)
         {
             if (sessionState == null) sessionState = session;
             sessionState["SessionCreated"] = user;

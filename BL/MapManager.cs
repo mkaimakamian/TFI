@@ -70,16 +70,17 @@ namespace BL
             return mapMapper.Get();
         }
 
-
-        public List<Map> GetToCompare(string[] ids)
+        /// <summary>
+        /// Recupera los productos cuyos ids son pasados por parámetro.
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public List<Map> GetBySeveralIds(int[] ids)
         {
             List<Map> maps = new List<Map>();
 
             //feo... pero funciona por ahora
-            foreach (string id in ids)
-            {
-                maps.Add(Get(Convert.ToInt32(id)));
-            }
+            foreach (int id in ids) maps.Add(Get(id));
             return maps;
         }
         
