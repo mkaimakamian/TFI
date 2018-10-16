@@ -117,7 +117,7 @@ namespace Helper
             string path = ConfigurationManager.AppSettings["MAIL_TEMPLATE_PATH"];
             string fullPath = HttpContext.Current.Server.MapPath(path);
             StreamReader streamReader = new StreamReader(fullPath);
-            String body = streamReader.ReadToEnd();
+            string body = streamReader.ReadToEnd();
             streamReader.Dispose();
             return body.Replace("@usuario", user).Replace("@motivo",topic).Replace("@web", webUrl);
         }

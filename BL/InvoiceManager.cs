@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BE;
-
+using PdfSharp.Pdf;
+using TheArtOfDev.HtmlRenderer.PdfSharp;
 namespace BL
 {
     public class InvoiceManager:BaseManager
@@ -41,7 +42,9 @@ namespace BL
                     leftAmount = paymentMethod.ProcessPayment(leftAmount);
                 }
 
-                //Guardar los datos de la factura y enviar el mail con el pdf
+                //Crear invoice
+                //Crear PDF
+                CreateInvoicePDF(resources);
 
                     return true;
             } else
@@ -52,6 +55,20 @@ namespace BL
                 return false;
             }
                 
+        }
+
+        //TODO - Pasar a un helper... etso es todo frula
+        private void CreateInvoicePDF(List<Map> resources)
+        {
+            PdfDocument pdf = PdfGenerator.GeneratePdf("<p><h1>Hello World</h1>This is html rendered text</p>", PageSize.A4);
+            pdf.Save("document.pdf");
+
+
+            //string prueba = MailerHelper.GetTemplate("lalalala", "lkskslñksñks", "ljljsdljs");
+            //PdfDocument invoice = new PdfDocument(prueba);
+            //invoice.Save("c:/tmp/lala.pdf");
+            //    //PdfGenerator.GeneratePdf(html, PageSize.A4, 60);
+            //pdf.Save(pathOUT);
         }
 
         /// <summary>
