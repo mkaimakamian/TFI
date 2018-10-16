@@ -33,7 +33,7 @@ namespace ORM
         }
 
         /// <summary>
-        /// Guarda los datos modelados, en la base.
+        /// Ejecuta la actualización del modelo de datos.
         /// </summary>
         /// <param name="map"></param>
         /// <returns></returns>

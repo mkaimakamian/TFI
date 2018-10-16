@@ -38,9 +38,13 @@ namespace Helper
            return GetSessionState().Count();
         }
      
-        public static HashSet<int> GetItemsId()
+        /// <summary>
+        /// Devuelve un array de int con lo ids de los productos seleccionados
+        /// </summary>
+        /// <returns></returns>
+        public static int[] GetItemsId()
         {
-           return GetSessionState();
+           return GetSessionState().ToArray();
         }
 
         /// <summary>

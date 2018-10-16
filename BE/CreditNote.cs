@@ -14,6 +14,7 @@ namespace BE
         private string observation;
         private int status; //quizá enumerado?
         private User user;
+        private DateTime used;
         //todo - debería estar asociado a un invoice o directamente eso lo pongo como observación?
 
         public int Id
@@ -92,6 +93,19 @@ namespace BE
             set
             {
                 user = value;
+            }
+        }
+
+        public DateTime Used
+        {
+            get
+            {
+                return used;
+            }
+
+            set
+            {
+                used = value;
             }
         }
     }

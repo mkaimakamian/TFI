@@ -12,6 +12,47 @@ namespace ORM
 {
     public class CreditNoteMapper
     {
+
+        /// <summary>
+        /// Guarda los datos modelados, en la base.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <returns></returns>
+        public bool Save(CreditNote creditNote)
+        {
+            Dal dal = new Dal();
+            Hashtable table = new Hashtable();
+
+            table.Add("@amount", creditNote.Amount);
+            table.Add("@observation", creditNote.Observation);
+            table.Add("@date", creditNote.Date);
+            table.Add("@status", creditNote.Status);
+            table.Add("@userId", creditNote.User.Id);
+            creditNote.Id = dal.Write(table, "spWriteCreditNote");
+
+            return creditNote.Id > 0;
+        }
+
+        /// <summary>
+        /// Ejecuta la actualización del modelo de datos.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <returns></returns>
+        public bool Edit(CreditNote creditNote)
+        {
+            Dal dal = new Dal();
+            Hashtable table = new Hashtable();
+
+            table.Add("@id", creditNote.Id);
+            table.Add("@amount", creditNote.Amount);
+            table.Add("@observation", creditNote.Observation);
+            table.Add("@date", creditNote.Date);
+            table.Add("@status", creditNote.Status);
+            table.Add("@userId", creditNote.User.Id);
+            table.Add("@used", creditNote.Used);
+            return dal.Write(table, "spModifyCreditNote") > 0;
+        }
+
         /// <summary>
         /// Devuelve el listado de notas de crédito asociadas a un usuario.
         /// </summary>
@@ -34,7 +75,6 @@ namespace ORM
                     creditNotes.Add(ConvertToModel(data));
                 }
             }
-
             return creditNotes;
         }
 
@@ -52,7 +92,6 @@ namespace ORM
             {
                 creditNote = ConvertToModel(result.Tables[0].Rows[0]);
             }
-
             return creditNote;
         }
 
@@ -70,6 +109,7 @@ namespace ORM
             creditNote.Observation = data["observation"].ToString();
             creditNote.User.Id = Convert.ToInt32(data["userId"].ToString());
             creditNote.Status = Convert.ToInt32(data["status"].ToString());
+            creditNote.Used = Convert.ToDateTime(data["date"]);
             return creditNote;
         }
     }

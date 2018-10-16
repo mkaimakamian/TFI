@@ -16,9 +16,11 @@ namespace BL
         /// <param name="amount"></param>
         /// <param name="paymentMethods"></param>
         /// <returns></returns>
-        public bool ProcessPayment(double amount, List<PaymentMethod> paymentMethods)
+        public bool ProcessPayment(List<Map> resources, List<PaymentMethod> paymentMethods, User user)
         {
-            double leftAmount = amount;
+            //Total de los producto
+            double totalAmount = resources.Sum(resource => resource.Price);
+            double leftAmount = totalAmount;
 
             //Ejecuta una prueba para constatar que el saldo puede ser cubierto
             foreach(PaymentMethod paymentMethod in paymentMethods)
@@ -29,21 +31,24 @@ namespace BL
                 }
             }
 
-            //Si el resto es 0, significa que los métodos elegidos cubren la deuda y se puede aplicar el cobro 
-            //definitivo.
+            //Si el resto es igual o menor a 0, significa que los métodos elegidos cubren la deuda 
+            //y se puede aplicar el cobro definitivo.
             if (leftAmount <= 0)
             {
-                leftAmount = amount;
+                leftAmount = totalAmount;
                 foreach (PaymentMethod paymentMethod in paymentMethods)
                 {
                     leftAmount = paymentMethod.ProcessPayment(leftAmount);
                 }
+
                 //Guardar los datos de la factura y enviar el mail con el pdf
 
                     return true;
             } else
             {
-                //Crear un BEresult
+                string errorDescription = "Los medios de pago no cubren el total a pagar.";
+                log.AddLogInfo("ProcessPayment", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.FAIL, errorDescription));
                 return false;
             }
                 

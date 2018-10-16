@@ -40,7 +40,6 @@ namespace BL
         {
             // En caso de que esté "pagado" no tiene sentido procesar
             if (amount <= 0) return amount;
-
             List<CreditNote> creditNotes = GetCreditNotes(creditNoteIds);
             List<CreditNote> creditNoteUsed = new List<CreditNote>();
 
@@ -50,13 +49,22 @@ namespace BL
                 creditNoteUsed.Add(creditNotes[i]);
             }
 
-            //Anulo todos creditNoteUsed
-
-            //Significa que la última nota de crédito fue la que se excedió y, como fue "consumida" debo
-            //generar una nota de crédito por la diferencia
-            if (amount < 0)
+            //Todas las notas usadas deben ser anuladas
+            if (ChangeStateToUsed(creditNoteUsed))
             {
-                //crear nota de crédito por valor *-1
+                //Significa que la última nota de crédito fue la que se excedió y, como fue "consumida", 
+                //debo generar una nota de crédito por la diferencia.
+                if (amount < 0)
+                {
+                    CreditNote originalCreditNote = creditNotes[creditNotes.Count - 1];
+                    if(!SaveCreditNote(originalCreditNote, amount))
+                    {
+                        //mensaje de error
+                    }
+                }
+            } else
+            {
+                //crear beresult de error
             }
 
             return amount;
@@ -69,6 +77,11 @@ namespace BL
             return true;
         }
 
+        /// <summary>
+        /// Devuelve las notas de créditos cuyos id son pasados por parámetros.
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
         private List<CreditNote> GetCreditNotes(int[] ids)
         {
             if (creditNotes == null)
@@ -89,6 +102,38 @@ namespace BL
             }
 
             return creditNotes;
+        }
+
+
+        /// <summary>
+        /// Actualiza el estado de las notas para marcarlas como usadas.
+        /// </summary>
+        /// <param name="usedCreditNotes"></param>
+        /// <returns></returns>
+        private bool ChangeStateToUsed(List<CreditNote> usedCreditNotes)
+        {
+            CreditNoteManager creditNoteManager = new CreditNoteManager();
+            return creditNoteManager.ChangeStateToUsed(usedCreditNotes);
+        }
+
+        /// <summary>
+        /// Crea una nota de crédito por el monto especificado.
+        /// </summary>
+        /// <param name="creditNoteTS"></param>
+        /// <param name="amount"></param>
+        /// <returns></returns>
+        private bool SaveCreditNote(CreditNote creditNoteTS, double amount)
+        {
+            CreditNoteManager creditNoteManager = new CreditNoteManager();
+
+            CreditNote creditNote = new CreditNote();
+            creditNote.Amount = amount * -1;
+            creditNote.Date = DateTime.Now;
+            creditNote.Status = 1;
+            creditNote.Observation = "Remanente de pago: " + creditNoteTS.Id + " (monto original: "+creditNote.Amount+")";
+            creditNote.User = creditNoteTS.User;
+
+            return creditNoteManager.Save(creditNote);
         }
     }
 }

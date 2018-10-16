@@ -28,6 +28,11 @@ namespace BL
             return true;
         }
 
+        /// <summary>
+        /// Guarda los cambios del recurso existente.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <returns></returns>
         public bool Edit(Map map)
         {
             if (!IsValidForEdit(map)) return false;
@@ -45,6 +50,11 @@ namespace BL
             return true;
         }
 
+        /// <summary>
+        /// Devuelve el recurso cuyo id es pasado por parámetro.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Map Get(int id)
         {
             MapMapper mapMapper = new MapMapper();
