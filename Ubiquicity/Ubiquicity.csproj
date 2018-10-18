@@ -120,6 +120,7 @@
     <Content Include="Resources\log.svg" />
     <Content Include="Resources\login.svg" />
     <Content Include="Resources\logo.png" />
+    <Content Include="Resources\logo_azul.png" />
     <Content Include="Resources\mail.htm" />
     <Content Include="Resources\map.svg" />
     <Content Include="Resources\mapa_vect.png" />
@@ -189,6 +190,7 @@
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="shop.aspx" />
     <Content Include="suscription_manager.aspx" />
+    <Content Include="unsuscribe_action.aspx" />
     <Content Include="UserControls\sub\UCCalendar.ascx" />
     <Content Include="UserControls\UCCompareGrid.ascx" />
     <Content Include="UserControls\sub\UCCompareItem.ascx" />
@@ -410,6 +412,13 @@
     </Compile>
     <Compile Include="suscription_manager.aspx.designer.cs">
       <DependentUpon>suscription_manager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="unsuscribe_action.aspx.cs">
+      <DependentUpon>unsuscribe_action.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="unsuscribe_action.aspx.designer.cs">
+      <DependentUpon>unsuscribe_action.aspx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\sub\UCCalendar.ascx.cs">
       <DependentUpon>UCCalendar.ascx</DependentUpon>

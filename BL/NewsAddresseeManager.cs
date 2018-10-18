@@ -18,7 +18,6 @@ namespace BL
 
             //chequear existencia del correo
             NewsAddresseeMapper mapper = new NewsAddresseeMapper();
-
             NewsAddressee existence = mapper.Get(newsAddressee.Email);
 
             if (existence != null)
@@ -44,6 +43,67 @@ namespace BL
             return true;
         }
 
+        /// <summary>
+        /// Realiza la desuscripción del suscriptor.
+        /// </summary>
+        /// <param name="newsAddressee"></param>
+        /// <param name="confirm"></param>
+        /// <returns></returns>
+        public bool Unsuscribe(NewsAddressee newsAddressee, bool confirm)
+        {
+            if (!IsValidForUnsuscribe(newsAddressee, confirm)) return false;
+
+            NewsAddresseeMapper mapper = new NewsAddresseeMapper();
+            newsAddressee.Active = false;
+            newsAddressee.Dropout = DateTime.Now;
+
+            bool success = mapper.Unsuscribe(newsAddressee);
+
+            if (!success)
+            {
+                string errorDescription = "No se ha podido ejecutar la desuscripción.";
+                log.AddLogCritical("Unsuscribe", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.FAIL, errorDescription));
+                return false;
+            }
+
+            return success;
+        }
+
+        /// <summary>
+        /// Valida que los datos para ejecutar la desuscripción están completos.
+        /// </summary>
+        /// <param name="newsAddressee"></param>
+        /// <param name="confirm"></param>
+        /// <returns></returns>
+        private bool IsValidForUnsuscribe(NewsAddressee newsAddressee, bool confirm)
+        {
+            bool isValid = true;
+
+            if (String.IsNullOrEmpty(newsAddressee.Email))
+            {
+                string errorDescription = "Debe completarse el correo.";
+                log.AddLogWarn("IsValid", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
+                isValid = false;
+            }
+
+            if (!confirm)
+            {
+                string errorDescription = "Debe confirmarse la acción de desuscripción.";
+                log.AddLogWarn("IsValid", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+        /// <summary>
+        /// Valida que los datos para la suscripción estén completos.
+        /// </summary>
+        /// <param name="newsAddressee"></param>
+        /// <returns></returns>
         private bool IsValid(NewsAddressee newsAddressee)
         {
             bool isValid = true;

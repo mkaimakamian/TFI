@@ -64,6 +64,18 @@ namespace ORM
             return addressee;
         }
 
+        public bool Unsuscribe(NewsAddressee addressee)
+        {
+            Dal dal = new Dal();
+            Hashtable table = new Hashtable();
+
+            table.Add("@email", addressee.Email);
+            table.Add("@active", addressee.Active);
+            table.Add("@dropout", addressee.Dropout);
+            return dal.Write(table, "spModifyNewsAddressee") > 0;
+        }
+
+
         private NewsAddressee ConvertToModel(DataRow data)
         {
             NewsAddressee addressee = new NewsAddressee();

@@ -60,8 +60,8 @@ namespace BL
         //TODO - Pasar a un helper... etso es todo frula
         private void CreateInvoicePDF(List<Map> resources)
         {
-            PdfDocument pdf = PdfGenerator.GeneratePdf("<p><h1>Hello World</h1>This is html rendered text</p>", PageSize.A4);
-            pdf.Save("document.pdf");
+            //PdfDocument pdf = PdfGenerator.GeneratePdf("<p><h1>Hello World</h1>This is html rendered text</p>", PageSize.A4);
+            //pdf.Save("document.pdf");
 
 
             //string prueba = MailerHelper.GetTemplate("lalalala", "lkskslñksñks", "ljljsdljs");
