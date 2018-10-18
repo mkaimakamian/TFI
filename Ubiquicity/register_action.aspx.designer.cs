@@ -13,22 +13,13 @@ namespace Ubiquicity {
     public partial class register_action {
         
         /// <summary>
-        /// activationSuccess control.
+        /// divForm control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl activationSuccess;
-        
-        /// <summary>
-        /// activationRetry control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl activationRetry;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divForm;
         
         /// <summary>
         /// activationCodeInput control.
@@ -37,7 +28,7 @@ namespace Ubiquicity {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText activationCodeInput;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl activationCodeInput;
         
         /// <summary>
         /// btnApplyCode control.
@@ -47,5 +38,14 @@ namespace Ubiquicity {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnApplyCode;
+        
+        /// <summary>
+        /// divSuccessMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divSuccessMessage;
     }
 }

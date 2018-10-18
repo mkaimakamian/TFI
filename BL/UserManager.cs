@@ -15,11 +15,21 @@ namespace BL
         //TODO - Actualizar en ea
         public bool ActivateAccount(string hash)
         {
+            if (!isValidHash(hash)) return false;
             string activation = hash.Substring(0, 32);
             int userId = int.Parse(hash.Substring(32, hash.Length - 32));
 
             UserMapper userMapper = new UserMapper();
             User user = userMapper.Get(userId);
+
+            if (user == null)
+            {
+                // Siempre se devuelve true para ofuscar
+                string errorDescription = "¡Parece que estamos teniendo inconvenientes con el sistema!";
+                log.AddLogCritical("ActivateAccount", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.FAIL, errorDescription));
+                return false;
+            }
 
             if (SecurityHelper.IsEquivalent(user.Mail + user.Lastupdate.Minute, activation))
             {
@@ -404,6 +414,41 @@ namespace BL
             }
 
             return isValid;
+        }
+
+        /// <summary>
+        /// Evalúa que se cumplan las condiciones para seguir el proceso de registro.
+        /// </summary>
+        /// <param name="hash"></param>
+        /// <returns></returns>
+        private bool isValidHash(string hash)
+        {
+
+            if (String.IsNullOrEmpty(hash))
+            {
+                string errorDescription = "No se ha provisto el código.";
+                log.AddLogWarn("isValidHash", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
+               return false;
+            }
+
+            if (!String.IsNullOrEmpty(hash) && hash.Length <= 32)
+            {
+                string errorDescription = "Código inválido.";
+                log.AddLogWarn("isValidHash", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
+                return false;
+            }
+
+            if (!String.IsNullOrEmpty(hash) && hash.Length <= 32)
+            {
+                string errorDescription = "Código inválido.";
+                log.AddLogWarn("isValidHash", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
+                return false;
+            }
+
+            return true;
         }
     }
 }

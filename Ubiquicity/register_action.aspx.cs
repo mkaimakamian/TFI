@@ -20,18 +20,34 @@ namespace Ubiquicity
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        protected void btnApplyCode_Click(object sender, EventArgs e)
+        protected void ApplyCode(object sender, EventArgs e)
         {
             PerformActivation(activationCodeInput.Value);
         }
 
         private void PerformActivation(string activationHash)
         {
-            UserManager userManager = new UserManager();
-            bool success = userManager.ActivateAccount(activationHash);
+            try
+            {
+                UserManager userManager = new UserManager();
+                bool success = userManager.ActivateAccount(activationHash);
 
-            activationSuccess.Visible = success;
-            activationRetry.Visible = !success;
+                if (!success && userManager.HasErrors)
+                {
+                    ((front)Master).Alert.Show("Error", userManager.ErrorDescription);
+
+                }
+                else
+                {
+                    divForm.Visible = false;
+                    divSuccessMessage.Visible = true;
+                }
+
+            } catch (Exception exception)
+            {
+                ((front)Master).Alert.Show("Excepción", exception.Message);
+            }
+
         }
         
     }
