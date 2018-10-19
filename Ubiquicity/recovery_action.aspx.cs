@@ -17,18 +17,34 @@ namespace Ubiquicity
 
         protected void btnPassword_Click(object sender, EventArgs e)
         {
-            if (passwordInput.Value == passwordVerificationInput.Value && !String.IsNullOrEmpty(passwordInput.Value))
+            try
             {
-                String passwordHash = Request["a"];
-                UserManager userManager = new UserManager();
-                string password = SecurityHelper.Encrypt(passwordInput.Value);
-                userManager.ResetPasswordAction(password, passwordHash);
-            } else
-            {
+                if (passwordInput.Value == passwordVerificationInput.Value && !String.IsNullOrEmpty(passwordInput.Value))
+                {
+                    String passwordHash = Request["a"];
+                    UserManager userManager = new UserManager();
+                    string password = SecurityHelper.Encrypt(passwordInput.Value);
+                    bool success = userManager.ResetPasswordAction(password, passwordHash);
 
-                ((front)Master).Alert.Show("Error", "El password y la verificación deben coincidir.");
+                    if (!success && userManager.HasErrors)
+                    {
+                        ((front)Master).Alert.Show("Error", userManager.ErrorDescription);
+                    }
+                    else
+                    {
+                        divForm.Visible = false;
+                        divSuccessMessage.Visible = true;
+                    }
+
+                }
+                else
+                {
+                    ((front)Master).Alert.Show("Error", "El password y la verificación deben coincidir.");
+                }
+            } catch (Exception exception)
+            {
+                ((front)Master).Alert.Show("Excepción", exception.Message);
             }
-            
         }
     }
 }
