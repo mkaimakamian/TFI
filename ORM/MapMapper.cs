@@ -27,6 +27,7 @@ namespace ORM
             table.Add("@price", map.Price);
             table.Add("@imageB64", map.Image);
             table.Add("@sourcePath", map.Resource);
+            table.Add("@categoryId", map.Category.Id);
             map.Id = dal.Write(table, "spWriteMap");
 
             return map.Id > 0;
@@ -48,16 +49,20 @@ namespace ORM
             table.Add("@price", map.Price);
             table.Add("@imageB64", map.Image);
             table.Add("@sourcePath", map.Resource);
+            table.Add("@categoryId", map.Category.Id);
             return dal.Write(table, "spModifyMap") > 0;
         }
 
+        /// <summary>
+        /// Recupera el listado de elementos de la base.
+        /// </summary>
+        /// <returns></returns>
         public List<Map> Get()
         {
             Dal dal = new Dal();
             Hashtable table = new Hashtable();
             List<Map> maps = null;
 
-            table.Add("@resourceId", DBNull.Value);
             DataSet result = dal.Read(table, "spReadMap");
 
             if (result != null && result.Tables[0].Rows.Count > 0)
@@ -72,6 +77,11 @@ namespace ORM
             return maps;
         }
 
+        /// <summary>
+        /// Recupera el elemento cuyo id coincida con el provisto por parámetro.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Map Get(int id)
         {
             Dal dal = new Dal();
@@ -110,15 +120,17 @@ namespace ORM
         /// <returns></returns>
         private Map ConvertToModel(DataRow data)
         {
-            return new Map
-            {
-                Id = int.Parse(data["sourceId"].ToString()),
-                Name = data["name"].ToString(),
-                Description = data["description"].ToString(),
-                Price = Convert.ToDouble(data["price"]),
-                Image = data["image"].ToString(),
-                Resource = data["sourcePath"].ToString()
-            };
+            Map map = new Map();
+            map.Id = int.Parse(data["sourceId"].ToString());
+            map.Name = data["name"].ToString();
+            map.Description = data["description"].ToString();
+            map.Price = Convert.ToDouble(data["price"]);
+            map.Image = data["image"].ToString();
+            map.Resource = data["sourcePath"].ToString();
+            map.Category.Id = int.Parse(data["categoryId"].ToString());
+            map.Category.Name = data["categoryName"].ToString();
+
+            return map;
         }
 
     }

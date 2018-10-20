@@ -52,6 +52,10 @@ namespace Ubiquicity
             }
             else
             {
+                //TODO - agregar controles de error
+                CategoryManager newsCategoryManager = new CategoryManager();
+                List<Category> newsCategories = newsCategoryManager.Get();
+                UCFormMap.CleanForm(newsCategories);
                 UCFormMap.FillForm(map);
                 Session["Ubiquicity_action"] = EDIT;
                 Page.ClientScript.RegisterStartupScript(this.GetType(), "openModalEdit", "window.onload = function() { $('#modalMap').modal('show'); }", true);
@@ -79,8 +83,10 @@ namespace Ubiquicity
         protected override Dictionary<string, string> ColumnsToShowAndTranslate()
         {
             Dictionary<string, string> columns = new Dictionary<string, string>();
+            columns.Add("CategoryName", "Categoría");
             columns.Add("Name", "Nombre");
             columns.Add("Description", "Descripción");
+            columns.Add("Price", "Precio");
             columns.Add("Resource", "Recurso");
             return columns;
         }

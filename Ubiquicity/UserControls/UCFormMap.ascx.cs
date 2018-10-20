@@ -28,12 +28,14 @@ namespace Ubiquicity.UserControls
             mapFileImage.Src = "";
             imageInputBase64.Value = "";
             lblResource.InnerText = "Recurso";
+            priceInput.Value = "0.0";
         }
 
         public void FillForm(Map map)
         {
             nameInput.Value = map.Name;
-            //dropCategoryInput.SelectedValue = map.Category.Id.ToString();
+            priceInput.Value = map.Price.ToString();
+            dropCategoryInput.SelectedValue = map.Category.Id.ToString();
             descriptionInput.Value = map.Description;
             mapFileImage.Src = map.Image;
             imageInputBase64.Value = map.Image;
@@ -43,8 +45,10 @@ namespace Ubiquicity.UserControls
         public void PopulateModel(Map map)
         {
             map.Name = nameInput.Value;
+            map.Price = Convert.ToDouble(priceInput.Value);
             map.Description = descriptionInput.Value;
             map.Image = imageInputBase64.Value;
+            map.Category.Id = Convert.ToInt32(dropCategoryInput.SelectedValue);
 
             if (resourceInput.HasFile) {
                 string fileName = DateTime.Now.Ticks + resourceInput.FileName;

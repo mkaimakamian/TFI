@@ -11,8 +11,10 @@ namespace BE
         private int id;
         private string name;
         private string description;
-        private string image;
         private double price;
+        private Category category;
+        private string image;
+        
 
         public int Id
         {
@@ -53,19 +55,6 @@ namespace BE
             }
         }
 
-        public string Image
-        {
-            get
-            {
-                return image;
-            }
-
-            set
-            {
-                image = value;
-            }
-        }
-
         public double Price
         {
             get
@@ -76,6 +65,43 @@ namespace BE
             set
             {
                 price = value;
+            }
+        }
+
+        public Category Category
+        {
+            get
+            {
+                if (category == null) category = new Category();
+                return category;
+            }
+
+            set
+            {
+                category = value;
+            }
+        }
+
+        // Para poder leer el nombre en la grill
+        public String CategoryName
+        {
+            get
+            {
+                return Category.Name;
+            }
+
+        }
+
+        public string Image
+        {
+            get
+            {
+                return image;
+            }
+
+            set
+            {
+                image = value;
             }
         }
     }

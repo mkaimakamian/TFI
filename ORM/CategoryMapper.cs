@@ -23,7 +23,7 @@ namespace ORM
             Hashtable table = new Hashtable();
 
             table.Add("@name", category.Name);
-            category.Id = dal.Write(table, "spWriteNewsCategory");
+            category.Id = dal.Write(table, "spWriteCategory");
 
             return category.Id > 0;
         }
@@ -40,7 +40,7 @@ namespace ORM
 
             table.Add("@id", category.Id);
             table.Add("@name", category.Name);
-            return dal.Write(table, "spModifyNewsCategory") > 0;
+            return dal.Write(table, "spModifyCategory") > 0;
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace ORM
             Dal dal = new Dal();
             Hashtable table = new Hashtable();
             table.Add("@id", id);
-            return dal.Write(table, "spDeleteNewsCategory") > 0;
+            return dal.Write(table, "spDeleteCategory") > 0;
         }
 
         public Category Get(int id)
@@ -63,7 +63,7 @@ namespace ORM
             Category category = null;
 
             table.Add("@id",id);
-            DataSet result = dal.Read(table, "spReadNewsCategory");
+            DataSet result = dal.Read(table, "spReadCategory");
 
             if (result != null && result.Tables[0].Rows.Count > 0)
             {
@@ -80,7 +80,7 @@ namespace ORM
 
             table.Add("@id", id);
             table.Add("@inUse", true);
-            DataSet result = dal.Read(table, "spReadNewsCategory");
+            DataSet result = dal.Read(table, "spReadCategory");
 
             return result != null && result.Tables[0].Rows.Count > 0;
         }
@@ -95,7 +95,7 @@ namespace ORM
             Hashtable table = new Hashtable();
             List<Category> newsCategories = null;
 
-            DataSet result = dal.Read(table, "spReadNewsCategory");
+            DataSet result = dal.Read(table, "spReadCategory");
 
             if (result != null && result.Tables[0].Rows.Count > 0)
             {
