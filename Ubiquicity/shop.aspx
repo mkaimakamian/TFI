@@ -55,36 +55,19 @@
                     <%--<div class="card-deck">--%>
                     <asp:Repeater ID="shopRepeater" runat="server" OnItemCommand="shopRepeater_ItemCommand">
                         <ItemTemplate>
-                            <%--                                    <div class="col-4 card">
-                                        <div class="card-body justify-content-center text-center" style="padding-bottom: 1px;">
-                                            <h5 class="card-title"><%# Eval("Name") %></h5>
-                                            <img src="<%# Eval("Image") %>" class="rounded-circle" width="128" height="128" />
-                                            <p class="card-text text-truncate"><%# Eval("Description") %></p>
-                                            <hr />
-                                            <p class="text-muted" style="font-family: Courier New, Courier, monospace; font-size: xx-large">$AR <%# Eval("Price") %></p>
-                                            <hr />
-                                            <asp:LinkButton runat="server" CssClass="btn btn-primary btn-sm" Text="Adquirir" CommandName="AddToCart" CommandArgument='<%# Eval("id") %>' />
-                                            <asp:LinkButton runat="server" CssClass="btn btn-primary btn-sm" Text="Ver detalle" CommandName="ShowDetail" CommandArgument='<%# Eval("id") %>' />
-                                            <div class="row text-left " style="padding-top: 20px;">
-                                                <div class="col">
-                                                    <input type="checkbox" value="<%# Eval("Id") %>" onclick="AddToCompare(this.value)" />Comparar
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>--%>
                             <div class="col-3 border border-secondary bg-light rounded m-1">
-                                <div class="row justify-content-center text-center pb-3">
+                                <div class="row justify-content-center text-center pb-3 pt-3">
                                     <div class="col">
-                                        <img src="<%# Eval("Image") %>" class="rounded-circle" width="128" height="128" />
+                                        <img src="<%# Eval("Image") %>" class="img-thumbnail" />
                                     </div>
                                 </div>
                                 <h5><%# Eval("Name") %></h5>
                                 <blockquote class="blockquote">
-                                    <p class="mb-1 mt-2" style="font-size:14px;">
+                                    <p class="mb-1 mt-2 text-truncate" style="font-size: 14px;">
                                         <%# Eval("Description") %>
                                     </p>
-                                    <footer class="blockquote-footer">
-                                        $AR <%# Eval("Price") %>
+                                    <footer class="blockquote-footer mkcLetraNaranja">
+                                        <i class="fa fa-tags"></i>$AR <%# Eval("Price") %>
                                     </footer>
                                 </blockquote>
                                 <div class="form-group">

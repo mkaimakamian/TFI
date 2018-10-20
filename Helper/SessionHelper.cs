@@ -38,7 +38,7 @@ namespace Helper
         /// </summary>
         public static void EndSession()
         {
-            sessionState.Remove("SessionCreated");
+            if (GetUserFromSession() != null) sessionState.Remove("SessionCreated");
         }
 
         /// <summary>

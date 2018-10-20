@@ -45,10 +45,23 @@ namespace Ubiquicity.UserControls
             //super turbio: almaceno el id para saber, al momento de comentar, a qué producto le pertenece.
             btnComentar.CommandArgument = map.Id.ToString();
             this.title = map.Name;
-            this.message = map.Description;
+            //this.message = map.Description;
+            PopulateItemDetail(map);
             Page.ClientScript.RegisterStartupScript(this.GetType(), "openModalItemShop", "window.onload = function() { $('#ucModalItemShop').modal('show'); }", true);
         }
 
+        private void PopulateItemDetail(Map map)
+        {
+            imgItem.Src = map.Image;
+            descriptionItem.InnerText = map.Description;
+            priceItem.InnerHtml = "<i class=\"fa fa-tags\"></i> $AR " + map.Price.ToString();
+        }
+
+        /// <summary>
+        /// Recupera todos los comentarios para el producto cuyo detalle se quiere ver.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <returns></returns>
         private List<ItemComment> GetComments(Map map)
         {
             try
@@ -58,7 +71,7 @@ namespace Ubiquicity.UserControls
             }
             catch(Exception exception)
             {
-
+                //TODO - Agregar control de error
             }
 
             return null;
@@ -83,6 +96,7 @@ namespace Ubiquicity.UserControls
                 commentManager.Save(itemComment);
             }catch
             {
+                //TODO - agregar control de error
                 //((front)Master).Alert.Show("Exception", exception.Message);
             }
         }

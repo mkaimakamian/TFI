@@ -13,7 +13,24 @@
                 <div class="row">
                     <!-- Descripcion del producto -->
                     <div id="ucModalItemShopMessage" runat="server" class="col-6">
-                        XXXX
+                        
+   <%--                     <div class="col-3 border border-secondary bg-light rounded m-1">--%>
+                            <div class="row justify-content-center text-center pb-3 pt-3">
+                                <div class="col">
+                                    <img id="imgItem" runat="server" class="img-thumbnail" />
+                                </div>
+                            </div>
+                            <%--<h5><%# Eval("Name") %></h5>--%>
+                            <blockquote class="blockquote">
+                                <p id="descriptionItem" runat="server" class="mb-1 mt-2" style="font-size: 14px;">
+                                </p>
+                                <footer id="priceItem" runat="server" class="blockquote-footer mkcLetraNaranja">
+                                </footer>
+                            </blockquote>
+
+<%--                        </div>--%>
+
+
                     </div>
 
                     <!-- Comentarios del producto -->

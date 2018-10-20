@@ -18,7 +18,7 @@
     <div class="row">
         <div class="form-group col">
             <label for="nameInput">Nombre</label>
-            <input id="nameInput" runat="server" type="text" class="form-control form-control-sm" placeholder="Ingresá el nombre">
+            <input id="nameInput" runat="server" type="text" class="form-control form-control-sm" maxlength="50">
         </div>
         <div class="form-group col">
             <label for="dropCategoryInput">Categoría</label>
@@ -28,7 +28,8 @@
     <div class="row">
         <div class="form-group col-8">
             <label for="descriptionInput">Descripción</label>
-            <textarea id="descriptionInput" runat="server" class="form-control form-control-sm" rows="6"></textarea>
+            <textarea id="descriptionInput" runat="server" class="form-control form-control-sm" 
+                rows="6" maxlength="250"></textarea>
         </div>
         <div class="form-group col-4">
             <label for="imageInput">Thumbnail imagen</label>
