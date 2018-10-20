@@ -13,22 +13,34 @@
     }
 </script>
 
+
 <div class="modal-body">
-    <div class="row justify-content-center">
-        <div class="form-group col-12">
+        <div class="row">
+        <div class="form-group col">
             <label for="nameInput">Nombre</label>
             <input id="nameInput" runat="server" type="text" class="form-control form-control-sm" placeholder="Ingresá el nombre">
         </div>
+           <div class="form-group col">
+            <label for="dropCategoryInput">Categoría</label>
+            <asp:DropDownList ID="dropCategoryInput" runat="server" Font-Size="Small" CssClass="dropdown-toggle form-control form-control-sm"/>
+        </div>
+        </div>
+    <div class="row justify-content-center">
+<%--        <div class="form-group col-12">
+            <label for="nameInput">Nombre</label>
+            <input id="nameInput" runat="server" type="text" class="form-control form-control-sm" placeholder="Ingresá el nombre">
+        </div>--%>
         <div class="form-group col-8">
             <label for="descriptionInput">Descripción</label>
             <textarea id="descriptionInput" runat="server" class="form-control form-control-sm" rows="6"></textarea>
         </div>
         <div class="form-group col-4">
-            <label for="imageInput">Imagen</label>
-            <img id="mapFileImage" runat="server" width="128" />
+            <label for="imageInput">Thumbnail imagen</label>
+            <img id="mapFileImage" runat="server" width="128" class="img-fluid img-thumbnail"/>
 
         </div>
         <div class="form-group col-12">
+            <label for="imageInput">Imagen ilustrativa</label>
             <input id="imageInput" runat="server" type="file" onchange="readURL(this)">
             <input id="imageInputBase64" runat="server" type="hidden">
         </div>

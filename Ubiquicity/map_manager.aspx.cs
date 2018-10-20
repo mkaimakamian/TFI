@@ -26,7 +26,9 @@ namespace Ubiquicity
         /// <param name="e"></param>
         protected override void ShowNewForm(object sender, UbiquicityEventArg e)
         {
-            UCFormMap.CleanForm();
+            CategoryManager categoryManager = new CategoryManager();
+            List<Category> categories = categoryManager.Get();
+            UCFormMap.CleanForm(categories);
             Session["Ubiquicity_action"] = CREATE;
             Page.ClientScript.RegisterStartupScript(this.GetType(), "openModalCreate", "window.onload = function() { $('#modalMap').modal('show'); }", true);
         }

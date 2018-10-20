@@ -26,6 +26,7 @@ namespace Ubiquicity
         /// <param name="e"></param>
         protected override void ShowNewForm(object sender, UbiquicityEventArg e)
         {
+            // TODO - Agregar control de error
             CategoryManager newsCategoryManager = new CategoryManager();
             List<Category> newsCategories = newsCategoryManager.Get();
             UCFormNews.CleanForm(newsCategories);

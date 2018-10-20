@@ -16,8 +16,13 @@ namespace Ubiquicity.UserControls
 
         }
 
-        public void CleanForm()
+        public void CleanForm(List<Category> categories)
         {
+            dropCategoryInput.DataTextField = "Name";
+            dropCategoryInput.DataValueField = "Id";
+            dropCategoryInput.DataSource = categories;
+            dropCategoryInput.DataBind();
+
             nameInput.Value = "";
             descriptionInput.Value = "";
             mapFileImage.Src = "";
@@ -28,6 +33,7 @@ namespace Ubiquicity.UserControls
         public void FillForm(Map map)
         {
             nameInput.Value = map.Name;
+            //dropCategoryInput.SelectedValue = map.Category.Id.ToString();
             descriptionInput.Value = map.Description;
             mapFileImage.Src = map.Image;
             imageInputBase64.Value = map.Image;

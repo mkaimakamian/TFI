@@ -21,11 +21,11 @@
         </div>
         <div class="form-group col-8">
             <label for="bodyInput">Cuerpo</label>
-            <textarea id="bodyInput" runat="server" class="form-control form-control-sm" rows="10"></textarea>
+            <textarea id="bodyInput" runat="server" class="form-control form-control-sm" rows="6"></textarea>
         </div>
         <div class="form-group col-4">
             <label for="imageInput">Imagen</label>
-            <img id="fileImage" runat="server" width="200" />
+            <img id="fileImage" runat="server" width="200" class="img-fluid img-thumbnail"/>
         </div>
         <div class="form-group col-12">
             <input id="imageInput" runat="server" type="file" onchange="readURL(this)">
@@ -33,7 +33,7 @@
         </div>
         <div class="form-group col-4">
             <label for="dropCategoryInput">Categoría</label>
-            <asp:DropDownList ID="dropCategoryInput" runat="server" cclass="btn btn-secondary dropdown-toggle form-control form-control-sm"/>
+            <asp:DropDownList ID="dropCategoryInput" runat="server" Font-Size="Small" CssClass="dropdown-toggle form-control form-control-sm"/>
         </div>
         <div class="form-group col-4">
             <label for="sinceInput">Activación</label>

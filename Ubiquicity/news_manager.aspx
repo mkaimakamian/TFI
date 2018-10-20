@@ -7,7 +7,7 @@
 
     <!-- Map form -->
     <div id="modalNews" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <UCmkc:UCFormNews runat="server" ID="UCFormNews" />
                 <div class="modal-footer">
