@@ -15,7 +15,7 @@ namespace Ubiquicity.UserControls
 
         }
 
-        public void CleanForm(List<NewsCategory> newsCategories)
+        public void CleanForm(List<Category> newsCategories)
         {
             titleInput.Value = "";
             bodyInput.InnerText = "";

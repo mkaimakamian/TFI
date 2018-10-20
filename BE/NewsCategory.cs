@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BE
 {
-    public class NewsCategory
+    public class Category
     {
         private int id;
         private string name;

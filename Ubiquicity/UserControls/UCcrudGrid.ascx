@@ -9,24 +9,25 @@
 <ContentTemplate>--%>
 
 <asp:GridView ID="gvItem" runat="server" AllowPaging="true" PageSize="10" OnRowDataBound="gvItem_RowDataBound" OnPageIndexChanging="gvItem_PageIndexChanging"
-     OnRowCommand="gvItem_OnRowCommand" class="table table-bordered bs-table table-striped table-sm" Width="100%" >
+     OnRowCommand="gvItem_OnRowCommand" class="table table-bordered bs-table table-striped table-sm mkcGridview" 
+    >
     <Columns>
-        <asp:TemplateField ShowHeader="False">
+        <asp:TemplateField ShowHeader="False" HeaderStyle-Width="100px">
             <ItemTemplate>
                 <asp:LinkButton ID="btnDelete" runat="server" CssClass="btn btn-danger btn-sm" CausesValidation="false" CommandName="DeleteItem" Text="<i class='fa fa-minus' aria-hidden='true'></i> Eliminar" CommandArgument='<%# Eval("id") %>'/>
             </ItemTemplate>
         </asp:TemplateField>
-        <asp:TemplateField ShowHeader="False">
+        <asp:TemplateField ShowHeader="False" HeaderStyle-Width="100px">
             <ItemTemplate>
                 <asp:LinkButton ID="btnEdit" runat="server" CssClass="btn btn-warning btn-sm" CausesValidation="false" CommandName="EditItem" Text="<i class='fa fa-pencil-square-o' aria-hidden='true'></i> Editar" CommandArgument='<%# Eval("id") %>'/>
             </ItemTemplate>
         </asp:TemplateField>
-        <asp:TemplateField ShowHeader="False" Visible="false">
+        <asp:TemplateField ShowHeader="False" Visible="false" HeaderStyle-Width="100px">
             <ItemTemplate>
                 <asp:LinkButton ID="btnGenericAction" runat="server" CssClass="btn btn-primary btn-sm" CausesValidation="false" CommandName="GenericActionItem" CommandArgument='<%# Eval("id") %>'/>
             </ItemTemplate>
         </asp:TemplateField>
-        <asp:TemplateField ShowHeader="False" Visible="false">
+        <asp:TemplateField ShowHeader="False" Visible="false" HeaderStyle-Width="100px">
             <ItemTemplate>
                 <img src="<%# EvalProperty("Image") %>" width="96" height="96" />
             </ItemTemplate>

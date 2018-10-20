@@ -10,7 +10,11 @@ namespace BL
 {
     public class MapManager: BaseManager
     {
-
+        /// <summary>
+        /// Persiste el elemento.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <returns></returns>
         public bool Save(Map map)
         {
             if (!IsValid(map)) return false;
@@ -93,9 +97,12 @@ namespace BL
             foreach (int id in ids) maps.Add(Get(id));
             return maps;
         }
-        
 
-
+        /// <summary>
+        /// Elimina el elemento cuyo id es pasado por parámetro.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public bool Delete(int id)
         {
             MapMapper mapMapprer = new MapMapper();

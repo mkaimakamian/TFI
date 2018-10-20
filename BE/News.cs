@@ -15,7 +15,7 @@ namespace BE
         private DateTime since;
         private DateTime until;
         private bool sent;
-        private NewsCategory category;
+        private Category category;
         private DateTime created;
 
         public int Id
@@ -117,11 +117,11 @@ namespace BE
             }
         }
 
-        public NewsCategory Category
+        public Category Category
         {
             get
             {
-                if (category == null) category = new NewsCategory();
+                if (category == null) category = new Category();
                 return category;
             }
 

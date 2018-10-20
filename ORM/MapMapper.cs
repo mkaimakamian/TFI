@@ -90,6 +90,11 @@ namespace ORM
             return map;
         }
 
+        /// <summary>
+        /// Elimina el elemento del sistema.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public bool Delete(int id)
         {
             Dal dal = new Dal();

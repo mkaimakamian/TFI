@@ -27,8 +27,8 @@ namespace Ubiquicity
         {
             try
             {
-                NewsCategoryManager newsCategoryManager = new NewsCategoryManager();
-                List<NewsCategory> newsCategories = newsCategoryManager.Get();
+                CategoryManager newsCategoryManager = new CategoryManager();
+                List<Category> newsCategories = newsCategoryManager.Get();
                 checksCategoryInput.DataSource = newsCategories;
                 checksCategoryInput.DataTextField = "Name";
                 checksCategoryInput.DataValueField = "Id";

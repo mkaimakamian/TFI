@@ -2,9 +2,27 @@
    background-color:#434c6d;
 }
 
-/*.headerBackOffice {
-    margin-bottom:100px;
-}*/
+.mkcGridview {
+    width: 100%; 
+    word-wrap:break-word;
+    /*table-layout: fixed;*/
+}
+
+.mkcMenu{
+    background-color:#4e587e;
+}
+
+.mkcLetraGris {
+    color:dimgrey;
+}
+
+.mkcLetraGrisClaro {
+    color:darkgrey;
+}
+
+.mkcLetraNaranja {
+    color:#ffc107;
+}
 
 .btn-primary {
     background-color:#909abb;
@@ -20,41 +38,7 @@
    background-color:#434c6d;
 }*/
 
-.mkcMenu{
-    background-color:#4e587e;
-}
 
-/*.mkcMenuItem{
-    color: #fefefe;
-}
-
-.mkcMenuItemHover {
-    color: #ffc107;
-}*/
-
-/*.mkcColorNews {
-   border-color:#434c6d;
-}*/
-
-/*.mkcColorFooter {
-   background-color:#3e3e3e;
-}*/
-
-/*.mkcIndexCarrousel {
-   background-color:#8e7a89;
-}*/
-
-.mkcLetraGris {
-    color:dimgrey;
-}
-
-.mkcLetraGrisClaro {
-    color:darkgrey;
-}
-
-.mkcLetraNaranja {
-    color:#ffc107;
-}
 
 html, body {
     background-color:#fefefe;

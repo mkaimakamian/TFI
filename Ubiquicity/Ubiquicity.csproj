@@ -80,6 +80,7 @@
     <Content Include="approval_manager.aspx" />
     <Content Include="backup_manager.aspx" />
     <Content Include="business_manager.aspx" />
+    <Content Include="category_manager.aspx" />
     <Content Include="contact.aspx" />
     <Content Include="credit_manager.aspx" />
     <Content Include="dashboard.aspx" />
@@ -194,6 +195,7 @@
     <Content Include="UserControls\sub\UCCalendar.ascx" />
     <Content Include="UserControls\UCCompareGrid.ascx" />
     <Content Include="UserControls\sub\UCCompareItem.ascx" />
+    <Content Include="UserControls\UCFormCategory.ascx" />
     <Content Include="UserControls\UCFormMap.ascx" />
     <Content Include="UserControls\UCFormNews.ascx" />
     <Content Include="UserControls\UCFormPassword.ascx" />
@@ -252,6 +254,13 @@
     </Compile>
     <Compile Include="business_manager.aspx.designer.cs">
       <DependentUpon>business_manager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="category_manager.aspx.cs">
+      <DependentUpon>category_manager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="category_manager.aspx.designer.cs">
+      <DependentUpon>category_manager.aspx</DependentUpon>
     </Compile>
     <Compile Include="Classes\BaseManager.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -440,6 +449,13 @@
     </Compile>
     <Compile Include="UserControls\sub\UCCompareItem.ascx.designer.cs">
       <DependentUpon>UCCompareItem.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCFormCategory.ascx.cs">
+      <DependentUpon>UCFormCategory.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCFormCategory.ascx.designer.cs">
+      <DependentUpon>UCFormCategory.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\UCFormMap.ascx.cs">
       <DependentUpon>UCFormMap.ascx</DependentUpon>

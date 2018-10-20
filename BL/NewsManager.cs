@@ -61,7 +61,7 @@ namespace BL
 
         public List<News> GetByCategory(int[] categoriesId)
         {
-            NewsCategoryManager newscategoryManager = new NewsCategoryManager();
+            CategoryManager newscategoryManager = new CategoryManager();
             NewsMapper newsMapper = new NewsMapper();
             List<News> newsList = new List<News>();
 
@@ -74,7 +74,7 @@ namespace BL
             }
 
 
-            Dictionary<int, NewsCategory> newsCategories = newscategoryManager.GetDictinoray();
+            Dictionary<int, Category> newsCategories = newscategoryManager.GetDictinoray();
 
             foreach (News news in newsList)
             {
@@ -93,8 +93,8 @@ namespace BL
             NewsMapper newsMapper = new NewsMapper();
             List<News> newsList = newsMapper.Get();
 
-            NewsCategoryManager newscategoryManager = new NewsCategoryManager();
-            Dictionary<int, NewsCategory> newsCategories = newscategoryManager.GetDictinoray();
+            CategoryManager newscategoryManager = new CategoryManager();
+            Dictionary<int, Category> newsCategories = newscategoryManager.GetDictinoray();
 
             foreach (News news in newsList)
             {

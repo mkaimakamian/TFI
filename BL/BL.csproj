@@ -70,7 +70,7 @@
     <Compile Include="LanguageManager.cs" />
     <Compile Include="LogManager.cs" />
     <Compile Include="NewsAddresseeManager.cs" />
-    <Compile Include="NewsCategoryManager.cs" />
+    <Compile Include="CategoryManager.cs" />
     <Compile Include="NewsManager.cs" />
     <Compile Include="PaymentMethod.cs" />
     <Compile Include="RoleManager.cs" />

@@ -26,8 +26,8 @@ namespace Ubiquicity
         /// <param name="e"></param>
         protected override void ShowNewForm(object sender, UbiquicityEventArg e)
         {
-            NewsCategoryManager newsCategoryManager = new NewsCategoryManager();
-            List<NewsCategory> newsCategories = newsCategoryManager.Get();
+            CategoryManager newsCategoryManager = new CategoryManager();
+            List<Category> newsCategories = newsCategoryManager.Get();
             UCFormNews.CleanForm(newsCategories);
             Session["Ubiquicity_action"] = CREATE;
             Page.ClientScript.RegisterStartupScript(this.GetType(), "openModalCreate", "window.onload = function() { $('#modalNews').modal('show'); }", true);
@@ -60,8 +60,8 @@ namespace Ubiquicity
             }
             else
             {
-                NewsCategoryManager newsCategoryManager = new NewsCategoryManager();
-                List<NewsCategory> newsCategories = newsCategoryManager.Get();
+                CategoryManager newsCategoryManager = new CategoryManager();
+                List<Category> newsCategories = newsCategoryManager.Get();
                 UCFormNews.CleanForm(newsCategories);
                 UCFormNews.FillForm(news);
                 Session["Ubiquicity_action"] = EDIT;
