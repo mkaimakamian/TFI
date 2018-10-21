@@ -70,7 +70,7 @@
 
             <!-- Menu permisos -->
             <div class="row">
-                <div id="menuDiv" runat="server" class="col-2 mkcMenu" style="display: none">
+                <div class="col-2 mkcMenu" id="menuDiv" runat="server" style="display: none">
                     <asp:Menu ID="mnuSection" runat="server" MaximumDynamicDisplayLevels="2" Orientation="Vertical"
                         SkipLinkText="" StaticMenuItemStyle-ForeColor="#fefefe" StaticHoverStyle-ForeColor="#ffc107">
                     </asp:Menu>

@@ -9,11 +9,11 @@
         <input id="descriptionInput" runat="server" type="text" class="form-control form-control-sm">
     </div>
     <div class="form-group col">
-        <label for="minInput">Desde</label>
+        <label for="minInput">Montó mínimo</label>
         <input id="minInput" runat="server" type="text" class="form-control form-control-sm">
     </div>
     <div class="form-group col">
-        <label for="maxInput">Hasta</label>
+        <label for="maxInput">Monto máximo</label>
         <input id="maxInput" runat="server" type="text" class="form-control form-control-sm">
     </div>
 
