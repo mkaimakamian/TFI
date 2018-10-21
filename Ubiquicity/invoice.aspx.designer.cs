@@ -31,6 +31,24 @@ namespace Ubiquicity {
         protected global::System.Web.UI.WebControls.Repeater checkoutRepeater;
         
         /// <summary>
+        /// creditNotesChk control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox creditNotesChk;
+        
+        /// <summary>
+        /// cardChk control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cardChk;
+        
+        /// <summary>
         /// checkCreditNotes control.
         /// </summary>
         /// <remarks>
@@ -40,13 +58,67 @@ namespace Ubiquicity {
         protected global::System.Web.UI.WebControls.CheckBoxList checkCreditNotes;
         
         /// <summary>
-        /// checkCard control.
+        /// dropCardInput control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBoxList checkCard;
+        protected global::System.Web.UI.WebControls.DropDownList dropCardInput;
+        
+        /// <summary>
+        /// passwordInput control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText passwordInput;
+        
+        /// <summary>
+        /// UCCalendar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ubiquicity.UserControls.UCCalendar UCCalendar;
+        
+        /// <summary>
+        /// card1Input control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText card1Input;
+        
+        /// <summary>
+        /// card2Input control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText card2Input;
+        
+        /// <summary>
+        /// card3Input control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText card3Input;
+        
+        /// <summary>
+        /// card4Input control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText card4Input;
         
         /// <summary>
         /// btnCheckout control.

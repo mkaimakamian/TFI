@@ -44,7 +44,7 @@
                     <div class="form-group col-12">
                         <label for="cartBtn">¿Terminaste de agregar? <br />¡Pasemos al pago!</label>
                         <asp:LinkButton ID="cartBtn" runat="server" CssClass="btn btn-warning btn-sm"
-                            Text="<i class='fa fa-tags' aria-hidden='true'></i> Sin elementos"
+                            Text="<i class='fa fa-tags' aria-hidden='true'></i> Comprar"
                             OnClick="GoToInvoice" />
                     </div>
 
@@ -62,12 +62,12 @@
                 <div class="row">
                     <asp:Repeater ID="shopRepeater" runat="server" OnItemCommand="shopRepeater_ItemCommand">
                         <ItemTemplate>
-                            <div class="col-2 border border bg-light rounded p-1 m-1">
-                                <div class="row pb-1">
-                                    <div class="col">
+                            <div class="border rounded bg-light p-1 m-1" style="width: 240px;">
+                          <%--      <div class="row pb-1">
+                                    <div class="col">--%>
                                         <img src="<%# Eval("Image") %>" class="img-thumbnail"/>
-                                    </div>
-                                </div>
+                    <%--                </div>
+                                </div>--%>
                                 <h5><%# Eval("Name") %></h5>
                                 <blockquote class="blockquote">
                                     <p class="mb-1 mt-2 text-truncate" style="font-size: 14px;">

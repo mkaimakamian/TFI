@@ -48,10 +48,10 @@ namespace Ubiquicity
             try
             {
                 InvoiceManager invoiceManager = new InvoiceManager();
-                checkCard.DataSource = invoiceManager.GetCreditCards();
-                checkCard.DataTextField = "Name";
-                checkCard.DataValueField = "Id";
-                checkCard.DataBind();
+                dropCardInput.DataSource = invoiceManager.GetCreditCards();
+                dropCardInput.DataTextField = "Name";
+                dropCardInput.DataValueField = "Id";
+                dropCardInput.DataBind();
             }
             catch (Exception exception)
             {
