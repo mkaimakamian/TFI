@@ -72,8 +72,8 @@ namespace BL
 
         public override bool IsValid()
         {
-            //Las condiciones de validación se dan todas porque como precondición, 
-            //se requieren únicamente los ids de las notas de crédito afectadas.
+            //Como precondición, los ids de las notas de crédito pertenecen a aquellas válidas
+            //por lo que no hace falta constatar nada.
             return true;
         }
 

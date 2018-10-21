@@ -29,6 +29,11 @@ namespace BL
                 if (paymentMethod.IsValid())
                 {
                     leftAmount = paymentMethod.EstimatePaymentResult(leftAmount);
+                } else
+                {
+                    //Adicionar los errores que devuelve el método
+                    //AddError(paymentMethod.e)
+                    return false;
                 }
             }
 

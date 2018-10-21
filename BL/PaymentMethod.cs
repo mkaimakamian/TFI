@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BL
 {
-    public abstract class PaymentMethod
+    public abstract class PaymentMethod:BaseManager
     {
         /// <summary>
         /// Debe implementar el proceso que permita identificar si el pago puede ser cancelado en su totalidad.

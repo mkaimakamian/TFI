@@ -43,6 +43,9 @@ namespace Ubiquicity
             }
         }
 
+        /// <summary>
+        /// Recupera del sistema, todas las tarjetas disponibles.
+        /// </summary>
         private void LoadCreditCards()
         {
             try
@@ -60,7 +63,7 @@ namespace Ubiquicity
         }
 
         /// <summary>
-        /// Recupera los artículos que el usuario seleccionó para su selección.
+        /// Recupera los artículos que el usuario seleccionó para la compra.
         /// </summary>
         /// <param name="itemsId"></param>
         private void LoadItemsShop(int[] itemsId)
@@ -88,25 +91,37 @@ namespace Ubiquicity
         {
             try
             {
-                int[] creditNoteIds = GetCreditNotesIds();
-                int[] cardIds = GetCardIds();
-                int[] itemsIds = ShopHelper.GetItemsId();
+                InvoiceManager invoiceManager = new InvoiceManager();
 
                 //Debería ser el manager de recursos
                 MapManager mapManager = new MapManager();
-                List<Map> maps = mapManager.GetBySeveralIds(itemsIds);
+                List<Map> maps = mapManager.GetBySeveralIds(ShopHelper.GetItemsId());
 
                 // Cada método de pago implementa el modo de llevar adelante la operación.
                 List<PaymentMethod> paymenMethods = new List<PaymentMethod>();
-                paymenMethods.Add(new CreditNotePayment(creditNoteIds));
-                //paymenMethods.Add(new CardPayment(cardIds));
 
-                InvoiceManager invoiceManager = new InvoiceManager();
+                //Se eligió tarjeta de crédito
+                if(cardChk.Checked)
+                {
+                    CreditCard creditCard = GetCreditCard();
+                    paymenMethods.Add(new CardPayment(creditCard));
+                }
+
+                //Se elijió notas de crédito
+                if (creditNotesChk.Checked)
+                {
+                    int[] creditNoteIds = GetCreditNotesIds();
+                    paymenMethods.Add(new CreditNotePayment(creditNoteIds));
+                }
+
                 bool success = invoiceManager.ProcessPayment(maps, paymenMethods, SessionHelper.GetUserFromSession());
 
                 if (!success && invoiceManager.HasErrors)
                 {
                     ((front)Master).Alert.Show("Error", invoiceManager.ErrorDescription);
+                } else
+                {
+                    ((front)Master).Alert.Show("Éxito", "Felicitaciones, la operación se realizó con éxito.");
                 }
 
             } catch (Exception exception)
@@ -133,10 +148,20 @@ namespace Ubiquicity
             return creditNoteIds;
         }
 
-        private int[] GetCardIds()
+        /// <summary>
+        /// Modela los datos sobre la tarjeta de crédito y devuelve un objeto.
+        /// </summary>
+        /// <returns></returns>
+        private CreditCard GetCreditCard()
         {
-            //TODO  completar con la tarjeta de crédito
-           return new int[]{ };
+            CreditCard creditCard = new CreditCard();
+            creditCard.Cvv = Convert.ToInt32(cvvInput.Value);
+            creditCard.Field1 = Convert.ToInt32(card1Input.Value);
+            creditCard.Field2 = Convert.ToInt32(card2Input.Value);
+            creditCard.Field3 = Convert.ToInt32(card3Input.Value);
+            creditCard.Field4 = Convert.ToInt32(card4Input.Value);
+            creditCard.DueDate = Convert.ToDateTime(duedateInput.Date);
+            return creditCard;
         }
     }
 }

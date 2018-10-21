@@ -73,12 +73,12 @@
                                 <asp:DropDownList ID="dropCardInput" runat="server" Font-Size="Small" CssClass="dropdown-toggle form-control form-control-sm" />
                             </div>
                             <div class="form-group col-3">
-                                <label for="commentInput">Código</label>
-                                <input id="passwordInput" runat="server" type="text" class="form-control form-control-sm">
+                                <label for="cvvInput">Código</label>
+                                <input id="cvvInput" runat="server" type="text" class="form-control form-control-sm">
                             </div>
                             <div class="form-group">
-                                <label for="commentInput">Vencimiento</label>
-                                <UCmkc:UCCalendar runat="server" ID="UCCalendar" />
+                                <label for="duedateInput">Vencimiento</label>
+                                <UCmkc:UCCalendar runat="server" ID="duedateInput" />
                             </div>
                         </div>
                         <div class="row pb-2">

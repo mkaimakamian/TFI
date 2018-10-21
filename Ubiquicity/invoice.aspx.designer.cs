@@ -67,22 +67,22 @@ namespace Ubiquicity {
         protected global::System.Web.UI.WebControls.DropDownList dropCardInput;
         
         /// <summary>
-        /// passwordInput control.
+        /// cvvInput control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText passwordInput;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText cvvInput;
         
         /// <summary>
-        /// UCCalendar control.
+        /// duedateInput control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ubiquicity.UserControls.UCCalendar UCCalendar;
+        protected global::Ubiquicity.UserControls.UCCalendar duedateInput;
         
         /// <summary>
         /// card1Input control.
