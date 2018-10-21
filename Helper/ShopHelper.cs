@@ -35,9 +35,9 @@ namespace Helper
         /// <returns></returns>
         public static int GetQuantity()
         {
-           return GetSessionState().Count();
+            return GetSessionState() != null ? GetSessionState().Count() : 0;
         }
-     
+
         /// <summary>
         /// Devuelve un array de int con lo ids de los productos seleccionados
         /// </summary>

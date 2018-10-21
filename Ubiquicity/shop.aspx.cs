@@ -15,7 +15,6 @@ namespace Ubiquicity
         protected void Page_Load(object sender, EventArgs e)
         {
             UCItemShopFilter.ShopRepeater = shopRepeater;
-
         }
 
         /// <summary>
@@ -34,7 +33,13 @@ namespace Ubiquicity
         /// </summary>
         private void UpdateCartButton()
         {
-            cartBtn.Text = "<i class='fa fa-tags' aria-hidden='true'></i> Elementos: " + ShopHelper.GetQuantity();
+            //if (SessionHelper.IsSessionAlive())
+            //{
+                cartBtn.Text = "<i class='fa fa-tags' aria-hidden='true'></i> Elementos: " + ShopHelper.GetQuantity();
+            //} else
+            //{
+            //    cartBtn.Visible = false;
+            //}
         }
 
 
@@ -81,6 +86,9 @@ namespace Ubiquicity
             {
                 int id = Convert.ToInt32(e.CommandArgument);
 
+                MapManager mapManager = new MapManager();
+                Map map = mapManager.Get(id);
+
                 if (e.CommandName == "AddToCart")
                 {
                     ShopHelper.AddToCart(id, Session);
@@ -88,9 +96,6 @@ namespace Ubiquicity
                 }
                 else if (e.CommandName == "ShowDetail")
                 {
-                    
-                    MapManager mapManager = new MapManager();
-                    Map map = mapManager.Get(id);
                     ModalItemShop.Show(map);
                 }
             }

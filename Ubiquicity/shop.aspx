@@ -35,22 +35,23 @@
             <!-- Comparar, comprar y resumen -->
             <div class="col-2 text-center">
                 <div class="row border rounded mt-1">
-                    <div class="form-group col bg-light pb-2">
+                    <div class="form-group col-12 bg-light pb-2">
                         <label for="compareBtn">Seleccioná hasta 4 ítems para compararlos.</label>
                         <asp:LinkButton ID="compareBtn" runat="server" CssClass="btn btn-primary btn-sm" Text="<i class='fa fa-clone' aria-hidden='true'></i> Comparar" OnClick="PerformCompare" />
                         <input id="selectedItemsInput" type="hidden" runat="server" />
                     </div>
 
-                    <div class="form-group col">
-                        <label for="cartBtn">¿Terminaste de agregar ítems? presiona en éste botón para realizar el checkout.</label>
+                    <div class="form-group col-12">
+                        <label for="cartBtn">¿Terminaste de agregar? <br />¡Pasemos al pago!</label>
                         <asp:LinkButton ID="cartBtn" runat="server" CssClass="btn btn-warning btn-sm"
                             Text="<i class='fa fa-tags' aria-hidden='true'></i> Sin elementos"
                             OnClick="GoToInvoice" />
                     </div>
 
-                    <div class="form-group col">
+                    <div class="form-group col-12">
                         <hr />
-                        <label >Esto es lo que has comprado hasta el momento...</label>
+                        <label>Vistazo rápido</label>
+                        
                     </div>
                 </div>
             </div>
@@ -64,7 +65,7 @@
                             <div class="col-2 border border bg-light rounded p-1 m-1">
                                 <div class="row pb-1">
                                     <div class="col">
-                                        <img src="<%# Eval("Image") %>" class="img-thumbnail" />
+                                        <img src="<%# Eval("Image") %>" class="img-thumbnail"/>
                                     </div>
                                 </div>
                                 <h5><%# Eval("Name") %></h5>
@@ -77,8 +78,8 @@
                                     </footer>
                                 </blockquote>
                                 <div class="form-group text-center">
-                                    <asp:LinkButton runat="server" CssClass="btn btn-primary btn-sm" Text="Adquirir" CommandName="AddToCart" CommandArgument='<%# Eval("id") %>' />
-                                    <asp:LinkButton runat="server" CssClass="btn btn-primary btn-sm" Text="Ver detalle" CommandName="ShowDetail" CommandArgument='<%# Eval("id") %>' />
+                                    <asp:LinkButton runat="server" CssClass="btn btn-primary btn-sm" Text="¡Lo quiero!" CommandName="AddToCart" CommandArgument='<%# Eval("id") %>' />
+                                    <asp:LinkButton runat="server" CssClass="btn btn-primary btn-sm" Text="Detalle" CommandName="ShowDetail" CommandArgument='<%# Eval("id") %>' />
                                 </div>
 
                                 <input type="checkbox" value="<%# Eval("Id") %>" onclick="AddToCompare(this.value)" />Comparar
