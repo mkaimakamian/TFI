@@ -69,7 +69,7 @@
 
                         <div class="row">
                             <div class="form-group col">
-                                <label for="dropCategoryInput">Banco</label>
+                                <label for="dropCardInput">Banco</label>
                                 <asp:DropDownList ID="dropCardInput" runat="server" Font-Size="Small" CssClass="dropdown-toggle form-control form-control-sm" />
                             </div>
                             <div class="form-group col-3">

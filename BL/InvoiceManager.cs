@@ -31,8 +31,7 @@ namespace BL
                     leftAmount = paymentMethod.EstimatePaymentResult(leftAmount);
                 } else
                 {
-                    //Adicionar los errores que devuelve el método
-                    //AddError(paymentMethod.e)
+                    AddError(paymentMethod.Errors);
                     return false;
                 }
             }
@@ -49,7 +48,7 @@ namespace BL
 
                 //Crear invoice
                 //Crear PDF
-                CreateInvoicePDF(resources);
+                //CreateInvoicePDF(resources);
 
                     return true;
             } else
@@ -76,25 +75,5 @@ namespace BL
             //pdf.Save(pathOUT);
         }
 
-        /// <summary>
-        /// Devuelve el listado con el tipo de tarjetas disponibles.
-        /// </summary>
-        /// <returns></returns>
-        public List<CreditCardType> GetCreditCards()
-        {
-            //MOCK
-            List<CreditCardType> creditCards = new List<CreditCardType>();
-            CreditCardType creditCard = new CreditCardType();
-            creditCard.Name = "Visa";
-            creditCard.Prefix = 325;
-            creditCards.Add(creditCard);
-
-            creditCard = new CreditCardType();
-            creditCard.Name = "Master";
-            creditCard.Prefix = 369;
-            creditCards.Add(creditCard);
-
-            return creditCards;
-        }
     }
 }

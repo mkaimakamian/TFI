@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BE;
+using ORM;
 
 namespace BL
 {
@@ -91,7 +92,25 @@ namespace BL
                 isValid = false;
             }
 
-            //TODO - Comparar contra las tarjetas bloqueadas
+            // Control de validez de la tarjeta
+            CreditCardMapper creditCardMapper = new CreditCardMapper();
+
+            if (!creditCardMapper.IsValidPrefix(creditCard))
+            {
+                string errorDescription = "El emisor de la tarjeta no se corresponde con el declarado.";
+                log.AddLogCritical("IsValid", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.FAIL, errorDescription));
+                isValid = false;
+            }
+
+            if (creditCardMapper.IsInBlackList(creditCard))
+            {
+                string errorDescription = "La tarjeta actual no puede utilizarse porque está anulada.";
+                log.AddLogCritical("IsValid", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.FAIL, errorDescription));
+                isValid = false;
+            }
+    
             return isValid;
         }
     }

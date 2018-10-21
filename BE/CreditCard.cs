@@ -14,6 +14,7 @@ namespace BE
         private int field4;
         private DateTime dueDate;
         private int cvv;
+        private CreditCardType creditCardType;
 
         public int Field1
         {
@@ -90,6 +91,20 @@ namespace BE
             set
             {
                 cvv = value;
+            }
+        }
+
+        public CreditCardType CreditCardType
+        {
+            get
+            {
+                if (creditCardType == null) creditCardType = new CreditCardType();
+                return creditCardType;
+            }
+
+            set
+            {
+                creditCardType = value;
             }
         }
     }

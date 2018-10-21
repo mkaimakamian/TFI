@@ -62,6 +62,7 @@
     <Compile Include="BackupManager.cs" />
     <Compile Include="BaseManager.cs" />
     <Compile Include="CardPayment.cs" />
+    <Compile Include="CreditCardManager.cs" />
     <Compile Include="CreditNoteManager.cs" />
     <Compile Include="CreditNotePayment.cs" />
     <Compile Include="InvoiceManager.cs" />

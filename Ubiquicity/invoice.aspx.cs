@@ -50,8 +50,8 @@ namespace Ubiquicity
         {
             try
             {
-                InvoiceManager invoiceManager = new InvoiceManager();
-                dropCardInput.DataSource = invoiceManager.GetCreditCards();
+                CreditCardManager creditCardManager = new CreditCardManager();
+                dropCardInput.DataSource = creditCardManager.Get();
                 dropCardInput.DataTextField = "Name";
                 dropCardInput.DataValueField = "Id";
                 dropCardInput.DataBind();
@@ -161,6 +161,7 @@ namespace Ubiquicity
             creditCard.Field3 = Convert.ToInt32(card3Input.Value);
             creditCard.Field4 = Convert.ToInt32(card4Input.Value);
             creditCard.DueDate = Convert.ToDateTime(duedateInput.Date);
+            creditCard.CreditCardType.Id = Convert.ToInt32(dropCardInput.SelectedValue);
             return creditCard;
         }
     }

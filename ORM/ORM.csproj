@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BackupMapper.cs" />
+    <Compile Include="CreditCardMapper.cs" />
     <Compile Include="CreditNoteMapper.cs" />
     <Compile Include="ItemCommenMapper.cs" />
     <Compile Include="LabelMapper.cs" />

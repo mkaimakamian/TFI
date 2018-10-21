@@ -19,6 +19,7 @@ namespace Ubiquicity.UserControls
             if (!IsPostBack)
             {
                 LoadCategories();
+                PerformSearch(null, null);
             }
         }
 

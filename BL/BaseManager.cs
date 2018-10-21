@@ -56,5 +56,10 @@ namespace BL
         {
             Errors.Add(error);
         }
+
+        protected void AddError(List<ResultBE> errors)
+        {
+            Errors.AddRange(errors);
+        }
     }
 }
