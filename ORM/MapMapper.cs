@@ -100,6 +100,32 @@ namespace ORM
             return map;
         }
 
+        public List<Map> Get(List<QueryFilter> filters)
+        {
+            Dal dal = new Dal();
+            Hashtable table = new Hashtable();
+            List<Map> maps = null;
+
+            foreach (QueryFilter qf in filters)
+            {
+                table.Add(qf.Key, qf.Value);
+            }
+
+            DataSet result = dal.Read(table, "spReadMap");
+
+            if (result != null && result.Tables[0].Rows.Count > 0)
+            {
+                maps = new List<Map>();
+
+                foreach (DataRow data in result.Tables[0].Rows)
+                {
+                    maps.Add(ConvertToModel(data));
+                }
+            }
+
+            return maps;
+        }
+
         /// <summary>
         /// Elimina el elemento del sistema.
         /// </summary>

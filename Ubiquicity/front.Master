@@ -75,7 +75,7 @@
                         SkipLinkText="" StaticMenuItemStyle-ForeColor="#fefefe" StaticHoverStyle-ForeColor="#ffc107">
                     </asp:Menu>
                 </div>
-                <div class="col">
+                <div class="col-10">
                     <!-- contenedor de las páginas -->
                     <asp:ContentPlaceHolder ID="contentHolder" runat="server">
                     </asp:ContentPlaceHolder>

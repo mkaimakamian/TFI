@@ -61,6 +61,7 @@ namespace Ubiquicity
             }
             else
             {
+                //TODO - controlar errores
                 CategoryManager newsCategoryManager = new CategoryManager();
                 List<Category> newsCategories = newsCategoryManager.Get();
                 UCFormNews.CleanForm(newsCategories);

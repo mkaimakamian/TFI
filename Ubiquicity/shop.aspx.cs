@@ -14,23 +14,20 @@ namespace Ubiquicity
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-                LoadRepeater();
-            }
+            UCItemShopFilter.ShopRepeater = shopRepeater;
 
         }
 
         /// <summary>
         /// Carga el repeater con los artículos a mostrar en el shop.
         /// </summary>
-        private void LoadRepeater()
-        {
-            MapManager mapManager = new MapManager();
-            List<Map> maps = mapManager.Get();
-            shopRepeater.DataSource = maps;
-            shopRepeater.DataBind();
-        }
+        //private void LoadRepeater()
+        //{
+        //    MapManager mapManager = new MapManager();
+        //    List<Map> maps = mapManager.Get();
+        //    shopRepeater.DataSource = maps;
+        //    shopRepeater.DataBind();
+        //}
 
         /// <summary>
         /// Actualiza la etiqueta del botón, mostrando las cantidades de los artículos escogidos para comprar.

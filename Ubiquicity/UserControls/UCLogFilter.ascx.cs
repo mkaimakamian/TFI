@@ -18,7 +18,7 @@ namespace Ubiquicity.UserControls
 
         }
 
-        protected void btnSearch_PerformSearch(object sender, EventArgs e)
+        protected void PerformSearch(object sender, EventArgs e)
         {
             List<QueryFilter> filters = new List<QueryFilter>();
 

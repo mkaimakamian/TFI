@@ -15,7 +15,7 @@ namespace Ubiquicity.UserControls
 
         }
 
-        public void CleanForm(List<Category> newsCategories)
+        public void CleanForm(List<Category> categories)
         {
             titleInput.Value = "";
             bodyInput.InnerText = "";
@@ -23,7 +23,7 @@ namespace Ubiquicity.UserControls
             imageInputBase64.Value = "";
             dropCategoryInput.DataTextField = "Name";
             dropCategoryInput.DataValueField = "Id";
-            dropCategoryInput.DataSource = newsCategories;
+            dropCategoryInput.DataSource = categories;
             dropCategoryInput.DataBind();
             sinceInput.Date = DateTime.Now.ToShortDateString();
             untilInput.Date = DateTime.Now.AddDays(1).ToShortDateString();

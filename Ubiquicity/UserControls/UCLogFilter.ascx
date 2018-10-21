@@ -18,18 +18,18 @@
     </div>
     <div class="form-group col-2">
         <label for="dateSince">Desde</label>
-        <UCmkc:UCCalendar id="dateSince" runat="server" />
+        <UCmkc:UCCalendar ID="dateSince" runat="server" />
     </div>
     <div class="form-group col-2">
         <label for="dateUntil">Hasta</label>
-        <UCmkc:UCCalendar id="dateUntil" runat="server" />
+        <UCmkc:UCCalendar ID="dateUntil" runat="server" />
     </div>
     <div class="form-group col-2">
         <label for="inputUser">Usuario</label>
         <input id="inputUser" runat="server" type="text" class="form-control form-control-sm" placeholder="Usuario">
     </div>
     <div class="form-group col-10 align-content-bottom">
-        <button ID="btnSearch" runat="server" class="btn btn-primary btn-sm" onserverclick="btnSearch_PerformSearch" >
-    <i class="fa fa-search" aria-hidden="true"></i> Buscar</button>
+        <button id="btnSearch" runat="server" class="btn btn-primary btn-sm" onserverclick="PerformSearch">
+            <i class="fa fa-search" aria-hidden="true"></i>Buscar</button>
     </div>
 </div>

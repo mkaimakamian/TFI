@@ -203,6 +203,7 @@
     <Content Include="UserControls\UCFormUserRole.ascx" />
     <Content Include="UserControls\UCHeaderBackOffice.ascx" />
     <Content Include="UserControls\UCHeaderWeb.ascx" />
+    <Content Include="UserControls\UCItemShopFilter.ascx" />
     <Content Include="UserControls\UCLogFilter.ascx" />
     <Content Include="UserControls\UCModalCompare.ascx" />
     <Content Include="UserControls\UCModalItemShop.ascx" />
@@ -505,6 +506,13 @@
     </Compile>
     <Compile Include="UserControls\UCHeaderWeb.ascx.designer.cs">
       <DependentUpon>UCHeaderWeb.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCItemShopFilter.ascx.cs">
+      <DependentUpon>UCItemShopFilter.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCItemShopFilter.ascx.designer.cs">
+      <DependentUpon>UCItemShopFilter.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\UCLogFilter.ascx.cs">
       <DependentUpon>UCLogFilter.ascx</DependentUpon>

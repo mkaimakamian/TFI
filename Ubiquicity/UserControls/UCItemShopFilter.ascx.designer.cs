@@ -7,45 +7,63 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Ubiquicity {
+namespace Ubiquicity.UserControls {
     
     
-    public partial class shop {
+    public partial class UCItemShopFilter {
         
         /// <summary>
-        /// UCItemShopFilter control.
+        /// nameInput control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ubiquicity.UserControls.UCItemShopFilter UCItemShopFilter;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText nameInput;
         
         /// <summary>
-        /// shopRepeater control.
+        /// descriptionInput control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater shopRepeater;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText descriptionInput;
         
         /// <summary>
-        /// ModalCompare control.
+        /// minInput control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ubiquicity.UserControls.UCModalCompare ModalCompare;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText minInput;
         
         /// <summary>
-        /// ModalItemShop control.
+        /// maxInput control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ubiquicity.UserControls.UCModalItemShop ModalItemShop;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText maxInput;
+        
+        /// <summary>
+        /// dropCategoryInput control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList dropCategoryInput;
+        
+        /// <summary>
+        /// btnSearch control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnSearch;
     }
 }

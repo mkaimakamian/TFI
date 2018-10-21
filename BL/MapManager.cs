@@ -84,6 +84,12 @@ namespace BL
             return mapMapper.Get();
         }
 
+        public List<Map> Get(List<QueryFilter> filters)
+        {
+            MapMapper mapMapper = new MapMapper();
+            return mapMapper.Get(filters);
+        }
+
         /// <summary>
         /// Recupera los productos cuyos ids son pasados por parámetro.
         /// </summary>
