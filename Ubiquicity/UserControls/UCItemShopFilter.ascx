@@ -23,6 +23,6 @@
     </div>
     <div class="form-group col align-content-bottom">
         <button id="btnSearch" runat="server" class="btn btn-primary btn-sm" onserverclick="PerformSearch">
-            <i class="fa fa-search" aria-hidden="true"></i>Buscar</button>
+            <i class="fa fa-search" aria-hidden="true"></i> Buscar</button>
     </div>
 </div>

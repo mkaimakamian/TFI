@@ -30,28 +30,14 @@
     <div class="container-fluid">
         <UCmkc:UCHeaderWeb runat="server" Label="Catálogo" Imgsource="~/Resources/shop01.svg" />
         <UCmkc:UCItemShopFilter runat="server" ID="UCItemShopFilter" />
-
-        <!-- filtros & carrito -->
-        <%--        <div class="row border rounded align-items-end mt-1">
-            <div class="form-group col">
-                <asp:LinkButton runat="server" CssClass="btn btn-primary btn-sm" Text="Comparar" OnClick="PerformCompare" />
-                <input id="selectedItemsInput" type="hidden" runat="server" />
-            </div>
-            <div class="form-group col">
-                <asp:LinkButton ID="btnCart" runat="server" CssClass="btn btn-warning btn-sm"
-                    Text="<i class='fa fa-tags' aria-hidden='true'></i> Sin elementos"
-                    OnClick="GoToInvoice" />
-            </div>
-
-
-        </div>--%>
-
+        
         <div class="row">
-            <div class="col-2  text-center">
+            <!-- Comparar, comprar y resumen -->
+            <div class="col-2 text-center">
                 <div class="row border rounded mt-1">
                     <div class="form-group col bg-light pb-2">
-                        <label for="compareBtn">Elije hasta 4 ítems para compararlos.</label>
-                        <asp:LinkButton ID="compareBtn" runat="server" CssClass="btn btn-primary btn-sm" Text="Comparar" OnClick="PerformCompare" />
+                        <label for="compareBtn">Seleccioná hasta 4 ítems para compararlos.</label>
+                        <asp:LinkButton ID="compareBtn" runat="server" CssClass="btn btn-primary btn-sm" Text="<i class='fa fa-clone' aria-hidden='true'></i> Comparar" OnClick="PerformCompare" />
                         <input id="selectedItemsInput" type="hidden" runat="server" />
                     </div>
 
@@ -62,11 +48,16 @@
                             OnClick="GoToInvoice" />
                     </div>
 
-
+                    <div class="form-group col">
+                        <hr />
+                        <label >Esto es lo que has comprado hasta el momento...</label>
+                    </div>
                 </div>
             </div>
+
             <!-- Galeria de elementos -->
             <div class="col-10">
+                <%--justify-content-between--%>
                 <div class="row">
                     <asp:Repeater ID="shopRepeater" runat="server" OnItemCommand="shopRepeater_ItemCommand">
                         <ItemTemplate>
@@ -85,7 +76,7 @@
                                         <i class="fa fa-tags"></i>$AR <%# Eval("Price") %>
                                     </footer>
                                 </blockquote>
-                                <div class="form-group">
+                                <div class="form-group text-center">
                                     <asp:LinkButton runat="server" CssClass="btn btn-primary btn-sm" Text="Adquirir" CommandName="AddToCart" CommandArgument='<%# Eval("id") %>' />
                                     <asp:LinkButton runat="server" CssClass="btn btn-primary btn-sm" Text="Ver detalle" CommandName="ShowDetail" CommandArgument='<%# Eval("id") %>' />
                                 </div>

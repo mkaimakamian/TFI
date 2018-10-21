@@ -146,7 +146,11 @@ namespace Ubiquicity
         {
             if (user != null)
             {
-                menuDiv.Style.Remove("display");
+                //Asigno tamaño y visibilidad al menú y ajusto el tamaño del contenido
+                menuDiv.Attributes["class"] = "col-2 mkcMenu";
+                menuDiv.Visible = true;
+                contentDiv.Attributes["class"] = "col-10";
+
                 mnuSection.Items.Clear();
                 Dictionary<int, MenuItem> access = new Dictionary<int, MenuItem>();
 

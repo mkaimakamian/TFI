@@ -68,14 +68,14 @@
                 </div>
             </nav>
 
-            <!-- Menu permisos -->
+            <!-- Menu permisos: menuDiv y contentDiv por codebehind-->
             <div class="row">
-                <div class="col-2 mkcMenu" id="menuDiv" runat="server" style="display: none">
+                <div id="menuDiv" class="col-2 mkcMenu" runat="server" visible="false">
                     <asp:Menu ID="mnuSection" runat="server" MaximumDynamicDisplayLevels="2" Orientation="Vertical"
                         SkipLinkText="" StaticMenuItemStyle-ForeColor="#fefefe" StaticHoverStyle-ForeColor="#ffc107">
                     </asp:Menu>
                 </div>
-                <div class="col-10">
+                <div id="contentDiv"  runat="server" class="col-12">
                     <!-- contenedor de las páginas -->
                     <asp:ContentPlaceHolder ID="contentHolder" runat="server">
                     </asp:ContentPlaceHolder>

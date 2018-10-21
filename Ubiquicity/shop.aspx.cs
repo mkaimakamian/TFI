@@ -34,7 +34,7 @@ namespace Ubiquicity
         /// </summary>
         private void UpdateCartButton()
         {
-            btnCart.Text = "<i class='fa fa-tags' aria-hidden='true'></i> Elementos: " + ShopHelper.GetQuantity();
+            cartBtn.Text = "<i class='fa fa-tags' aria-hidden='true'></i> Elementos: " + ShopHelper.GetQuantity();
         }
 
 
