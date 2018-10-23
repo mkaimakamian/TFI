@@ -31,10 +31,11 @@
             </div>
 
             <!-- Resumen de lo que se adquirió-->
-            <div class="col-2 rounded mkcMenu">
-                <h6>Resumen de compra</h6>
+            <div class="col-2 rounded mkcMenu text-center">
+<%--                <h6>Resumen de compra</h6>
                 Artículos: XX<br />
-                Total: $AR XXX
+                Total: $AR XXX--%>
+                <img src="Resources/one.svg" class="mt-8" width="96" />
             </div>
         </div>
 
@@ -113,25 +114,68 @@
 
         <!-- Formulario de dirección-->
         <div class="row border rounded mb-3 p-1">
-            <div class="col-10" style="height: 190px;">
+            <div class="col-10">
                 <div class="row">
+                    <!-- Nombre -->
+                    <div class="col-3">
+                        <h6>¿A quién le facturamos?</h6>
+                        <div class="form-group">
+                            <label for="namesInput">Nombres</label>
+                            <input id="firstNamesInput" runat="server" type="text" class="form-control form-control-sm">
+                        </div>
+                        <div class="form-group">
+                            <label for="lastNamesInput">Apellidos</label>
+                            <input id="lastNamesInput" runat="server" type="text" class="form-control form-control-sm">
+                        </div>
+                    </div>
+
+                    <!-- Dirección de facturación -->
+                    <div class="col-9  border-left">
+                        <h6>¿A qué dirección facturamos?</h6>
+                        <div class="row">
+                            <div class="col">
+                                <div class="row">
+                                    <div class="form-group col-6">
+                                        <label for="streetInput">Calle</label>
+                                        <input id="streetInput" runat="server" type="text" class="form-control form-control-sm">
+                                    </div>
+                                    <div class="form-group col-3">
+                                        <label for="numberInput">Número</label>
+                                        <input id="numberInput" runat="server" type="text" class="form-control form-control-sm">
+                                    </div>
+                                    <div class="form-group col-3">
+                                        <label for="zipInput">C. P.</label>
+                                        <input id="zipInput" runat="server" type="text" class="form-control form-control-sm">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col">
+                                        <label for="cityInput">Ciudad</label>
+                                        <input id="cityInput" runat="server" type="text" class="form-control form-control-sm">
+                                    </div>
+                                    <div class="form-group col">
+                                        <label for="countryInput">País</label>
+                                        <input id="countryInput" runat="server" type="text" class="form-control form-control-sm">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-4">
+                                <label for="observationInput">Observación</label>
+                                <textarea id="observationInput" runat="server" class="form-control form-control-sm" rows="5"></textarea>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <div class="col-2 rounded mkcMenu">
                 <h6>Resumen de compra</h6>
                 Artículos: XX<br />
-                Total: $AR XXX
-            </div>
-        </div>
-
-
-
-        <div class="row">
-            <div class="col-12">
                 <asp:LinkButton ID="btnCheckout" runat="server" CssClass="btn btn-warning btn-sm"
                     Text="Comprar" OnClick="PerformCheckout" />
             </div>
         </div>
+
     </div>
 </asp:Content>

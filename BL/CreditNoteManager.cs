@@ -49,6 +49,20 @@ namespace BL
             return creditNoteMapper.Get(id);
         }
 
+        /// <summary>
+        /// Recupera los credit notes cuyos ids son pasados por parámetro.
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public List<CreditNote> GetBySeveralIds(int[] ids)
+        {
+            List<CreditNote> creditNotes = new List<CreditNote>();
+
+            // TODO - feo... pero funciona por ahora
+            foreach (int id in ids) creditNotes.Add(Get(id));
+            return creditNotes;
+        }
+
         public bool ChangeStateToUsed(List<CreditNote> creditNotes)
         {
             bool success = true;

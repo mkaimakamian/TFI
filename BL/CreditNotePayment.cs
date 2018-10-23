@@ -9,12 +9,12 @@ namespace BL
 {
     public class CreditNotePayment : PaymentMethod
     {
-        private int[] creditNoteIds;
+        //private int[] creditNoteIds;
         private List<CreditNote> creditNotes;
 
-        public CreditNotePayment(int[] creditNoteIds)
+        public CreditNotePayment(List<CreditNote> creditNotes)
         {
-            this.creditNoteIds = creditNoteIds;
+            this.creditNotes = creditNotes;
         }
 
         /// <summary>
@@ -26,8 +26,6 @@ namespace BL
         /// <returns></returns>
         public override double EstimatePaymentResult(double amount)
         {
-            List<CreditNote> creditNotes = GetCreditNotes(creditNoteIds);
-
             for (int i = 0; i < creditNotes.Count && amount > 0; ++i)
             {
                 amount -= creditNotes[i].Amount;
@@ -38,9 +36,9 @@ namespace BL
 
         public override double ProcessPayment(double amount)
         {
-            // En caso de que esté "pagado" no tiene sentido procesar
+            // En caso de que esté "pago" no tiene sentido procesar
             if (amount <= 0) return amount;
-            List<CreditNote> creditNotes = GetCreditNotes(creditNoteIds);
+
             List<CreditNote> creditNoteUsed = new List<CreditNote>();
 
             for (int i = 0; i < creditNotes.Count && amount > 0; ++i)
@@ -82,27 +80,27 @@ namespace BL
         /// </summary>
         /// <param name="ids"></param>
         /// <returns></returns>
-        private List<CreditNote> GetCreditNotes(int[] ids)
-        {
-            if (creditNotes == null)
-            {
-                creditNotes = new List<CreditNote>();
-            }
-            else
-            {
-                // Si no es nulo es porque ya se llenó en alguna oportunidad
-                // y no hace falta regresar a la base de nuevo.
-                return creditNotes;
-            }                
+        //private List<CreditNote> GetCreditNotes(int[] ids)
+        //{
+        //    if (creditNotes == null)
+        //    {
+        //        creditNotes = new List<CreditNote>();
+        //    }
+        //    else
+        //    {
+        //        // Si no es nulo es porque ya se llenó en alguna oportunidad
+        //        // y no hace falta regresar a la base de nuevo.
+        //        return creditNotes;
+        //    }                
 
-            foreach (int id in ids)
-            {
-                CreditNoteManager creditNoteManager = new CreditNoteManager();
-                creditNotes.Add(creditNoteManager.Get(id));
-            }
+        //    foreach (int id in ids)
+        //    {
+        //        CreditNoteManager creditNoteManager = new CreditNoteManager();
+        //        creditNotes.Add(creditNoteManager.Get(id));
+        //    }
 
-            return creditNotes;
-        }
+        //    return creditNotes;
+        //}
 
 
         /// <summary>

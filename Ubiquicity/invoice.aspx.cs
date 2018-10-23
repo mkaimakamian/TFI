@@ -92,29 +92,18 @@ namespace Ubiquicity
             try
             {
                 InvoiceManager invoiceManager = new InvoiceManager();
-
-                //Debería ser el manager de recursos
-                MapManager mapManager = new MapManager();
-                List<Map> maps = mapManager.GetBySeveralIds(ShopHelper.GetItemsId());
-
-                // Cada método de pago implementa el modo de llevar adelante la operación.
                 List<PaymentMethod> paymenMethods = new List<PaymentMethod>();
 
-                //Se eligió tarjeta de crédito
-                if(cardChk.Checked)
-                {
-                    CreditCard creditCard = GetCreditCard();
-                    paymenMethods.Add(new CardPayment(creditCard));
-                }
+                //Modelo la factura
+                Invoice invoice = new Invoice();
+                invoice.User = SessionHelper.GetUserFromSession();
+                invoice.BillingAddress = GetBillingAddress();
+                invoice.CreditCard = GetCreditCard();
+                invoice.CreditNotes = GetCreditNotes();
+                invoice.InvoiceItems = GetInvoiceItems();
 
-                //Se elijió notas de crédito
-                if (creditNotesChk.Checked)
-                {
-                    int[] creditNoteIds = GetCreditNotesIds();
-                    paymenMethods.Add(new CreditNotePayment(creditNoteIds));
-                }
-
-                bool success = invoiceManager.ProcessPayment(maps, paymenMethods, SessionHelper.GetUserFromSession());
+                // Procesamiento del pago y creación de la facturación
+                bool success = invoiceManager.ProcessPayment(invoice);
 
                 if (!success && invoiceManager.HasErrors)
                 {
@@ -131,37 +120,93 @@ namespace Ubiquicity
         }
 
         /// <summary>
-        /// Recupera los ids de las notas de crédito utilizadas para pagar los ítems.
+        /// Modela la dirección de facturación.
         /// </summary>
         /// <returns></returns>
-        private int[] GetCreditNotesIds()
+        private Address GetBillingAddress()
         {
-            //Dudo que no haya otro modo más práctico de obtener los ids de las notas de crédito 
-            //seleccionadas. Se obtienen las elegidas y luego se arma un array de int
-            List<ListItem> selected = checkCreditNotes.Items.Cast<ListItem>().Where(li => li.Selected).ToList();
-            int[] creditNoteIds = new int[selected.Count];
-            for (int i = 0; i < selected.Count; ++i)
+            Address billingAddress = new Address();
+            billingAddress.Street = streetInput.Value;
+            billingAddress.Number = Convert.ToInt32(numberInput.Value);
+            billingAddress.Zip = zipInput.Value;
+            billingAddress.City = cityInput.Value;
+            // Debería ser de un drop
+            Country country = new Country();
+            country.Name = countryInput.Value;
+            billingAddress.Country = country;
+            billingAddress.Observation = observationInput.Value;
+            return billingAddress;
+        }
+
+
+        private List<InvoiceItem> GetInvoiceItems()
+        {
+            //TODO - Controlar error
+            MapManager mapManager = new MapManager();
+            List<Map> maps = mapManager.GetBySeveralIds(ShopHelper.GetItemsId());
+            List<InvoiceItem> invoiceItems = new List<InvoiceItem>();
+
+            foreach(Map map in maps)
             {
-                creditNoteIds[i] = Convert.ToInt32(selected[i].Value);
+                InvoiceItem invoiceItem = new InvoiceItem();
+                invoiceItem.Quantity = 1;
+                invoiceItem.Resource = map;
+                invoiceItem.Price = map.Price;
+                invoiceItems.Add(invoiceItem);
             }
 
-            return creditNoteIds;
+            return invoiceItems;
         }
 
         /// <summary>
-        /// Modela los datos sobre la tarjeta de crédito y devuelve un objeto.
+        /// Si se eligió nc como método de pago, recupera sus ids y crea el método de pago afín..
+        /// </summary>
+        /// <returns></returns>
+        private List<CreditNote> GetCreditNotes()
+        {
+            List<CreditNote> creditNotes = null;
+
+            if (creditNotesChk.Checked)
+            {
+                CreditNoteManager creditNoteManager = new CreditNoteManager();
+
+                //Dudo que no haya otro modo más práctico de obtener los ids de las notas de crédito 
+                //seleccionadas. Se obtienen las elegidas y luego se arma un array de int
+                List<ListItem> selected = checkCreditNotes.Items.Cast<ListItem>().Where(li => li.Selected).ToList();
+                int[] creditNoteIds = new int[selected.Count];
+                for (int i = 0; i < selected.Count; ++i)
+                {
+                    creditNoteIds[i] = Convert.ToInt32(selected[i].Value);
+                }
+
+                creditNotes = creditNoteManager.GetBySeveralIds(creditNoteIds);
+            }
+
+            return creditNotes;
+        }
+
+        /// <summary>
+        /// Si la tarjeta se eligió como método de pago, devuelve el objeto modelado.
         /// </summary>
         /// <returns></returns>
         private CreditCard GetCreditCard()
         {
-            CreditCard creditCard = new CreditCard();
-            creditCard.Cvv = Convert.ToInt32(cvvInput.Value);
-            creditCard.Field1 = Convert.ToInt32(card1Input.Value);
-            creditCard.Field2 = Convert.ToInt32(card2Input.Value);
-            creditCard.Field3 = Convert.ToInt32(card3Input.Value);
-            creditCard.Field4 = Convert.ToInt32(card4Input.Value);
-            creditCard.DueDate = Convert.ToDateTime(duedateInput.Date);
-            creditCard.CreditCardType.Id = Convert.ToInt32(dropCardInput.SelectedValue);
+            CreditCard creditCard = null;
+
+            if (cardChk.Checked)
+            {
+                creditCard = new CreditCard();
+                creditCard.FirstName = firstNamesInput.Value;
+                creditCard.LastName = lastNamesInput.Value;
+                creditCard.Cvv = Convert.ToInt32(cvvInput.Value);
+                creditCard.Field1 = Convert.ToInt32(card1Input.Value);
+                creditCard.Field2 = Convert.ToInt32(card2Input.Value);
+                creditCard.Field3 = Convert.ToInt32(card3Input.Value);
+                creditCard.Field4 = Convert.ToInt32(card4Input.Value);
+                creditCard.DueDate = Convert.ToDateTime(duedateInput.Date);
+                creditCard.CreditCardType.Id = Convert.ToInt32(dropCardInput.SelectedValue);
+            }
+
             return creditCard;
         }
     }

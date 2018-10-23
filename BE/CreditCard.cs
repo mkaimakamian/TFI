@@ -15,6 +15,8 @@ namespace BE
         private DateTime dueDate;
         private int cvv;
         private CreditCardType creditCardType;
+        private string firstName;
+        private string lastName;
 
         public int Field1
         {
@@ -105,6 +107,32 @@ namespace BE
             set
             {
                 creditCardType = value;
+            }
+        }
+
+        public string FirstName
+        {
+            get
+            {
+                return firstName;
+            }
+
+            set
+            {
+                firstName = value;
+            }
+        }
+
+        public string LastName
+        {
+            get
+            {
+                return lastName;
+            }
+
+            set
+            {
+                lastName = value;
             }
         }
     }

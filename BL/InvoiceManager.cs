@@ -17,14 +17,17 @@ namespace BL
         /// <param name="amount"></param>
         /// <param name="paymentMethods"></param>
         /// <returns></returns>
-        public bool ProcessPayment(List<Map> resources, List<PaymentMethod> paymentMethods, User user)
+        public bool ProcessPayment(Invoice invoice)
         {
-            //Total de los producto
-            double totalAmount = resources.Sum(resource => resource.Price);
+            double totalAmount = invoice.InvoiceItems.Sum(resource => resource.Price);
             double leftAmount = totalAmount;
 
+            List<PaymentMethod> paymentMethods = new List<PaymentMethod>();
+            paymentMethods.Add(new CreditNotePayment(invoice.CreditNotes));
+            paymentMethods.Add(new CardPayment(invoice.CreditCard));
+
             //Ejecuta una prueba para constatar que el saldo puede ser cubierto
-            foreach(PaymentMethod paymentMethod in paymentMethods)
+            foreach (PaymentMethod paymentMethod in paymentMethods)
             {
                 if (paymentMethod.IsValid())
                 {
@@ -46,11 +49,9 @@ namespace BL
                     leftAmount = paymentMethod.ProcessPayment(leftAmount);
                 }
 
-                //Crear invoice
-                //Crear PDF
-                //CreateInvoicePDF(resources);
+                //Persistir el invoice.
 
-                    return true;
+                return true;
             } else
             {
                 string errorDescription = "Los medios de pago no cubren el total a pagar.";
@@ -60,20 +61,5 @@ namespace BL
             }
                 
         }
-
-        //TODO - Pasar a un helper... etso es todo frula
-        private void CreateInvoicePDF(List<Map> resources)
-        {
-            //PdfDocument pdf = PdfGenerator.GeneratePdf("<p><h1>Hello World</h1>This is html rendered text</p>", PageSize.A4);
-            //pdf.Save("document.pdf");
-
-
-            //string prueba = MailerHelper.GetTemplate("lalalala", "lkskslñksñks", "ljljsdljs");
-            //PdfDocument invoice = new PdfDocument(prueba);
-            //invoice.Save("c:/tmp/lala.pdf");
-            //    //PdfGenerator.GeneratePdf(html, PageSize.A4, 60);
-            //pdf.Save(pathOUT);
-        }
-
     }
 }

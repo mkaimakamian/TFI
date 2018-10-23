@@ -40,10 +40,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Address.cs" />
     <Compile Include="Backup.cs" />
+    <Compile Include="Country.cs" />
     <Compile Include="CreditCard.cs" />
     <Compile Include="CreditCardType.cs" />
     <Compile Include="CreditNote.cs" />
+    <Compile Include="Invoice.cs" />
+    <Compile Include="InvoiceItem.cs" />
     <Compile Include="ItemComment.cs" />
     <Compile Include="Label.cs" />
     <Compile Include="Language.cs" />

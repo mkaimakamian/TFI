@@ -99,7 +99,7 @@ namespace BL
         {
             List<Map> maps = new List<Map>();
 
-            //feo... pero funciona por ahora
+            // TODO -feo... pero funciona por ahora
             foreach (int id in ids) maps.Add(Get(id));
             return maps;
         }
