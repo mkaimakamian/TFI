@@ -8,6 +8,7 @@ namespace BE
 {
     public class CreditCard
     {
+        private int id;
         private int field1;
         private int field2;
         private int field3;
@@ -17,6 +18,19 @@ namespace BE
         private CreditCardType creditCardType;
         private string firstName;
         private string lastName;
+
+        public int Id
+        {
+            get
+            {
+                return id;
+            }
+
+            set
+            {
+                id = value;
+            }
+        }
 
         public int Field1
         {

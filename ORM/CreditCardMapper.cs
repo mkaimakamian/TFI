@@ -12,6 +12,26 @@ namespace ORM
 {
     public class CreditCardMapper
     {
+
+        /// <summary>
+        /// Guarda los datos modelados, en la base.
+        /// </summary>
+        /// <param name="CreditCard"></param>
+        /// <returns></returns>
+        public bool Save(CreditCard creditCard)
+        {
+            Dal dal = new Dal();
+            Hashtable table = new Hashtable();
+
+            table.Add("@field4", creditCard.Field4);
+            table.Add("@typeId", creditCard.CreditCardType.Id);
+            table.Add("@firstName", creditCard.FirstName);
+            table.Add("@lastName", creditCard.LastName);
+            creditCard.Id = dal.Write(table, "spWriteMap");
+
+            return creditCard.Id > 0;
+        }
+
         /// <summary>
         /// Recupera el listado de elementos de la base.
         /// </summary>

@@ -40,9 +40,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddressMapper.cs" />
     <Compile Include="BackupMapper.cs" />
     <Compile Include="CreditCardMapper.cs" />
     <Compile Include="CreditNoteMapper.cs" />
+    <Compile Include="InvoiceCreditCardMapper.cs" />
+    <Compile Include="InvoiceCreditNoteMapper.cs" />
+    <Compile Include="InvoiceItemMapper.cs" />
+    <Compile Include="InvoiceMapper.cs" />
     <Compile Include="ItemCommenMapper.cs" />
     <Compile Include="LabelMapper.cs" />
     <Compile Include="LanguageMapper.cs" />

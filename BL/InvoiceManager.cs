@@ -4,8 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BE;
+using ORM;
 using PdfSharp.Pdf;
 using TheArtOfDev.HtmlRenderer.PdfSharp;
+
 namespace BL
 {
     public class InvoiceManager:BaseManager
@@ -49,8 +51,7 @@ namespace BL
                     leftAmount = paymentMethod.ProcessPayment(leftAmount);
                 }
 
-                //Persistir el invoice.
-
+                SaveInvoice(invoice);
                 return true;
             } else
             {
@@ -59,7 +60,24 @@ namespace BL
                 AddError(new ResultBE(ResultBE.Type.FAIL, errorDescription));
                 return false;
             }
-                
+        }
+
+        private void SaveInvoice(Invoice invoice)
+        {
+            //Persistir el invoice: debería hacerse en una transacción
+            AddressManager addressManager = new AddressManager();
+            InvoiceMapper invoiceMapper = new InvoiceMapper();
+            InvoiceItemMapper invoiceItemMapper = new InvoiceItemMapper();
+            CreditCardMapper creditCardMapper = new CreditCardMapper();
+            InvoiceCreditNoteMapper invoiceCNMapper = new InvoiceCreditNoteMapper();
+            InvoiceCreditCardMapper invoiceCCMapper = new InvoiceCreditCardMapper();
+
+            addressManager.Save(invoice.BillingAddress);
+            invoiceMapper.Save(invoice);
+            invoiceItemMapper.Save(invoice);
+            creditCardMapper.Save(invoice.CreditCard);
+            invoiceCNMapper.Save(invoice);
+            invoiceCNMapper.Save(invoice);
         }
     }
 }

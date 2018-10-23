@@ -138,7 +138,10 @@ namespace Ubiquicity
             return billingAddress;
         }
 
-
+        /// <summary>
+        /// Toma los productos y los transforma en el detalle de la factura.
+        /// </summary>
+        /// <returns></returns>
         private List<InvoiceItem> GetInvoiceItems()
         {
             //TODO - Controlar error
