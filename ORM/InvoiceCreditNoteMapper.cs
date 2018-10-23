@@ -26,9 +26,9 @@ namespace ORM
             foreach(CreditNote creditNote in invoice.CreditNotes)
             {
                 table = new Hashtable();
-                table.Add("@invoideId", invoice.Id);
-                table.Add("@creditNoteid", creditNote.Id);
-                invoice.Id = dal.Write(table, "spWriteMap");
+                table.Add("@invoiceId", invoice.Id);
+                table.Add("@creditNoteId", creditNote.Id);
+                dal.Write(table, "spWriteInvoiceCreditNote");
 
             }
 

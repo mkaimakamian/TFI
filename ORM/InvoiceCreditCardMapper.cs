@@ -24,7 +24,7 @@ namespace ORM
 
             table.Add("@invoiceId", invoice.Id);
             table.Add("@creditCardId", invoice.CreditCard.Id);
-            invoice.Id = dal.Write(table, "spWriteMap");
+            dal.Write(table, "spWriteInvoiceCreditCard");
 
             return invoice.Id > 0;
         }

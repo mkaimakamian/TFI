@@ -30,7 +30,8 @@ namespace ORM
                 table.Add("@price", invoiceItem.Price);
                 table.Add("@quantity", invoiceItem.Quantity);
                 table.Add("@resourceId", invoiceItem.Resource.Id);
-                invoiceItem.Id = dal.Write(table, "spWriteMap");
+                table.Add("@invoiceId", invoice.Id);
+                invoiceItem.Id = dal.Write(table, "spWriteInvoiceItem");
             }
 
             return true;

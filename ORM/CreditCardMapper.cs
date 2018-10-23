@@ -27,7 +27,8 @@ namespace ORM
             table.Add("@typeId", creditCard.CreditCardType.Id);
             table.Add("@firstName", creditCard.FirstName);
             table.Add("@lastName", creditCard.LastName);
-            creditCard.Id = dal.Write(table, "spWriteMap");
+            table.Add("@dueDate", creditCard.DueDate);
+            creditCard.Id = dal.Write(table, "spWriteCreditCard");
 
             return creditCard.Id > 0;
         }

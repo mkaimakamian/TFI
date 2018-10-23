@@ -22,10 +22,9 @@ namespace ORM
             Dal dal = new Dal();
             Hashtable table = new Hashtable();
 
-            table.Add("@date", invoice.Date);
             table.Add("@userId", invoice.User.Id);
             table.Add("@billingAddressId", invoice.BillingAddress.Id);
-            invoice.Id = dal.Write(table, "spWriteMap");
+            invoice.Id = dal.Write(table, "spWriteInvoice");
 
             return invoice.Id > 0;
         }

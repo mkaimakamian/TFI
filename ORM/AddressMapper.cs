@@ -25,10 +25,10 @@ namespace ORM
             table.Add("@street", address.Street);
             table.Add("@number", address.Number);
             table.Add("@city", address.City);
-            table.Add("@country", address.Country.Name);//debería ser id
+            table.Add("@countryIso", address.Country.Name);//debería ser id
             table.Add("@zip", address.Zip);
             table.Add("@observation", address.Observation);
-            address.Id = dal.Write(table, "spWriteMap");
+            address.Id = dal.Write(table, "spWriteAddress");
 
             return address.Id > 0;
         }
