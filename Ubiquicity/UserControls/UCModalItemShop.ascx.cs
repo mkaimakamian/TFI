@@ -40,6 +40,7 @@ namespace Ubiquicity.UserControls
         /// <param name="button2Label"></param>
         public void Show(Map map)
         {
+
             itemRepeater.DataSource = GetComments(map);
             itemRepeater.DataBind();
             //super turbio: almaceno el id para saber, al momento de comentar, a qué producto le pertenece.
@@ -47,7 +48,9 @@ namespace Ubiquicity.UserControls
             this.title = map.Name;
             //this.message = map.Description;
             PopulateItemDetail(map);
-            Page.ClientScript.RegisterStartupScript(this.GetType(), "openModalItemShop", "window.onload = function() { $('#ucModalItemShop').modal('show'); }", true);
+            //Page.ClientScript.RegisterStartupScript(this.GetType(), "openModalItemShop", "window.onload = function() { $('#ucModalItemShop').modal('show'); }", true);
+            ScriptManager.RegisterStartupScript(upItemShop, upItemShop.GetType(), "openModalItemShop", "$('#ucModalItemShop').modal('show');", true);
+            upItemShop.Update();
         }
 
         private void PopulateItemDetail(Map map)

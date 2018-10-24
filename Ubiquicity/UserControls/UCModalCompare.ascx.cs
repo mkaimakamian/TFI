@@ -33,7 +33,9 @@ namespace Ubiquicity.UserControls
             this.title = title;
             compareRepeater.DataSource = resources;
             compareRepeater.DataBind();
-            Page.ClientScript.RegisterStartupScript(this.GetType(), "openModalCompare", "window.onload = function() { $('#ucModalCompare').modal('show'); }", true);
+            //Page.ClientScript.RegisterStartupScript(this.GetType(), "openModalCompare", "window.onload = function() { $('#ucModalCompare').modal('show'); }", true);
+            ScriptManager.RegisterStartupScript(upCompare, upCompare.GetType(), "openModalCompare", "$('#ucModalCompare').modal('show');", true);
+            upCompare.Update();
         }
     }
 }

@@ -13,6 +13,15 @@ namespace Ubiquicity.UserControls {
     public partial class UCModalCompare {
         
         /// <summary>
+        /// upCompare control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upCompare;
+        
+        /// <summary>
         /// ucModalNewsLabel control.
         /// </summary>
         /// <remarks>

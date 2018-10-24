@@ -1,7 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/front.Master" AutoEventWireup="true" CodeBehind="shop.aspx.cs" Inherits="Ubiquicity.shop" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="contentHolder" runat="server">
-
+    <asp:UpdatePanel ID="upShop" runat="server">
+<ContentTemplate>
     <script type="text/javascript">
         var itemList = [];
 
@@ -44,7 +45,7 @@
                     <div class="form-group col-12">
                         <label for="cartBtn">¿Terminaste de agregar? <br />¡Pasemos al pago!</label>
                         <asp:LinkButton ID="cartBtn" runat="server" CssClass="btn btn-warning btn-sm"
-                            Text="<i class='fa fa-tags' aria-hidden='true'></i> Comprar"
+                            Text="<i class='fa fa-tags' aria-hidden='true'></i> Adquirir"
                             OnClick="GoToInvoice" />
                     </div>
 
@@ -79,7 +80,7 @@
                                 </blockquote>
                                 <div class="form-group text-center">
                                     <asp:LinkButton runat="server" CssClass="btn btn-primary btn-sm" Text="¡Lo quiero!" CommandName="AddToCart" CommandArgument='<%# Eval("id") %>' />
-                                    <asp:LinkButton runat="server" CssClass="btn btn-primary btn-sm" Text="Detalle" CommandName="ShowDetail" CommandArgument='<%# Eval("id") %>' />
+                                    <asp:LinkButton ID="btnDetail" runat="server" CssClass="btn btn-primary btn-sm" Text="Detalle" CommandName="ShowDetail" CommandArgument='<%# Eval("id") %>' />
                                 </div>
 
                                 <input type="checkbox" value="<%# Eval("Id") %>" onclick="AddToCompare(this.value)" />Comparar
@@ -91,6 +92,8 @@
             </div>
         </div>
     </div>
+    </ContentTemplate>
+</asp:UpdatePanel>
     <UCmkc:UCModalCompare runat="server" ID="ModalCompare" />
     <UCmkc:UCModalItemShop runat="server" ID="ModalItemShop" />
 </asp:Content>

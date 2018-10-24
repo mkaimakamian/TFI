@@ -96,6 +96,7 @@ namespace Ubiquicity
                 }
                 else if (e.CommandName == "ShowDetail")
                 {
+
                     ModalItemShop.Show(map);
                 }
             }
