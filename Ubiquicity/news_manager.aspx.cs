@@ -31,7 +31,9 @@ namespace Ubiquicity
             List<Category> newsCategories = newsCategoryManager.Get();
             UCFormNews.CleanForm(newsCategories);
             Session["Ubiquicity_action"] = CREATE;
-            Page.ClientScript.RegisterStartupScript(this.GetType(), "openModalCreate", "window.onload = function() { $('#modalNews').modal('show'); }", true);
+            //Page.ClientScript.RegisterStartupScript(this.GetType(), "openModalCreate", "window.onload = function() { $('#modalNews').modal('show'); }", true);
+            ScriptManager.RegisterStartupScript(upUCModalForm, upUCModalForm.GetType(), "openModalCreate", "$('#modalNews').modal('show');", true);
+            upUCModalForm.Update();
         }
 
         protected override bool AcceptCreate(BL.BaseManager manager)
@@ -67,7 +69,9 @@ namespace Ubiquicity
                 UCFormNews.CleanForm(newsCategories);
                 UCFormNews.FillForm(news);
                 Session["Ubiquicity_action"] = EDIT;
-                Page.ClientScript.RegisterStartupScript(this.GetType(), "openModalEdit", "window.onload = function() { $('#modalNews').modal('show'); }", true);
+                //Page.ClientScript.RegisterStartupScript(this.GetType(), "openModalEdit", "window.onload = function() { $('#modalNews').modal('show'); }", true);
+                ScriptManager.RegisterStartupScript(upUCModalForm, upUCModalForm.GetType(), "openModalEdit", "$('#modalNews').modal('show');", true);
+                upUCModalForm.Update();
             }
         }
 

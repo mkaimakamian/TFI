@@ -30,13 +30,13 @@ namespace Ubiquicity
         /// <param name="e"></param>
         protected override void ShowNewForm(object sender, UbiquicityEventArg e)
         {
-            Alert.Show("Crear respaldo", "¿Está seguro de querer crear el respaldo? El sistema se inhabilitará durante la ejecución.", "Si, crear respaldo");
+            Alert.ShowUP("Crear respaldo", "¿Está seguro de querer crear el respaldo? El sistema se inhabilitará durante la ejecución.", "Si, crear respaldo");
         }
 
         protected override void PerformGenericAction(object sender, UbiquicityEventArg e)
         {
             Session["Ubiquicity_itemId"] = e.TheObject.ToString();
-            Alert.Show("Restaurar respaldo", "¿Está seguro de querer restaurar el respaldo? El sistema se inhabilitará y se perderán los datos posteriores al punto de restauración.", null, "Si, restaurar respaldo");
+            Alert.ShowUP("Restaurar respaldo", "¿Está seguro de querer restaurar el respaldo? El sistema se inhabilitará y se perderán los datos posteriores al punto de restauración.", null, "Si, restaurar respaldo");
         }
 
         /// <summary>
@@ -52,12 +52,14 @@ namespace Ubiquicity
 
                 if (!backupManager.PerformBackup() && backupManager.HasErrors)
                 {
+                    //TODO - NO MUESTRA MENSAJE DE CONFIRMACIÓN
                     Alert.Show("Error", backupManager.ErrorDescription);
                 }
                 else
                 {
                     LoadGridView();
-                    Alert.Show("Éxtito", "El respaldo se ha generado exitosamente.");
+                    //TODO - NO MUESTRA MENSAJE DE CONFIRMACIÓN
+                    Alert.ShowUP("Éxtito", "El respaldo se ha generado exitosamente.");
                 }
             }
             catch (Exception exception)
@@ -76,15 +78,18 @@ namespace Ubiquicity
 
                 if (!backupManager.PerformRestore(fileName) && backupManager.HasErrors)
                 {
+                    //TODO - NO MUESTRA MENSAJE DE CONFIRMACIÓN
                     Alert.Show("Error", backupManager.ErrorDescription);
                 }
                 else
                 {
+                    //TODO - NO MUESTRA MENSAJE DE CONFIRMACIÓN
                     Alert.Show("Éxtito", "La restauración se ha generado exitosamente.");
                 }
             }
             catch (Exception exception)
             {
+                //TODO - NO MUESTRA MENSAJE DE
                 Alert.Show("Exception", exception.Message);
             }
 

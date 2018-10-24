@@ -61,6 +61,7 @@ namespace Ubiquicity
                     else
                     {
                         SessionHelper.StartSession(user, Session);
+                        //TODO revisar: tira excepcion pero redirige... no sé qué hace
                         Response.Redirect(Request.RawUrl);
                     }
                 }

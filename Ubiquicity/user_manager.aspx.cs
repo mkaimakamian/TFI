@@ -62,7 +62,9 @@ namespace Ubiquicity
             UCFormNewMember.EnableUserField();
             UCFormNewMember.CleanForm();
             Session["Ubiquicity_action"] = CREATE;
-            Page.ClientScript.RegisterStartupScript(this.GetType(), "openModalCreate", "window.onload = function() { $('#ucModalNewMember').modal('show'); }", true);
+            //Page.ClientScript.RegisterStartupScript(this.GetType(), "openModalCreate", "window.onload = function() { $('#ucModalNewMember').modal('show'); }", true);
+            ScriptManager.RegisterStartupScript(upUCModalForm, upUCModalForm.GetType(), "openModalCreate", "$('#ucModalNewMember').modal('show');", true);
+            upUCModalForm.Update();
         }
 
         /// <summary>
@@ -88,7 +90,9 @@ namespace Ubiquicity
                 UCFormNewMember.DisableUserField();
                 UCFormNewMember.FillForm(user);
                 Session["Ubiquicity_action"] = EDIT;
-                Page.ClientScript.RegisterStartupScript(this.GetType(), "openModalEdit", "window.onload = function() { $('#ucModalNewMember').modal('show'); }", true);
+                //Page.ClientScript.RegisterStartupScript(this.GetType(), "openModalEdit", "window.onload = function() { $('#ucModalNewMember').modal('show'); }", true);
+                ScriptManager.RegisterStartupScript(upUCModalForm, upUCModalForm.GetType(), "openModalEdit", "$('#ucModalNewMember').modal('show');", true);
+                upUCModalForm.Update();
             }
         }
 

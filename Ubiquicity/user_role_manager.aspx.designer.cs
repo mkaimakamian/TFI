@@ -31,6 +31,15 @@ namespace Ubiquicity {
         protected global::Ubiquicity.UserControls.UCcrudGrid UCcrudGrid;
         
         /// <summary>
+        /// upUCModalForm control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upUCModalForm;
+        
+        /// <summary>
         /// UCFormUserRole control.
         /// </summary>
         /// <remarks>

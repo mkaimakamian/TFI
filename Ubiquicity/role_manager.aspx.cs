@@ -137,7 +137,9 @@ namespace Ubiquicity
 
         private void ShowCrudForm()
         {
-            Page.ClientScript.RegisterStartupScript(this.GetType(), "openModalRole", "window.onload = function() { $('#modalRolePermission').modal('show'); }", true);
+            //Page.ClientScript.RegisterStartupScript(this.GetType(), "openModalRole", "window.onload = function() { $('#modalRolePermission').modal('show'); }", true);
+            ScriptManager.RegisterStartupScript(upUCModalForm, upUCModalForm.GetType(), "openModalRole", "$('#modalRolePermission').modal('show');", true);
+            upUCModalForm.Update();
         }
 
         //estrategia para manejar las listas: el uso de la sesión

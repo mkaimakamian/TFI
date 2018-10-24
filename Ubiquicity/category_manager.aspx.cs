@@ -28,6 +28,8 @@ namespace Ubiquicity
             UCFormCategory.CleanForm();
             Session["Ubiquicity_action"] = CREATE;
             Page.ClientScript.RegisterStartupScript(this.GetType(), "openModalCreate", "window.onload = function() { $('#modalCategory').modal('show'); }", true);
+            ScriptManager.RegisterStartupScript(upUCModalForm, upUCModalForm.GetType(), "openModalCreate", "$('#modalCategory').modal('show');", true);
+            upUCModalForm.Update();
         }
 
         /// <summary>
@@ -51,7 +53,9 @@ namespace Ubiquicity
             {
                 UCFormCategory.FillForm(category);
                 Session["Ubiquicity_action"] = EDIT;
-                Page.ClientScript.RegisterStartupScript(this.GetType(), "openModalEdit", "window.onload = function() { $('#modalCategory').modal('show'); }", true);
+                //Page.ClientScript.RegisterStartupScript(this.GetType(), "openModalEdit", "window.onload = function() { $('#modalCategory').modal('show'); }", true);
+                ScriptManager.RegisterStartupScript(upUCModalForm, upUCModalForm.GetType(), "openModalEdit", "$('#modalCategory').modal('show');", true);
+                upUCModalForm.Update();
             }
         }
 

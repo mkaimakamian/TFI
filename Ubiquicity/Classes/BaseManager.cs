@@ -81,10 +81,15 @@ namespace Ubiquicity
             }
         }
 
+        /// <summary>
+        /// Muestra el mensaje para que se confirme la eliminación, mostrando los mensajes con UP.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected virtual void AskForDelete(object sender, UbiquicityEventArg e)
         {
             Session["Ubiquicity_itemId"] = Convert.ToInt32(e.TheObject);
-            Alert.Show("Eliminar registro", "¿Está seguro de querer eliminar el registro?", "Si, eliminarlo");
+            Alert.ShowUP("Eliminar registro", "¿Está seguro de querer eliminar el registro?", "Si, eliminarlo");
         }
 
         protected virtual void PerformDeleteItem(object sender, UbiquicityEventArg e) {

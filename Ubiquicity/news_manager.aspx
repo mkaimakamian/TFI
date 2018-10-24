@@ -9,7 +9,11 @@
     <div id="modalNews" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-                <UCmkc:UCFormNews runat="server" ID="UCFormNews" />
+                <asp:UpdatePanel ID="upUCModalForm" runat="server" UpdateMode="Conditional">
+                    <ContentTemplate>
+                        <UCmkc:UCFormNews runat="server" ID="UCFormNews" />
+                    </ContentTemplate>
+                </asp:UpdatePanel>
                 <div class="modal-footer">
                     <asp:Button ID="modalMap_btnAccept" runat="server" CssClass="btn btn-primary btn-sm" Text="Aceptar" OnClick="AccepCreateOrModify" />
                     <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cerrar</button>

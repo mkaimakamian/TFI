@@ -131,7 +131,9 @@ namespace Ubiquicity
 
         private void ShowCrudForm()
         {
-            Page.ClientScript.RegisterStartupScript(this.GetType(), "openModalUserRole", "window.onload = function() { $('#modalUserRole').modal('show'); }", true);
+            //Page.ClientScript.RegisterStartupScript(this.GetType(), "openModalUserRole", "window.onload = function() { $('#modalUserRole').modal('show'); }", true);
+            ScriptManager.RegisterStartupScript(upUCModalForm, upUCModalForm.GetType(), "openModalUserRole", "$('#modalUserRole').modal('show');", true);
+            upUCModalForm.Update();
         }
 
         private List<Role> RetrieveFromSession(string key)
