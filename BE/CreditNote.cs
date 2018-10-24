@@ -108,5 +108,10 @@ namespace BE
                 used = value;
             }
         }
+
+        public string Description
+        {
+            get { return "$" + Amount + " ("+ Date.ToShortDateString() + ")" ; }
+        }
     }
 }

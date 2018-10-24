@@ -33,7 +33,7 @@ namespace Ubiquicity
             {
                 CreditNoteManager creditNoteManager = new CreditNoteManager();
                 checkCreditNotes.DataSource = creditNoteManager.Get(user);
-                checkCreditNotes.DataTextField = "Amount";
+                checkCreditNotes.DataTextField = "Description";
                 checkCreditNotes.DataValueField = "Id";
                 checkCreditNotes.DataBind();
             }
@@ -79,7 +79,7 @@ namespace Ubiquicity
 
                 totalItems.InnerText = "Artículos: " + maps.Count;
                 totalAmount.InnerText = "Total a pagar: $" + maps.Sum(resource => resource.Price);
-
+                btnCheckout.Text = "¡Pagar $" + maps.Sum(resource => resource.Price) + "!";
             }
             catch (Exception exception)
             {
