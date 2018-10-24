@@ -31,18 +31,21 @@
             </div>
 
             <!-- Resumen de lo que se adquirió-->
-            <div class="col-2 rounded mkcMenu text-center">
-<%--                <h6>Resumen de compra</h6>
-                Artículos: XX<br />
-                Total: $AR XXX--%>
-                <img src="Resources/one.svg" class="mt-8" width="96" />
+            <div class="col-2 rounded mkcCheckoutEnd text-center">
+                <h6 class="mt-2">Resumen de compra</h6>
+                <p style="font-size: 64px" class="m-0 mkcLetraNaranja">#1</p>
+                <p id="totalItems" runat="server" class="m-0"></p>
+                <p id="totalAmount" runat="server" class="m-0"></p>
             </div>
         </div>
 
         <!-- Listado horizontal de medios de pago-->
         <div class="row border rounded mb-3 p-1">
-            <div class="col-2 rounded mkcMenu">
-                <h6>Medios de Pago</h6>
+            <div class="col-2 rounded mkcCheckoutEnd text-center">
+                <h6 class="mt-2">Medios de pago</h6>
+                <p style="font-size: 64px" class="m-0 mkcLetraNaranja">#2</p>
+                <p class="m-0">¿Tarjeta? ¿Crétito?<br />
+                    ¡todo vale!</p>
             </div>
 
             <div class="col-10">
@@ -50,9 +53,9 @@
                     <!-- Modo de pago -->
                     <div class="col-3">
                         <h6>¿Cómo vas a pagar?</h6>
-                        <p class="text-muted">Recorá que podés usar ambos medios de pago.</p>
+                        <p class="text-muted">Recordá que podés utilizar múltiples medios de pago.</p>
                         <asp:CheckBox ID="creditNotesChk" runat="server" Text="Notas de crédito" /><br />
-                        <asp:CheckBox ID="cardChk" runat="server" Text="Con tarjeta" />
+                        <asp:CheckBox ID="cardChk" runat="server" Text="Tarjeta de crédito" />
                     </div>
 
                     <!-- Notas de crédito -->
@@ -169,12 +172,14 @@
                 </div>
             </div>
 
-            <div class="col-2 rounded mkcMenu">
-                <h6>Resumen de compra</h6>
-                Artículos: XX<br />
+            <div class="col-2 rounded mkcCheckoutEnd text-center">
+                <h6 class="mt-2">Fin de la operación</h6>
+                <p style="font-size: 64px" class="m-0 mkcLetraNaranja">#3</p>
                 <asp:LinkButton ID="btnCheckout" runat="server" CssClass="btn btn-warning btn-sm"
-                    Text="Comprar" OnClick="PerformCheckout" />
+                    Text="¡Pagar!" OnClick="PerformCheckout" />
             </div>
+
+
         </div>
 
     </div>

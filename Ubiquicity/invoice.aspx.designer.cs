@@ -31,6 +31,24 @@ namespace Ubiquicity {
         protected global::System.Web.UI.WebControls.Repeater checkoutRepeater;
         
         /// <summary>
+        /// totalItems control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl totalItems;
+        
+        /// <summary>
+        /// totalAmount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl totalAmount;
+        
+        /// <summary>
         /// creditNotesChk control.
         /// </summary>
         /// <remarks>

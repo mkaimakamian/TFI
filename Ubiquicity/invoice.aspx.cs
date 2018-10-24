@@ -73,8 +73,13 @@ namespace Ubiquicity
                 //Esto debería ser un resource manager, porque si bien ahora existen únicamente mapas, 
                 //se ofrecen servicios también.
                 MapManager mapManager = new MapManager();
-                checkoutRepeater.DataSource = mapManager.GetBySeveralIds(itemsId);
+                List<Map> maps = mapManager.GetBySeveralIds(itemsId);
+                checkoutRepeater.DataSource = maps;
                 checkoutRepeater.DataBind();
+
+                totalItems.InnerText = "Artículos: " + maps.Count;
+                totalAmount.InnerText = "Total a pagar: $" + maps.Sum(resource => resource.Price);
+
             }
             catch (Exception exception)
             {

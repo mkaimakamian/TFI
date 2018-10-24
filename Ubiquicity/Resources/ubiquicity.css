@@ -24,6 +24,13 @@
     color:#ffc107;
 }
 
+
+.mkcCheckoutEnd {
+    background-color:#909abb;
+    border-color: #909abb;
+    color: #ffffff;
+}
+
 .btn-primary {
     background-color:#909abb;
     border-color: #909abb;
