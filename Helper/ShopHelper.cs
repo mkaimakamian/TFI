@@ -28,6 +28,16 @@ namespace Helper
             GetSessionState().Add(resourceId);
         }
 
+        public static void RemoveFromCart(int resourceId, HttpSessionState session)
+        {
+            if (sessionState == null)
+            {
+                sessionState = session;
+                session["ItemShopsCheckout"] = new HashSet<int>();
+            }
+            GetSessionState().Remove(resourceId);
+        }
+
         /// <summary>
         /// Devuelve la cantidad de ítems almacenados
         /// </summary>
@@ -53,7 +63,8 @@ namespace Helper
         /// <returns></returns>
         private static HashSet<int> GetSessionState()
         {
-            if (sessionState == null) sessionState["ItemShopsCheckout"] = new HashSet<int>();
+            if (sessionState == null) return null;
+            if(sessionState["ItemShopsCheckout"] == null) sessionState["ItemShopsCheckout"] = new HashSet<int>();
             return (HashSet<int>)sessionState["ItemShopsCheckout"];
         }
     }

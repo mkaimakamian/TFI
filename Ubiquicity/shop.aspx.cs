@@ -15,6 +15,7 @@ namespace Ubiquicity
         protected void Page_Load(object sender, EventArgs e)
         {
             UCItemShopFilter.ShopRepeater = shopRepeater;
+            UpdateCartInformation();
         }
 
         /// <summary>
@@ -31,11 +32,35 @@ namespace Ubiquicity
         /// <summary>
         /// Actualiza la etiqueta del botón, mostrando las cantidades de los artículos escogidos para comprar.
         /// </summary>
-        private void UpdateCartButton()
+        private void UpdateCartInformation()
         {
             //if (SessionHelper.IsSessionAlive())
             //{
-                cartBtn.Text = "<i class='fa fa-tags' aria-hidden='true'></i> Elementos: " + ShopHelper.GetQuantity();
+            try
+            {
+                if (ShopHelper.GetQuantity() > 0)
+                {
+                    cartBtn.Text = "<i class='fa fa-tags' aria-hidden='true'></i> Elementos: " + ShopHelper.GetQuantity();
+                    MapManager mapManager = new MapManager();
+                    List<Map> maps = mapManager.GetBySeveralIds(ShopHelper.GetItemsId());
+
+                    if ((maps == null || maps.Count == 0) && mapManager.HasErrors)
+                    {
+                        ((front)Master).Alert.Show("Error", mapManager.ErrorDescription);
+                    }
+                    else
+                    {
+                        cartItemRepeater.DataSource = maps;
+                        cartItemRepeater.DataBind();
+                    }
+                }
+            }
+            catch (Exception exception)
+            {
+                ((front)Master).Alert.Show("Excepción", exception.Message);
+            }
+
+
             //} else
             //{
             //    cartBtn.Visible = false;
@@ -62,14 +87,16 @@ namespace Ubiquicity
                 MapManager mapManager = new MapManager();
                 List<Map> maps = mapManager.GetBySeveralIds(itemsId);
 
-                if ((maps == null || maps.Count == 0) && mapManager.HasErrors )
+                if ((maps == null || maps.Count == 0) && mapManager.HasErrors)
                 {
                     ((front)Master).Alert.Show("Error", mapManager.ErrorDescription);
-                } else
+                }
+                else
                 {
                     ModalCompare.Show("Comparador", maps);
                 }
-            } catch (Exception exception)
+            }
+            catch (Exception exception)
             {
                 ((front)Master).Alert.Show("Excepción", exception.Message);
             }
@@ -92,15 +119,18 @@ namespace Ubiquicity
                 if (e.CommandName == "AddToCart")
                 {
                     ShopHelper.AddToCart(id, Session);
-                    UpdateCartButton();
+                    UpdateCartInformation();
                 }
                 else if (e.CommandName == "ShowDetail")
                 {
-
                     ModalItemShop.Show(map);
+                } else if (e.CommandName == "RemoveItemCart")
+                {
+                    ShopHelper.RemoveFromCart(id, Session);
+                    UpdateCartInformation();
                 }
             }
-            catch(Exception exception)
+            catch (Exception exception)
             {
                 ((front)Master).Alert.Show("Exception", exception.Message);
             }

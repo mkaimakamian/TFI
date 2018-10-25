@@ -13,15 +13,6 @@ namespace Ubiquicity {
     public partial class invoice {
         
         /// <summary>
-        /// UCHeaderWeb control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Ubiquicity.UserControls.UCHeaderWeb UCHeaderWeb;
-        
-        /// <summary>
         /// checkoutRepeater control.
         /// </summary>
         /// <remarks>

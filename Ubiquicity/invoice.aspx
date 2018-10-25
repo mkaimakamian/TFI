@@ -1,11 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/front.Master" AutoEventWireup="true" CodeBehind="invoice.aspx.cs" Inherits="Ubiquicity.invoice" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="contentHolder" runat="server">
-    <div class="container-fluid">
-        <UCmkc:UCHeaderWeb runat="server" ID="UCHeaderWeb" Label="Nosotros" Imgsource="~/Resources/about01.svg" />
+    <div class="container-fluid pt-2">
+        <%--<UCmkc:UCHeaderWeb runat="server" ID="UCHeaderWeb" Label="Nosotros" Imgsource="~/Resources/about01.svg" />--%>
 
         <div class="row border rounded mb-3 p-1">
-            <div class="col-10" style="height: 190px;">
+            <div class="col-10" style="height: 190px; overflow-x: hidden; overflow-y: scroll;">
                 <%-- overflow-x: hidden; overflow-y: scroll;--%>
                 <div class="row">
 
