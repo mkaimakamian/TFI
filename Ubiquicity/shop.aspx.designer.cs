@@ -49,6 +49,15 @@ namespace Ubiquicity {
         protected global::System.Web.UI.HtmlControls.HtmlInputHidden selectedItemsInput;
         
         /// <summary>
+        /// divLoggedShop control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divLoggedShop;
+        
+        /// <summary>
         /// cartBtn control.
         /// </summary>
         /// <remarks>
@@ -65,6 +74,24 @@ namespace Ubiquicity {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater cartItemRepeater;
+        
+        /// <summary>
+        /// divNotLogged control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divNotLogged;
+        
+        /// <summary>
+        /// loginBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton loginBtn;
         
         /// <summary>
         /// shopRepeater control.

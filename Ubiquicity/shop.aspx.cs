@@ -14,12 +14,26 @@ namespace Ubiquicity
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
             UCItemShopFilter.ShopRepeater = shopRepeater;
+            ShowItemsResume(SessionHelper.IsSessionAlive());
+
             if (!IsPostBack)
             {
                 UpdateCartInformation();
             }
         }
+
+        /// <summary>
+        /// Muestra el menú con el resumen de los artículos seleccionados únicamente si el usuario
+        /// está logueado.
+        /// </summary>
+        private void ShowItemsResume(bool logged)
+        {
+            divLoggedShop.Visible = logged;
+            divNotLogged.Visible = !logged;
+        }
+
 
         /// <summary>
         /// Actualiza la etiqueta del botón, mostrando las cantidades de los artículos escogidos para comprar.
@@ -125,6 +139,12 @@ namespace Ubiquicity
         protected void GoToInvoice(object sender, EventArgs e)
         {
             Response.Redirect("/invoice.aspx");
+        }
+
+        //Muestra la ventana de login
+        protected void LogIn(object sender, EventArgs e)
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "openModal", "$('#loginModal').modal('show');", true);
         }
     }
 }

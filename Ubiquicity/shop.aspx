@@ -37,37 +37,51 @@
                     <!-- Comparar, adquirir y resumen -->
                     <div class="col-2 text-center">
                         <div class="row border rounded mt-1">
+
                             <div class="form-group col-12 bg-light pb-2">
                                 <label for="compareBtn">Seleccioná hasta 4 ítems para compararlos.</label>
-                                <asp:LinkButton ID="compareBtn" runat="server" CssClass="btn btn-primary btn-sm" Text="<i class='fa fa-clone' aria-hidden='true'></i> Comparar" OnClick="PerformCompare" />
+                                <asp:LinkButton ID="compareBtn" runat="server" CssClass="btn btn-success btn-sm" Text="<i class='fa fa-clone' aria-hidden='true'></i> Comparar" OnClick="PerformCompare" />
                                 <input id="selectedItemsInput" type="hidden" runat="server" />
                             </div>
 
-                            <div class="form-group col-12">
-                                <label for="cartBtn">
-                                    ¿Terminaste de agregar?
-                                    <br />
-                                    ¡Pasemos al pago!</label>
-                                <asp:LinkButton ID="cartBtn" runat="server" CssClass="btn btn-warning btn-sm"
-                                    Text="<i class='fa fa-tags' aria-hidden='true'></i> Adquirir"
-                                    OnClick="GoToInvoice" />
+                            <!-- Visibilidad controlada por back -->
+                            <div class="row" id="divLoggedShop" runat="server">
+                                <div class="col-12">
+                                    <div class="form-group col-12">
+                                        <label for="cartBtn">
+                                            ¿Terminaste de agregar?
+                                             <br />
+                                            ¡Pasemos al pago!</label>
+                                        <asp:LinkButton ID="cartBtn" runat="server" CssClass="btn btn-warning btn-sm"
+                                            Text="<i class='fa fa-tags' aria-hidden='true'></i> Adquirir"
+                                            OnClick="GoToInvoice" />
 
+                                    </div>
+                                    <div class="form-group col-12">
+                                        <hr class="mb-2 mt-0" />
+                                        <label class="blockquote">Tu listado</label>
+                                        <asp:Repeater ID="cartItemRepeater" runat="server" OnItemCommand="shopRepeater_ItemCommand">
+                                            <ItemTemplate>
+                                                <div class="row bg-light mb-1">
+                                                    <div class="col-10 text-left">
+                                                        <p class="m-0" style="font-size: 12px;" runat="server"><%#Eval("Name") %></p>
+                                                    </div>
+                                                    <div class="col-2">
+                                                        <asp:LinkButton ID="btnDelete" runat="server" Text="<i class='fa fa-trash-o' aria-hidden='true'></i>" CommandName="RemoveItemCart" CommandArgument='<%# Eval("id") %>' />
+                                                    </div>
+                                                </div>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
+                                    </div>
+
+                                </div>
                             </div>
-                            <div class="form-group col-12">
-                                <hr class="mb-2 mt-0" />
-                                <label class="blockquote">Tu listado</label>
-                                <asp:Repeater ID="cartItemRepeater" runat="server" OnItemCommand="shopRepeater_ItemCommand">
-                                    <ItemTemplate>
-                                        <div class="row bg-light mb-1">
-                                            <div class="col-10 text-left">
-                                                <p class="m-0" style="font-size: 12px;" runat="server"><%#Eval("Name") %></p>
-                                            </div>
-                                            <div class="col-2">
-                                                <asp:LinkButton ID="btnDelete" runat="server" Text="<i class='fa fa-trash-o' aria-hidden='true'></i>" CommandName="RemoveItemCart" CommandArgument='<%# Eval("id") %>' />
-                                            </div>
-                                        </div>
-                                    </ItemTemplate>
-                                </asp:Repeater>
+                            
+                            <div class="row" id="divNotLogged" runat="server">
+                                <div class="form-group col-12">
+                                    <label for="loginBtn">¿No estás logueado?</label>
+                                    <asp:LinkButton ID="loginBtn" runat="server" CssClass="btn btn-primary btn-sm" Text="<i class='fa fa-user' aria-hidden='true'></i> Ingresar :D" OnClick="LogIn" />
+                                </div>
                             </div>
 
                         </div>
@@ -80,7 +94,7 @@
                             <asp:Repeater ID="shopRepeater" runat="server" OnItemCommand="shopRepeater_ItemCommand">
                                 <ItemTemplate>
                                     <div class="border rounded bg-light p-1 m-1" style="width: 240px;">
-                                        <asp:ImageButton runat="server" src='<%# Eval("Image") %>' CssClass="img-thumbnail" CommandName="ShowDetail" CommandArgument='<%# Eval("id") %>'/>
+                                        <asp:ImageButton runat="server" src='<%# Eval("Image") %>' CssClass="img-thumbnail" CommandName="ShowDetail" CommandArgument='<%# Eval("id") %>' />
                                         <%--<img src="<%# Eval("Image") %>" class="img-thumbnail" />--%>
 
                                         <h5><%# Eval("Name") %></h5>
@@ -97,7 +111,8 @@
                                             <%--<asp:LinkButton ID="btnDetail" runat="server" CssClass="btn btn-primary btn-sm" Text="Detalle" CommandName="ShowDetail" CommandArgument='<%# Eval("id") %>' />--%>
                                         </div>
 
-                                        <input type="checkbox" value="<%# Eval("Id") %>" onclick="AddToCompare(this.value)" /> <small>Comparar</small>
+                                        <input type="checkbox" value="<%# Eval("Id") %>" onclick="AddToCompare(this.value)" />
+                                        <small>Comparar</small>
 
                                     </div>
                                 </ItemTemplate>

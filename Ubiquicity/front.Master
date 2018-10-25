@@ -117,7 +117,7 @@
                 </div>
             </div>
 
-            <!-- Modal de subscripcio newsletter -->
+            <!-- Modal de subscripcion newsletter -->
             <div class="modal fade" id="modalNewsSuscription" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
                     <div class="modal-content">
