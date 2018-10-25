@@ -15,27 +15,17 @@ namespace Ubiquicity
         protected void Page_Load(object sender, EventArgs e)
         {
             UCItemShopFilter.ShopRepeater = shopRepeater;
-            UpdateCartInformation();
+            if (!IsPostBack)
+            {
+                UpdateCartInformation();
+            }
         }
-
-        /// <summary>
-        /// Carga el repeater con los artículos a mostrar en el shop.
-        /// </summary>
-        //private void LoadRepeater()
-        //{
-        //    MapManager mapManager = new MapManager();
-        //    List<Map> maps = mapManager.Get();
-        //    shopRepeater.DataSource = maps;
-        //    shopRepeater.DataBind();
-        //}
 
         /// <summary>
         /// Actualiza la etiqueta del botón, mostrando las cantidades de los artículos escogidos para comprar.
         /// </summary>
         private void UpdateCartInformation()
         {
-            //if (SessionHelper.IsSessionAlive())
-            //{
             try
             {
                 if (ShopHelper.GetQuantity() > 0)
@@ -44,9 +34,11 @@ namespace Ubiquicity
                     MapManager mapManager = new MapManager();
                     List<Map> maps = mapManager.GetBySeveralIds(ShopHelper.GetItemsId());
 
+                    // Si por algún motivo no se recuperan mapas, significa que los ids están mal
+                    // o hay algo raro
                     if ((maps == null || maps.Count == 0) && mapManager.HasErrors)
                     {
-                        ((front)Master).Alert.Show("Error", mapManager.ErrorDescription);
+                        ((front)Master).Alert.ShowUP("Error", mapManager.ErrorDescription);
                     }
                     else
                     {
@@ -57,14 +49,8 @@ namespace Ubiquicity
             }
             catch (Exception exception)
             {
-                ((front)Master).Alert.Show("Excepción", exception.Message);
+                ((front)Master).Alert.ShowUP("Excepción", exception.Message);
             }
-
-
-            //} else
-            //{
-            //    cartBtn.Visible = false;
-            //}
         }
 
 
@@ -89,7 +75,7 @@ namespace Ubiquicity
 
                 if ((maps == null || maps.Count == 0) && mapManager.HasErrors)
                 {
-                    ((front)Master).Alert.Show("Error", mapManager.ErrorDescription);
+                    ((front)Master).Alert.ShowUP("Error", mapManager.ErrorDescription);
                 }
                 else
                 {
@@ -98,7 +84,7 @@ namespace Ubiquicity
             }
             catch (Exception exception)
             {
-                ((front)Master).Alert.Show("Excepción", exception.Message);
+                ((front)Master).Alert.ShowUP("Excepción", exception.Message);
             }
         }
 
