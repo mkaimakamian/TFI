@@ -70,9 +70,19 @@ namespace BL
 
         public override bool IsValid()
         {
+            bool isValid = true;
+
+            if (creditNotes == null || creditNotes.Count == 0)
+            {
+                string errorDescription = "No se seleccionó ninguna nota de crédito.";
+                log.AddLogWarn("IsValid", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
+                isValid = false;
+            }
+            
             //Como precondición, los ids de las notas de crédito pertenecen a aquellas válidas
             //por lo que no hace falta constatar nada.
-            return true;
+            return isValid;
         }
 
         /// <summary>

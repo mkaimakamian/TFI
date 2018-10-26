@@ -24,9 +24,12 @@ namespace BL
             double totalAmount = invoice.InvoiceItems.Sum(resource => resource.Price);
             double leftAmount = totalAmount;
 
+            if (!IsValid(invoice)) return false;
+
             List<PaymentMethod> paymentMethods = new List<PaymentMethod>();
-            paymentMethods.Add(new CreditNotePayment(invoice.CreditNotes));
-            paymentMethods.Add(new CardPayment(invoice.CreditCard));
+
+            if (invoice.CreditNotes != null) paymentMethods.Add(new CreditNotePayment(invoice.CreditNotes));
+            if (invoice.CreditCard != null) paymentMethods.Add(new CardPayment(invoice.CreditCard));
 
             //Ejecuta una prueba para constatar que el saldo puede ser cubierto
             foreach (PaymentMethod paymentMethod in paymentMethods)
@@ -82,9 +85,25 @@ namespace BL
             //Credit notes exist beforehand//
             invoiceMapper.Save(invoice);
             invoiceItemMapper.Save(invoice);
-            invoiceCNMapper.Save(invoice);
-            invoiceCCMapper.Save(invoice);
 
+            if (invoice.CreditNotes != null) invoiceCNMapper.Save(invoice);
+            if (invoice.CreditCard != null) invoiceCCMapper.Save(invoice);
+
+        }
+
+        private bool IsValid(Invoice invoice)
+        {
+            bool isValid = true;
+
+            if (invoice.CreditCard == null && invoice.CreditNotes == null)
+            {
+                string errorDescription = "Debe escogerse al menos un método de pagp.";
+                log.AddLogWarn("IsValid", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
+                isValid = false;
+            }
+
+            return isValid;
         }
     }
 }

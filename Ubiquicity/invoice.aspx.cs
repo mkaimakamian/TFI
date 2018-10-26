@@ -132,7 +132,7 @@ namespace Ubiquicity
         {
             Address billingAddress = new Address();
             billingAddress.Street = streetInput.Value;
-            billingAddress.Number = Convert.ToInt32(numberInput.Value);
+            billingAddress.Number = Convert.ToInt32(String.IsNullOrEmpty(numberInput.Value)? "0" : numberInput.Value);
             billingAddress.Zip = zipInput.Value;
             billingAddress.City = cityInput.Value;
             // Debería ser de un drop
@@ -206,12 +206,12 @@ namespace Ubiquicity
                 creditCard = new CreditCard();
                 creditCard.FirstName = firstNamesInput.Value;
                 creditCard.LastName = lastNamesInput.Value;
-                creditCard.Cvv = Convert.ToInt32(cvvInput.Value);
-                creditCard.Field1 = Convert.ToInt32(card1Input.Value);
-                creditCard.Field2 = Convert.ToInt32(card2Input.Value);
-                creditCard.Field3 = Convert.ToInt32(card3Input.Value);
-                creditCard.Field4 = Convert.ToInt32(card4Input.Value);
-                creditCard.DueDate = Convert.ToDateTime(duedateInput.Date);
+                creditCard.Cvv = Convert.ToInt32(String.IsNullOrEmpty(cvvInput.Value)? "0" : cvvInput.Value);
+                creditCard.Field1 = Convert.ToInt32(String.IsNullOrEmpty(card1Input.Value) ? "0000" : card1Input.Value);
+                creditCard.Field2 = Convert.ToInt32(String.IsNullOrEmpty(card2Input.Value) ? "0000" : card1Input.Value);
+                creditCard.Field3 = Convert.ToInt32(String.IsNullOrEmpty(card3Input.Value) ? "0000" : card1Input.Value);
+                creditCard.Field4 = Convert.ToInt32(String.IsNullOrEmpty(card4Input.Value) ? "0000" : card1Input.Value);
+                creditCard.DueDate = Convert.ToDateTime(String.IsNullOrEmpty(duedateInput.Date)? DateTime.Now.ToString() : duedateInput.Date);
                 creditCard.CreditCardType.Id = Convert.ToInt32(dropCardInput.SelectedValue);
             }
 

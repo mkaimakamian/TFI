@@ -81,6 +81,7 @@
     <Content Include="backup_manager.aspx" />
     <Content Include="business_manager.aspx" />
     <Content Include="category_manager.aspx" />
+    <Content Include="comment_manager.aspx" />
     <Content Include="contact.aspx" />
     <Content Include="credit_manager.aspx" />
     <Content Include="dashboard.aspx" />
@@ -268,6 +269,13 @@
     </Compile>
     <Compile Include="Classes\CompareItem.cs" />
     <Compile Include="Classes\UbiquicityEventArg.cs" />
+    <Compile Include="comment_manager.aspx.cs">
+      <DependentUpon>comment_manager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="comment_manager.aspx.designer.cs">
+      <DependentUpon>comment_manager.aspx</DependentUpon>
+    </Compile>
     <Compile Include="contact.aspx.cs">
       <DependentUpon>contact.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
