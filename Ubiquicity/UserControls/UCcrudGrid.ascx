@@ -3,7 +3,7 @@
     <ContentTemplate>
         <div id="divBtnNew" runat="server" class="row border p-1 m-1 rounded">
             <button id="btnNewItem" runat="server" class="btn btn-primary btn-sm" onserverclick="btnNewItem_Click">
-                <i class="fa fa-plus" aria-hidden="true"></i>Crear nuevo</button>
+                <i class="fa fa-plus" aria-hidden="true"></i> Crear nuevo</button>
         </div>
         <div class="row border p-1 m-1 rounded">
             <asp:GridView ID="gvItem" runat="server" AllowPaging="true" PageSize="10" OnRowDataBound="gvItem_RowDataBound" OnPageIndexChanging="gvItem_PageIndexChanging"

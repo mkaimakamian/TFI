@@ -75,6 +75,9 @@
     <Compile Include="CategoryManager.cs" />
     <Compile Include="NewsManager.cs" />
     <Compile Include="PaymentMethod.cs" />
+    <Compile Include="PollManager.cs" />
+    <Compile Include="PollOptionManager.cs" />
+    <Compile Include="PollQuestionManager.cs" />
     <Compile Include="RoleManager.cs" />
     <Compile Include="SessionManager.cs" />
     <Compile Include="UserManager.cs" />

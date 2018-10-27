@@ -86,34 +86,6 @@ namespace BL
         }
 
         /// <summary>
-        /// Devuelve las notas de créditos cuyos id son pasados por parámetros.
-        /// </summary>
-        /// <param name="ids"></param>
-        /// <returns></returns>
-        //private List<CreditNote> GetCreditNotes(int[] ids)
-        //{
-        //    if (creditNotes == null)
-        //    {
-        //        creditNotes = new List<CreditNote>();
-        //    }
-        //    else
-        //    {
-        //        // Si no es nulo es porque ya se llenó en alguna oportunidad
-        //        // y no hace falta regresar a la base de nuevo.
-        //        return creditNotes;
-        //    }                
-
-        //    foreach (int id in ids)
-        //    {
-        //        CreditNoteManager creditNoteManager = new CreditNoteManager();
-        //        creditNotes.Add(creditNoteManager.Get(id));
-        //    }
-
-        //    return creditNotes;
-        //}
-
-
-        /// <summary>
         /// Actualiza el estado de las notas para marcarlas como usadas.
         /// </summary>
         /// <param name="usedCreditNotes"></param>

@@ -96,6 +96,7 @@
     <Content Include="packages.config" />
     <Content Include="front.Master" />
     <Content Include="password_reset.aspx" />
+    <Content Include="poll_manager.aspx" />
     <Content Include="privacy.aspx" />
     <Content Include="promotion_manager.aspx" />
     <Content Include="recovery_action.aspx" />
@@ -200,6 +201,7 @@
     <Content Include="UserControls\UCFormMap.ascx" />
     <Content Include="UserControls\UCFormNews.ascx" />
     <Content Include="UserControls\UCFormPassword.ascx" />
+    <Content Include="UserControls\UCFormPoll.ascx" />
     <Content Include="UserControls\UCFormRolePermission.ascx" />
     <Content Include="UserControls\UCFormUserRole.ascx" />
     <Content Include="UserControls\UCHeaderBackOffice.ascx" />
@@ -374,6 +376,13 @@
     <Compile Include="password_reset.aspx.designer.cs">
       <DependentUpon>password_reset.aspx</DependentUpon>
     </Compile>
+    <Compile Include="poll_manager.aspx.cs">
+      <DependentUpon>poll_manager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="poll_manager.aspx.designer.cs">
+      <DependentUpon>poll_manager.aspx</DependentUpon>
+    </Compile>
     <Compile Include="privacy.aspx.cs">
       <DependentUpon>privacy.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -486,6 +495,13 @@
     </Compile>
     <Compile Include="UserControls\UCFormPassword.ascx.designer.cs">
       <DependentUpon>UCFormPassword.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCFormPoll.ascx.cs">
+      <DependentUpon>UCFormPoll.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCFormPoll.ascx.designer.cs">
+      <DependentUpon>UCFormPoll.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\UCFormRolePermission.ascx.cs">
       <DependentUpon>UCFormRolePermission.ascx</DependentUpon>
