@@ -87,6 +87,7 @@
     <Content Include="dashboard.aspx" />
     <Content Include="faq.aspx" />
     <Content Include="invoice.aspx" />
+    <Content Include="invoice_finish.aspx" />
     <Content Include="language_manager.aspx" />
     <Content Include="log_manager.aspx" />
     <Content Include="map_manager.aspx" />
@@ -326,6 +327,13 @@
     </Compile>
     <Compile Include="invoice.aspx.designer.cs">
       <DependentUpon>invoice.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="invoice_finish.aspx.cs">
+      <DependentUpon>invoice_finish.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="invoice_finish.aspx.designer.cs">
+      <DependentUpon>invoice_finish.aspx</DependentUpon>
     </Compile>
     <Compile Include="language_manager.aspx.cs">
       <DependentUpon>language_manager.aspx</DependentUpon>

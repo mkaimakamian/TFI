@@ -10,24 +10,15 @@
 namespace Ubiquicity {
     
     
-    public partial class user_profile {
+    public partial class invoide_finish {
         
         /// <summary>
-        /// UCHeaderBackOffice control.
+        /// divSuccessMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ubiquicity.UserControls.UCHeaderBackOffice UCHeaderBackOffice;
-        
-        /// <summary>
-        /// UCcrudGrid control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Ubiquicity.UserControls.UCcrudGrid UCcrudGrid;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divSuccessMessage;
     }
 }

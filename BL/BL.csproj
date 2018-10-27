@@ -59,6 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountDetailManager.cs" />
     <Compile Include="AddressManager.cs" />
     <Compile Include="BackupManager.cs" />
     <Compile Include="BaseManager.cs" />
