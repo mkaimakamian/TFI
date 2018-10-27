@@ -68,7 +68,7 @@ namespace BL
                 AddError(new ResultBE(ResultBE.Type.NULL, errorDescription));
                 return null;
             }
-
+            poll.Questions = pollQuestions;
             return poll;
         }
 

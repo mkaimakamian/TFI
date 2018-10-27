@@ -76,7 +76,7 @@ namespace Ubiquicity
                 UCFormPoll.FillForm(poll);
                 Session["Ubiquicity_action"] = EDIT;
                 //Page.ClientScript.RegisterStartupScript(this.GetType(), "openModalEdit", "window.onload = function() { $('#modalMap').modal('show'); }", true);
-                ScriptManager.RegisterStartupScript(upUCModalForm, upUCModalForm.GetType(), "openModalEdit", "$('#modalMap').modal('show');", true);
+                ScriptManager.RegisterStartupScript(upUCModalForm, upUCModalForm.GetType(), "openModalEdit", "$('#modalPol').modal('show');", true);
                 upUCModalForm.Update();
             }
         }

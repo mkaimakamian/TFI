@@ -60,6 +60,7 @@
     <Compile Include="PollMapper.cs" />
     <Compile Include="PollOptionMapper.cs" />
     <Compile Include="PollQuestionMapper.cs" />
+    <Compile Include="PollQuestionOptionMapper.cs" />
     <Compile Include="RoleMapper.cs" />
     <Compile Include="RolePermissionMapper.cs" />
     <Compile Include="TranslationMapper.cs" />

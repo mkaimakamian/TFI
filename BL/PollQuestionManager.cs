@@ -8,7 +8,7 @@ using ORM;
 
 namespace BL
 {
-    public class PollQuestionManager:BaseManager
+    public class PollQuestionManager : BaseManager
     {
         /// <summary>
         /// Persiste el elemento.
@@ -20,14 +20,24 @@ namespace BL
             if (!IsValid(poll)) return false;
 
             PollQuestionMapper pollQuestionMapper = new PollQuestionMapper();
+            PollQuestionOptionMapper pollQuestionOptionMapper = new PollQuestionOptionMapper();
 
             if (!pollQuestionMapper.Save(poll))
             {
-                string errorDescription = "No se ha podido guardar la encuesta.";
+                string errorDescription = "No se han podido guardar las preguntas para la encuesta con id " + poll.Id + ".";
                 log.AddLogCritical("Save", errorDescription, this);
                 AddError(new ResultBE(ResultBE.Type.FAIL, errorDescription));
                 return false;
             }
+
+            if (!pollQuestionOptionMapper.Save(poll.Questions))
+            {
+                string errorDescription = "No se ha podido guardar las opcione spara la spreguntas de la encuesta con id " + poll.Id + ".";
+                log.AddLogCritical("Save", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.FAIL, errorDescription));
+                return false;
+            }
+
             return true;
         }
 
@@ -38,8 +48,18 @@ namespace BL
         /// <returns></returns>
         public List<PollQuestion> Get(int pollId)
         {
+            PollQuestionOptionMapper pollQuestionOptionMapper = new PollQuestionOptionMapper();
             PollQuestionMapper pollQuestionMapper = new PollQuestionMapper();
-            return pollQuestionMapper.GetByPoll(pollId);
+            //TODO - controlar errores
+            List<PollQuestion> pollQuestions = pollQuestionMapper.GetByPoll(pollId);
+            
+            foreach (PollQuestion pollQuestion in pollQuestions)
+            {
+                //TODO - controlar errores
+                pollQuestion.Options = pollQuestionOptionMapper.Get(pollQuestion.Id);
+            }
+
+            return pollQuestions;
         }
 
 
@@ -51,10 +71,10 @@ namespace BL
         public bool Edit(Poll poll)
         {
             if (!IsValid(poll)) return false;
-
             if (!Delete(poll.Id)) return false;
+            //TODO - Regenerar la tabla de relaciones
             if (!Save(poll)) return false;
-            
+
             return true;
         }
 

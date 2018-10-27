@@ -49,31 +49,13 @@ namespace Ubiquicity.UserControls {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl questionListCol;
         
         /// <summary>
-        /// newBtn control.
+        /// pollQuestionList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton newBtn;
-        
-        /// <summary>
-        /// pollOptionList control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox pollOptionList;
-        
-        /// <summary>
-        /// editBtn control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton editBtn;
+        protected global::System.Web.UI.WebControls.ListBox pollQuestionList;
         
         /// <summary>
         /// deleteBtn control.
@@ -83,6 +65,15 @@ namespace Ubiquicity.UserControls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton deleteBtn;
+        
+        /// <summary>
+        /// newBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton newBtn;
         
         /// <summary>
         /// newQuestionListCol control.
@@ -109,7 +100,7 @@ namespace Ubiquicity.UserControls {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBoxList optionListInput;
+        protected global::System.Web.UI.WebControls.ListBox optionListInput;
         
         /// <summary>
         /// addBtn control.

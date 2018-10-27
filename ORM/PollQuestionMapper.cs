@@ -26,7 +26,8 @@ namespace ORM
             foreach (PollQuestion pollQuestion in poll.Questions)
             {
                 table = new Hashtable();
-                table.Add("@name", pollQuestion.Question);
+                table.Add("@pollId", poll.Id);
+                table.Add("@question", pollQuestion.Question);
                 pollQuestion.Id = dal.Write(table, "spWritePollQuestion");
             }
             return true;

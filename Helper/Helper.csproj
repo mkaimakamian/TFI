@@ -46,6 +46,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SecurityHelper.cs" />
     <Compile Include="SessionHelper.cs" />
+    <Compile Include="SessionUtilHelper.cs" />
     <Compile Include="ShopHelper.cs" />
     <Compile Include="UtilsHelper.cs" />
   </ItemGroup>

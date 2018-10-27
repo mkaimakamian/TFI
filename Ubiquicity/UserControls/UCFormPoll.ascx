@@ -2,26 +2,6 @@
 <div class="modal-body">
     <div class="row">
         <!-- Poll -->
-
-        <%--<div class="col">
-            <label for="pollOptionList">Preguntas</label>
-            <div class="row">
-                <div class="form-group col-4">
-                    <asp:LinkButton ID="newBtn" runat="server" 
-                        CssClass="btn btn-primary btn-sm" Text="<i class='fa fa-plus' aria-hidden='true'></i> Nueva"/>
-                </div>
-                
-                <div class="form-group col-12">
-                    <asp:ListBox ID="pollOptionList" runat="server" CssClass="form-control" Height="200" />
-                </div>
-                <div class="form-group col-6">
-                    <asp:LinkButton ID="editBtn" runat="server" CssClass="btn btn-primary btn-sm" Text="<i class='fa fa-pencil-square-o' aria-hidden='true'></i> Editar" />
-                </div>
-                <div class="form-group col-6">
-                    <asp:LinkButton ID="deleteBtn" runat="server" CssClass="btn btn-primary btn-sm" Text="<i class='fa fa-window-close-o' aria-hidden='true'></i> Eliminar" />
-                </div>
-            </div>
-        </div>--%>
         <div class="col">
             <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -55,19 +35,23 @@
                     <div class="row">
                         <div class="col-6" id="questionListCol" runat="server">
                             <div class="row">
-                                <div class="form-group col-4">
-                                    <asp:LinkButton ID="newBtn" runat="server" CssClass="btn btn-primary btn-sm" 
-                                        Text="<i class='fa fa-plus' aria-hidden='true'></i> Nueva" OnClick="NewQuestion"/>
-                                </div>
+
 
                                 <div class="form-group col-12">
-                                    <asp:ListBox ID="pollOptionList" runat="server" CssClass="form-control" Height="200" />
+                                    <label for="pollQuestionList">Preguntas</label>
+
+                                    <asp:ListBox ID="pollQuestionList" runat="server" CssClass="form-control" Height="200" />
+
                                 </div>
-                                <div class="form-group col-6">
+                                <%--                                <div class="form-group col-6">
                                     <asp:LinkButton ID="editBtn" runat="server" CssClass="btn btn-primary btn-sm" Text="<i class='fa fa-pencil-square-o' aria-hidden='true'></i> Editar" />
-                                </div>
+                                </div>--%>
                                 <div class="form-group col-6">
-                                    <asp:LinkButton ID="deleteBtn" runat="server" CssClass="btn btn-primary btn-sm" Text="<i class='fa fa-window-close-o' aria-hidden='true'></i> Eliminar" />
+                                    <asp:LinkButton ID="deleteBtn" runat="server" CssClass="btn btn-primary btn-sm" Text="Eliminar" OnClick="DeleteQuestion" />
+                                </div>
+
+                                                                <div class="form-group col-6">
+                                    <asp:LinkButton ID="newBtn" runat="server" CssClass="btn btn-primary btn-sm" Text="Nueva" OnClick="NewQuestion" />
                                 </div>
                             </div>
                         </div>
@@ -81,10 +65,11 @@
                                 </div>
                                 <div class="form-group col-12">
                                     <label for="optionListInput">Opciones</label>
-                                    <asp:CheckBoxList ID="optionListInput" runat="server" CssClass="form-control"></asp:CheckBoxList>
+                                    <asp:ListBox ID="optionListInput" runat="server" CssClass="form-control" Height="125" SelectionMode="Multiple"></asp:ListBox>
+
                                 </div>
                                 <div class="form-group col-6">
-                                    <asp:LinkButton ID="addBtn" runat="server" CssClass="btn btn-primary btn-sm" Text="<i class='fa fa-window-close-o' aria-hidden='true'></i> Agregar" />
+                                    <asp:LinkButton ID="addBtn" runat="server" CssClass="btn btn-primary btn-sm" Text="Agregar" OnClick="AddQuestion" />
                                 </div>
                             </div>
                         </div>

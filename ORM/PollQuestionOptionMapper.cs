@@ -7,37 +7,37 @@ using System.Data;
 using System.Collections;
 using BE;
 using DA;
-
 namespace ORM
 {
-    public class PollOptionMapper
+    public class PollQuestionOptionMapper
     {
+
         /// <summary>
-        /// Recupera el listado de elementos de la base.
+        /// Guarda la relación entre pregunta y opciones.
         /// </summary>
+        /// <param name="pollQuestions"></param>
         /// <returns></returns>
-        public List<PollOption> Get()
+        public bool Save(List<PollQuestion> pollQuestions)
         {
             Dal dal = new Dal();
-            Hashtable table = new Hashtable();
-            List<PollOption> pollOptions = null;
+            Hashtable table = null;
 
-            DataSet result = dal.Read(table, "spReadPollOption");
-
-            if (result != null && result.Tables[0].Rows.Count > 0)
+            foreach(PollQuestion pollQuestion in pollQuestions)
             {
-                pollOptions = new List<PollOption>();
-                foreach (DataRow data in result.Tables[0].Rows)
+                foreach (PollOption pollOption in pollQuestion.Options)
                 {
-                    pollOptions.Add(ConvertToModel(data));
+                    table = new Hashtable();
+                    table.Add("@questionid", pollQuestion.Id);
+                    table.Add("@optionId", pollOption.Id);
+                    dal.Write(table, "spWritePollQuestionOption");
                 }
-            }
 
-            return pollOptions;
+            }
+            return true;
         }
 
         /// <summary>
-        /// Recupera el listado de elementos de la base, para un id de pregunta particular.
+        /// Recupera el listado de elementos de la base.
         /// </summary>
         /// <returns></returns>
         public List<PollOption> Get(int pollQuestionId)
@@ -46,9 +46,9 @@ namespace ORM
             Hashtable table = new Hashtable();
             List<PollOption> pollOptions = null;
 
-            table.Add("@pollQuestionId", pollQuestionId);
+            table.Add("@questionId", pollQuestionId);
 
-            DataSet result = dal.Read(table, "spReadPollOption");
+            DataSet result = dal.Read(table, "spReadPollQuestionOption");
 
             if (result != null && result.Tables[0].Rows.Count > 0)
             {
@@ -67,12 +67,9 @@ namespace ORM
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        public PollOption ConvertToModel(DataRow data)
+        private PollOption ConvertToModel(DataRow data)
         {
-            PollOption pollOption = new PollOption();
-            pollOption.Id = int.Parse(data["id"].ToString());
-            pollOption.Option = data["option"].ToString();
-            return pollOption;
+            return new PollOptionMapper().ConvertToModel(data);
         }
     }
 }

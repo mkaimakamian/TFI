@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BE;
+using Helper;
 
 namespace Ubiquicity.UserControls
 {
@@ -22,6 +23,9 @@ namespace Ubiquicity.UserControls
             optionListInput.DataValueField = "Id";
             optionListInput.DataBind();
 
+            pollQuestionList.DataSource = null;
+            pollQuestionList.DataBind();
+
             nameInput.Value = "";
             descriptionInput.Value = "";
             dueDateInput.Date = "";
@@ -33,8 +37,8 @@ namespace Ubiquicity.UserControls
             nameInput.Value = poll.Name;
             descriptionInput.Value = poll.Description;
             dueDateInput.Date = poll.DueDate.ToShortDateString();
-            poll.PollType = false;
-            poll.Questions = null;
+            //poll.PollType = false;
+            RefreshQuestionList(poll.Questions);
         }
 
         public void PopulateModel(Poll poll)
@@ -43,7 +47,9 @@ namespace Ubiquicity.UserControls
             poll.Description = descriptionInput.Value;
             poll.DueDate = Convert.ToDateTime(dueDateInput.Date);
             poll.PollType = false;
-            poll.Questions = null;
+            poll.Questions = SessionUtilHelper.GetPollQuestions(Session);
+
+            SessionUtilHelper.FlushPollQuestion(Session);
         }
 
         /// <summary>
@@ -55,6 +61,56 @@ namespace Ubiquicity.UserControls
         {
             questionListCol.Disabled = true;
             newQuestionListCol.Disabled = false;
+        }
+
+        protected void AddQuestion(object sender, EventArgs e)
+        {
+            List<PollOption> pollOptions = new List<PollOption>();
+            List<ListItem> selectedOptions = optionListInput.Items.Cast<ListItem>().Where(li => li.Selected).ToList();
+
+            //Como es un elemento simple, no tiene sentido buscar el elemento en la base
+            //puesto que todos los datos ya están disponibles.
+            foreach(ListItem listItem in selectedOptions)
+            {
+                PollOption pollOption = new PollOption();
+                pollOption.Id = Convert.ToInt32(listItem.Value);
+                pollOption.Option = listItem.Text;
+                pollOptions.Add(pollOption);
+            }
+
+            PollQuestion pollQuestion = new PollQuestion();
+            pollQuestion.Question = questionInput.Value;
+            pollQuestion.Options = pollOptions;
+
+            SessionUtilHelper.KeepPollQuestion(pollQuestion, Session);
+            RefreshQuestionList(SessionUtilHelper.GetPollQuestions(Session));
+
+            questionInput.Value = "";
+            optionListInput.ClearSelection();
+        }
+
+        /// <summary>
+        /// Elimina de la lista de las preguntas, aquella que se encuentra seleccionada.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void DeleteQuestion(object sender, EventArgs e)
+        {
+            ListItem selectedQuestion = pollQuestionList.SelectedItem;
+            PollQuestion pollQuestion = new PollQuestion();
+            pollQuestion.Question = selectedQuestion.Text;
+            SessionUtilHelper.RemovePollQuestion(pollQuestion, Session);
+            RefreshQuestionList(SessionUtilHelper.GetPollQuestions(Session));
+        }
+
+        /// <summary>
+        /// Actualiza el listado de preguntas.
+        /// </summary>
+        private void RefreshQuestionList(List<PollQuestion> questions)
+        {
+            pollQuestionList.DataSource = questions;
+            pollQuestionList.DataTextField = "Question";
+            pollQuestionList.DataBind();
         }
     }
 }
