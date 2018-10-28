@@ -15,7 +15,7 @@ namespace BE
         private int status; //quizá enumerado?
         private User user;
         private DateTime used;
-        //todo - debería estar asociado a un invoice o directamente eso lo pongo como observación?
+        private int invoiceId;
 
         public int Id
         {
@@ -112,6 +112,19 @@ namespace BE
         public string Description
         {
             get { return "$" + Amount + " ("+ Date.ToShortDateString() + ")" ; }
+        }
+
+        public int InvoiceId
+        {
+            get
+            {
+                return invoiceId;
+            }
+
+            set
+            {
+                invoiceId = value;
+            }
         }
     }
 }

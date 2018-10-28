@@ -53,6 +53,7 @@ namespace Helper
         /// <returns></returns>
         public static int[] GetItemsId()
         {
+            if (GetSessionState() == null) return null;
            return GetSessionState().ToArray();
         }
 

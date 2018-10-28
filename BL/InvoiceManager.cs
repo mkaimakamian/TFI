@@ -55,6 +55,7 @@ namespace BL
                 }
 
                 SaveInvoice(invoice);
+                SaveTracking(invoice);
                 return true;
             } else
             {
@@ -77,18 +78,23 @@ namespace BL
             InvoiceItemMapper invoiceItemMapper = new InvoiceItemMapper();
             // TODO - si se crea un manager, mover la tarjeta
             CreditCardMapper creditCardMapper = new CreditCardMapper();
-            InvoiceCreditNoteMapper invoiceCNMapper = new InvoiceCreditNoteMapper();
             InvoiceCreditCardMapper invoiceCCMapper = new InvoiceCreditCardMapper();
 
             addressManager.Save(invoice.BillingAddress);
             creditCardMapper.Save(invoice.CreditCard);
-            //Credit notes exist beforehand//
             invoiceMapper.Save(invoice);
             invoiceItemMapper.Save(invoice);
-
-            if (invoice.CreditNotes != null) invoiceCNMapper.Save(invoice);
             if (invoice.CreditCard != null) invoiceCCMapper.Save(invoice);
+        }
 
+        /// <summary>
+        /// Genera el registro de traxckeo del producto.
+        /// </summary>
+        private void SaveTracking(Invoice invoice)
+        {
+            TrackingManager trackingManager = new TrackingManager();
+            // TODO - implementar control de error.
+            trackingManager.Save(invoice);
         }
 
         private bool IsValid(Invoice invoice)

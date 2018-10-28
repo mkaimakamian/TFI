@@ -46,7 +46,6 @@
     <Compile Include="CreditCardMapper.cs" />
     <Compile Include="CreditNoteMapper.cs" />
     <Compile Include="InvoiceCreditCardMapper.cs" />
-    <Compile Include="InvoiceCreditNoteMapper.cs" />
     <Compile Include="InvoiceItemMapper.cs" />
     <Compile Include="InvoiceMapper.cs" />
     <Compile Include="ItemCommenMapper.cs" />
@@ -64,6 +63,7 @@
     <Compile Include="PollQuestionOptionMapper.cs" />
     <Compile Include="RoleMapper.cs" />
     <Compile Include="RolePermissionMapper.cs" />
+    <Compile Include="TrackingMapper.cs" />
     <Compile Include="TranslationMapper.cs" />
     <Compile Include="UserMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

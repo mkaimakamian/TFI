@@ -56,6 +56,7 @@ namespace BE
         {
             get
             {
+                if (resource == null) resource = new Resource();
                 return resource;
             }
 

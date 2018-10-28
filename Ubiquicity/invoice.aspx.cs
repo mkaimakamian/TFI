@@ -115,7 +115,7 @@ namespace Ubiquicity
                     ((front)Master).Alert.Show("Error", invoiceManager.ErrorDescription);
                 } else
                 {
-                    ((front)Master).Alert.Show("Éxito", "Felicitaciones, la operación se realizó con éxito.");
+                    Response.Redirect("/invoice_finish.aspx");
                 }
 
             } catch (Exception exception)

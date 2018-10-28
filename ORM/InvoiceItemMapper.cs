@@ -36,5 +36,44 @@ namespace ORM
 
             return true;
         }
+
+        /// <summary>
+        /// Recupera el elemento cuyo id coincida con el provisto por parámetro.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public InvoiceItem Get(int id)
+        {
+            Dal dal = new Dal();
+            Hashtable table = new Hashtable();
+            InvoiceItem invoiceItem = null;
+
+            table.Add("@id", id);
+
+            DataSet result = dal.Read(table, "spReadInvoiceItem");
+
+            if (result != null && result.Tables[0].Rows.Count > 0)
+            {
+                invoiceItem = ConvertToModel(result.Tables[0].Rows[0]);
+            }
+
+            return invoiceItem;
+        }
+
+        /// <summary>
+        /// Devuelve un objeto modelado con los valores del dataRow que recibe por parámetro.
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        private InvoiceItem ConvertToModel(DataRow data)
+        {
+            InvoiceItem invoiceItem = new InvoiceItem();
+            invoiceItem.Id = int.Parse(data["id"].ToString());
+            invoiceItem.Price = Convert.ToDouble(data["price"]); 
+            invoiceItem.Quantity = int.Parse(data["quantity"].ToString());
+            invoiceItem.Resource.Id = int.Parse(data["resourceId"].ToString());
+
+            return invoiceItem;
+        }
     }
 }

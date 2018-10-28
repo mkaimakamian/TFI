@@ -66,6 +66,7 @@
     <Compile Include="Resource.cs" />
     <Compile Include="ResultBE.cs" />
     <Compile Include="Role.cs" />
+    <Compile Include="Tracking.cs" />
     <Compile Include="Translation.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

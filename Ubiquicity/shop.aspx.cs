@@ -82,18 +82,27 @@ namespace Ubiquicity
                 //A continuación se crea un array de strings a través del split y se convierten los elementos en enteros
                 //para crear el mismo array pero del tipo entero.
                 //int[] itemsId = Array.ConvertAll(selectedItemsInput.Value.Split(','), item => Convert.ToInt32(item));
-                int[] itemsId = UtilsHelper.ToIntArray(selectedItemsInput.Value);
 
-                MapManager mapManager = new MapManager();
-                List<Map> maps = mapManager.GetBySeveralIds(itemsId);
-
-                if ((maps == null || maps.Count == 0) && mapManager.HasErrors)
+                if (!String.IsNullOrEmpty(selectedItemsInput.Value))
                 {
-                    ((front)Master).Alert.ShowUP("Error", mapManager.ErrorDescription);
+                    int[] itemsId = UtilsHelper.ToIntArray(selectedItemsInput.Value);
+
+                    MapManager mapManager = new MapManager();
+                    List<Map> maps = mapManager.GetBySeveralIds(itemsId);
+
+                    if ((maps == null || maps.Count == 0) && mapManager.HasErrors)
+                    {
+                        ((front)Master).Alert.ShowUP("Error", mapManager.ErrorDescription);
+                    }
+                    else
+                    {
+                        ModalCompare.Show("Comparador", maps);
+                    }
                 }
                 else
                 {
-                    ModalCompare.Show("Comparador", maps);
+                    ((front)Master).Alert.ShowUP("Comparador", "Debes elegir productos para realizar la comparación.");
+
                 }
             }
             catch (Exception exception)
@@ -116,29 +125,50 @@ namespace Ubiquicity
                 MapManager mapManager = new MapManager();
                 Map map = mapManager.Get(id);
 
-                if (e.CommandName == "AddToCart")
-                {
-                    ShopHelper.AddToCart(id, Session);
-                    UpdateCartInformation();
-                }
-                else if (e.CommandName == "ShowDetail")
+                if (e.CommandName == "ShowDetail")
                 {
                     ModalItemShop.Show(map);
-                } else if (e.CommandName == "RemoveItemCart")
+                }
+                else
                 {
-                    ShopHelper.RemoveFromCart(id, Session);
-                    UpdateCartInformation();
+                    //Únicamente es posible agregar artículos si el usuario está logueado
+                    if (SessionHelper.IsSessionAlive())
+                    {
+                        if (e.CommandName == "AddToCart")
+                        {
+                            ShopHelper.AddToCart(id, Session);
+                            UpdateCartInformation();
+                        }
+                        else if (e.CommandName == "RemoveItemCart")
+                        {
+                            ShopHelper.RemoveFromCart(id, Session);
+                            UpdateCartInformation();
+                        }
+                    }
+                    else
+                    {
+                        ((front)Master).Alert.ShowUP("Sesión requerida", "Para poder realizar la operación debés iniciar sesión.");
+
+                    }
+
                 }
             }
             catch (Exception exception)
             {
-                ((front)Master).Alert.Show("Exception", exception.Message);
+                ((front)Master).Alert.ShowUP("Exception", exception.Message);
             }
         }
 
         protected void GoToInvoice(object sender, EventArgs e)
         {
-            Response.Redirect("/invoice.aspx");
+            if (ShopHelper.GetQuantity() > 0)
+            {
+                Response.Redirect("/invoice.aspx");
+            }
+            else
+            {
+                ((front)Master).Alert.ShowUP("No hay productos elegidos", "¡Hey! debes elegir algún producto primero.");
+            }
         }
 
         //Muestra la ventana de login

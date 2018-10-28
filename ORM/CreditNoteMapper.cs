@@ -28,6 +28,7 @@ namespace ORM
             table.Add("@date", creditNote.Date);
             table.Add("@status", creditNote.Status);
             table.Add("@userId", creditNote.User.Id);
+            table.Add("@invoiceId", creditNote.InvoiceId);
             creditNote.Id = dal.Write(table, "spWriteCreditNote");
 
             return creditNote.Id > 0;
@@ -50,6 +51,8 @@ namespace ORM
             table.Add("@status", creditNote.Status);
             table.Add("@userId", creditNote.User.Id);
             table.Add("@used", creditNote.Used);
+            table.Add("@invoiceId", creditNote.InvoiceId);
+
             return dal.Write(table, "spModifyCreditNote") > 0;
         }
 
@@ -110,6 +113,7 @@ namespace ORM
             creditNote.User.Id = Convert.ToInt32(data["userId"].ToString());
             creditNote.Status = Convert.ToInt32(data["status"].ToString());
             creditNote.Used = Convert.ToDateTime(data["date"]);
+            creditNote.InvoiceId = int.Parse(data["invoiceId"].ToString());
             return creditNote;
         }
     }

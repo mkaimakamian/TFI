@@ -1,7 +1,16 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/front.Master" AutoEventWireup="true" CodeBehind="user_profile.aspx.cs" Inherits="Ubiquicity.user_profile" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="contentHolder" runat="server">
+
     <UCmkc:UCHeaderBackOffice runat="server" ID="UCHeaderBackOffice" Image="~/Resources/backup_manager01.svg" Title="Perfil de usuario" Subtitle="En este apartado podrás..." Content="Administrar los datos de tu cuenta y conocer tus movimientos." />
-    <UCmkc:UCcrudGrid runat="server" id="UCcrudGrid" />
+    
+    <UCmkc:UCHeaderBackOffice runat="server"  Content="Estado de cuenta"/>
+    <UCmkc:UCcrudGrid runat="server" ID="UCcrudGrid" />
+
+    <UCmkc:UCHeaderBackOffice runat="server"  Content="Tus productos adquiridos"/>
+    <UCmkc:UCcrudGrid runat="server" ID="UCcrudGridTracking" />
+
+
 
     <%--<div class="container-fluid mt-5">
         <div class="row">

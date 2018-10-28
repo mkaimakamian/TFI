@@ -81,6 +81,7 @@
     <Compile Include="PollQuestionManager.cs" />
     <Compile Include="RoleManager.cs" />
     <Compile Include="SessionManager.cs" />
+    <Compile Include="TrackingManager.cs" />
     <Compile Include="UserManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

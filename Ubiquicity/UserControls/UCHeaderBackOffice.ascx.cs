@@ -24,6 +24,7 @@ namespace Ubiquicity.UserControls
             set
             {
                 UCImage.Src = value;
+                UCImage.Visible = true;
             }
         }
 
