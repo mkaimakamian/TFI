@@ -50,7 +50,6 @@
     <Compile Include="Invoice.cs" />
     <Compile Include="InvoiceItem.cs" />
     <Compile Include="ItemComment.cs" />
-    <Compile Include="Label.cs" />
     <Compile Include="Language.cs" />
     <Compile Include="LogEntry.cs" />
     <Compile Include="Map.cs" />

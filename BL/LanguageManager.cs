@@ -60,19 +60,19 @@ namespace BL
             return languages;
         }
 
-        public List<Label> GetLabels()
-        {
-            LabelMapper labelMapper = new LabelMapper();
-            List<Label> labels = labelMapper.Get();
+        //public List<Label> GetLabels()
+        //{
+        //    LabelMapper labelMapper = new LabelMapper();
+        //    List<Label> labels = labelMapper.Get();
 
-            if (labels == null)
-            {
-                AddError(new ResultBE(ResultBE.Type.NULL, "No existen etiquetas"));
-                return null;
-            }
+        //    if (labels == null)
+        //    {
+        //        AddError(new ResultBE(ResultBE.Type.NULL, "No existen etiquetas"));
+        //        return null;
+        //    }
 
-            return labels;
-        }
+        //    return labels;
+        //}
 
         //TODO - agregar en ea
         public List<Translation> GetTranslations(int languageId)

@@ -22,21 +22,12 @@ namespace Ubiquicity {
         protected global::Ubiquicity.UserControls.UCHeaderBackOffice UCHeaderBackOffice;
         
         /// <summary>
-        /// UCcrudGrid control.
+        /// invoiceRepeater control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ubiquicity.UserControls.UCcrudGrid UCcrudGrid;
-        
-        /// <summary>
-        /// UCcrudGridTracking control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Ubiquicity.UserControls.UCcrudGrid UCcrudGridTracking;
+        protected global::System.Web.UI.WebControls.Repeater invoiceRepeater;
     }
 }

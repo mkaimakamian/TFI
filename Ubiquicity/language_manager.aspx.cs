@@ -62,7 +62,7 @@ namespace Ubiquicity
             try
             {
                 LanguageManager languageManager = new LanguageManager();
-                List<BE.Label> labels = languageManager.GetLabels();
+                //List<BE.Label> labels = languageManager.GetLabels();
                 List<Translation> translations = new List<Translation>();
                 Translation translation = null;
 
@@ -72,12 +72,12 @@ namespace Ubiquicity
                 }
                 else
                 {
-                    foreach (BE.Label label in labels)
-                    {
-                        translation = new Translation();
-                        translation.Label = label;
-                        translations.Add(translation);
-                    }
+                    //foreach (BE.Label label in labels)
+                    //{
+                    //    translation = new Translation();
+                    //    translation.Label = label;
+                    //    translations.Add(translation);
+                    //}
 
                     UCFormLanguage.FillForm(translations);
                 }

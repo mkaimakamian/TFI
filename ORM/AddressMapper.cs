@@ -32,5 +32,46 @@ namespace ORM
 
             return address.Id > 0;
         }
+
+
+        /// <summary>
+        /// Recupera el elemento cuyo id coincida con el provisto por parámetro.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public Address Get(int id)
+        {
+            Dal dal = new Dal();
+            Hashtable table = new Hashtable();
+            Address address = null;
+
+            table.Add("@id", id);
+
+            DataSet result = dal.Read(table, "spReadAddress");
+
+            if (result != null && result.Tables[0].Rows.Count > 0)
+            {
+                address = ConvertToModel(result.Tables[0].Rows[0]);
+            }
+
+            return address;
+        }
+
+        /// <summary>
+        /// Devuelve un objeto modelado con los valores del dataRow que recibe por parámetro.
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        private Address ConvertToModel(DataRow data)
+        {
+            Address address = new Address();
+            address.Id = int.Parse(data["id"].ToString());
+            address.City = data["city"].ToString();
+            address.Street = data["street"].ToString();
+            address.Number = Convert.ToInt32(data["number"]);
+            address.Zip = data["zip"].ToString();
+
+            return address;
+        }
     }
 }

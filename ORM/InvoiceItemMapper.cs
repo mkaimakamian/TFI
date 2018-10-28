@@ -61,6 +61,33 @@ namespace ORM
         }
 
         /// <summary>
+        /// Recupera el listado de elementos de la base.
+        /// </summary>
+        /// <param name="invoice"></param>
+        /// <returns></returns>
+        public List<InvoiceItem> Get(Invoice invoice)
+        {
+            Dal dal = new Dal();
+            Hashtable table = new Hashtable();
+            List<InvoiceItem> invoiceItems = null;
+
+            table.Add("@invoiceId", invoice.Id);
+
+            DataSet result = dal.Read(table, "spReadInvoiceItem");
+
+            if (result != null && result.Tables[0].Rows.Count > 0)
+            {
+                invoiceItems = new List<InvoiceItem>();
+                foreach (DataRow data in result.Tables[0].Rows)
+                {
+                    invoiceItems.Add(ConvertToModel(data));
+                }
+            }
+
+            return invoiceItems;
+        }
+
+        /// <summary>
         /// Devuelve un objeto modelado con los valores del dataRow que recibe por parámetro.
         /// </summary>
         /// <param name="data"></param>

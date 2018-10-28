@@ -5,11 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Mail;
 using System.Net;
-using BE;
 using System.IO;
 using System.Configuration;
 using System.Web;
-
+using BE;
 namespace Helper
 {
     public static class MailerHelper

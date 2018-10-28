@@ -5,8 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BE;
 using ORM;
-using PdfSharp.Pdf;
-using TheArtOfDev.HtmlRenderer.PdfSharp;
+using Helper;
 
 namespace BL
 {
@@ -67,6 +66,34 @@ namespace BL
         }
 
         /// <summary>
+        /// Genera el PDF para la descarga de la factura
+        /// </summary>
+        public string DownloadInvoice(int id) {
+
+            AddressManager addressManager = new AddressManager();
+            UserManager userManager = new UserManager();
+            InvoiceItemMapper invoiceItemMapper = new InvoiceItemMapper();
+            InvoiceMapper invoiceMapper = new InvoiceMapper();
+
+            Invoice invoice = invoiceMapper.Get(id);
+            invoice.BillingAddress = addressManager.Get(invoice.BillingAddress.Id);
+            invoice.User = userManager.Get(invoice.User.Id);
+            invoice.InvoiceItems = invoiceItemMapper.Get(invoice);
+            //No es necesaria la información sobre el medio de pago //
+
+            string fullPath = PDFHelper.CreateInvoice(invoice);
+
+            if (String.IsNullOrEmpty(fullPath))
+            {
+                string errorDescription = "Se ha producido un error al generar el archivo de la factura.";
+                log.AddLogCritical("DownloadInvoice", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.FAIL, errorDescription));
+            }
+
+            return fullPath;
+        }
+
+        /// <summary>
         /// Persiste la factura en el sistema.
         /// </summary>
         /// <param name="invoice"></param>
@@ -111,5 +138,6 @@ namespace BL
 
             return isValid;
         }
+
     }
 }

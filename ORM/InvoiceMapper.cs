@@ -28,5 +28,44 @@ namespace ORM
 
             return invoice.Id > 0;
         }
+
+        /// <summary>
+        /// Recupera el elemento cuyo id coincida con el provisto por parámetro.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public Invoice Get(int id)
+        {
+            Dal dal = new Dal();
+            Hashtable table = new Hashtable();
+            Invoice invoice = null;
+
+            table.Add("@id", id);
+
+            DataSet result = dal.Read(table, "spReadInvoice");
+
+            if (result != null && result.Tables[0].Rows.Count > 0)
+            {
+                invoice = ConvertToModel(result.Tables[0].Rows[0]);
+            }
+
+            return invoice;
+        }
+
+        /// <summary>
+        /// Devuelve un objeto modelado con los valores del dataRow que recibe por parámetro.
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        private Invoice ConvertToModel(DataRow data)
+        {
+            Invoice invoice = new Invoice();
+            invoice.Id = int.Parse(data["id"].ToString());
+            invoice.Date = Convert.ToDateTime(data["date"].ToString());
+            invoice.User.Id = Convert.ToInt32(data["userId"]);
+            invoice.BillingAddress.Id = Convert.ToInt32(data["billingAddressId"]);
+
+            return invoice;
+        }
     }
 }

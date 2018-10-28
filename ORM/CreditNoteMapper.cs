@@ -57,17 +57,33 @@ namespace ORM
         }
 
         /// <summary>
+        /// Devuelve el listado de notas de crédito asociadas a una factura
+        /// </summary>
+        /// <param name="invoice"></param>
+        /// <returns></returns>
+        public List<CreditNote> GetByInvoice(Invoice invoice)
+        {
+            Hashtable table = new Hashtable();
+            table.Add("@invoiceId", invoice.Id);
+            return GetCNLIst(table);
+        }
+
+        /// <summary>
         /// Devuelve el listado de notas de crédito asociadas a un usuario.
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
         public List<CreditNote> Get(User user)
         {
-            Dal dal = new Dal();
             Hashtable table = new Hashtable();
-            List<CreditNote> creditNotes = null;
-
             table.Add("@userId", user.Id);
+            return GetCNLIst(table);
+        }
+
+        private List<CreditNote> GetCNLIst(Hashtable table)
+        {
+            Dal dal = new Dal();
+            List<CreditNote> creditNotes = null;
             DataSet result = dal.Read(table, "spReadCreditNote");
 
             if (result != null && result.Tables[0].Rows.Count > 0)
@@ -80,6 +96,7 @@ namespace ORM
             }
             return creditNotes;
         }
+
 
         public CreditNote Get(int id)
         {

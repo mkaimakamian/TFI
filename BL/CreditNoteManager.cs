@@ -50,6 +50,17 @@ namespace BL
         }
 
         /// <summary>
+        /// Devuelve la nota de crédito según el id de la factura pasado por parámetro.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public List<CreditNote> GetByInvoice(Invoice invoice)
+        {
+            CreditNoteMapper creditNoteMapper = new CreditNoteMapper();
+            return creditNoteMapper.GetByInvoice(invoice);
+        }
+
+        /// <summary>
         /// Recupera los credit notes cuyos ids son pasados por parámetro.
         /// </summary>
         /// <param name="ids"></param>

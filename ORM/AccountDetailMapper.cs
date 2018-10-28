@@ -52,6 +52,7 @@ namespace ORM
             accountsDetail.Amount = Convert.ToDouble(data["amount"]);
             accountsDetail.Status = data["status"].ToString();
             accountsDetail.Date = Convert.ToDateTime(data["date"].ToString());
+            accountsDetail.Type = data["type"].ToString();
             return accountsDetail;
         }
     }

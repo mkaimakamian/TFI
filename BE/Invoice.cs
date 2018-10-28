@@ -59,6 +59,7 @@ namespace BE
         {
             get
             {
+                if (user == null) user = new User();
                 return user;
             }
 
@@ -71,7 +72,7 @@ namespace BE
         public Address BillingAddress
         {
             get
-            {
+            { if (billingAddress == null) billingAddress = new Address();
                 return billingAddress;
             }
 
@@ -98,6 +99,7 @@ namespace BE
         {
             get
             {
+                if (creditCard == null) creditCard = new CreditCard();
                 return creditCard;
             }
 

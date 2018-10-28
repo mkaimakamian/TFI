@@ -42,7 +42,7 @@ namespace ORM
 
             foreach(Translation translation in language.Translations)
             {
-                table.Add("@labelId", translation.Label.Id);
+                //table.Add("@labelId", translation.Label.Id);
                 table.Add("@languageId", language.Id);
                 table.Add("@translation", translation.Translate);
             }
@@ -55,8 +55,8 @@ namespace ORM
         {
             Translation translation = new Translation();
             translation.Id = int.Parse(data["id"].ToString());
-            translation.Label.Id = data["labelId"].ToString();
-            translation.Label.Description = data["description"].ToString();
+            //translation.Label.Id = data["labelId"].ToString();
+            //translation.Label.Description = data["description"].ToString();
             translation.Translate = data["translation"].ToString();
             return translation;
         }

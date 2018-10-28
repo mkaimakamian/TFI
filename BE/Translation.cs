@@ -9,12 +9,12 @@ namespace BE
     public class Translation
     {
         private int id;
-        private Label label;
+        //private Label label;
         private string translate;
 
         public Translation()
         {
-            label = new Label();
+            //label = new Label();
         }
 
         public int Id
@@ -30,26 +30,26 @@ namespace BE
             }
         }
 
-        public Label Label
-        {
-            get
-            {
-                return label;
-            }
+        //public Label Label
+        //{
+        //    get
+        //    {
+        //        return label;
+        //    }
 
-            set
-            {
-                label = value;
-            }
-        }
+        //    set
+        //    {
+        //        label = value;
+        //    }
+        //}
 
-        public string LabelDescription
-        {
-            get
-            {
-                return label.Description;
-            }
-        }
+        //public string LabelDescription
+        //{
+        //    get
+        //    {
+        //        return label.Description;
+        //    }
+        //}
 
         public string Translate
         {

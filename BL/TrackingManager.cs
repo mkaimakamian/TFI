@@ -47,6 +47,7 @@ namespace BL
             {
                 foreach (Tracking tracking in trakings)
                 {
+                    //Sería más óptimo se si buscaran por invoice
                     tracking.InvoiceItem = invoiceItemMapper.Get(tracking.InvoiceItem.Id);
                     tracking.InvoiceItem.Resource = mapManager.Get(tracking.InvoiceItem.Resource.Id);
                 }

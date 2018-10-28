@@ -17,6 +17,7 @@ namespace BE
         private double amount;
         private string status;
         private DateTime date;
+        private string type;
 
         public int Id
         {
@@ -93,6 +94,19 @@ namespace BE
             set
             {
                 date = value;
+            }
+        }
+
+        public string Type
+        {
+            get
+            {
+                return type;
+            }
+
+            set
+            {
+                type = value;
             }
         }
     }

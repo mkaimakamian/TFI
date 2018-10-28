@@ -32,6 +32,26 @@ namespace BL
             return true;
         }
 
+        /// <summary>
+        /// Devuelve el recurso cuyo id es pasado por parámetro.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public Address Get(int id)
+        {
+            AddressMapper addressMapper = new AddressMapper();
+            Address address = addressMapper.Get(id);
+
+            if (address == null)
+            {
+                string errorDescription = "No se ha encontrado la direcció con id " + id + ".";
+                log.AddLogCritical("Get", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.NULL, errorDescription));
+            } 
+
+            return address;
+        }
+
         private bool IsValid(Address address)
         {
             bool isValid = true;
