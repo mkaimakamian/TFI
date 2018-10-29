@@ -134,7 +134,7 @@
     <Content Include="Resources\registro.svg" />
     <Content Include="Resources\roles_permisos.svg" />
     <Content Include="Resources\shop01.svg" />
-    <Content Include="Resources\template\invoice.html" />
+    <Content Include="Resources\template\invoice.htm" />
     <Content Include="Resources\ubiquicity.css" />
     <Content Include="Resources\ucity.png" />
     <Content Include="Resources\user_manager01.svg" />

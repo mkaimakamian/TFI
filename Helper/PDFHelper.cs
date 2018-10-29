@@ -39,10 +39,12 @@ namespace Helper
             string body = streamReader.ReadToEnd();
             streamReader.Dispose();
             string replaced = body.Replace(
-                "@user", invoice.User.Name + " " + invoice.User.Lastname
+                "$$user", invoice.User.Name + " " + invoice.User.Lastname
             ).Replace(
-                "@userMail", invoice.User.Mail
-            );
+                "$$mail", invoice.User.Mail
+            ).Replace(
+                "$$address", invoice.BillingAddress.Street + " " + invoice.BillingAddress.Number
+                );
 
             return replaced;
         }

@@ -15,12 +15,69 @@ namespace Ubiquicity
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            AccountDetailManager am = new AccountDetailManager();
-            invoiceRepeater.DataSource = am.Get(SessionHelper.GetUserFromSession());
-            invoiceRepeater.DataBind();
+            if (!IsPostBack)
+            {
+                LoadAccountDetail();
+                LoadProductTracking();
+            }
+
         }
 
-        protected void Repeater1_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        private void LoadAccountDetail()
+        {
+            try
+            {
+                AccountDetailManager am = new AccountDetailManager();
+                List<AccountDetail> accountsDetail = am.Get(SessionHelper.GetUserFromSession());
+
+                if (am.HasErrors)
+                {
+                    ((front)Master).Alert.Show("Error", am.ErrorDescription);
+                }
+                else
+                {
+                    invoiceRepeater.DataSource = accountsDetail;
+                    invoiceRepeater.DataBind();
+                }
+            }
+            catch (Exception exception)
+            {
+                ((front)Master).Alert.Show("Exception", exception.Message);
+            }
+        }
+
+        private void LoadProductTracking()
+        {
+            try
+            {
+                TrackingManager trackingManager = new TrackingManager();
+                List<Tracking> accountsDetail = trackingManager.Get(SessionHelper.GetUserFromSession());
+
+                if (trackingManager.HasErrors)
+                {
+                    ((front)Master).Alert.Show("Error", trackingManager.ErrorDescription);
+
+                }
+                else
+                {
+                    productRepeater.DataSource = accountsDetail;
+                    productRepeater.DataBind();
+                }
+            }
+            catch (Exception exception)
+            {
+                ((front)Master).Alert.Show("Exception", exception.Message);
+
+            }
+        }
+
+
+        /// <summary>
+        /// Se encarga de habilitar o esconder el link para la descarga de la factura.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void invoiceRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
             LinkButton link = e.Item.FindControl("downloadLink") as LinkButton;
             if (((AccountDetail)e.Item.DataItem).Type == "NC")
@@ -29,35 +86,11 @@ namespace Ubiquicity
             }
         }
 
-        //protected void PerformDownload(object sender, EventArgs e)
-        //{
-        //    try
-        //    {
-        //        InvoiceManager invoiceManager = new InvoiceManager();
-        //        string url = invoiceManager.DownloadInvoice(3);
-
-        //        if (invoiceManager.HasErrors)
-        //        {
-        //            //Alert.ShowUP("Error", invoiceManager.ErrorDescription);
-        //        }
-        //        else
-        //        {
-        //            HttpResponse res = HttpContext.Current.Response;
-        //            res.Clear();
-        //            res.AppendHeader("content-disposition", "attachment; filename=PaymentReceipt.pdf");
-        //            res.ContentType = "application/octet-stream";
-        //            res.WriteFile(url);
-        //            res.Flush();
-        //            res.End();
-        //        }
-
-        //    }
-        //    catch (Exception exception)
-        //    {
-        //        //Alert.Show("Exception", exception.Message);
-        //    }
-        //}
-
+        /// <summary>
+        /// Ejecuta la creación y descarga de la factura.
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="e"></param>
         protected void PerformDownload(object source, RepeaterCommandEventArgs e)
         {
             try
@@ -67,7 +100,7 @@ namespace Ubiquicity
 
                 if (invoiceManager.HasErrors)
                 {
-                    //Alert.ShowUP("Error", invoiceManager.ErrorDescription);
+                    ((front)Master).Alert.Show("Error", invoiceManager.ErrorDescription);
                 }
                 else
                 {
