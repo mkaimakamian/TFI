@@ -11,8 +11,8 @@ namespace BE
         public enum StatusType
         {
             Pending = 0,
-            Downloades = 1,
-            Rejected = 2
+            Downloaded = 1,
+            Claimed = 2
         }
 
         private int id;

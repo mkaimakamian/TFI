@@ -26,7 +26,7 @@
                 </div>
             </div>
             <div class="row">
-                <asp:Repeater ID="invoiceRepeater" runat="server" OnItemDataBound="invoiceRepeater_ItemDataBound" OnItemCommand="PerformDownload">
+                <asp:Repeater ID="invoiceRepeater" runat="server" OnItemDataBound="ResolveDownloadLink" OnItemCommand="PerformDownload">
                     <ItemTemplate>
                         <div class="col-12">
                             <div class="row m-0">
@@ -71,12 +71,12 @@
                 <div class="col-2">
                     <p>Actualizado</p>
                 </div>
-
                 <div class="col-6">
+                    <p>Acciones</p>
                 </div>
             </div>
             <div class="row">
-                <asp:Repeater ID="productRepeater" runat="server">
+                <asp:Repeater ID="productRepeater" runat="server" OnItemDataBound="ResolveActionLink" OnItemCommand="PerformTrackingAction">
                     <ItemTemplate>
                         <div class="col-12">
                             <div class="row m-0">
@@ -88,10 +88,11 @@
                                 </div>
                                 <div class="col-2">
                                     <p><%#Eval("Date") %></p>
-
                                 </div>
 
                                 <div class="col-6">
+                                    <asp:LinkButton ID="claimCNLink" runat="server" CommandArgument='<%#Eval("InvoiceItem.Id") %>'>Reclamar</asp:LinkButton>
+
                                 </div>
                             </div>
                         </div>

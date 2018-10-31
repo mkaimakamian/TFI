@@ -109,7 +109,7 @@ namespace BL
             CreditNote creditNote = new CreditNote();
             creditNote.Amount = amount * -1;
             creditNote.Date = DateTime.Now;
-            creditNote.Status = 1;
+            creditNote.Status = CreditNote.StatusType.Aprobada;
             creditNote.Observation = "Remanente de pago: " + creditNoteTS.Id + " (monto original: "+creditNote.Amount+")";
             creditNote.User = creditNoteTS.User;
 

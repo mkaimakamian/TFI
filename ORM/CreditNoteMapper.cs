@@ -35,6 +35,22 @@ namespace ORM
         }
 
         /// <summary>
+        /// Genera una nota de crédito por el producto adquirido.
+        /// </summary>
+        /// <param name="invoiceItemId"></param>
+        /// <returns></returns>
+        public bool ClaimCreditNote(int invoiceItemId)
+        {
+            Dal dal = new Dal();
+            Hashtable table = new Hashtable();
+
+            table.Add("@invoiceItemId", invoiceItemId);
+            int id = dal.Write(table, "spWriteCreditNoteClaim");
+
+            return id > 0;
+        }
+
+        /// <summary>
         /// Ejecuta la actualización del modelo de datos.
         /// </summary>
         /// <param name="map"></param>
@@ -122,13 +138,16 @@ namespace ORM
         /// <returns></returns>
         private CreditNote ConvertToModel(DataRow data)
         {
+            CreditNote.StatusType statusType;
+            Enum.TryParse<CreditNote.StatusType>(data["status"].ToString(), true, out statusType);
+
             CreditNote creditNote = new CreditNote();
             creditNote.Id = int.Parse(data["id"].ToString());
             creditNote.Amount = Convert.ToDouble(data["amount"]);
             creditNote.Date = Convert.ToDateTime(data["date"]);
             creditNote.Observation = data["observation"].ToString();
             creditNote.User.Id = Convert.ToInt32(data["userId"].ToString());
-            creditNote.Status = Convert.ToInt32(data["status"].ToString());
+            creditNote.Status = statusType;
             creditNote.Used = Convert.ToDateTime(data["date"]);
             creditNote.InvoiceId = int.Parse(data["invoiceId"].ToString());
             return creditNote;

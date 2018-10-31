@@ -13,6 +13,8 @@ namespace Ubiquicity
 {
     public partial class user_profile : System.Web.UI.Page
     {
+        private const string PERFORM_CLAIM = "PerformClaim";
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -23,6 +25,9 @@ namespace Ubiquicity
 
         }
 
+        /// <summary>
+        /// Carga el listado de movimientos: facturas y notas de crédito.
+        /// </summary>
         private void LoadAccountDetail()
         {
             try
@@ -46,6 +51,9 @@ namespace Ubiquicity
             }
         }
 
+        /// <summary>
+        /// Carga la información sobre la trazabilidad de los productos adquiridos.
+        /// </summary>
         private void LoadProductTracking()
         {
             try
@@ -77,7 +85,7 @@ namespace Ubiquicity
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        protected void invoiceRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        protected void ResolveDownloadLink(object sender, RepeaterItemEventArgs e)
         {
             LinkButton link = e.Item.FindControl("downloadLink") as LinkButton;
             if (((AccountDetail)e.Item.DataItem).Type == "NC")
@@ -112,7 +120,6 @@ namespace Ubiquicity
                     res.Flush();
                     res.End();
                 }
-
             }
             catch (Exception exception)
             {
@@ -120,7 +127,61 @@ namespace Ubiquicity
             }
         }
 
+        /// <summary>
+        /// Muestra la descripción adecuada según el estado de la compra.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void ResolveActionLink(object sender, RepeaterItemEventArgs e)
+        {
+            LinkButton link = e.Item.FindControl("claimCNLink") as LinkButton;
+            
+            switch (((Tracking)e.Item.DataItem).Status)
+            {
+                case Tracking.StatusType.Pending:
+                    link.Text = "Reclamar";
+                    link.CommandName = "PerformClaim";
+                    break;
+                case Tracking.StatusType.Downloaded:
+                    link.Text = "Obtenido";
+                    break;
+                case Tracking.StatusType.Claimed:
+                    link.Text = "Reclamado";
+                    link.Enabled = false;
+                    break;
+            }
+        }
 
+        /// <summary>
+        /// Atiende la ejecución de las acciones generadas según el estado del tracking.
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="e"></param>
+        protected void PerformTrackingAction(object source, RepeaterCommandEventArgs e)
+        {
+            //Por el momento es la única acción dispobible
+            if (e.CommandName == PERFORM_CLAIM) {
+                try
+                {
+                    int invoiceItemId = Convert.ToInt32(e.CommandArgument);
+                    CreditNoteManager creditNoteManager = new CreditNoteManager();
+                    bool success = creditNoteManager.ClaimCreditNote(invoiceItemId);
+
+                    if (!success && creditNoteManager.HasErrors)
+                    {
+                        ((front)Master).Alert.Show("Error", creditNoteManager.ErrorDescription);
+                    } else
+                    {
+                        LoadProductTracking();
+                        ((front)Master).Alert.Show("Nota de crédito", "Se ha generado una nota de crédito, pendiente de aprobación");
+                    }
+
+                } catch (Exception exception)
+                {
+                    ((front)Master).Alert.Show("Exception", exception.Message);
+                }
+            }
+        }
 
         /*
         protected override void PageLoad(object sender, EventArgs e)

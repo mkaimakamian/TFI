@@ -10,6 +10,11 @@ namespace BL
 {
     public class CreditNoteManager: BaseManager
     {
+        /// <summary>
+        /// Persiste una nota de crédito en la base.
+        /// </summary>
+        /// <param name="creditNote"></param>
+        /// <returns></returns>
         public bool Save(CreditNote creditNote)
         {
             if (!IsValid(creditNote)) return false;
@@ -26,6 +31,22 @@ namespace BL
 
             return true;
         }
+
+        public bool ClaimCreditNote(int invoiceItemId)
+        {
+            CreditNoteMapper creditNotemapper = new CreditNoteMapper();
+
+            if (!creditNotemapper.ClaimCreditNote(invoiceItemId))
+            {
+                string errorDescription = "No se ha podido generar la nota de crédito.";
+                log.AddLogCritical("ClaimCreditNote", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.FAIL, errorDescription));
+                return false;
+            }
+
+            return true;
+        }
+
 
         /// <summary>
         /// Devuelve el listado de notas de créditos disponibles para el usuario pasado por parámetro.

@@ -8,11 +8,18 @@ namespace BE
 {
     public class CreditNote
     {
+        public enum StatusType
+        {
+            Pendiente = 0,
+            Aprobada = 1,
+            Rechazada = 2
+        }
+
         private int id;
         private double amount;
         private DateTime date;
         private string observation;
-        private int status; //quizá enumerado?
+        private StatusType status;
         private User user;
         private DateTime used;
         private int invoiceId;
@@ -69,18 +76,7 @@ namespace BE
             }
         }
 
-        public int Status
-        {
-            get
-            {
-                return status;
-            }
-
-            set
-            {
-                status = value;
-            }
-        }
+        
 
         public User User
         {
@@ -124,6 +120,19 @@ namespace BE
             set
             {
                 invoiceId = value;
+            }
+        }
+
+        public StatusType Status
+        {
+            get
+            {
+                return status;
+            }
+
+            set
+            {
+                status = value;
             }
         }
     }
