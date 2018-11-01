@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 using ORM;
 using System.IO;
 using BE;
-using System.Web;
 using System.Configuration;
+using Helper;
 
 namespace BL
 {
@@ -86,6 +86,7 @@ namespace BL
             List<Backup> backups = new List<Backup>();
 
             string path = ConfigurationManager.AppSettings["BACKUP_PATH"];
+            UtilsHelper.CreateDirectory(path);
 
             DirectoryInfo Dir = new DirectoryInfo(path);
             FileInfo[] FileList = Dir.GetFiles("*.bkp", SearchOption.AllDirectories);

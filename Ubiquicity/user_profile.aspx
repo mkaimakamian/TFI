@@ -18,7 +18,7 @@
                 <div class="col-1">
                     <p>Monto</p>
                 </div>
-                <div class="col-1">
+                <div class="col-2">
                     <p>Estado</p>
                 </div>
                 <div class="col-2">
@@ -43,7 +43,7 @@
                                 <div class="col-1">
                                     <p><%#Eval("Amount") %></p>
                                 </div>
-                                <div class="col-1">
+                                <div class="col-2">
                                     <p><%#Eval("Status") %></p>
                                 </div>
                                 <div class="col-2">
@@ -66,12 +66,15 @@
                     <p>Producto</p>
                 </div>
                 <div class="col-1">
+                    <p>Precio</p>
+                </div>
+                <div class="col-1">
                     <p>Estado</p>
                 </div>
                 <div class="col-2">
                     <p>Actualizado</p>
                 </div>
-                <div class="col-6">
+                <div class="col-5">
                     <p>Acciones</p>
                 </div>
             </div>
@@ -81,7 +84,10 @@
                         <div class="col-12">
                             <div class="row m-0">
                                 <div class="col-2">
-                                    <p><%#Eval("Resource") %></p>
+                                    <p><%#Eval("InvoiceItem.Resource.Name") %></p>
+                                </div>
+                                <div class="col-1">
+                                    <p><%#Eval("InvoiceItem.Resource.Price") %></p>
                                 </div>
                                 <div class="col-1">
                                     <p><%#Eval("Status") %></p>
@@ -90,7 +96,7 @@
                                     <p><%#Eval("Date") %></p>
                                 </div>
 
-                                <div class="col-6">
+                                <div class="col-5">
                                     <asp:LinkButton ID="claimCNLink" runat="server" CommandArgument='<%#Eval("InvoiceItem.Id") %>'>Reclamar</asp:LinkButton>
 
                                 </div>

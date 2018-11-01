@@ -138,14 +138,14 @@ namespace Ubiquicity
             
             switch (((Tracking)e.Item.DataItem).Status)
             {
-                case Tracking.StatusType.Pending:
+                case Tracking.StatusType.Pendiente:
                     link.Text = "Reclamar";
                     link.CommandName = "PerformClaim";
                     break;
-                case Tracking.StatusType.Downloaded:
+                case Tracking.StatusType.Descargado:
                     link.Text = "Obtenido";
                     break;
-                case Tracking.StatusType.Claimed:
+                case Tracking.StatusType.Reclamado:
                     link.Text = "Reclamado";
                     link.Enabled = false;
                     break;

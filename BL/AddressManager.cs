@@ -52,7 +52,7 @@ namespace BL
             return address;
         }
 
-        private bool IsValid(Address address)
+        public bool IsValid(Address address)
         {
             bool isValid = true;
 

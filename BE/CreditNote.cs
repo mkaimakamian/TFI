@@ -76,7 +76,10 @@ namespace BE
             }
         }
 
-        
+        public string UserName
+        {
+            get { return user.Name + " " + user.Lastname; }
+        }
 
         public User User
         {

@@ -24,7 +24,7 @@ namespace BL
             {
                 tracking = new Tracking();
                 tracking.InvoiceItem = invoiceItem;
-                tracking.Status = Tracking.StatusType.Pending;
+                tracking.Status = Tracking.StatusType.Pendiente;
                 tracking.Date = DateTime.Now;
 
                 trackings.Add(tracking);

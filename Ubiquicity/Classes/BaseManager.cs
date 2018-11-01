@@ -43,10 +43,10 @@ namespace Ubiquicity
             //Se emplea una suerte de patrón template para que los hijos puedan hacer uso del Page_Load
             PageLoad(sender, e);
 
-            if (manager == null)
-            {
-                throw new Exception("Manager no definido.");
-            }
+            //if (manager == null)
+            //{
+            //    throw new Exception("Manager no definido.");
+            //}
 
             if (!IsPostBack)
             {

@@ -10,9 +10,11 @@ namespace BE
     {
         public enum StatusType
         {
-            Pending = 0,
-            Downloaded = 1,
-            Claimed = 2
+            Pendiente = 0,
+            Descargado = 1,
+            Reclamado = 2,
+            Rechazado = 3,
+            Aceptado = 4
         }
 
         private int id;
@@ -34,10 +36,10 @@ namespace BE
             }
         }
 
-        public string Resource
-        {
-            get { return invoiceItem.Resource.Name; }
-        }
+        //public string Resource
+        //{
+        //    get { return invoiceItem.Resource.Name; }
+        //}
 
         public StatusType Status
         {

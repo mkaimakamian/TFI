@@ -32,6 +32,32 @@ namespace BL
             return true;
         }
 
+        /// <summary>
+        /// Aprueba (true) o rechaza (false) la nota de crédito
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="approve"></param>
+        /// <returns></returns>
+        public bool ApproveOrReject(int id, bool approve)
+        {
+            CreditNoteMapper creditNotemapper = new CreditNoteMapper();
+
+            if (!creditNotemapper.ApproveOrReject(id, approve))
+            {
+                string errorDescription = "No se ha podido aplicar accuón de aprobación / rechazo sobre la nota de crédito con id " + id + ".";
+                log.AddLogCritical("Reject", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.FAIL, errorDescription));
+                return false;
+            }
+
+            return true;
+        } 
+
+        /// <summary>
+        /// Crea una nota de crédito por el ítem reclamado, en estado pendiente de aprobación.
+        /// </summary>
+        /// <param name="invoiceItemId"></param>
+        /// <returns></returns>
         public bool ClaimCreditNote(int invoiceItemId)
         {
             CreditNoteMapper creditNotemapper = new CreditNoteMapper();
@@ -56,7 +82,20 @@ namespace BL
         public List<CreditNote> Get(User user)
         {
             CreditNoteMapper creditNoteMapper = new CreditNoteMapper();
-            return creditNoteMapper.Get(user);
+            List<CreditNote> creditNotes = creditNoteMapper.Get(user);
+            if (creditNotes != null) creditNotes.ForEach(x => x.User = user);
+            return creditNotes;
+        }
+
+        /// <summary>
+        /// Devuelve el listado de notas de crédito.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public List<CreditNote> Get()
+        {
+            CreditNoteMapper creditNoteMapper = new CreditNoteMapper();
+            return creditNoteMapper.Get();
         }
 
         /// <summary>

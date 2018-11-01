@@ -16,6 +16,12 @@ namespace BE
         private List<CreditNote> creditNotes;
         private CreditCard creditCard;
 
+        public Invoice()
+        {
+            creditCard = new CreditCard();
+            user = new User();
+            billingAddress = new Address();
+        }
         public int Id
         {
             get
@@ -59,7 +65,6 @@ namespace BE
         {
             get
             {
-                if (user == null) user = new User();
                 return user;
             }
 
@@ -72,7 +77,7 @@ namespace BE
         public Address BillingAddress
         {
             get
-            { if (billingAddress == null) billingAddress = new Address();
+            {
                 return billingAddress;
             }
 
@@ -99,7 +104,6 @@ namespace BE
         {
             get
             {
-                if (creditCard == null) creditCard = new CreditCard();
                 return creditCard;
             }
 

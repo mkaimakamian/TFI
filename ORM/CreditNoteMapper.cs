@@ -16,7 +16,7 @@ namespace ORM
         /// <summary>
         /// Guarda los datos modelados, en la base.
         /// </summary>
-        /// <param name="map"></param>
+        /// <param name="creditNote"></param>
         /// <returns></returns>
         public bool Save(CreditNote creditNote)
         {
@@ -33,6 +33,24 @@ namespace ORM
 
             return creditNote.Id > 0;
         }
+
+        /// <summary>
+        /// Aprueba (true) o rechaza (false) la nota de crédito cuyo id es pasado 
+        /// por parámetro.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="approve"></param>
+        /// <returns></returns>
+        public bool ApproveOrReject(int id, bool approve)
+        {
+            Dal dal = new Dal();
+            Hashtable table = new Hashtable();
+
+            table.Add("@id", id);
+            table.Add("@approve", approve);
+            return dal.Write(table, "spWriteCreditNoteApprove") > 0;
+        }
+
 
         /// <summary>
         /// Genera una nota de crédito por el producto adquirido.
@@ -93,6 +111,16 @@ namespace ORM
         {
             Hashtable table = new Hashtable();
             table.Add("@userId", user.Id);
+            return GetCNLIst(table);
+        }
+
+        /// <summary>
+        /// Devuelve el listado de notas de crédito asociadas a un usuario.
+        /// </summary>
+        /// <returns></returns>
+        public List<CreditNote> Get()
+        {
+            Hashtable table = new Hashtable();
             return GetCNLIst(table);
         }
 

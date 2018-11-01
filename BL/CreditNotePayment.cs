@@ -112,7 +112,7 @@ namespace BL
             creditNote.Status = CreditNote.StatusType.Aprobada;
             creditNote.Observation = "Remanente de pago: " + creditNoteTS.Id + " (monto original: "+creditNote.Amount+")";
             creditNote.User = creditNoteTS.User;
-
+            creditNote.InvoiceId = creditNoteTS.InvoiceId;
             return creditNoteManager.Save(creditNote);
         }
     }

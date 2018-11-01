@@ -22,16 +22,17 @@ namespace ORM
         {
             Dal dal = new Dal();
             Hashtable table = null;
-
+            bool success = true;
             foreach (Tracking tracking in trackings)
             {
                 table = new Hashtable();
                 table.Add("@invoiceItemId", tracking.InvoiceItem.Id);
                 table.Add("@status", tracking.Status);
                 table.Add("@date", tracking.Date);
+                success = success && dal.Write(table, "spWriteTracking") > 0;
             }
 
-            return dal.Write(table, "spWriteTracking") > 0;
+            return success;
         }
 
 

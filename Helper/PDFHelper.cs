@@ -22,7 +22,7 @@ namespace Helper
         public static string CreateInvoice(Invoice invoice)
         {
             string finalPath = ConfigurationManager.AppSettings["PDF_INVOICE_FINAL_PATH"];
-            if (!Directory.Exists(finalPath)) Directory.CreateDirectory(finalPath);
+            UtilsHelper.CreateDirectory(finalPath);
             finalPath += "/" + invoice.Id + "_" + invoice.User.Lastname+".pdf";
             string htmlInvoice = BuildInvoice(invoice);
             PdfDocument pdfInvoice = PdfGenerator.GeneratePdf(htmlInvoice, PdfSharp.PageSize.A4);

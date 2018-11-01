@@ -43,6 +43,14 @@ namespace BL
                 }
             }
 
+            //- valido la dirección ahora que se sabe que se puede afrontar el gasto-//
+            AddressManager addressManager = new AddressManager();
+            if (!addressManager.IsValid(invoice.BillingAddress))
+            {
+                AddError(addressManager.Errors);
+                return false;
+            }
+
             //Si el resto es igual o menor a 0, significa que los métodos elegidos cubren la deuda 
             //y se puede aplicar el cobro definitivo.
             if (leftAmount <= 0)
@@ -108,10 +116,13 @@ namespace BL
             InvoiceCreditCardMapper invoiceCCMapper = new InvoiceCreditCardMapper();
 
             addressManager.Save(invoice.BillingAddress);
-            creditCardMapper.Save(invoice.CreditCard);
             invoiceMapper.Save(invoice);
             invoiceItemMapper.Save(invoice);
-            if (invoice.CreditCard != null) invoiceCCMapper.Save(invoice);
+            if (invoice.CreditCard != null)
+            {
+                creditCardMapper.Save(invoice.CreditCard);
+                invoiceCCMapper.Save(invoice);
+            }
         }
 
         /// <summary>
@@ -130,12 +141,12 @@ namespace BL
 
             if (invoice.CreditCard == null && invoice.CreditNotes == null)
             {
-                string errorDescription = "Debe escogerse al menos un método de pagp.";
+                string errorDescription = "Debe escogerse al menos un método de pago.";
                 log.AddLogWarn("IsValid", errorDescription, this);
                 AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
                 isValid = false;
             }
-
+            
             return isValid;
         }
 
