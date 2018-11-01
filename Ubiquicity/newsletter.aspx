@@ -20,7 +20,7 @@
             </div>
 
             <div class="col-10">
-                <div class="card-deck">
+                <%--              <div class="card-deck">
                     <asp:Repeater ID="newsRepeater" runat="server" OnItemCommand="newsRepeater_ItemCommand">
                         <ItemTemplate>
                             <div class="col-4">
@@ -37,6 +37,24 @@
                                     <img class="card-img-right flex-auto d-none d-md-block"
                                         data-src="holder.js/200x250?theme=thumb" alt="Thumbnail [200x250]" style="width: 150px; height: 150px;" src="<%# Eval("Image") %>" data-holder-rendered="true">
                                 </div>
+                            </div>
+                        </ItemTemplate>
+                    </asp:Repeater>
+                </div>--%>
+                <div class="row">
+                    <asp:Repeater ID="newsRepeater" runat="server" OnItemCommand="newsRepeater_ItemCommand">                    
+                        <ItemTemplate>
+                            <div class="border rounded bg-light p-1 m-1" style="width: 240px;">
+                                <asp:ImageButton runat="server" src='<%# Eval("Image") %>' CssClass="img-thumbnail" CommandName="ShowDetail" CommandArgument='<%# Eval("id") %>' />
+                                <h5><%# Eval("Title") %></h5>
+                                <blockquote class="blockquote">
+                                    <p class="mb-1 mt-2 text-truncate" style="font-size: 14px;">
+                                        <%# Eval("Resume") %>
+                                    </p>
+                                    <footer class="blockquote-footer">
+                                        <%# Eval("Category.Name") %> - <%# Eval("Created") %>
+                                    </footer>
+                                </blockquote>
                             </div>
                         </ItemTemplate>
                     </asp:Repeater>
