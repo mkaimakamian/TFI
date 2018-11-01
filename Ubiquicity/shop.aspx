@@ -80,7 +80,10 @@
                             <div class="row" id="divNotLogged" runat="server">
                                 <div class="form-group col-12">
                                     <label for="loginBtn">¿No estás logueado?</label>
-                                    <asp:LinkButton ID="loginBtn" runat="server" CssClass="btn btn-primary btn-sm" Text="<i class='fa fa-user' aria-hidden='true'></i> Ingresar :D" OnClick="LogIn" />
+                                    <%--<asp:LinkButton ID="loginBtn" runat="server" CssClass="btn btn-primary btn-sm" Text="<i class='fa fa-user' aria-hidden='true'></i> Ingresar :D" OnClick="LogIn" />--%>
+                                </div>
+                                <div class="form-group col-12">
+                                    <asp:LinkButton ID="loginBtn" runat="server" CssClass="btn btn-primary btn-sm" Text="<i class='fa fa-user' aria-hidden='true'></i> Ingresar :D" OnClick="LogIn" />                                    
                                 </div>
                             </div>
 
@@ -91,12 +94,10 @@
                     <div class="col-10">
                         <%--justify-content-between--%>
                         <div class="row">
-                            <asp:Repeater ID="shopRepeater" runat="server" OnItemCommand="shopRepeater_ItemCommand">
+                            <asp:Repeater ID="shopRepeater" runat="server" OnItemCommand="shopRepeater_ItemCommand" OnItemDataBound="HideBuyButton">
                                 <ItemTemplate>
                                     <div class="border rounded bg-light p-1 m-1" style="width: 240px;">
                                         <asp:ImageButton runat="server" src='<%# Eval("Image") %>' CssClass="img-thumbnail" CommandName="ShowDetail" CommandArgument='<%# Eval("id") %>' />
-                                        <%--<img src="<%# Eval("Image") %>" class="img-thumbnail" />--%>
-
                                         <h5><%# Eval("Name") %></h5>
                                         <blockquote class="blockquote">
                                             <p class="mb-1 mt-2 text-truncate" style="font-size: 14px;">
@@ -107,8 +108,7 @@
                                             </footer>
                                         </blockquote>
                                         <div class="form-group text-center">
-                                            <asp:LinkButton runat="server" CssClass="btn btn-primary btn-sm" Text="¡Lo quiero!" CommandName="AddToCart" CommandArgument='<%# Eval("id") %>' />
-                                            <%--<asp:LinkButton ID="btnDetail" runat="server" CssClass="btn btn-primary btn-sm" Text="Detalle" CommandName="ShowDetail" CommandArgument='<%# Eval("id") %>' />--%>
+                                            <asp:LinkButton ID="btnBuy" runat="server" CssClass="btn btn-primary btn-sm" Text="¡Lo quiero!" CommandName="AddToCart" CommandArgument='<%# Eval("id") %>' />
                                         </div>
 
                                         <input type="checkbox" value="<%# Eval("Id") %>" onclick="AddToCompare(this.value)" />

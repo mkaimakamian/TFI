@@ -24,6 +24,7 @@ namespace Ubiquicity
             }
         }
 
+
         /// <summary>
         /// Muestra el menú con el resumen de los artículos seleccionados únicamente si el usuario
         /// está logueado.
@@ -175,6 +176,12 @@ namespace Ubiquicity
         protected void LogIn(object sender, EventArgs e)
         {
             ScriptManager.RegisterStartupScript(this, this.GetType(), "openModal", "$('#loginModal').modal('show');", true);
+        }
+
+        protected void HideBuyButton(object sender, RepeaterItemEventArgs e)
+        {
+            LinkButton btn = e.Item.FindControl("btnBuy") as LinkButton;
+            btn.Visible = SessionHelper.IsSessionAlive();
         }
     }
 }

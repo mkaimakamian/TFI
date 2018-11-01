@@ -144,6 +144,7 @@ namespace Ubiquicity
                     break;
                 case Tracking.StatusType.Descargado:
                     link.Text = "Obtenido";
+                    link.Enabled = false;
                     break;
                 case Tracking.StatusType.Reclamado:
                     link.Text = "Reclamado";
