@@ -14,6 +14,8 @@ namespace Ubiquicity
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!SessionHelper.IsSessionAlive()) Response.Redirect("/index.aspx");
+
             if (!IsPostBack)
             {
                 LoadPoll();
@@ -56,20 +58,37 @@ namespace Ubiquicity
 
         protected void SubmitAnswer(object sender, EventArgs e)
         {
-            List<PollAnswer> pollAnswers = new List<PollAnswer>();
-
-            foreach (RepeaterItem item in pollRepeater.Items)
+            try
             {
-                PollAnswer pollAnswer = new PollAnswer();
-                pollAnswer.User = SessionHelper.GetUser();
-                pollAnswer.PollOption.Id = Convert.ToInt32( ((RadioButtonList) item.FindControl("radioOptionList")).SelectedValue);
-                pollAnswer.PollQuestion.Id = Convert.ToInt32(((HiddenField)item.FindControl("lblQuestion")).Value);
-                //if (item.ItemType == ListItemType.Item || item.ItemType == ListItemType.AlternatingItem)
-                pollAnswers.Add(pollAnswer);
-            }
+                PollAnswerManager pollAnswerManager = new PollAnswerManager();
+                List<PollAnswer> pollAnswers = new List<PollAnswer>();
 
-            PollAnswerManager pollAnswerManager = new PollAnswerManager();
-            pollAnswerManager.Save(pollAnswers);
+                foreach (RepeaterItem item in pollRepeater.Items)
+                {
+                    PollAnswer pollAnswer = new PollAnswer();
+                    pollAnswer.User = SessionHelper.GetUser();
+                    pollAnswer.PollOption.Id = Convert.ToInt32(((RadioButtonList)item.FindControl("radioOptionList")).SelectedValue);
+                    pollAnswer.PollQuestion.Id = Convert.ToInt32(((HiddenField)item.FindControl("lblQuestion")).Value);
+                    //if (item.ItemType == ListItemType.Item || item.ItemType == ListItemType.AlternatingItem)
+                    pollAnswers.Add(pollAnswer);
+                }
+
+                bool success = pollAnswerManager.Save(pollAnswers);
+
+                if (!success && pollAnswerManager.HasErrors)
+                {
+                    ((front)Master).Alert.Show("Error", pollAnswerManager.ErrorDescription);
+                }
+                else
+                {
+                    divPoll.Visible = false;
+                    divSuccessMessage.Visible = true;
+                }
+            }
+            catch (Exception exception)
+            {
+                ((front)Master).Alert.Show("Excepción", exception.Message);
+            }
         }
     }
 }
