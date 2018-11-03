@@ -57,6 +57,7 @@
     <Compile Include="CategoryMapper.cs" />
     <Compile Include="NewsMapper.cs" />
     <Compile Include="PermissionMapper.cs" />
+    <Compile Include="PollAnswerMapper.cs" />
     <Compile Include="PollMapper.cs" />
     <Compile Include="PollOptionMapper.cs" />
     <Compile Include="PollQuestionMapper.cs" />

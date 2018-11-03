@@ -21,7 +21,7 @@ namespace Ubiquicity
         {
             if (!IsPostBack)
             {
-                User user = SessionHelper.GetUserFromSession();
+                User user = SessionHelper.GetUser();
                 ManageLoginPanel(user);
                 LoadMenu(user);
                 //No está bueno... ver la performance.

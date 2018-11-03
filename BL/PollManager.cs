@@ -81,7 +81,7 @@ namespace BL
             PollMapper pollMapper = new PollMapper();
             return pollMapper.Get();
         }
-
+        
         /// <summary>
         /// Guarda los cambios del recurso existente.
         /// </summary>

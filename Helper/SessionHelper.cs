@@ -27,7 +27,7 @@ namespace Helper
         /// Devuelve el usuario guardado en sesión.
         /// </summary>
         /// <returns></returns>
-        public static User GetUserFromSession()
+        public static User GetUser()
         {
             
             return sessionState == null? null: (User)sessionState["SessionCreated"];
@@ -38,7 +38,7 @@ namespace Helper
         /// </summary>
         public static void EndSession()
         {
-            if (GetUserFromSession() != null) sessionState.Remove("SessionCreated");
+            if (GetUser() != null) sessionState.Remove("SessionCreated");
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace Helper
         /// <returns></returns>
         public static bool IsSessionAlive()
         {
-            return GetUserFromSession() != null;
+            return GetUser() != null;
         }
     }
 }

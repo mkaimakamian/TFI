@@ -13,12 +13,21 @@ namespace Ubiquicity {
     public partial class invoide_finish {
         
         /// <summary>
-        /// divSuccessMessage control.
+        /// pollRepeater control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divSuccessMessage;
+        protected global::System.Web.UI.WebControls.Repeater pollRepeater;
+        
+        /// <summary>
+        /// btnPoll control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnPoll;
     }
 }

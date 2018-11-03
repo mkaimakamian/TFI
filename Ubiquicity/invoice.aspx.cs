@@ -17,7 +17,7 @@ namespace Ubiquicity
             {
                 if (!SessionHelper.IsSessionAlive()) Response.Redirect("/index.aspx");
 
-                LoadCreditNotes(SessionHelper.GetUserFromSession());
+                LoadCreditNotes(SessionHelper.GetUser());
                 LoadCreditCards();
                 LoadItemsShop(ShopHelper.GetItemsId());
             }
@@ -101,7 +101,7 @@ namespace Ubiquicity
 
                 //Modelo la factura
                 Invoice invoice = new Invoice();
-                invoice.User = SessionHelper.GetUserFromSession();
+                invoice.User = SessionHelper.GetUser();
                 invoice.BillingAddress = GetBillingAddress();
                 invoice.CreditCard = GetCreditCard();
                 invoice.CreditNotes = GetCreditNotes();

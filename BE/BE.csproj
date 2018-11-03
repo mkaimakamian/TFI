@@ -59,6 +59,7 @@
     <Compile Include="Permission.cs" />
     <Compile Include="PersonalInformation.cs" />
     <Compile Include="Poll.cs" />
+    <Compile Include="PollAnswer.cs" />
     <Compile Include="PollOption.cs" />
     <Compile Include="PollQuestion.cs" />
     <Compile Include="QueryFilter.cs" />

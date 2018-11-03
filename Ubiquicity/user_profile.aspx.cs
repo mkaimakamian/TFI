@@ -33,7 +33,7 @@ namespace Ubiquicity
             try
             {
                 AccountDetailManager am = new AccountDetailManager();
-                List<AccountDetail> accountsDetail = am.Get(SessionHelper.GetUserFromSession());
+                List<AccountDetail> accountsDetail = am.Get(SessionHelper.GetUser());
 
                 if (am.HasErrors)
                 {
@@ -59,7 +59,7 @@ namespace Ubiquicity
             try
             {
                 TrackingManager trackingManager = new TrackingManager();
-                List<Tracking> accountsDetail = trackingManager.Get(SessionHelper.GetUserFromSession());
+                List<Tracking> accountsDetail = trackingManager.Get(SessionHelper.GetUser());
 
                 if (trackingManager.HasErrors)
                 {
