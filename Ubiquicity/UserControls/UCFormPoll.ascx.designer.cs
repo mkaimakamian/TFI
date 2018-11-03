@@ -22,6 +22,15 @@ namespace Ubiquicity.UserControls {
         protected global::System.Web.UI.HtmlControls.HtmlInputText nameInput;
         
         /// <summary>
+        /// dueDateInput control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ubiquicity.UserControls.UCCalendar dueDateInput;
+        
+        /// <summary>
         /// descriptionInput control.
         /// </summary>
         /// <remarks>
@@ -31,13 +40,22 @@ namespace Ubiquicity.UserControls {
         protected global::System.Web.UI.HtmlControls.HtmlTextArea descriptionInput;
         
         /// <summary>
-        /// dueDateInput control.
+        /// pollRadioList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ubiquicity.UserControls.UCCalendar dueDateInput;
+        protected global::System.Web.UI.WebControls.RadioButtonList pollRadioList;
+        
+        /// <summary>
+        /// activeCheck control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox activeCheck;
         
         /// <summary>
         /// questionListCol control.

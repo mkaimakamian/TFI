@@ -34,7 +34,7 @@ namespace Ubiquicity
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!SessionHelper.IsSessionAlive()) Response.Redirect("/index.aspx");
+            SessionHelper.ExecuteAutoStop();
             if (!SecurityHelper.HasPermission(SessionHelper.GetUser(), Request.RawUrl)) Response.Redirect("/index.aspx");
 
             //Se asignó al botón principal la tarea de ejecutar la eliminación

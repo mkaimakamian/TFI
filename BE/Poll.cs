@@ -8,12 +8,19 @@ namespace BE
 {
     public class Poll
     {
+        public enum PollType
+        {
+            Staisfaccion = 0,
+            General = 1
+        }
+
         private int id;
         private string name;
         private string description;
         private DateTime dueDate;
-        private bool pollType;
+        private PollType type;
         private List<PollQuestion> questions;
+        private bool active;
 
         public int Id
         {
@@ -67,19 +74,6 @@ namespace BE
             }
         }
 
-        public bool PollType
-        {
-            get
-            {
-                return pollType;
-            }
-
-            set
-            {
-                pollType = value;
-            }
-        }
-
         public List<PollQuestion> Questions
         {
             get
@@ -90,6 +84,32 @@ namespace BE
             set
             {
                 questions = value;
+            }
+        }
+
+        public PollType Type
+        {
+            get
+            {
+                return type;
+            }
+
+            set
+            {
+                type = value;
+            }
+        }
+
+        public bool Active
+        {
+            get
+            {
+                return active;
+            }
+
+            set
+            {
+                active = value;
             }
         }
     }

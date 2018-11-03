@@ -34,5 +34,19 @@ namespace ORM
 
             return success;
         }
+
+        /// <summary>
+        /// Devuelve true cuando la encuesta ha sido contestada por al menos una persona.
+        /// </summary>
+        /// <param name="poll"></param>
+        /// <returns></returns>
+        public bool HasAnswers(Poll poll)
+        {
+            Dal dal = new Dal();
+            Hashtable table = new Hashtable();
+            table.Add("@pollId", poll.Id);
+            DataSet result = dal.Read(table, "spReadPollAnswer");
+            return result != null && result.Tables[0].Rows.Count > 0;
+        }
     }
 }

@@ -14,7 +14,7 @@ namespace Ubiquicity
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!SessionHelper.IsSessionAlive()) Response.Redirect("/index.aspx");
+            SessionHelper.ExecuteAutoStop();
 
             if (!IsPostBack)
             {
@@ -22,15 +22,25 @@ namespace Ubiquicity
             }
         }
 
+        /// <summary>
+        /// Carga la encuesta de satisfacción.
+        /// </summary>
         public void LoadPoll()
         {
             try
             {
                 PollManager pollManager = new PollManager();
-                Poll poll = pollManager.Get(7);
+                Poll poll = pollManager.GetSatisfactionPoll();
 
-                pollRepeater.DataSource = poll.Questions;
-                pollRepeater.DataBind();
+                if (poll != null)
+                {
+                    pollRepeater.DataSource = poll.Questions;
+                    pollRepeater.DataBind();
+                } else
+                {
+                    // No es prolijo porque se mezcla la parte visual con los datos, pero sirve
+                    divPoll.Visible = false;
+                }
             }
             catch (Exception exception)
             {
@@ -40,7 +50,7 @@ namespace Ubiquicity
         }
 
         /// <summary>
-        /// 
+        /// Llena el listado de opciones de la pregunta que se está cargando en el repeater.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -56,6 +66,11 @@ namespace Ubiquicity
             }
         }
 
+        /// <summary>
+        /// Se encarga de guardar las respuestas en el sistema.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void SubmitAnswer(object sender, EventArgs e)
         {
             try

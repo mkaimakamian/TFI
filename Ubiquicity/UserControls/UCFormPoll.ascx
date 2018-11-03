@@ -10,32 +10,53 @@
                 </div>
             </nav>
             <div class="tab-content" id="nav-tabContent">
+                <!-- Primer solapa -->
                 <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                    <div class="row">
-                        <div class="form-group col-12">
-                            <label for="nameInput">Nombre</label>
-                            <input id="nameInput" runat="server" type="text" class="form-control form-control-sm" maxlength="50">
+                    <div class="row mt-2">
+
+                        <div class="col">
+                            <div class="row">
+                                <div class="form-group col">
+                                    <label for="nameInput">Nombre</label>
+                                    <input id="nameInput" runat="server" type="text" class="form-control form-control-sm" maxlength="50">
+                                </div>
+                                <div class="form-group col">
+                                    <label for="dueDateInput">Vencimiento</label>
+                                    <UCmkc:UCCalendar runat="server" ID="dueDateInput" />
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group col-12">
                             <label for="descriptionInput">Descripción</label>
                             <textarea id="descriptionInput" runat="server" class="form-control form-control-sm"
                                 rows="6" maxlength="250"></textarea>
                         </div>
-                        <div class="form-group col-12">
-                            <label for="dueDateInput">Vencimiento</label>
-                            <UCmkc:UCCalendar runat="server" ID="dueDateInput" />
+
+                        <div class="col">
+                            <div class="row">
+                                <div class="form-group col">
+                                    <label for="pollTypeInput">Tipo</label>
+                                    <asp:RadioButtonList ID="pollRadioList" runat="server" RepeatDirection="Horizontal">
+                                        <asp:ListItem Selected="True" Value="0">Satisfacción</asp:ListItem>
+                                        <asp:ListItem Value="1">General</asp:ListItem>
+                                    </asp:RadioButtonList>
+                                </div>
+                                <div class="form-group col">
+                                <input id="activeCheck" type="checkbox" runat="server"/>
+                                <label for="activeCheck">Activo</label>
+                            </div>
+                            </div>
                         </div>
-                        <div class="form-group col-12">
-                            <label for="pollTypeInput">Tipo</label>
-                        </div>
+
+
                     </div>
                 </div>
 
+                <!-- Preguntas -->
                 <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                     <div class="row">
                         <div class="col-6" id="questionListCol" runat="server">
-                            <div class="row">
-
+                            <div class="row mt-2">
 
                                 <div class="form-group col-12">
                                     <label for="pollQuestionList">Preguntas</label>
@@ -50,7 +71,7 @@
                                     <asp:LinkButton ID="deleteBtn" runat="server" CssClass="btn btn-primary btn-sm" Text="Eliminar" OnClick="DeleteQuestion" />
                                 </div>
 
-                                                                <div class="form-group col-6">
+                                <div class="form-group col-6">
                                     <asp:LinkButton ID="newBtn" runat="server" CssClass="btn btn-primary btn-sm" Text="Nueva" OnClick="NewQuestion" />
                                 </div>
                             </div>

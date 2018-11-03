@@ -25,7 +25,9 @@ namespace ORM
             table.Add("@name", poll.Name);
             table.Add("@description", poll.Description);
             table.Add("@dueDate", poll.DueDate);
-            table.Add("@pollType", poll.PollType);
+            table.Add("@pollType", poll.Type);
+            table.Add("@active", poll.Active);
+
             poll.Id = dal.Write(table, "spWritePoll");
 
             return poll.Id > 0;
@@ -53,6 +55,26 @@ namespace ORM
 
             return poll;
         }
+
+
+        public Poll GetSatisfactionPoll()
+        {
+            Dal dal = new Dal();
+            Hashtable table = new Hashtable();
+            Poll poll = null;
+
+            table.Add("@activeSP", true);
+
+            DataSet result = dal.Read(table, "spReadPoll");
+
+            if (result != null && result.Tables[0].Rows.Count > 0)
+            {
+                poll = ConvertToModel(result.Tables[0].Rows[0]);
+            }
+
+            return poll;
+        }
+        
 
         /// <summary>
         /// Recupera el listado de elementos de la base.
@@ -92,7 +114,8 @@ namespace ORM
             table.Add("@name", poll.Name);
             table.Add("@description", poll.Description);
             table.Add("@dueDate", poll.DueDate);
-            table.Add("@pollType", poll.PollType);
+            table.Add("@pollType", poll.Type);
+            table.Add("@active", poll.Active);
             return dal.Write(table, "spModifyPoll") > 0;
         }
 
@@ -116,12 +139,16 @@ namespace ORM
         /// <returns></returns>
         private Poll ConvertToModel(DataRow data)
         {
+            Poll.PollType type;
+            Enum.TryParse<Poll.PollType>(data["pollType"].ToString(), true, out type);
+
             Poll poll = new Poll();
             poll.Id = int.Parse(data["id"].ToString());
             poll.Name = data["name"].ToString();
             poll.Description = data["description"].ToString();
             poll.DueDate = Convert.ToDateTime(data["dueDate"]);
-            poll.PollType = Convert.ToBoolean(data["pollType"].ToString());
+            poll.Type = type;
+            poll.Active = Convert.ToBoolean(data["active"]);
             return poll;
         }
     }

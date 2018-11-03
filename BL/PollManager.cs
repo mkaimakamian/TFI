@@ -73,6 +73,32 @@ namespace BL
         }
 
         /// <summary>
+        /// Recupera la encuesta de satisfacción (activa)
+        /// </summary>
+        /// <returns></returns>
+        public Poll GetSatisfactionPoll()
+        {
+            PollQuestionManager pollQuestionManager = new PollQuestionManager();
+            PollMapper pollMapper = new PollMapper();
+            Poll poll = pollMapper.GetSatisfactionPoll();
+
+            //Es válido que no exista encuesta de satisfacción
+            if (poll == null) return null;
+            
+            List<PollQuestion> pollQuestions = pollQuestionManager.Get(poll.Id);
+
+            if (pollQuestions == null || pollQuestions.Count == 0)
+            {
+                string errorDescription = "No se han encontrado preguntas para la encuesta " + poll.Id + ".";
+                log.AddLogCritical("Get", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.NULL, errorDescription));
+                return null;
+            }
+            poll.Questions = pollQuestions;
+            return poll;
+        }
+
+        /// <summary>
         /// Recupera el listado de todos los items.
         /// </summary>
         /// <returns></returns>
@@ -89,10 +115,22 @@ namespace BL
         /// <returns></returns>
         public bool Edit(Poll poll)
         {
-            if (!IsValid(poll)) return false;
-
+            PollAnswerManager pollAnswerManager = new PollAnswerManager();
             PollQuestionManager pollQuestionManager = new PollQuestionManager();
             PollMapper pollMapper = new PollMapper();
+
+            if (!IsValideForEdit(poll)) return false;
+
+            //Si fue respondida, no es posible la edición.
+            //Notar que a menos que se editen las preguntas, Questions estará vacío
+            bool hasQuestions = poll.Questions != null && poll.Questions.Count > 0;
+            if (hasQuestions && pollAnswerManager.HasAnswers(poll))
+            {
+                string errorDescription = "La encuesta no puede ser editada porque al menos una persona contestó.";
+                log.AddLogInfo("Edit", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.FAIL, errorDescription));
+                return false;
+            }
 
             if (!pollMapper.Edit(poll))
             {
@@ -102,7 +140,7 @@ namespace BL
                 return false;
             }
 
-            if (!pollQuestionManager.Edit(poll))
+            if (hasQuestions && !pollQuestionManager.Edit(poll))
             {
                 AddError(pollQuestionManager.Errors);
                 return false;
@@ -111,7 +149,7 @@ namespace BL
             return true;
         }
 
-        private bool IsValid(Poll poll)
+        private bool IsValideForEdit(Poll poll)
         {
             bool isValid = true;
 
@@ -123,7 +161,24 @@ namespace BL
                 isValid = false;
             }
 
-            if (poll.Questions == null | poll.Questions.Count == 0)
+            if (poll.DueDate == null)
+            {
+                string errorDescription = "Debe ingresars euna fecha.";
+                log.AddLogWarn("IsValid", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+        private bool IsValid(Poll poll)
+        {
+            bool isValid = true;
+
+            isValid = IsValideForEdit(poll);
+
+            if (poll.Questions == null || poll.Questions.Count == 0)
             {
                 string errorDescription = "La encuesta debe contener al menos una pregunta.";
                 log.AddLogWarn("IsValid", errorDescription, this);

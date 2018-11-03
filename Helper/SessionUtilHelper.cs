@@ -16,7 +16,7 @@ namespace Helper
     public static class SessionUtilHelper
     {
         private const string POLL_QUESTION = "ubiquicity_pollQuestion";
-
+        private static bool pollQuestionEdited = false;
 
         /// <summary>
         /// Persiste las preguntas de la encuestas en sessión para podes efectuar tareas ABMicas.
@@ -28,6 +28,23 @@ namespace Helper
             if (!Exist(POLL_QUESTION, session)) session[POLL_QUESTION] = new List<PollQuestion>();
 
             ((List<PollQuestion>)session[POLL_QUESTION]).Add(pollQuestion);
+            pollQuestionEdited = true;
+        }
+
+        public static void KeepPollQuestion(List<PollQuestion> pollQuestions, HttpSessionState session)
+        {
+            if (!Exist(POLL_QUESTION, session)) session[POLL_QUESTION] = new List<PollQuestion>();
+
+            ((List<PollQuestion>)session[POLL_QUESTION]).AddRange(pollQuestions);
+        }
+
+        /// <summary>
+        /// Devuelve true si se han agregado preguntas nuevas.
+        /// </summary>
+        /// <returns></returns>
+        public static bool PollQuestionEdited()
+        {
+            return pollQuestionEdited;
         }
 
         /// <summary>

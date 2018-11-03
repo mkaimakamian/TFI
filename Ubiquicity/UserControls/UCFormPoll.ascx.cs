@@ -28,27 +28,41 @@ namespace Ubiquicity.UserControls
 
             nameInput.Value = "";
             descriptionInput.Value = "";
-            dueDateInput.Date = "";
+            dueDateInput.Date = DateTime.Now.ToString();
+            pollRadioList.SelectedIndex = 0;
+            activeCheck.Checked = false;
         }
 
         public void FillForm(Poll poll)
         {
-
             nameInput.Value = poll.Name;
             descriptionInput.Value = poll.Description;
             dueDateInput.Date = poll.DueDate.ToShortDateString();
-            //poll.PollType = false;
+            pollRadioList.SelectedIndex = (int)poll.Type;
+            SessionUtilHelper.KeepPollQuestion(poll.Questions, Session);
             RefreshQuestionList(poll.Questions);
+            activeCheck.Checked = poll.Active;
         }
 
         public void PopulateModel(Poll poll)
         {
             poll.Name = nameInput.Value;
             poll.Description = descriptionInput.Value;
-            poll.DueDate = Convert.ToDateTime(dueDateInput.Date);
-            poll.PollType = false;
-            poll.Questions = SessionUtilHelper.GetPollQuestions(Session);
+            poll.DueDate = String.IsNullOrEmpty(dueDateInput.Date)? DateTime.Now :  Convert.ToDateTime(dueDateInput.Date);
+            poll.Active = activeCheck.Checked;
+            Poll.PollType type;
+            Enum.TryParse<Poll.PollType>(pollRadioList.SelectedItem.Value, true, out type);
+            poll.Type = type;
 
+            //Es un chinito: si no se editaron, no se debe llenar la lista
+            if (SessionUtilHelper.PollQuestionEdited())
+            {
+                poll.Questions.AddRange(SessionUtilHelper.GetPollQuestions(Session));
+            }
+            else
+            {
+                poll.Questions = null;
+            }
             SessionUtilHelper.FlushPollQuestion(Session);
         }
 
@@ -70,7 +84,7 @@ namespace Ubiquicity.UserControls
 
             //Como es un elemento simple, no tiene sentido buscar el elemento en la base
             //puesto que todos los datos ya están disponibles.
-            foreach(ListItem listItem in selectedOptions)
+            foreach (ListItem listItem in selectedOptions)
             {
                 PollOption pollOption = new PollOption();
                 pollOption.Id = Convert.ToInt32(listItem.Value);

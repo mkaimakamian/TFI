@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using BE;
 using System.Web.SessionState;
+using System.Web;
+
 
 namespace Helper
 {
@@ -48,6 +50,14 @@ namespace Helper
         public static bool IsSessionAlive()
         {
             return GetUser() != null;
+        }
+
+        /// <summary>
+        /// Redirige a la home de la plataforma en caso de que la seisón del usuario no exista.
+        /// </summary>
+        public static void ExecuteAutoStop()
+        {
+            if (!IsSessionAlive()) HttpContext.Current.Response.Redirect("/index.aspx");
         }
     }
 }

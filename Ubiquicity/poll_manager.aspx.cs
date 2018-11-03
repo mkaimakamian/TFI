@@ -88,6 +88,13 @@ namespace Ubiquicity
             return ((PollManager)manager).Save(poll);
         }
 
+        protected override bool AcceptModify(BL.BaseManager manager, int id)
+        {
+            Poll poll = ((PollManager)manager).Get(id);
+            UCFormPoll.PopulateModel(poll);
+            return ((PollManager)manager).Edit(poll);
+        }
+
         /// <summary>
         /// Se establece la traducción de las columnas que quieren ser mostradas.
         /// </summary>

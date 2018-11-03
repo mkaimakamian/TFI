@@ -31,5 +31,16 @@ namespace BL
             
             return true;
         }
+
+        /// <summary>
+        /// Devuelve true si existe al menos una respuesta para la encuesta.
+        /// </summary>
+        /// <param name="poll"></param>
+        /// <returns></returns>
+        public bool HasAnswers(Poll poll)
+        {
+            PollAnswerMapper pollAnswerMapper = new PollAnswerMapper();
+            return pollAnswerMapper.HasAnswers(poll);
+        }
     }
 }
