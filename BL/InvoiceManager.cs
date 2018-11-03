@@ -80,6 +80,8 @@ namespace BL
 
             AddressManager addressManager = new AddressManager();
             UserManager userManager = new UserManager();
+            CreditNoteManager creditNoteManager = new CreditNoteManager();
+            CreditCardManager creditCardmanager = new CreditCardManager();
             InvoiceItemMapper invoiceItemMapper = new InvoiceItemMapper();
             InvoiceMapper invoiceMapper = new InvoiceMapper();
 
@@ -87,7 +89,15 @@ namespace BL
             invoice.BillingAddress = addressManager.Get(invoice.BillingAddress.Id);
             invoice.User = userManager.Get(invoice.User.Id);
             invoice.InvoiceItems = invoiceItemMapper.Get(invoice);
+
+            foreach (InvoiceItem invoiceItem in invoice.InvoiceItems )
+            {
+                invoiceItem.Resource = new MapManager().Get(invoiceItem.Resource.Id);
+            }
             //No es necesaria la información sobre el medio de pago //
+
+            invoice.CreditNotes = creditNoteManager.GetByInvoice(invoice);
+            //creditCardmanager.Get()
 
             string fullPath = PDFHelper.CreateInvoice(invoice);
 
