@@ -18,6 +18,7 @@ namespace BE
         }
 
         private int id;
+        private int invoiceId; //¬_¬'
         private InvoiceItem invoiceItem;
         private StatusType status;
         private DateTime date;
@@ -77,6 +78,19 @@ namespace BE
             set
             {
                 id = value;
+            }
+        }
+
+        public int InvoiceId
+        {
+            get
+            {
+                return invoiceId;
+            }
+
+            set
+            {
+                invoiceId = value;
             }
         }
     }

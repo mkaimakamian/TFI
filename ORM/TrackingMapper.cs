@@ -75,7 +75,7 @@ namespace ORM
             tracking.InvoiceItem.Id = int.Parse(data["invoiceItemId"].ToString());
             tracking.Status = statusType;
             tracking.Date= Convert.ToDateTime(data["date"].ToString());
-
+            tracking.InvoiceId = int.Parse(data["InvoiceId"].ToString());
             return tracking;
         }
     }

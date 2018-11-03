@@ -10,19 +10,22 @@
                 <div class="col-1">
                 </div>
                 <div class="col-1">
-                    <p>#</p>
+                    <p>Comp.</p>
                 </div>
                 <div class="col-3">
                     <p>Concepto</p>
-                </div>
-                <div class="col-1">
-                    <p>Monto</p>
                 </div>
                 <div class="col-2">
                     <p>Estado</p>
                 </div>
                 <div class="col-2">
                     <p>Emisión</p>
+                </div>
+                <div class="col-1">
+                    <p>Debe</p>
+                </div>
+                <div class="col-1">
+                    <p>Haber</p>
                 </div>
             </div>
             <div class="row">
@@ -35,19 +38,22 @@
                                         CommandName="PerformDownload" CommandArgument='<%#Eval("IssuedId") %>'>Descargar</asp:LinkButton>
                                 </div>
                                 <div class="col-1">
-                                    <p><%#Eval("IssuedId") %></p>
+                                    <p>#<%#Eval("IssuedId") %></p>
                                 </div>
                                 <div class="col-3">
                                     <p><%#Eval("Description") %></p>
-                                </div>
-                                <div class="col-1">
-                                    <p><%#Eval("Amount") %></p>
                                 </div>
                                 <div class="col-2">
                                     <p><%#Eval("Status") %></p>
                                 </div>
                                 <div class="col-2">
                                     <p><%#Eval("Date") %></p>
+                                </div>
+                                <div class="col-1">
+                                    <p><%#Eval("Debe") %></p>
+                                </div>
+                                <div class="col-1">
+                                    <p><%#Eval("Haber") %></p>
                                 </div>
                             </div>
                         </div>
@@ -62,6 +68,9 @@
     <div class="row rounded border p-0 m-0">
         <div class="col-12 p-0">
             <div class="row m-0 bg-light">
+                <div class="col-1">
+                    <p>Factura</p>
+                </div>
                 <div class="col-2">
                     <p>Producto</p>
                 </div>
@@ -83,6 +92,9 @@
                     <ItemTemplate>
                         <div class="col-12">
                             <div class="row m-0">
+                                <div class="col-1">
+                                    <p>#<%#Eval("InvoiceId") %></p>
+                                </div>
                                 <div class="col-2">
                                     <p><%#Eval("InvoiceItem.Resource.Name") %></p>
                                 </div>
@@ -96,7 +108,7 @@
                                     <p><%#Eval("Date") %></p>
                                 </div>
 
-                                <div class="col-5">
+                                <div class="col">
                                     <asp:LinkButton ID="claimCNLink" runat="server" CommandArgument='<%#Eval("InvoiceItem.Id") %>'>Reclamar</asp:LinkButton>
 
                                 </div>

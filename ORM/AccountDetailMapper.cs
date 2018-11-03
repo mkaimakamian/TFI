@@ -49,10 +49,12 @@ namespace ORM
             //accountsDetail.Id = int.Parse(data["sourceId"].ToString());
             accountsDetail.IssuedId = int.Parse(data["issuedId"].ToString());
             accountsDetail.Description = data["description"].ToString();
-            accountsDetail.Amount = Convert.ToDouble(data["amount"]);
+            //accountsDetail.Amount = Convert.ToDouble(data["amount"]);
             accountsDetail.Status = data["status"].ToString();
             accountsDetail.Date = Convert.ToDateTime(data["date"].ToString());
             accountsDetail.Type = data["type"].ToString();
+            accountsDetail.Debe = data["debe"].ToString();
+            accountsDetail.Haber = data["haber"].ToString();
             return accountsDetail;
         }
     }

@@ -14,11 +14,13 @@ namespace BE
         private int id;
         private int issuedId;
         private string description;
-        private double amount;
+        //private double amount;
         private string status;
         private DateTime date;
         private string type;
-
+        private string debe;
+        private string haber;
+        
         public int Id
         {
             get
@@ -58,18 +60,18 @@ namespace BE
             }
         }
 
-        public double Amount
-        {
-            get
-            {
-                return amount;
-            }
+        //public double Amount
+        //{
+        //    get
+        //    {
+        //        return amount;
+        //    }
 
-            set
-            {
-                amount = value;
-            }
-        }
+        //    set
+        //    {
+        //        amount = value;
+        //    }
+        //}
 
         public string Status
         {
@@ -107,6 +109,32 @@ namespace BE
             set
             {
                 type = value;
+            }
+        }
+
+        public string Debe
+        {
+            get
+            {
+                return debe;
+            }
+
+            set
+            {
+                debe = value;
+            }
+        }
+
+        public string Haber
+        {
+            get
+            {
+                return haber;
+            }
+
+            set
+            {
+                haber = value;
             }
         }
     }
