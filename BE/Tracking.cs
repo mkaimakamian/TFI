@@ -14,7 +14,8 @@ namespace BE
             Descargado = 1,
             Reclamado = 2,
             Rechazado = 3,
-            Aceptado = 4
+            Aceptado = 4,
+            Valorado = 5
         }
 
         private int id;
@@ -22,6 +23,7 @@ namespace BE
         private InvoiceItem invoiceItem;
         private StatusType status;
         private DateTime date;
+        private int ranking;
 
         public InvoiceItem InvoiceItem
         {
@@ -91,6 +93,19 @@ namespace BE
             set
             {
                 invoiceId = value;
+            }
+        }
+
+        public int Ranking
+        {
+            get
+            {
+                return ranking;
+            }
+
+            set
+            {
+                ranking = value;
             }
         }
     }

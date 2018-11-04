@@ -94,7 +94,6 @@ namespace BL
             {
                 invoiceItem.Resource = new MapManager().Get(invoiceItem.Resource.Id);
             }
-            //No es necesaria la información sobre el medio de pago //
 
             invoice.CreditNotes = creditNoteManager.GetByInvoice(invoice);
             //creditCardmanager.Get()

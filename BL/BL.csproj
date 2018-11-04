@@ -64,6 +64,7 @@
     <Compile Include="PollManager.cs" />
     <Compile Include="PollOptionManager.cs" />
     <Compile Include="PollQuestionManager.cs" />
+    <Compile Include="RankingManager.cs" />
     <Compile Include="RoleManager.cs" />
     <Compile Include="SessionManager.cs" />
     <Compile Include="TrackingManager.cs" />

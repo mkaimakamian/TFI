@@ -17,6 +17,8 @@ namespace Helper
     {
         private const string POLL_QUESTION = "ubiquicity_pollQuestion";
         private static bool pollQuestionEdited = false;
+        private const string UBIQUICITY_ITEM_ID = "Ubiquicity_itemId";
+
 
         /// <summary>
         /// Persiste las preguntas de la encuestas en sessión para podes efectuar tareas ABMicas.
@@ -48,7 +50,7 @@ namespace Helper
         }
 
         /// <summary>
-        /// Devuelve el listado de prgeuntas de la encuesta persistidas en sesión.  
+        /// Devuelve el listado de preguntas de la encuesta persistidas en sesión.  
         /// </summary>
         /// <param name="session"></param>
         /// <returns></returns>
@@ -59,7 +61,7 @@ namespace Helper
         }
 
         /// <summary>
-        /// Devuelve el listado de prgeuntas de la encuesta persistidas en sesión.  
+        /// Elimina del listado la pregunta de la encuesta persistidas en sesión.  
         /// </summary>
         /// <param name="session"></param>
         /// <returns></returns>
@@ -79,6 +81,23 @@ namespace Helper
         public static void FlushPollQuestion(HttpSessionState session)
         {
             if (Exist(POLL_QUESTION, session)) session.Remove(POLL_QUESTION);
+        }
+
+        /// <summary>
+        /// Mantiene el id de el ítem deseado en sesión; es responsabilidad del usuario
+        /// encargarse del contenido.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="session"></param>
+        public static void KeepInSession(string id, HttpSessionState session)
+        {
+            session[UBIQUICITY_ITEM_ID] = id;
+        }
+
+        public static String GetIdFromSession(HttpSessionState session)
+        {
+            if (!Exist(UBIQUICITY_ITEM_ID, session)) return null;
+            return session[UBIQUICITY_ITEM_ID].ToString();
         }
 
         /// <summary>

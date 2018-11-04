@@ -63,6 +63,7 @@
     <Compile Include="PollOption.cs" />
     <Compile Include="PollQuestion.cs" />
     <Compile Include="QueryFilter.cs" />
+    <Compile Include="Ranking.cs" />
     <Compile Include="Resource.cs" />
     <Compile Include="ResultBE.cs" />
     <Compile Include="Role.cs" />

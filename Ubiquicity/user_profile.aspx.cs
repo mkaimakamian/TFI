@@ -14,9 +14,13 @@ namespace Ubiquicity
     public partial class user_profile : System.Web.UI.Page
     {
         private const string PERFORM_CLAIM = "PerformClaim";
+        private const string PERFORM_RANKING = "PerformRanking";
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            SessionHelper.ExecuteAutoStop();
+            if (!SecurityHelper.HasPermission(SessionHelper.GetUser(), Request.RawUrl)) Response.Redirect("/index.aspx");
+
             if (!IsPostBack)
             {
                 LoadAccountDetail();
@@ -135,19 +139,23 @@ namespace Ubiquicity
         protected void ResolveActionLink(object sender, RepeaterItemEventArgs e)
         {
             LinkButton link = e.Item.FindControl("claimCNLink") as LinkButton;
-            
+
             switch (((Tracking)e.Item.DataItem).Status)
             {
                 case Tracking.StatusType.Pendiente:
                     link.Text = "Reclamar";
-                    link.CommandName = "PerformClaim";
+                    link.CommandName = PERFORM_CLAIM;
                     break;
                 case Tracking.StatusType.Descargado:
-                    link.Text = "Obtenido";
-                    link.Enabled = false;
+                    link.Text = "Valorar";
+                    link.CommandName = PERFORM_RANKING;
+                    link.CommandArgument = ((Tracking)e.Item.DataItem).InvoiceItem.Id.ToString();
                     break;
                 case Tracking.StatusType.Reclamado:
-                    link.Text = "Reclamado";
+                    link.Visible = false;
+                    break;
+                case Tracking.StatusType.Valorado:
+                    link.Text = "Valorado con " + ((Tracking)e.Item.DataItem).Ranking + " puntos";
                     link.Enabled = false;
                     break;
             }
@@ -160,9 +168,9 @@ namespace Ubiquicity
         /// <param name="e"></param>
         protected void PerformTrackingAction(object source, RepeaterCommandEventArgs e)
         {
-            //Por el momento es la única acción dispobible
-            if (e.CommandName == PERFORM_CLAIM) {
-                try
+            try
+            {
+                if (e.CommandName == PERFORM_CLAIM)
                 {
                     int invoiceItemId = Convert.ToInt32(e.CommandArgument);
                     CreditNoteManager creditNoteManager = new CreditNoteManager();
@@ -171,148 +179,62 @@ namespace Ubiquicity
                     if (!success && creditNoteManager.HasErrors)
                     {
                         ((front)Master).Alert.Show("Error", creditNoteManager.ErrorDescription);
-                    } else
+                    }
+                    else
                     {
                         LoadProductTracking();
                         ((front)Master).Alert.Show("Nota de crédito", "Se ha generado una nota de crédito, pendiente de aprobación");
                     }
-
-                } catch (Exception exception)
-                {
-                    ((front)Master).Alert.Show("Exception", exception.Message);
                 }
-            }
-        }
-
-        /*
-        protected override void PageLoad(object sender, EventArgs e)
-        {
-
-            GridView = UCcrudGrid;
-            GridView.HideDeleteButton();
-            GridView.HideEditButton();
-            GridView.HideNewButton();
-            GridView.ShowGenericActionButton("Descargar");
-
-            Manager = new AccountDetailManager();
-
-            //BaseManager trabaja solidario con una UCGrid... pero en este caso la página presemta
-            //dos grillas, de modo que esta segunda, de visualización, se manipula aparte
-            UCcrudGridTracking.HideDeleteButton();
-            UCcrudGridTracking.HideEditButton();
-            UCcrudGridTracking.HideNewButton();
-
-            LoadTrackingInformation();
-        }
-
-        /// <summary>
-        /// Sobreescribe el método base porque éste trabaja con reflection buscando un método GET sin
-        /// parámetros, y en este caso se necesita suministrarle el id del susuario para refinar la búsqueda.
-        /// </summary>
-        protected override void LoadGridView()
-        {
-            try
-            {
-                List<AccountDetail> accountsDetail = ((AccountDetailManager)Manager).Get(SessionHelper.GetUserFromSession());
-
-                if (Manager.HasErrors)
+                else if (e.CommandName == PERFORM_RANKING)
                 {
-                    Alert.Show("Error", Manager.ErrorDescription);
+                    SessionUtilHelper.KeepInSession(e.CommandArgument.ToString(), Session);
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "openModal", "window.onload = function() { $('#modalCategory').modal('show'); }", true);
                 }
-                else
-                {
-                    GridView.ColumnsToShow = ColumnsToShowAndTranslate();
-                    GridView.LoadGrid(accountsDetail);
-                }
+
             }
             catch (Exception exception)
             {
-                Alert.Show("Exception", exception.Message);
+                ((front)Master).Alert.Show("Exception", exception.Message);
             }
         }
 
         /// <summary>
-        /// Se establece la traducción de las columnas que quieren ser mostradas.
+        /// Ejecuta la valración
         /// </summary>
-        /// <returns></returns>
-        protected override Dictionary<string, string> ColumnsToShowAndTranslate()
-        {
-            Dictionary<string, string> columns = new Dictionary<string, string>();
-            columns.Add("IssuedId", "#");
-            columns.Add("Description", "Descripción");
-            columns.Add("Amount", "Monto");
-            columns.Add("Date", "Emisión");
-            columns.Add("Status", "Estado");
-            return columns;
-        }
-
-        /// <summary>
-        /// Carga la grilla con la información de trackeo.
-        /// </summary>
-        private void LoadTrackingInformation()
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void PerformRanking(object sender, EventArgs e)
         {
             try
             {
+                int invoiceItemId = Convert.ToInt32(SessionUtilHelper.GetIdFromSession(Session));
                 TrackingManager trackingManager = new TrackingManager();
-                List<Tracking> accountsDetail = trackingManager.Get(SessionHelper.GetUserFromSession());
 
-                if (trackingManager.HasErrors)
+                //TODO - AGREGAR CONTROL DE ERROR
+                Tracking tracking = trackingManager.Get(invoiceItemId);
+
+                tracking.Ranking = UCFormRanking.Ranking;
+                tracking.Status = Tracking.StatusType.Valorado;
+
+                bool success = trackingManager.Edit(tracking);
+
+                if (!success && trackingManager.HasErrors)
                 {
-                    Alert.Show("Error", Manager.ErrorDescription);
+                    ((front)Master).Alert.Show("Error", trackingManager.ErrorDescription);
+
                 }
                 else
                 {
-                    UCcrudGridTracking.ColumnsToShow = ColumnsToShowAndTranslateForTracking();
-                    UCcrudGridTracking.LoadGrid(accountsDetail);
+                    LoadProductTracking();
                 }
+                //}
             }
             catch (Exception exception)
             {
-                Alert.Show("Exception", exception.Message);
+                ((front)Master).Alert.Show("Exception", exception.Message);
+
             }
         }
-
-        /// <summary>
-        /// Se establece la traducción de las columnas que quieren ser mostradas.
-        /// </summary>
-        /// <returns></returns>
-        private Dictionary<string, string> ColumnsToShowAndTranslateForTracking()
-        {
-            Dictionary<string, string> columns = new Dictionary<string, string>();
-            columns.Add("Resource", "Artículo");
-            columns.Add("Status", "Estado");
-            columns.Add("Date", "Últ. Actualización");
-            return columns;
-        }
-
-
-        protected override void PerformGenericAction(object sender, UbiquicityEventArg e)
-        {
-            Session["Ubiquicity_itemId"] = e.TheObject.ToString();
-            try
-            {
-                InvoiceManager invoiceManager = new InvoiceManager();
-                invoiceManager.DownloadInvoice();
-
-                if (invoiceManager.HasErrors)
-                {
-                    Alert.ShowUP("Error", invoiceManager.ErrorDescription);
-                } else
-                {
-                    HttpResponse res = HttpContext.Current.Response;
-                    res.Clear();
-                    res.AppendHeader("content-disposition", "attachment; filename=PaymentReceipt.pdf");
-                    res.ContentType = "application/octet-stream";
-                    res.WriteFile(@"C:\\tmp\\testPDF.pdf");
-                    res.Flush();
-                    res.End();
-                }
-
-            }
-            catch (Exception exception)
-            {
-                Alert.Show("Exception", exception.Message);
-            }
-        }*/
     }
 }

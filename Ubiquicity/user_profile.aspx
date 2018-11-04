@@ -83,8 +83,8 @@
                 <div class="col-2">
                     <p>Actualizado</p>
                 </div>
-                <div class="col-5">
-                    <p>Acciones</p>
+                <div class="col">
+                    <p>Acciones / Observaciones</p>
                 </div>
             </div>
             <div class="row">
@@ -120,9 +120,22 @@
             </div>
         </div>
     </div>
-    <%-- <UCmkc:UCHeaderBackOffice runat="server"  Content="Estado de cuenta"/>
-    <UCmkc:UCcrudGrid runat="server" ID="UCcrudGrid" />
 
-    <UCmkc:UCHeaderBackOffice runat="server"  Content="Tus productos adquiridos"/>
-    <UCmkc:UCcrudGrid runat="server" ID="UCcrudGridTracking" />--%>
+ <!-- Ranking form -->
+    <div id="modalCategory" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <%--  <asp:UpdatePanel ID="upUCModalForm" runat="server" UpdateMode="Conditional">--%>
+                    <%--<ContentTemplate>--%>
+                        <UCmkc:UCFormRanking runat="server" ID="UCFormRanking" />
+<%--                    </ContentTemplate>
+                </asp:UpdatePanel>--%>
+                <div class="modal-footer">
+                    <asp:Button runat="server" CssClass="btn btn-primary btn-sm" Text="Aceptar" OnClick="PerformRanking"/>
+                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </asp:Content>

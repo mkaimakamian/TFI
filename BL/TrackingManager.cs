@@ -33,6 +33,25 @@ namespace BL
         }
 
         /// <summary>
+        /// Recupera el elemento según el id pasado por parámetro.
+        /// </summary>
+        /// <returns></returns>
+        public Tracking Get(int invoiceItemId)
+        {
+            TrackingMapper trackingMapper = new TrackingMapper();
+            Tracking tracking = trackingMapper.Get(invoiceItemId);
+
+            if (tracking == null)
+            {
+                string errorDescription = "No se ha encontrado tracking para el producto adquirido con id " + invoiceItemId + ".";
+                log.AddLogCritical("Get", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.NULL, errorDescription));
+            }
+
+            return tracking;
+        }
+
+        /// <summary>
         /// Recupera el listado de todos los elementos.
         /// </summary>
         /// <returns></returns>
@@ -53,6 +72,27 @@ namespace BL
                 }
             }
             return trakings;
+        }
+
+        /// <summary>
+        /// Guarda los cambios del recurso existente.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <returns></returns>
+        public bool Edit(Tracking tracking)
+        {
+            TrackingMapper trackingMapper = new TrackingMapper();
+            tracking.Date = DateTime.Now;
+
+            if (!trackingMapper.Edit(tracking))
+            {
+                string errorDescription = "No se ha podido modificar el tracking.";
+                log.AddLogCritical("Edit", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.FAIL, errorDescription));
+                return false;
+            }
+
+            return true;
         }
     }
 }

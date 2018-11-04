@@ -14,7 +14,12 @@ namespace BE
         private double price;
         private Category category;
         private string image;
-        
+        private Ranking ranking;
+
+        public Resource()
+        {
+            Ranking = new Ranking();
+        }
 
         public int Id
         {
@@ -102,6 +107,19 @@ namespace BE
             set
             {
                 image = value;
+            }
+        }
+
+        public Ranking Ranking
+        {
+            get
+            {
+                return ranking;
+            }
+
+            set
+            {
+                ranking = value;
             }
         }
     }

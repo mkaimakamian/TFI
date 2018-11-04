@@ -22,7 +22,8 @@
                                 <img class="card-img-top" src="<%# Eval("Image") %>">
                                 <div class="card-body">
                                     <h4 class="card-title"><%# Eval("Name") %></h4>
-                                    <h6 class="card-subtitle mb-2 text-muted">Categoría de producto</h6>
+                                    <h6 class="card-subtitle mb-2 text-muted"><%# Eval("Category.Name") %></h6>
+                                    <h5 class="card-subtitle mb-2 mkcLetraNaranja"><i class="fa fa-tags"></i> $AR <%# Eval("Price") %></h5>
                                     <p class="card-text"><%# Eval("Description") %></p>
                                 </div>
                             </div>

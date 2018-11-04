@@ -62,6 +62,45 @@ namespace ORM
         }
 
         /// <summary>
+        /// Recupera el elemento por el id de objeto comprado.
+        /// </summary>
+        /// <param name="invoiceItemId"></param>
+        /// <returns></returns>
+        public Tracking Get(int invoiceItemId)
+        {
+            Dal dal = new Dal();
+            Hashtable table = new Hashtable();
+            Tracking tracking = null;
+
+            table.Add("@invoiceItemId", invoiceItemId);
+            DataSet result = dal.Read(table, "spReadTracking");
+
+            if (result != null && result.Tables[0].Rows.Count > 0)
+            {
+                tracking = ConvertToModel(result.Tables[0].Rows[0]);
+            }
+
+            return tracking;
+        }
+
+        /// <summary>
+        /// Ejecuta la actualización del modelo de datos.
+        /// </summary>
+        /// <param name="tracking"></param>
+        /// <returns></returns>
+        public bool Edit(Tracking tracking)
+        {
+            Dal dal = new Dal();
+            Hashtable table = new Hashtable();
+
+            table.Add("@invoiceItemId", tracking.InvoiceItem.Id);
+            table.Add("@status", tracking.Status);
+            table.Add("@ranking", tracking.Ranking);
+
+            return dal.Write(table, "spModifyTracking") > 0;
+        }
+
+        /// <summary>
         /// Devuelve un objeto modelado con los valores del dataRow que recibe por parámetro.
         /// </summary>
         /// <param name="data"></param>
@@ -76,6 +115,7 @@ namespace ORM
             tracking.Status = statusType;
             tracking.Date= Convert.ToDateTime(data["date"].ToString());
             tracking.InvoiceId = int.Parse(data["InvoiceId"].ToString());
+            tracking.Ranking = int.Parse(data["Ranking"].ToString());
             return tracking;
         }
     }

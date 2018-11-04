@@ -63,10 +63,13 @@
                                         <asp:Repeater ID="cartItemRepeater" runat="server" OnItemCommand="shopRepeater_ItemCommand">
                                             <ItemTemplate>
                                                 <div class="row bg-light mb-1">
-                                                    <div class="col-10 text-left">
+                                                   <div class="col-1 pl-1">
+                                                        <p class="m-0" style="font-size: 12px;" runat="server">$<%#Eval("Price") %></p>
+                                                    </div>
+                                                    <div class="col-9 text-left pl-2 pr-0">
                                                         <p class="m-0" style="font-size: 12px;" runat="server"><%#Eval("Name") %></p>
                                                     </div>
-                                                    <div class="col-2">
+                                                    <div class="col-1 pr-1">
                                                         <asp:LinkButton ID="btnDelete" runat="server" Text="<i class='fa fa-trash-o' aria-hidden='true'></i>" CommandName="RemoveItemCart" CommandArgument='<%# Eval("id") %>' />
                                                     </div>
                                                 </div>
@@ -76,14 +79,13 @@
 
                                 </div>
                             </div>
-                            
+
                             <div class="row" id="divNotLogged" runat="server">
                                 <div class="form-group col-12">
                                     <label for="loginBtn">¿No estás logueado?</label>
-                                    <%--<asp:LinkButton ID="loginBtn" runat="server" CssClass="btn btn-primary btn-sm" Text="<i class='fa fa-user' aria-hidden='true'></i> Ingresar :D" OnClick="LogIn" />--%>
                                 </div>
                                 <div class="form-group col-12">
-                                    <asp:LinkButton ID="loginBtn" runat="server" CssClass="btn btn-primary btn-sm" Text="<i class='fa fa-user' aria-hidden='true'></i> Ingresar :D" OnClick="LogIn" />                                    
+                                    <asp:LinkButton ID="loginBtn" runat="server" CssClass="btn btn-primary btn-sm" Text="<i class='fa fa-user' aria-hidden='true'></i> Ingresar :D" OnClick="LogIn" />
                                 </div>
                             </div>
 
@@ -103,6 +105,7 @@
                                             <p class="mb-1 mt-2 text-truncate" style="font-size: 14px;">
                                                 <%# Eval("Description") %>
                                             </p>
+                                            <p class="font-weight-light font-italic small"><%# Eval("Category.Name") %></p>
                                             <footer class="blockquote-footer mkcLetraNaranja">
                                                 <i class="fa fa-tags"></i>$AR <%# Eval("Price") %>
                                             </footer>
@@ -111,9 +114,13 @@
                                             <asp:LinkButton ID="btnBuy" runat="server" CssClass="btn btn-primary btn-sm" Text="¡Lo quiero!" CommandName="AddToCart" CommandArgument='<%# Eval("id") %>' />
                                         </div>
 
-                                        <input type="checkbox" value="<%# Eval("Id") %>" onclick="AddToCompare(this.value)" />
-                                        <small>Comparar</small>
+                                        <div class="row pl-3 pr-3">
+                                            <div class="col table-active">
+                                                <input type="checkbox" value="<%# Eval("Id") %>" onclick="AddToCompare(this.value)" />
+                                                <small >Comparar</small>
 
+                                            </div>
+                                        </div>
                                     </div>
                                 </ItemTemplate>
                             </asp:Repeater>

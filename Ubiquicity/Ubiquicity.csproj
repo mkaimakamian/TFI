@@ -134,7 +134,7 @@
     <Content Include="Resources\registro.svg" />
     <Content Include="Resources\roles_permisos.svg" />
     <Content Include="Resources\shop01.svg" />
-    <Content Include="Resources\template\!invoice.htm" />
+    <Content Include="Resources\star.svg" />
     <Content Include="Resources\template\invoice.htm" />
     <Content Include="Resources\template\mail.htm" />
     <Content Include="Resources\ubiquicity.css" />
@@ -206,6 +206,7 @@
     <Content Include="UserControls\UCFormNews.ascx" />
     <Content Include="UserControls\UCFormPassword.ascx" />
     <Content Include="UserControls\UCFormPoll.ascx" />
+    <Content Include="UserControls\UCFormRanking.ascx" />
     <Content Include="UserControls\UCFormRolePermission.ascx" />
     <Content Include="UserControls\UCFormUserRole.ascx" />
     <Content Include="UserControls\UCHeaderBackOffice.ascx" />
@@ -513,6 +514,13 @@
     </Compile>
     <Compile Include="UserControls\UCFormPoll.ascx.designer.cs">
       <DependentUpon>UCFormPoll.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCFormRanking.ascx.cs">
+      <DependentUpon>UCFormRanking.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCFormRanking.ascx.designer.cs">
+      <DependentUpon>UCFormRanking.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\UCFormRolePermission.ascx.cs">
       <DependentUpon>UCFormRolePermission.ascx</DependentUpon>
