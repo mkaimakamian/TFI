@@ -63,7 +63,7 @@
                                         <asp:Repeater ID="cartItemRepeater" runat="server" OnItemCommand="shopRepeater_ItemCommand">
                                             <ItemTemplate>
                                                 <div class="row bg-light mb-1">
-                                                   <div class="col-1 pl-1">
+                                                    <div class="col-1 pl-1">
                                                         <p class="m-0" style="font-size: 12px;" runat="server">$<%#Eval("Price") %></p>
                                                     </div>
                                                     <div class="col-9 text-left pl-2 pr-0">
@@ -101,6 +101,7 @@
                                     <div class="border rounded bg-light p-1 m-1" style="width: 240px;">
                                         <asp:ImageButton runat="server" src='<%# Eval("Image") %>' CssClass="img-thumbnail" CommandName="ShowDetail" CommandArgument='<%# Eval("id") %>' />
                                         <h5><%# Eval("Name") %></h5>
+                                        Valoración: <%# Eval("Ranking") %> <i class="fa fa-star-o" aria-hidden="true"></i>
                                         <blockquote class="blockquote">
                                             <p class="mb-1 mt-2 text-truncate" style="font-size: 14px;">
                                                 <%# Eval("Description") %>
@@ -117,7 +118,7 @@
                                         <div class="row pl-3 pr-3">
                                             <div class="col table-active">
                                                 <input type="checkbox" value="<%# Eval("Id") %>" onclick="AddToCompare(this.value)" />
-                                                <small >Comparar</small>
+                                                <small>Comparar</small>
 
                                             </div>
                                         </div>

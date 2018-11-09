@@ -155,7 +155,7 @@ namespace ORM
             map.Resource = data["sourcePath"].ToString();
             map.Category.Id = int.Parse(data["categoryId"].ToString());
             map.Category.Name = data["categoryName"].ToString();
-
+            map.Ranking = int.Parse(data["ranking"].ToString());
             return map;
         }
 

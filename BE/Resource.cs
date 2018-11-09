@@ -14,12 +14,12 @@ namespace BE
         private double price;
         private Category category;
         private string image;
-        private Ranking ranking;
+        private int ranking;
 
-        public Resource()
-        {
-            Ranking = new Ranking();
-        }
+        //public Resource()
+        //{
+        //    Ranking = new Ranking();
+        //}
 
         public int Id
         {
@@ -87,7 +87,7 @@ namespace BE
             }
         }
 
-        // Para poder leer el nombre en la grill
+        // Para poder leer el nombre en la grilla
         public String CategoryName
         {
             get
@@ -110,7 +110,7 @@ namespace BE
             }
         }
 
-        public Ranking Ranking
+        public int Ranking
         {
             get
             {
