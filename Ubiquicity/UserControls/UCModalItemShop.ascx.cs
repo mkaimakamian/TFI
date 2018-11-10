@@ -45,7 +45,6 @@ namespace Ubiquicity.UserControls
             itemRepeater.DataBind();
             //super turbio: almaceno el id para saber, al momento de comentar, a qué producto le pertenece.
             btnComentar.CommandArgument = map.Id.ToString();
-            this.title = map.Name;
             //this.message = map.Description;
             PopulateItemDetail(map);
             //Page.ClientScript.RegisterStartupScript(this.GetType(), "openModalItemShop", "window.onload = function() { $('#ucModalItemShop').modal('show'); }", true);
@@ -55,8 +54,10 @@ namespace Ubiquicity.UserControls
 
         private void PopulateItemDetail(Map map)
         {
+            title = map.Name;
             imgItem.Src = map.Image;
             descriptionItem.InnerText = map.Description;
+            lblRanking.Text = "Valoración: "+ map.Ranking+" <i class='fa fa-star-o' aria-hidden='true'></i>";
             priceItem.InnerHtml = "<i class=\"fa fa-tags\"></i> $AR " + map.Price.ToString();
         }
 

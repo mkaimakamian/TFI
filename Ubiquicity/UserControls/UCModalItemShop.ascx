@@ -20,6 +20,7 @@
                                 <div class="row justify-content-center text-center pb-3 pt-3">
                                     <div class="col">
                                         <img id="imgItem" runat="server" class="img-thumbnail" />
+                                        <asp:Label ID="lblRanking" runat="server"></asp:Label>
                                     </div>
                                 </div>
                                 <%--<h5><%# Eval("Name") %></h5>--%>
