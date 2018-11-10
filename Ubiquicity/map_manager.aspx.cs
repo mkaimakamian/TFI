@@ -50,7 +50,7 @@ namespace Ubiquicity
 
             if (map == null && mapManager.HasErrors)
             {
-                Alert.Show("Error", mapManager.ErrorDescription);
+                Alert.ShowUP("Error", mapManager.ErrorDescription);
             }
             else
             {

@@ -16,22 +16,18 @@
                             <!-- Descripcion del producto -->
                             <div id="ucModalItemShopMessage" runat="server" class="col-6">
 
-                                <%--                     <div class="col-3 border border-secondary bg-light rounded m-1">--%>
                                 <div class="row justify-content-center text-center pb-3 pt-3">
                                     <div class="col">
                                         <img id="imgItem" runat="server" class="img-thumbnail" />
                                         <asp:Label ID="lblRanking" runat="server"></asp:Label>
                                     </div>
                                 </div>
-                                <%--<h5><%# Eval("Name") %></h5>--%>
                                 <blockquote class="blockquote">
                                     <p id="descriptionItem" runat="server" class="mb-1 mt-2" style="font-size: 14px;">
                                     </p>
                                     <footer id="priceItem" runat="server" class="blockquote-footer mkcLetraNaranja">
                                     </footer>
                                 </blockquote>
-
-                                <%--                        </div>--%>
                             </div>
 
                             <!-- Comentarios del producto -->
@@ -43,14 +39,16 @@
                                             <ItemTemplate>
                                                 <div class="media comment-box">
                                                     <div class="media-left">
-                                                        <%--  <a href="#">--%>
                                                         <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
-                                                        <%-- </a>--%>
                                                     </div>
                                                     <div class="media-body">
-                                                        <h4 class="media-heading"><%# Eval("User.Name") %> - <%# Eval("Date") %></h4>
+                                                        <h4 class="media-heading">
+                                                            <%#Eval("SentenceReference") != null ? "<font color=\"#ffc107\">[Ubiquicity]</font> " : "[Usuario] " %>
+                                                            <%# Eval("User.Name") %> - <%# Eval("Date") %>
+                                                        </h4>
                                                         <p>
-                                                            <%# Eval("Comment") %>
+
+                                                            <%# Eval("Sentence") %>
                                                         </p>
                                                     </div>
                                                 </div>

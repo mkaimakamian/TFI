@@ -22,7 +22,7 @@ namespace Ubiquicity
             GridView.HideEditButton();
 
             Alert.PerformMainAction += RejectCreditNote;
-            //se elimina para que no conflictúe
+            //se elimina el evento de eliminación para que no conflictúe
             Alert.PerformMainAction -= PerformDeleteItem; 
             Alert.PerformSecondAction += AcceptCreditNote;
             Manager = new CreditNoteManager();

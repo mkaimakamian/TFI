@@ -6,79 +6,23 @@ using System.Threading.Tasks;
 
 namespace BE
 {
-    public class ItemComment
+    public class ItemComment : Message
     {
-        private int id;
-        private Resource resource;
-        private User user;
-        private DateTime date;
-        private string comment;
-
-        public int Id
-        {
-            get
-            {
-                return id;
-            }
-
-            set
-            {
-                id = value;
-            }
+        public ItemComment () {
+            Resource = new Resource();          
         }
 
-        public Resource Resource
-        {
-            get
-            {
-                if (resource == null) resource = new Resource();
-                return resource;
-            }
+        public Resource Resource { get; set; }
+        public ItemComment SentenceReference { get; set; }
 
-            set
-            {
-                resource = value;
-            }
+        public string Answer
+        {
+            get { return SentenceReference != null ? SentenceReference.Sentence : "Sin respuesta"; }
         }
 
-        public User User
+        public String AnswerDate
         {
-            get
-            {
-                if (user == null) user = new User();
-                return user;
-            }
-
-            set
-            {
-                user = value;
-            }
-        }
-
-        public DateTime Date
-        {
-            get
-            {
-                return date;
-            }
-
-            set
-            {
-                date = value;
-            }
-        }
-
-        public string Comment
-        {
-            get
-            {
-                return comment;
-            }
-
-            set
-            {
-                comment = value;
-            }
+            get { return SentenceReference != null ? SentenceReference.Date.ToShortDateString() : "--/--/--"; }
         }
     }
 }

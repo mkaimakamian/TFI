@@ -43,6 +43,7 @@
     <Compile Include="AccountDetail.cs" />
     <Compile Include="Address.cs" />
     <Compile Include="Backup.cs" />
+    <Compile Include="Chat.cs" />
     <Compile Include="Country.cs" />
     <Compile Include="CreditCard.cs" />
     <Compile Include="CreditCardType.cs" />
@@ -53,6 +54,7 @@
     <Compile Include="Language.cs" />
     <Compile Include="LogEntry.cs" />
     <Compile Include="Map.cs" />
+    <Compile Include="Message.cs" />
     <Compile Include="News.cs" />
     <Compile Include="NewsAddressee.cs" />
     <Compile Include="NewsCategory.cs" />

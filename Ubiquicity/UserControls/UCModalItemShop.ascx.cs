@@ -71,7 +71,7 @@ namespace Ubiquicity.UserControls
             try
             {
                 ItemCommentManager commentManager = new ItemCommentManager();
-                return commentManager.Get(map.Id);
+                return commentManager.GetByResource(map.Id);
             }
             catch(Exception exception)
             {
@@ -93,16 +93,32 @@ namespace Ubiquicity.UserControls
                 ItemCommentManager commentManager = new ItemCommentManager();
 
                 ItemComment itemComment = new ItemComment();
-                itemComment.Comment = commentInput.InnerText;
+                itemComment.Sentence = commentInput.InnerText;
                 itemComment.User =(User)Session["SessionCreated"];
                 itemComment.Resource.Id = Convert.ToInt32(((Button)sender).CommandArgument);
 
                 commentManager.Save(itemComment);
-            }catch
+            }catch (Exception exception)
             {
                 //TODO - agregar control de error
                 //((front)Master).Alert.Show("Exception", exception.Message);
             }
+        }
+
+        public bool EvalProperty(string columnName)
+        {
+            bool toReturn;
+            try
+            {
+                toReturn = Eval(columnName) != null;
+
+            }
+            catch
+            {
+                toReturn = false;
+            }
+
+            return toReturn;
         }
     }
 }

@@ -86,6 +86,7 @@
     <Content Include="credit_manager.aspx" />
     <Content Include="dashboard.aspx" />
     <Content Include="faq.aspx" />
+    <Content Include="inquiry_manager.aspx" />
     <Content Include="invoice.aspx" />
     <Content Include="invoice_finish.aspx" />
     <Content Include="language_manager.aspx" />
@@ -202,6 +203,7 @@
     <Content Include="UserControls\UCCompareGrid.ascx" />
     <Content Include="UserControls\sub\UCCompareItem.ascx" />
     <Content Include="UserControls\UCFormCategory.ascx" />
+    <Content Include="UserControls\UCFormInquiry.ascx" />
     <Content Include="UserControls\UCFormMap.ascx" />
     <Content Include="UserControls\UCFormNews.ascx" />
     <Content Include="UserControls\UCFormPassword.ascx" />
@@ -324,6 +326,13 @@
     </Compile>
     <Compile Include="index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="inquiry_manager.aspx.cs">
+      <DependentUpon>inquiry_manager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="inquiry_manager.aspx.designer.cs">
+      <DependentUpon>inquiry_manager.aspx</DependentUpon>
     </Compile>
     <Compile Include="invoice.aspx.cs">
       <DependentUpon>invoice.aspx</DependentUpon>
@@ -486,6 +495,13 @@
     </Compile>
     <Compile Include="UserControls\UCFormCategory.ascx.designer.cs">
       <DependentUpon>UCFormCategory.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCFormInquiry.ascx.cs">
+      <DependentUpon>UCFormInquiry.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCFormInquiry.ascx.designer.cs">
+      <DependentUpon>UCFormInquiry.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\UCFormMap.ascx.cs">
       <DependentUpon>UCFormMap.ascx</DependentUpon>

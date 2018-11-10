@@ -101,6 +101,15 @@ namespace Helper
         }
 
         /// <summary>
+        /// Se encarga de eliminar el id persistido en sesión.
+        /// </summary>
+        /// <param name="session"></param>
+        public static void FlushId(HttpSessionState session)
+        {
+            if (Exist(UBIQUICITY_ITEM_ID, session)) session.Remove(UBIQUICITY_ITEM_ID);
+        }
+
+        /// <summary>
         /// Devuelve el valor de verdad de la existencia de un determinado elemento en sesión.
         /// </summary>
         /// <param name="SessionTag"></param>
