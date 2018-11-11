@@ -22,6 +22,10 @@ namespace BE
         private List<PollQuestion> questions;
         private bool active;
 
+        public Poll ()
+        {
+            Questions = new List<PollQuestion>();
+        }
         public int Id
         {
             get

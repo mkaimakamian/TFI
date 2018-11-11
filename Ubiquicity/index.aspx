@@ -46,9 +46,11 @@
         </div>
     </div>
 
-    <div class="container marketing">
+    <div class="row">
+        <UCmkc:UCPanelPoll runat="server" ID="UCPanelPoll" />
+    </div>
 
-        <!-- Three columns of text below the carousel -->
+    <div class="container marketing">
         <div class="row text-center mt-4">
             <div class="col-lg-4">
                 <img src="Resources/home02.svg" width="96" height="96">

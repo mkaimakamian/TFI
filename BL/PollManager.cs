@@ -50,25 +50,7 @@ namespace BL
             PollQuestionManager pollQuestionManager = new PollQuestionManager();
             PollMapper pollMapper = new PollMapper();
             Poll poll = pollMapper.Get(id);
-
-            if (poll == null)
-            {
-                string errorDescription = "No se ha encontrado la encuesta con id " + id + ".";
-                log.AddLogCritical("Get", errorDescription, this);
-                AddError(new ResultBE(ResultBE.Type.NULL, errorDescription));
-                return null;
-            }
-
-            List<PollQuestion> pollQuestions = pollQuestionManager.Get(id);
-
-            if (pollQuestions == null || pollQuestions.Count == 0)
-            {
-                string errorDescription = "No se han encontrado preguntas para la encuesta " + id + ".";
-                log.AddLogCritical("Get", errorDescription, this);
-                AddError(new ResultBE(ResultBE.Type.NULL, errorDescription));
-                return null;
-            }
-            poll.Questions = pollQuestions;
+            PopulatePoll(poll);
             return poll;
         }
 
@@ -81,20 +63,24 @@ namespace BL
             PollQuestionManager pollQuestionManager = new PollQuestionManager();
             PollMapper pollMapper = new PollMapper();
             Poll poll = pollMapper.GetSatisfactionPoll();
+            PopulatePoll(poll);
+            return poll;
+        }
 
-            //Es válido que no exista encuesta de satisfacción
-            if (poll == null) return null;
-            
-            List<PollQuestion> pollQuestions = pollQuestionManager.Get(poll.Id);
-
-            if (pollQuestions == null || pollQuestions.Count == 0)
-            {
-                string errorDescription = "No se han encontrado preguntas para la encuesta " + poll.Id + ".";
-                log.AddLogCritical("Get", errorDescription, this);
-                AddError(new ResultBE(ResultBE.Type.NULL, errorDescription));
-                return null;
+        /// <summary>
+        /// Devuelve una encuesta aleatoria válida apara ser mostrada en el sitio.
+        /// </summary>
+        /// <returns></returns>
+        public Poll GetInstantPoll()
+        {
+            PollMapper pollMapper = new PollMapper();
+            List<Poll> polls = pollMapper.GetInstantPolls();
+            Poll poll = null;
+            if (polls != null && polls.Count > 0) { 
+                poll = polls[new Random().Next(0, polls.Count)];
+                PopulatePoll(poll);
             }
-            poll.Questions = pollQuestions;
+
             return poll;
         }
 
@@ -107,7 +93,7 @@ namespace BL
             PollMapper pollMapper = new PollMapper();
             return pollMapper.Get();
         }
-        
+
         /// <summary>
         /// Guarda los cambios del recurso existente.
         /// </summary>
@@ -186,6 +172,29 @@ namespace BL
                 isValid = false;
             }
             return isValid;
+        }
+
+        /// <summary>
+        /// Completa con elementos adicionales la encuesta
+        /// </summary>
+        /// <param name="poll"></param>
+        /// <returns></returns>
+        private void PopulatePoll(Poll poll)
+        {
+            // Como es válida la no existencia, simplemente retorno un null
+            if (poll == null) return;
+
+            PollQuestionManager pollQuestionManager = new PollQuestionManager();
+            List<PollQuestion> pollQuestions = pollQuestionManager.Get(poll.Id);
+
+            if (pollQuestions == null || pollQuestions.Count == 0)
+            {
+                string errorDescription = "No se han encontrado preguntas para la encuesta " + poll.Id + ".";
+                log.AddLogCritical("Get", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.NULL, errorDescription));
+                return;
+            }
+            poll.Questions = pollQuestions;
         }
     }
 }

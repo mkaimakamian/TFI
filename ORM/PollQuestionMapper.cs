@@ -33,6 +33,11 @@ namespace ORM
             return true;
         }
 
+        /// <summary>
+        /// Devuelve las opciones en base al id de la encuesta.
+        /// </summary>
+        /// <param name="pollId"></param>
+        /// <returns></returns>
         public List<PollQuestion> GetByPoll(int pollId)
         {
             Dal dal = new Dal();

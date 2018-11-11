@@ -56,7 +56,10 @@ namespace ORM
             return poll;
         }
 
-
+        /// <summary>
+        /// Devulve la encuesta de satisfacción activa.
+        /// </summary>
+        /// <returns></returns>
         public Poll GetSatisfactionPoll()
         {
             Dal dal = new Dal();
@@ -75,7 +78,6 @@ namespace ORM
             return poll;
         }
         
-
         /// <summary>
         /// Recupera el listado de elementos de la base.
         /// </summary>
@@ -86,6 +88,31 @@ namespace ORM
             Hashtable table = new Hashtable();
             List<Poll> polls = null;
 
+            DataSet result = dal.Read(table, "spReadPoll");
+
+            if (result != null && result.Tables[0].Rows.Count > 0)
+            {
+                polls = new List<Poll>();
+                foreach (DataRow data in result.Tables[0].Rows)
+                {
+                    polls.Add(ConvertToModel(data));
+                }
+            }
+
+            return polls;
+        }
+
+        /// <summary>
+        /// Recupera el listado de elementos de la base.
+        /// </summary>
+        /// <returns></returns>
+        public List<Poll> GetInstantPolls()
+        {
+            Dal dal = new Dal();
+            Hashtable table = new Hashtable();
+            List<Poll> polls = null;
+
+            table.Add("@instant", true);
             DataSet result = dal.Read(table, "spReadPoll");
 
             if (result != null && result.Tables[0].Rows.Count > 0)

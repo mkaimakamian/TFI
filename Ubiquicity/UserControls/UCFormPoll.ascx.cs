@@ -73,8 +73,8 @@ namespace Ubiquicity.UserControls
         /// <param name="e"></param>
         protected void NewQuestion(object sender, EventArgs e)
         {
-            questionListCol.Disabled = true;
-            newQuestionListCol.Disabled = false;
+            //questionListCol.Disabled = true;
+            //newQuestionListCol.Disabled = false;
         }
 
         protected void AddQuestion(object sender, EventArgs e)

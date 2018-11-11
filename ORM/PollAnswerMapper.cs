@@ -26,7 +26,7 @@ namespace ORM
             foreach (PollAnswer answer in pollAnswers)
             {
                 table = new Hashtable();
-                table.Add("@userId", answer.User.Id);
+                if (answer.User != null) table.Add("@userId", answer.User.Id);
                 table.Add("@questionId", answer.PollQuestion.Id);
                 table.Add("@optionId", answer.PollOption.Id);
                 success = success && dal.Write(table, "spWritePollAnswer") > 0;

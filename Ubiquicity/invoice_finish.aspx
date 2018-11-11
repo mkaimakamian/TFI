@@ -28,10 +28,8 @@
                         <asp:Repeater ID="pollRepeater" runat="server" OnItemCreated="PopulateOptions">
                             <ItemTemplate>
                                 <h5 itemid="<%# Eval("Id") %>"><%# Eval("Question") %></h5>
-                                <%--<input id="lblQuestion" type="hidden" value='<%# Eval("Id") %>' />--%>
                                 <asp:HiddenField ID="lblQuestion" runat="server" Value='<%# Eval("Id") %>' />
-                                <asp:RadioButtonList ID="radioOptionList" runat="server"
-                                    RepeatDirection="Horizontal">
+                                <asp:RadioButtonList ID="radioOptionList" runat="server" RepeatDirection="Horizontal">
                                 </asp:RadioButtonList>
                             </ItemTemplate>
                         </asp:Repeater>
