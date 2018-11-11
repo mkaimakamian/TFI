@@ -48,5 +48,41 @@ namespace ORM
             DataSet result = dal.Read(table, "spReadPollAnswer");
             return result != null && result.Tables[0].Rows.Count > 0;
         }
+
+        public List<PollAnswerSerie> GetPollAnswersForChart(int pollId)
+        {
+            Dal dal = new Dal();
+            Hashtable table = new Hashtable();
+            List<PollAnswerSerie> pollAnswerSeries = null;
+
+            table.Add("@pollId", pollId);
+            table.Add("@chart", true);
+            DataSet result = dal.Read(table, "spReadPollAnswer");
+
+            if (result != null && result.Tables[0].Rows.Count > 0)
+            {
+                pollAnswerSeries = new List<PollAnswerSerie>();
+                foreach (DataRow data in result.Tables[0].Rows)
+                {
+                    pollAnswerSeries.Add(ConvertToModel(data));
+                }
+            }
+
+            return pollAnswerSeries;
+        }
+
+        /// <summary>
+        /// Devuelve un objeto modelado con los valores del dataRow que recibe por parámetro.
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        private PollAnswerSerie ConvertToModel(DataRow data)
+        {
+            PollAnswerSerie pollAnswerSerie = new PollAnswerSerie();
+            pollAnswerSerie.SerieLabel = data["SerieLabel"].ToString();
+            pollAnswerSerie.ValueLabel = data["ValueLabel"].ToString();
+            pollAnswerSerie.Value = int.Parse(data["Value"].ToString());
+            return pollAnswerSerie;
+        }
     }
 }

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BE;
 using ORM;
+using System.Collections;
 
 namespace BL
 {
@@ -41,6 +42,34 @@ namespace BL
         {
             PollAnswerMapper pollAnswerMapper = new PollAnswerMapper();
             return pollAnswerMapper.HasAnswers(poll);
+        }
+
+            /// <summary>
+        /// Devuelve un diccionario cuyas keys son el nombre de la serie, y cuyos valores
+        /// es un array de objeto bidimensional con 0 = opcion, 1 = valor
+        /// </summary>
+        /// <param name="pollId"></param>
+        /// <returns></returns>
+        public Dictionary<string, ArrayList[]> GetPollAnswersForChart(int pollId)
+        {
+            PollAnswerMapper pollAnswerMapper = new PollAnswerMapper();
+            List<PollAnswerSerie> series = pollAnswerMapper.GetPollAnswersForChart(pollId);
+            Dictionary<string, ArrayList[]> chartSeries = new Dictionary<string, ArrayList[]>();
+
+            //La estrategia consiste en devolver un diccionario para identificar adecuadamente
+            //las series, cada una con los array que necesita el chart para ser mostrado
+            foreach (PollAnswerSerie paserie in series)
+            {
+                if (!chartSeries.ContainsKey(paserie.SerieLabel))
+                {
+                    chartSeries.Add(paserie.SerieLabel, new ArrayList[2] { new ArrayList(), new ArrayList()});
+                }
+
+                chartSeries[paserie.SerieLabel][0].Add(paserie.ValueLabel);
+                chartSeries[paserie.SerieLabel][1].Add(paserie.Value);
+            }
+
+            return chartSeries;
         }
     }
 }

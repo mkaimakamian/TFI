@@ -1,4 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UCPanelPoll.ascx.cs" Inherits="Ubiquicity.UserControls.UCPanelPoll" %>
+<%@ Register Assembly="System.Web.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Namespace="System.Web.UI.DataVisualization.Charting" TagPrefix="asp" %>
 <div class="container-fluid">
 
     <div class="row" id="divPoll" runat="server">
@@ -16,9 +17,17 @@
             </div>
         </div>
     </div>
+<!-- CHART -->
     <div id="divPollStatistics" runat="server" class="row justify-content-center text-center" visible="false">
         <div class="col">
-            <h3 class="text-success">¡Gracias por participar!</h3>
+            <asp:Chart ID="Chart1" runat="server">
+<%--                <Series>
+                    <asp:Series Name="Series1"></asp:Series>
+                </Series>--%>
+                <ChartAreas>
+                    <asp:ChartArea Name="ChartArea1" Area3DStyle-Enable3D="true"></asp:ChartArea>
+                </ChartAreas>
+            </asp:Chart>
         </div>
     </div>
 </div>
