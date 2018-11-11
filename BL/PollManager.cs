@@ -135,6 +135,26 @@ namespace BL
             return true;
         }
 
+        /// <summary>
+        /// Elimina el elemento cuyo id es pasado por parámetro.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public bool Delete(int id)
+        {
+            PollMapper pollMapper = new PollMapper();
+
+            if (!pollMapper.Delete(id))
+            {
+                string errorDescription = "No se ha podido eliminar la encuesta con id " + id + ".";
+                log.AddLogCritical("Delete", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.FAIL, errorDescription));
+                return false;
+            }
+
+            return true;
+        }
+
         private bool IsValideForEdit(Poll poll)
         {
             bool isValid = true;

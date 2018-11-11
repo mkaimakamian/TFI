@@ -151,13 +151,14 @@ namespace ORM
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        //public bool Delete(int pollId)
-        //{
-        //    Dal dal = new Dal();
-        //    Hashtable table = new Hashtable();
-        //    table.Add("@pollId", pollId);
-        //    return dal.Write(table, "spDeleteMap") > 0;
-        //}
+        public bool Delete(int id)
+        {
+            //eliminado lógico
+            Dal dal = new Dal();
+            Hashtable table = new Hashtable();
+            table.Add("@id", id);
+            return dal.Write(table, "spDeletePoll") > 0;
+        }
 
         /// <summary>
         /// Devuelve un objeto modelado con los valores del dataRow que recibe por parámetro.

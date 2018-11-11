@@ -46,9 +46,9 @@
         </div>
     </div>
 
-    <div class="row">
+<%--    <div class="row">
         <UCmkc:UCPanelPoll runat="server" ID="UCPanelPoll" />
-    </div>
+    </div>--%>
 
     <div class="container marketing">
         <div class="row text-center mt-4">

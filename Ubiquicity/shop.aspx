@@ -34,10 +34,12 @@
                 <UCmkc:UCItemShopFilter runat="server" ID="UCItemShopFilter" />
 
                 <div class="row">
-                    <!-- Comparar, adquirir y resumen -->
                     <div class="col-2 text-center">
-                        <div class="row border rounded mt-1">
+                        <!-- Encuesta -->
+                        <UCmkc:UCPanelPoll runat="server" ID="UCPanelPoll" />
 
+                        <!-- Comparar, adquirir y resumen -->
+                        <div class="row border rounded mt-1">
                             <div class="form-group col-12 bg-light pb-2">
                                 <label for="compareBtn">Seleccioná hasta 4 ítems para compararlos.</label>
                                 <asp:LinkButton ID="compareBtn" runat="server" CssClass="btn btn-success btn-sm" Text="<i class='fa fa-clone' aria-hidden='true'></i> Comparar" OnClick="PerformCompare" />

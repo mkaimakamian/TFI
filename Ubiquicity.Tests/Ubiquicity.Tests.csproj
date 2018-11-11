@@ -82,7 +82,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="20181110.sql" />
     <Content Include="20181111.sql" />
     <Content Include="TypeScript_Dev14Full.exe" />
   </ItemGroup>
