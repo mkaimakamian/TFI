@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using BE;
 using BL;
+using Helper;
 
 namespace Ubiquicity.UserControls
 {
@@ -40,9 +41,8 @@ namespace Ubiquicity.UserControls
         /// <param name="button2Label"></param>
         public void Show(Map map)
         {
-
-            itemRepeater.DataSource = GetComments(map);
-            itemRepeater.DataBind();
+            SessionUtilHelper.KeepInSession(map.Id.ToString(), Session);
+            LoadComments(map.Id);
             //super turbio: almaceno el id para saber, al momento de comentar, a qué producto le pertenece.
             btnComentar.CommandArgument = map.Id.ToString();
             //this.message = map.Description;
@@ -66,12 +66,14 @@ namespace Ubiquicity.UserControls
         /// </summary>
         /// <param name="map"></param>
         /// <returns></returns>
-        private List<ItemComment> GetComments(Map map)
+        private List<ItemComment> LoadComments(int id)
         {
             try
             {
                 ItemCommentManager commentManager = new ItemCommentManager();
-                return commentManager.GetByResource(map.Id);
+                itemRepeater.DataSource = commentManager.GetByResource(id);
+                itemRepeater.DataBind();
+                commentInput.InnerText = "";
             }
             catch(Exception exception)
             {
@@ -98,27 +100,14 @@ namespace Ubiquicity.UserControls
                 itemComment.Resource.Id = Convert.ToInt32(((Button)sender).CommandArgument);
 
                 commentManager.Save(itemComment);
-            }catch (Exception exception)
+                LoadComments(Convert.ToInt32(SessionUtilHelper.GetIdFromSession(Session)));
+                //upItemShop.Update();
+            }
+            catch (Exception exception)
             {
                 //TODO - agregar control de error
                 //((front)Master).Alert.Show("Exception", exception.Message);
             }
-        }
-
-        public bool EvalProperty(string columnName)
-        {
-            bool toReturn;
-            try
-            {
-                toReturn = Eval(columnName) != null;
-
-            }
-            catch
-            {
-                toReturn = false;
-            }
-
-            return toReturn;
         }
     }
 }
