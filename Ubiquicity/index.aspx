@@ -50,32 +50,36 @@
         <UCmkc:UCPanelPoll runat="server" ID="UCPanelPoll" />
     </div>--%>
 
-    <div class="container marketing">
+<%--    <div class="container">--%>
         <div class="row text-center mt-4">
-            <div class="col-lg-4">
+            <div class="col-3">
                 <img src="Resources/home02.svg" width="96" height="96">
                 <h2>Realidad Aumentada</h2>
                 <p>La tecnología Sniper&reg; desarrollada por Ubiqui-city ter permitirá obtener información sobre el lugar en el que estás con solo apuntar el dispositivo hacia el horizonte.</p>
                 <p><a class="btn btn-warning" href="#" role="button">¡Quiero saber más!</a></p>
             </div>
 
-            <div class="col-lg-4">
+            <div class="col-3">
                 <img src="Resources/home03.svg" width="96" height="96">
                 <h2>Experiencias 3D</h2>
                 <p>Vivenciá los POI turísticos mediante la realidad aumentada y la realidad mixta, accediendo a descargables que te permitirán visitar -desde donde estés- tu lugar en el mundo favorito.</p>
                 <p><a class="btn btn-warning" href="#" role="button">¡Quiero saber más!</a></p>
             </div>
 
-            <div class="col-lg-4">
+            <div class="col-3">
                 <img src="Resources/home01.svg" width="96" height="96">
                 <h2>Servicios GPS</h2>
                 <p>Mejorá tu experiencia de viaje adquiriendo los servicios de geolocalización útiles como información sobre el clima, medios de transportes, noticias locales y más.</p>
                 <p><a class="btn btn-warning" href="#" role="button">¡Quiero saber más!</a></p>
             </div>
-
+            
+            <!-- Publicidad con el ad-rotator-->
+            <div class="col-3">
+                <asp:AdRotator ID="adRotator" runat="server" AdvertisementFile="~/Resources/adRotatorImages/ARImages.xml" />
+            </div>
         </div>
         <!-- /.row -->
 
-    </div>
+  <%--  </div>--%>
     <!-- /.container -->
 </asp:Content>

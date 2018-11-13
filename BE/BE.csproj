@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="AccountDetail.cs" />
     <Compile Include="Address.cs" />
+    <Compile Include="Ad.cs" />
     <Compile Include="Backup.cs" />
     <Compile Include="Chat.cs" />
     <Compile Include="Country.cs" />

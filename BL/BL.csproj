@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="AccountDetailManager.cs" />
     <Compile Include="AddressManager.cs" />
+    <Compile Include="AdImageManager.cs" />
     <Compile Include="BackupManager.cs" />
     <Compile Include="BaseManager.cs" />
     <Compile Include="CardPayment.cs" />

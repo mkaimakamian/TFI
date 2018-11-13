@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="AccountDetailMapper.cs" />
     <Compile Include="AddressMapper.cs" />
+    <Compile Include="AdImageMapper.cs" />
     <Compile Include="BackupMapper.cs" />
     <Compile Include="ChatMapper.cs" />
     <Compile Include="CreditCardMapper.cs" />
