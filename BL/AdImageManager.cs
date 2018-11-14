@@ -19,6 +19,8 @@ namespace BL
 
         public bool Save(Ad adImage)
         {
+            if (!IsValid(adImage)) return false;
+
             AdImageMapper adImageMapper = new AdImageMapper();
             return adImageMapper.Save(adImage);
         }
@@ -27,6 +29,29 @@ namespace BL
         {
             AdImageMapper adImageMapper = new AdImageMapper();
             return adImageMapper.Delete(id);
+        }
+
+        public bool IsValid(Ad adImage)
+        {
+            bool isValid = true;
+
+            if (String.IsNullOrEmpty(adImage.Image))
+            {
+                string errorDescription = "Debe escogerse una imagen para la publicidad.";
+                log.AddLogWarn("IsValid", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
+                isValid = false;
+            }
+
+            if (String.IsNullOrEmpty(adImage.NavigateUrl))
+            {
+                string errorDescription = "Debe completarse con la url destino.";
+                log.AddLogWarn("IsValid", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
+                isValid = false;
+            }
+
+            return isValid;
         }
     }
 }
