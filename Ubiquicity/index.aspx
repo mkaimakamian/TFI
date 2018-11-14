@@ -75,7 +75,7 @@
             
             <!-- Publicidad con el ad-rotator-->
             <div class="col-3">
-                <asp:AdRotator ID="adRotator" runat="server" AdvertisementFile="~/Resources/adRotatorImages/ARImages.xml" />
+                <asp:AdRotator ID="adRotator" runat="server" AdvertisementFile="~/Resources/adRotator/ARImages.xml" />
             </div>
         </div>
         <!-- /.row -->

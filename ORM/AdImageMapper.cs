@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using BE;
 using System.Xml.Serialization;
 using System.IO;
+using System.Configuration;
+using System.Web;
+
 namespace ORM
 {
     public class AdImageMapper
@@ -28,7 +31,7 @@ namespace ORM
         {
             XmlRootAttribute root = new XmlRootAttribute("Advertisements");
             XmlSerializer deserializer = new XmlSerializer(typeof(List<Ad>), root);
-            TextReader textReader = new StreamReader(@"C:\Users\Kokumo\Documents\UAI\5to\TFI\plataforma\Ubiquicity\Ubiquicity\Resources\adRotatorImages\ARImages.xml");
+            TextReader textReader = new StreamReader(GetAdFilePath());
             List<Ad> adImages = (List<Ad>)deserializer.Deserialize(textReader);
             textReader.Close();
             return adImages;
@@ -47,9 +50,15 @@ namespace ORM
         {
             XmlRootAttribute root = new XmlRootAttribute("Advertisements");
             XmlSerializer serializer = new XmlSerializer(typeof(List<Ad>), root);
-            StreamWriter writer = new StreamWriter(@"C:\Users\Kokumo\Documents\UAI\5to\TFI\plataforma\Ubiquicity\Ubiquicity\Resources\adRotatorImages\ARImages.xml");
+            StreamWriter writer = new StreamWriter(GetAdFilePath());
             serializer.Serialize(writer, adImages);
             writer.Close();
+        }
+
+        private string GetAdFilePath()
+        {
+            string path = ConfigurationManager.AppSettings["AD_RESOURCE"];
+            return HttpContext.Current.Server.MapPath(path);
         }
     }
 }

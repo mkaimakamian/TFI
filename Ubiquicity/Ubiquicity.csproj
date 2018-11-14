@@ -107,7 +107,7 @@
     <Content Include="redeem_manager.aspx" />
     <Content Include="register_action.aspx" />
     <Content Include="Resources\about01.svg" />
-    <Content Include="Resources\adRotatorImages\ARImages.xml" />
+    <Content Include="Resources\adRotator\ARImages.xml" />
     <Content Include="Resources\backup_manager01.svg" />
     <Content Include="Resources\carousel01.jpg" />
     <Content Include="Resources\carousel02.jpg" />
