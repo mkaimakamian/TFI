@@ -3,6 +3,8 @@ using System.Text;
 using System.Security.Cryptography;
 using BE;
 using System.Collections.Generic;
+using System.IO;
+using System.ComponentModel;
 
 namespace Helper
 {
@@ -67,6 +69,73 @@ namespace Helper
             }
 
             return found;
+        }
+
+        public static string REncrypt(int seed)
+        {
+            return REncrypt(seed.ToString());
+        }
+
+        public static string REncrypt(string seed)
+        {
+            CipherMode CyphMode = CipherMode.ECB;
+            string key = "KaimakamianCarrau";
+
+            TripleDESCryptoServiceProvider Des = new TripleDESCryptoServiceProvider();
+            byte[] InputbyteArray = Encoding.Default.GetBytes(seed);
+            MD5CryptoServiceProvider hashMD5 = new MD5CryptoServiceProvider();
+            Des.Key = hashMD5.ComputeHash(Encoding.Default.GetBytes(key));
+            Des.Mode = CyphMode;
+            MemoryStream ms = new MemoryStream();
+            CryptoStream cs = new CryptoStream(ms, Des.CreateEncryptor(), CryptoStreamMode.Write);
+            cs.Write(InputbyteArray, 0, InputbyteArray.Length);
+            cs.FlushFinalBlock();
+            StringBuilder ret = new StringBuilder();
+            byte[] b = ms.ToArray();
+            ms.Close();
+            int I;
+            for (I = 0; I <= b.GetUpperBound(0); I++)
+                ret.AppendFormat("{0:X2}", b[I]);
+            return ret.ToString();
+        }
+
+        public static string RDesencrypt(int seed)
+        {
+            return RDesencrypt(seed.ToString());
+
+        }
+
+        public static string RDesencrypt(string seed)
+        {
+            string key = "KaimakamianCarrau";
+
+            if (String.IsNullOrEmpty(seed)) return "";
+            CipherMode CyphMode = CipherMode.ECB;
+
+            TripleDESCryptoServiceProvider Des = new TripleDESCryptoServiceProvider();
+            byte[] InputbyteArray = new byte[System.Convert.ToInt32(seed.Length / (double)2 - 1) + 1];
+            MD5CryptoServiceProvider hashMD5 = new MD5CryptoServiceProvider();
+            Des.Key = hashMD5.ComputeHash(Encoding.Default.GetBytes(key));
+            Des.Mode = CyphMode;
+            int X;
+            for (X = 0; X <= InputbyteArray.Length - 1; X++)
+            {
+                Int32 IJ = (Convert.ToInt32(seed.Substring(X * 2, 2), 16));
+                ByteConverter BT = new ByteConverter();
+                InputbyteArray[X] = new byte();
+                InputbyteArray[X] = System.Convert.ToByte(BT.ConvertTo(IJ, typeof(byte)));
+            }
+            MemoryStream ms = new MemoryStream();
+            CryptoStream cs = new CryptoStream(ms, Des.CreateDecryptor(), CryptoStreamMode.Write);
+            cs.Write(InputbyteArray, 0, InputbyteArray.Length);
+            cs.FlushFinalBlock();
+            StringBuilder ret = new StringBuilder();
+            byte[] B = ms.ToArray();
+            ms.Close();
+            int I;
+            for (I = 0; I <= B.GetUpperBound(0); I++)
+                ret.Append(Convert.ToChar(B[I]));
+            return ret.ToString();
         }
     }
 }

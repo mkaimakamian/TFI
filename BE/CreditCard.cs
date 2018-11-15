@@ -9,12 +9,12 @@ namespace BE
     public class CreditCard
     {
         private int id;
-        private int field1;
-        private int field2;
-        private int field3;
-        private int field4;
+        private string field1;
+        private string field2;
+        private string field3;
+        private string field4;
         private DateTime dueDate;
-        private int cvv;
+        private string cvv;
         private CreditCardType creditCardType;
         private string firstName;
         private string lastName;
@@ -32,7 +32,7 @@ namespace BE
             }
         }
 
-        public int Field1
+        public string Field1
         {
             get
             {
@@ -45,7 +45,7 @@ namespace BE
             }
         }
 
-        public int Field2
+        public string Field2
         {
             get
             {
@@ -58,7 +58,7 @@ namespace BE
             }
         }
 
-        public int Field3
+        public string Field3
         {
             get
             {
@@ -71,7 +71,7 @@ namespace BE
             }
         }
 
-        public int Field4
+        public string Field4
         {
             get
             {
@@ -97,7 +97,7 @@ namespace BE
             }
         }
 
-        public int Cvv
+        public string Cvv
         {
             get
             {

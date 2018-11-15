@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BE;
 using ORM;
+using Helper;
 
 namespace BL
 {
@@ -41,9 +42,13 @@ namespace BL
         {
 
             bool isValid = true;
-
+            creditCard.Field1 = SecurityHelper.RDesencrypt(creditCard.Field1);
+            creditCard.Field2 = SecurityHelper.RDesencrypt(creditCard.Field2);
+            creditCard.Field3 = SecurityHelper.RDesencrypt(creditCard.Field3);
+            creditCard.Field4 = SecurityHelper.RDesencrypt(creditCard.Field4);
+            
             //Asumo que al menos debe posee 3 dígitos
-            if (creditCard.Cvv < 100)
+            if (String.IsNullOrEmpty(SecurityHelper.RDesencrypt(creditCard.Cvv)))
             {
                 string errorDescription = "Debe completarse el CVV.";
                 log.AddLogCritical("IsValid", errorDescription, this);
@@ -52,7 +57,7 @@ namespace BL
             }
 
             //Deben poseer al menos 4 dígitos
-            if (creditCard.Field1 < 1000)
+            if (String.IsNullOrEmpty(creditCard.Field1))
             {
                 string errorDescription = "Debe completarse el campo 1 de la tarjeta.";
                 log.AddLogCritical("IsValid", errorDescription, this);
@@ -60,7 +65,7 @@ namespace BL
                 isValid = false;
             }
 
-            if (creditCard.Field2 < 1000)
+            if (String.IsNullOrEmpty(creditCard.Field2))
             {
                 string errorDescription = "Debe completarse el campo 2 de la tarjeta.";
                 log.AddLogCritical("IsValid", errorDescription, this);
@@ -68,7 +73,7 @@ namespace BL
                 isValid = false;
             }
 
-            if (creditCard.Field3 < 1000)
+            if (String.IsNullOrEmpty((creditCard.Field3)))
             {
                 string errorDescription = "Debe completarse el campo 3 de la tarjeta.";
                 log.AddLogCritical("IsValid", errorDescription, this);
@@ -76,7 +81,7 @@ namespace BL
                 isValid = false;
             }
 
-            if (creditCard.Field4 < 1000)
+            if (String.IsNullOrEmpty(creditCard.Field4))
             {
                 string errorDescription = "Debe completarse el campo 4 de la tarjeta.";
                 log.AddLogCritical("IsValid", errorDescription, this);
@@ -94,7 +99,6 @@ namespace BL
 
             // Control de validez de la tarjeta
             CreditCardMapper creditCardMapper = new CreditCardMapper();
-
             if (!creditCardMapper.IsValidPrefix(creditCard))
             {
                 string errorDescription = "El emisor de la tarjeta no se corresponde con el declarado.";
@@ -102,6 +106,7 @@ namespace BL
                 AddError(new ResultBE(ResultBE.Type.FAIL, errorDescription));
                 isValid = false;
             }
+            
 
             if (creditCardMapper.IsInBlackList(creditCard))
             {
@@ -110,7 +115,12 @@ namespace BL
                 AddError(new ResultBE(ResultBE.Type.FAIL, errorDescription));
                 isValid = false;
             }
-    
+
+            creditCard.Field1 = SecurityHelper.REncrypt(creditCard.Field1);
+            creditCard.Field2 = SecurityHelper.REncrypt(creditCard.Field2);
+            creditCard.Field3 = SecurityHelper.REncrypt(creditCard.Field3);
+            creditCard.Field4 = SecurityHelper.REncrypt(creditCard.Field4);
+
             return isValid;
         }
     }

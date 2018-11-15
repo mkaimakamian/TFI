@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using BE;
 using BL;
 using Helper;
+
 namespace Ubiquicity
 {
     public partial class invoice : System.Web.UI.Page
@@ -208,13 +209,22 @@ namespace Ubiquicity
                 creditCard = new CreditCard();
                 creditCard.FirstName = firstNamesInput.Value;
                 creditCard.LastName = lastNamesInput.Value;
-                creditCard.Cvv = Convert.ToInt32(String.IsNullOrEmpty(cvvInput.Value)? "0" : cvvInput.Value);
-                creditCard.Field1 = Convert.ToInt32(String.IsNullOrEmpty(card1Input.Value) ? "0000" : card1Input.Value);
-                creditCard.Field2 = Convert.ToInt32(String.IsNullOrEmpty(card2Input.Value) ? "0000" : card1Input.Value);
-                creditCard.Field3 = Convert.ToInt32(String.IsNullOrEmpty(card3Input.Value) ? "0000" : card1Input.Value);
-                creditCard.Field4 = Convert.ToInt32(String.IsNullOrEmpty(card4Input.Value) ? "0000" : card1Input.Value);
+                creditCard.Cvv = String.IsNullOrEmpty(cvvInput.Value)? "0" : cvvInput.Value;
+                creditCard.Field1 = String.IsNullOrEmpty(card1Input.Value) ? "0000" : card1Input.Value;
+                creditCard.Field2 = String.IsNullOrEmpty(card2Input.Value) ? "0000" : card1Input.Value;
+                creditCard.Field3 = String.IsNullOrEmpty(card3Input.Value) ? "0000" : card1Input.Value;
+                creditCard.Field4 = String.IsNullOrEmpty(card4Input.Value) ? "0000" : card1Input.Value;
                 creditCard.DueDate = Convert.ToDateTime(String.IsNullOrEmpty(duedateInput.Date)? DateTime.Now.ToString() : duedateInput.Date);
                 creditCard.CreditCardType.Id = Convert.ToInt32(dropCardInput.SelectedValue);
+
+                //Encriptación
+                creditCard.FirstName = SecurityHelper.REncrypt(creditCard.FirstName);
+                creditCard.LastName = SecurityHelper.REncrypt(creditCard.LastName);
+                creditCard.Cvv = SecurityHelper.REncrypt(creditCard.Cvv);
+                creditCard.Field1 = SecurityHelper.REncrypt(creditCard.Field1);
+                creditCard.Field2 = SecurityHelper.REncrypt(creditCard.Field2);
+                creditCard.Field3 = SecurityHelper.REncrypt(creditCard.Field3);
+                creditCard.Field4 = SecurityHelper.REncrypt(creditCard.Field4);
             }
 
             return creditCard;
