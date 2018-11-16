@@ -200,6 +200,7 @@
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="shop.aspx" />
+    <Content Include="statistic_manager.aspx" />
     <Content Include="suscription_manager.aspx" />
     <Content Include="unsuscribe_action.aspx" />
     <Content Include="UserControls\sub\UCCalendar.ascx" />
@@ -465,6 +466,13 @@
     </Compile>
     <Compile Include="shop.aspx.designer.cs">
       <DependentUpon>shop.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="statistic_manager.aspx.cs">
+      <DependentUpon>statistic_manager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="statistic_manager.aspx.designer.cs">
+      <DependentUpon>statistic_manager.aspx</DependentUpon>
     </Compile>
     <Compile Include="suscription_manager.aspx.cs">
       <DependentUpon>suscription_manager.aspx</DependentUpon>
