@@ -43,9 +43,10 @@ namespace Ubiquicity
         {
             try
             {
+                cartBtn.Text = "<i class='fa fa-tags' aria-hidden='true'></i> Elementos: " + ShopHelper.GetQuantity();
+
                 if (ShopHelper.GetQuantity() > 0)
                 {
-                    cartBtn.Text = "<i class='fa fa-tags' aria-hidden='true'></i> Elementos: " + ShopHelper.GetQuantity();
                     MapManager mapManager = new MapManager();
                     List<Map> maps = mapManager.GetBySeveralIds(ShopHelper.GetItemsId());
 
@@ -60,6 +61,10 @@ namespace Ubiquicity
                         cartItemRepeater.DataSource = maps;
                         cartItemRepeater.DataBind();
                     }
+                } else
+                {
+                    cartItemRepeater.DataSource = null;
+                    cartItemRepeater.DataBind();
                 }
             }
             catch (Exception exception)

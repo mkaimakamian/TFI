@@ -211,9 +211,9 @@ namespace Ubiquicity
                 creditCard.LastName = lastNamesInput.Value;
                 creditCard.Cvv = String.IsNullOrEmpty(cvvInput.Value)? "0" : cvvInput.Value;
                 creditCard.Field1 = String.IsNullOrEmpty(card1Input.Value) ? "0000" : card1Input.Value;
-                creditCard.Field2 = String.IsNullOrEmpty(card2Input.Value) ? "0000" : card1Input.Value;
-                creditCard.Field3 = String.IsNullOrEmpty(card3Input.Value) ? "0000" : card1Input.Value;
-                creditCard.Field4 = String.IsNullOrEmpty(card4Input.Value) ? "0000" : card1Input.Value;
+                creditCard.Field2 = String.IsNullOrEmpty(card2Input.Value) ? "0000" : card2Input.Value;
+                creditCard.Field3 = String.IsNullOrEmpty(card3Input.Value) ? "0000" : card3Input.Value;
+                creditCard.Field4 = String.IsNullOrEmpty(card4Input.Value) ? "0000" : card4Input.Value;
                 creditCard.DueDate = Convert.ToDateTime(String.IsNullOrEmpty(duedateInput.Date)? DateTime.Now.ToString() : duedateInput.Date);
                 creditCard.CreditCardType.Id = Convert.ToInt32(dropCardInput.SelectedValue);
 

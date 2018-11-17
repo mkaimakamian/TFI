@@ -40,54 +40,17 @@ namespace BL
 
         public override bool IsValid()
         {
-
             bool isValid = true;
             creditCard.Field1 = SecurityHelper.RDesencrypt(creditCard.Field1);
             creditCard.Field2 = SecurityHelper.RDesencrypt(creditCard.Field2);
             creditCard.Field3 = SecurityHelper.RDesencrypt(creditCard.Field3);
             creditCard.Field4 = SecurityHelper.RDesencrypt(creditCard.Field4);
-            
-            //Asumo que al menos debe posee 3 dígitos
-            if (String.IsNullOrEmpty(SecurityHelper.RDesencrypt(creditCard.Cvv)))
-            {
-                string errorDescription = "Debe completarse el CVV.";
-                log.AddLogCritical("IsValid", errorDescription, this);
-                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
-                isValid = false;
-            }
 
-            //Deben poseer al menos 4 dígitos
-            if (String.IsNullOrEmpty(creditCard.Field1))
-            {
-                string errorDescription = "Debe completarse el campo 1 de la tarjeta.";
-                log.AddLogCritical("IsValid", errorDescription, this);
-                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
-                isValid = false;
-            }
-
-            if (String.IsNullOrEmpty(creditCard.Field2))
-            {
-                string errorDescription = "Debe completarse el campo 2 de la tarjeta.";
-                log.AddLogCritical("IsValid", errorDescription, this);
-                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
-                isValid = false;
-            }
-
-            if (String.IsNullOrEmpty((creditCard.Field3)))
-            {
-                string errorDescription = "Debe completarse el campo 3 de la tarjeta.";
-                log.AddLogCritical("IsValid", errorDescription, this);
-                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
-                isValid = false;
-            }
-
-            if (String.IsNullOrEmpty(creditCard.Field4))
-            {
-                string errorDescription = "Debe completarse el campo 4 de la tarjeta.";
-                log.AddLogCritical("IsValid", errorDescription, this);
-                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
-                isValid = false;
-            }
+            isValid &= IsValidNumber(SecurityHelper.RDesencrypt(creditCard.Cvv), 3);
+            isValid &= IsValidNumber(creditCard.Field1);
+            isValid &= IsValidNumber(creditCard.Field2);
+            isValid &= IsValidNumber(creditCard.Field3);
+            isValid &= IsValidNumber(creditCard.Field4);
 
             if (creditCard.DueDate < DateTime.Today)
             {
@@ -106,20 +69,59 @@ namespace BL
                 AddError(new ResultBE(ResultBE.Type.FAIL, errorDescription));
                 isValid = false;
             }
-            
 
-            if (creditCardMapper.IsInBlackList(creditCard))
+            creditCard.Field1 = SecurityHelper.REncrypt(creditCard.Field1);
+            creditCard.Field2 = SecurityHelper.REncrypt(creditCard.Field2);
+            creditCard.Field3 = SecurityHelper.REncrypt(creditCard.Field3);
+            creditCard.Field4 = SecurityHelper.REncrypt(creditCard.Field4);
+
+            CreditCard cc = creditCardMapper.CreditCardList(creditCard);
+            if (cc == null)
+            {
+                string errorDescription = "La tarjeta debe ser habilitada para su uso.";
+                log.AddLogCritical("IsValid", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.FAIL, errorDescription));
+                isValid = false;
+            }
+
+            if (cc != null && !cc.Allowed)
             {
                 string errorDescription = "La tarjeta actual no puede utilizarse porque está anulada.";
                 log.AddLogCritical("IsValid", errorDescription, this);
                 AddError(new ResultBE(ResultBE.Type.FAIL, errorDescription));
                 isValid = false;
             }
+            return isValid;
+        }
 
-            creditCard.Field1 = SecurityHelper.REncrypt(creditCard.Field1);
-            creditCard.Field2 = SecurityHelper.REncrypt(creditCard.Field2);
-            creditCard.Field3 = SecurityHelper.REncrypt(creditCard.Field3);
-            creditCard.Field4 = SecurityHelper.REncrypt(creditCard.Field4);
+        private bool IsValidNumber(string number, int qty = 4)
+        {
+            bool isValid = true;
+            int converted = 0;
+
+            if (String.IsNullOrEmpty(number))
+            {
+                string errorDescription = "Alguno de los números de la tarjeta está incompleto.";
+                log.AddLogCritical("IsValidNumber", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
+                isValid = false;
+            }
+
+            if (number.Length != qty)
+            {
+                string errorDescription = "Todos los números deben poseer "+ qty+" dígitos";
+                log.AddLogCritical("IsValidNumber", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
+                isValid = false;
+            }
+
+            if (!int.TryParse(number, out converted))
+            {
+                string errorDescription = "No se admiten caracteres en los campos numéricos de la tarjeta.";
+                log.AddLogCritical("IsValidNumber", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
+                isValid = false;
+            }
 
             return isValid;
         }

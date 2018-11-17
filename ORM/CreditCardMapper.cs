@@ -23,6 +23,9 @@ namespace ORM
             Dal dal = new Dal();
             Hashtable table = new Hashtable();
 
+            table.Add("@prefix", creditCard.Field1);
+            table.Add("@field2", creditCard.Field2);
+            table.Add("@field3", creditCard.Field3);
             table.Add("@field4", creditCard.Field4);
             table.Add("@typeId", creditCard.CreditCardType.Id);
             table.Add("@firstName", creditCard.FirstName);
@@ -74,20 +77,32 @@ namespace ORM
             return result != null && result.Tables[0].Rows.Count > 0;
         }
 
-
-        public bool IsInBlackList(CreditCard creditCard)
+        /// <summary>
+        /// Representa al sustema externo
+        /// </summary>
+        /// <param name="creditCard"></param>
+        /// <returns></returns>
+        public CreditCard CreditCardList(CreditCard creditCard)
         {
             Dal dal = new Dal();
             Hashtable table = new Hashtable();
+            CreditCard cc = null;
 
             table.Add("@prefix", creditCard.Field1);
             table.Add("@field2", creditCard.Field2);
             table.Add("@field3", creditCard.Field3);
             table.Add("@field4", creditCard.Field4);
+            table.Add("@dueDate", creditCard.DueDate);
+            table.Add("@cvv", creditCard.Cvv);
 
-            DataSet result = dal.Read(table, "spReadCreditCardBlack");
+            DataSet result = dal.Read(table, "spReadCreditCardList");
 
-            return result != null && result.Tables[0].Rows.Count > 0;
+            if (result != null && result.Tables[0].Rows.Count > 0)
+            {
+                cc = ConvertToCCModel(result.Tables[0].Rows[0]);
+            }
+
+            return cc;
         }
 
         /// <summary>
@@ -102,6 +117,17 @@ namespace ORM
             creditCardType.Name = data["name"].ToString();
             creditCardType.Prefix = Convert.ToInt32(data["prefix"].ToString());
             return creditCardType;
+        }
+
+        private CreditCard ConvertToCCModel(DataRow data)
+        {
+            CreditCard creditCard = new CreditCard();
+            creditCard.Field1 = data["prefix"].ToString();
+            creditCard.Field2 = data["field2"].ToString();
+            creditCard.Field3 = data["field3"].ToString();
+            creditCard.Field4 = data["field4"].ToString();
+            creditCard.Allowed = Convert.ToBoolean(data["allowed"]);
+            return creditCard;
         }
     }
 }

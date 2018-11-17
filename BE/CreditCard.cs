@@ -18,6 +18,7 @@ namespace BE
         private CreditCardType creditCardType;
         private string firstName;
         private string lastName;
+        private bool allowed;
 
         public int Id
         {
@@ -147,6 +148,19 @@ namespace BE
             set
             {
                 lastName = value;
+            }
+        }
+
+        public bool Allowed
+        {
+            get
+            {
+                return allowed;
+            }
+
+            set
+            {
+                allowed = value;
             }
         }
     }
