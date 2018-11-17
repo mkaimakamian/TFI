@@ -57,7 +57,8 @@ namespace Helper
         public static bool HasPermission(User user, string page)
         {
             bool found = false;
-            page = page.Substring(1);
+            int idx = page.IndexOf("/");
+            if (idx > -1) page = page.Substring(idx+1);
             for (int i = 0; i < user.Roles.Count && !found; ++i)
             {
                 List<Permission> permissions = user.Roles[i].Permissions;

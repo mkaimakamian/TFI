@@ -56,8 +56,18 @@
                         </li>
                     </ul>
                     <!-- Visibilidad controlada por backend -->
+
+                  <%--  <div class="row">
+                        <div class="col-12 form-group">--%>
+                            <input id="searchInput" runat="server" type="text" class="form-control form-control-sm" 
+                                placeholder="Buscar" style="width:200px;">
+                            <asp:Button ID="searchBtn" runat="server" CssClass="btn btn-secondary btn-sm mr-4" 
+                                Text="Buscar" OnClick="PerformSearch" />
+
+                      <%--  </div>
+                    </div>--%>
                     <asp:Panel ID="panelLogin" runat="server">
-                        <button type="button" class="btn btn-link" data-toggle="modal" data-target="#loginModal"><i class="fa fa-user"></i> Login</button>
+                        <button type="button" class="btn btn-link" data-toggle="modal" data-target="#loginModal"><i class="fa fa-user"></i>Login</button>
                         |
                         <button type="button" class="btn btn-link" data-toggle="modal" data-target="#ModalRegisterWebUser">¡Soy nuevo!</button>
                     </asp:Panel>
@@ -75,7 +85,7 @@
                         SkipLinkText="" StaticMenuItemStyle-ForeColor="#fefefe" StaticHoverStyle-ForeColor="#ffc107">
                     </asp:Menu>
                 </div>
-                <div id="contentDiv"  runat="server" class="col-12">
+                <div id="contentDiv" runat="server" class="col-12">
                     <!-- contenedor de las páginas -->
                     <asp:ContentPlaceHolder ID="contentHolder" runat="server">
                     </asp:ContentPlaceHolder>
@@ -204,41 +214,44 @@
                 </div>
             </div>
 
+            <!-- search word -->
+            <UCmkc:UCModalSearch runat="server" ID="UCModalSearch" />
+
             <!-- alert de uso múltiple -->
             <UCmkc:UCModalMessageBox runat="server" ID="customAlertBox" />
         </div>
         <div class='push'></div>
     </form>
 
-     <!-- footer -->
-            <footer class="row mkcFooter" style="padding:0px; margin:0px">
-                <div class="col-12" style="padding:0px; margin:0px">
-                    <nav class="navbar navbar-expand-sm mx-auto navbar-dark mkcColorNavbar">
+    <!-- footer -->
+    <footer class="row mkcFooter" style="padding: 0px; margin: 0px">
+        <div class="col-12" style="padding: 0px; margin: 0px">
+            <nav class="navbar navbar-expand-sm mx-auto navbar-dark mkcColorNavbar">
 
-                        <ul class="navbar-nav mr-auto mx-auto ">
-                            <li class="nav-item ">
-                                <a class="nav-link" href="about.aspx">Nosotros</a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="newsletter.aspx">Newsletter</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="privacy.aspx">Términos y Condiciones</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="contact.aspx">Contactate</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="faq.aspx">F.A.Qs.</a>
-                            </li>
-                            <li class="nav-item">
-                                <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalNewsSuscription">¡Suscribite al newsletter!</button>
-                            </li>
+                <ul class="navbar-nav mr-auto mx-auto ">
+                    <li class="nav-item ">
+                        <a class="nav-link" href="about.aspx">Nosotros</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="newsletter.aspx">Newsletter</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="privacy.aspx">Términos y Condiciones</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.aspx">Contactate</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="faq.aspx">F.A.Qs.</a>
+                    </li>
+                    <li class="nav-item">
+                        <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalNewsSuscription">¡Suscribite al newsletter!</button>
+                    </li>
 
-                        </ul>
-                    </nav>
-                </div>
-            </footer>
+                </ul>
+            </nav>
+        </div>
+    </footer>
 
     <script src="Scripts/jquery-3.3.1.js"></script>
     <script src="Scripts/bootstrap.js"></script>

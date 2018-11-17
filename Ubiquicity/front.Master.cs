@@ -300,5 +300,11 @@ namespace Ubiquicity
             }
 
         }
+
+        protected void PerformSearch(object sender, EventArgs e)
+        {
+            List<WebSearch> webSearchResult = new SearchManager().PerformSearch(searchInput.Value, SessionHelper.GetUser());
+            UCModalSearch.Show(webSearchResult);
+        }
     }
 }

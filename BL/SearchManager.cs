@@ -7,6 +7,7 @@ using System.Web;
 using System.IO;
 using BE;
 using Helper;
+using System.Text.RegularExpressions;
 
 namespace BL
 {
@@ -18,37 +19,46 @@ namespace BL
         /// </summary>
         /// <param name="toFind"></param>
         /// <param name="user"></param>
-        public void PerformSearch(string toFind, User user = null)
+        public List<WebSearch> PerformSearch(string toFind, User user = null)
         {
 
             //1. recorrer el directorio de aspx
             //2. utilizar la función search y detectar una coincidencia
             //3. guardar las coincidencias
             //4. excluir según los permisos del usuario
-
+            WebSearch result = null;
             RoleManager roleManager = new RoleManager();
             List<Permission> permissions = roleManager.GetAllPermission();
 
             string[] fileArray = Directory.GetFiles(HttpContext.Current.Server.MapPath(""), "*.aspx");
-            List<string> availableFile = new List<string>();
+            List<WebSearch> searchResult = new List<WebSearch>();
 
             foreach (string file in fileArray)
             {
                 TextReader textReader = new StreamReader(file);
                 string fileContent = textReader.ReadToEnd();
+
+                //Con la regex se pretende excluir los tags de html
+                //fileContent = Regex.Replace(fileContent, @"<[^>]+?\/?>", m => {return String.Empty;});
                 int index = fileContent.IndexOf(toFind);
 
-                string fileName = file.Substring(file.LastIndexOf("\\")+1);
-
-                bool exist = index > -1;
-                bool isPublic = permissions.Exists(x => x.UrlAccess != fileName);
-                bool hasPermission = user != null && SecurityHelper.HasPermission(user, fileName);
-                if (exist && (isPublic || hasPermission))
+                if (index > -1)
                 {
-                    availableFile.Add(file);
+                    string fileName = Path.GetFileName(file);
+                    bool isPublic = !permissions.Exists(x => x.UrlAccess == fileName);
+                    bool hasPermission = SessionHelper.IsSessionAlive() && SecurityHelper.HasPermission(user, fileName);
+
+                    if (isPublic || hasPermission)
+                    {
+                        result = new WebSearch();
+                        result.Url = fileName;
+                        result.Description = fileName;
+                        searchResult.Add(result);
+                    }
+
                 }
             }
-
+            return searchResult;
         }
     }
 }

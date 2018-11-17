@@ -223,6 +223,7 @@
     <Content Include="UserControls\UCModalCompare.ascx" />
     <Content Include="UserControls\UCModalItemShop.ascx" />
     <Content Include="UserControls\UCModalNews.ascx" />
+    <Content Include="UserControls\UCModalSearch.ascx" />
     <Content Include="UserControls\UCPanelPoll.ascx" />
     <Content Include="user_manager.aspx" />
     <Content Include="UserControls\UCcrudGrid.ascx" />
@@ -627,6 +628,13 @@
     </Compile>
     <Compile Include="UserControls\UCModalNews.ascx.designer.cs">
       <DependentUpon>UCModalNews.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCModalSearch.ascx.cs">
+      <DependentUpon>UCModalSearch.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCModalSearch.ascx.designer.cs">
+      <DependentUpon>UCModalSearch.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\UCPanelPoll.ascx.cs">
       <DependentUpon>UCPanelPoll.ascx</DependentUpon>
