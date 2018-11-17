@@ -3,7 +3,7 @@
     <div class="row">
         <div class="form-group col">
             <label for="nameInput">Url</label>
-            <input id="urlInput" runat="server" type="text" class="form-control form-control-sm" maxlength="50">
+            <input id="urlInput" runat="server" type="text" class="form-control form-control-sm" maxlength="250">
         </div>
     </div>
     <div class="row">

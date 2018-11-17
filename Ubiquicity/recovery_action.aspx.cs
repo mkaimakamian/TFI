@@ -39,7 +39,7 @@ namespace Ubiquicity
                 }
                 else
                 {
-                    ((front)Master).Alert.Show("Error", "El password y la verificación deben coincidir.");
+                    ((front)Master).Alert.Show("Error", "El password y la verificación deben coincidir, y al menos deben poseer 6 caracteres.");
                 }
             } catch (Exception exception)
             {

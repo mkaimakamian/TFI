@@ -60,6 +60,7 @@ namespace BL
 
         public bool ResetPasswordAction(String password, string passwordHash)
         {
+            if (!isValidHash(passwordHash)) return false;
             string recovery = passwordHash.Substring(0, 32);
             int userId = int.Parse(passwordHash.Substring(32, passwordHash.Length - 32));
             UserMapper userMapper = new UserMapper();
@@ -84,8 +85,11 @@ namespace BL
         /// acorde.
         /// </summary>
         /// <param name="mail"></param>
-        public void ResetPasswordRequest(string mail)
+        public bool ResetPasswordRequest(string mail)
         {
+
+            if (!IsValidForRecover(mail)) return false;
+
             UserMapper mapper = new UserMapper();
             User user = mapper.Get(mail);
 
@@ -100,6 +104,8 @@ namespace BL
                 string activationHash = SecurityHelper.Encrypt(user.Mail + user.Lastupdate.Minute) + user.Id;
                 MailerHelper.SendResetPassword(user, activationHash);
             }
+
+            return true;
         }
 
         /// <summary>
@@ -434,7 +440,7 @@ namespace BL
 
             if (!String.IsNullOrEmpty(hash) && hash.Length <= 32)
             {
-                string errorDescription = "Código inválido.";
+                string errorDescription = "Código hash inválido.";
                 log.AddLogWarn("isValidHash", errorDescription, this);
                 AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
                 return false;
@@ -444,6 +450,19 @@ namespace BL
             {
                 string errorDescription = "Código inválido.";
                 log.AddLogWarn("isValidHash", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool IsValidForRecover(string mail)
+        {
+            if (String.IsNullOrEmpty(mail))
+            {
+                string errorDescription = "Debe especificarse un mail.";
+                log.AddLogWarn("IsValidForRecover", errorDescription, this);
                 AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
                 return false;
             }

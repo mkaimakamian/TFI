@@ -2,19 +2,21 @@
 <div class="row border rounded align-items-end p-1">
     <div class="form-group col">
         <label for="nameInput">Nombre</label>
-        <input id="nameInput" runat="server" type="text" class="form-control form-control-sm">
+        <input id="nameInput" runat="server" type="text" class="form-control form-control-sm" maxlength="50">
     </div>
     <div class="form-group col">
         <label for="descriptionInput">Descripción</label>
-        <input id="descriptionInput" runat="server" type="text" class="form-control form-control-sm">
+        <input id="descriptionInput" runat="server" type="text" class="form-control form-control-sm" maxlength="250">
     </div>
     <div class="form-group col">
         <label for="minInput">Montó mínimo</label>
-        <input id="minInput" runat="server" type="text" class="form-control form-control-sm">
+        <input id="minInput" runat="server" class="form-control form-control-sm"
+            type="number" placeholder="1.0" step="0.01" min="0" max="9999">
     </div>
     <div class="form-group col">
         <label for="maxInput">Monto máximo</label>
-        <input id="maxInput" runat="server" type="text" class="form-control form-control-sm">
+        <input id="maxInput" runat="server" class="form-control form-control-sm"
+            type="number" placeholder="1.0" step="0.01" min="0" max="9999">
     </div>
 
     <div class="form-group col">

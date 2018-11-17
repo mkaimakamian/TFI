@@ -17,11 +17,12 @@
     <div class="row justify-content-center">
         <div class="form-group col-12">
             <label for="titleInput">Título</label>
-            <input id="titleInput" runat="server" type="text" class="form-control form-control-sm" placeholder="Ingresa el nombre">
+            <input id="titleInput" runat="server" type="text" class="form-control form-control-sm" 
+                placeholder="Ingresa el nombre" maxlength="50">
         </div>
         <div class="form-group col-8">
             <label for="bodyInput">Cuerpo</label>
-            <textarea id="bodyInput" runat="server" class="form-control form-control-sm" rows="6"></textarea>
+            <textarea id="bodyInput" runat="server" class="form-control form-control-sm" rows="6" maxlength="250"></textarea>
         </div>
         <div class="form-group col-4">
             <label for="imageInput">Imagen</label>

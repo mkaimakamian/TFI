@@ -37,7 +37,7 @@ namespace Ubiquicity.UserControls {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText minInput;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl minInput;
         
         /// <summary>
         /// maxInput control.
@@ -46,7 +46,7 @@ namespace Ubiquicity.UserControls {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText maxInput;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl maxInput;
         
         /// <summary>
         /// dropCategoryInput control.

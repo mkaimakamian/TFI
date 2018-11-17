@@ -60,7 +60,7 @@
                   <%--  <div class="row">
                         <div class="col-12 form-group">--%>
                             <input id="searchInput" runat="server" type="text" class="form-control form-control-sm" 
-                                placeholder="Buscar" style="width:200px;">
+                                placeholder="Buscar" style="width:200px;" maxlength="50">
                             <asp:Button ID="searchBtn" runat="server" CssClass="btn btn-secondary btn-sm mr-4" 
                                 Text="Buscar" OnClick="PerformSearch" />
 
@@ -110,11 +110,13 @@
                             </div>
                             <div class="form-group">
                                 <label for="txtUserMail">Mail</label>
-                                <input id="txtUserMail" runat="server" type="email" class="form-control form-control-sm" placeholder="Ingrese mail">
+                                <input id="txtUserMail" runat="server" type="email" maxlength="50"
+                                    class="form-control form-control-sm" placeholder="Ingrese mail">
                             </div>
                             <div id="passwordCollpase" class="form-group collapse show">
                                 <label for="txtPassword">Password</label>
-                                <input id="txtPassword" runat="server" type="password" class="form-control form-control-sm" placeholder="Ingrese password">
+                                <input id="txtPassword" runat="server" type="password" maxlength="50"
+                                    class="form-control form-control-sm" placeholder="Ingrese password">
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -178,7 +180,8 @@
 					</div>-->
                             <div class="form-group">
                                 <label for="txtPasswordMail">Mail</label>
-                                <input id="txtPasswordMail" runat="server" type="email" class="form-control form-control-sm" placeholder="Ingrese mail">
+                                <input id="txtPasswordMail" runat="server" type="email" maxlength="50"
+                                    class="form-control form-control-sm" placeholder="Ingrese mail">
                             </div>
 
                         </div>

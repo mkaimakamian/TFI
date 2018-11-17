@@ -70,6 +70,8 @@ namespace Ubiquicity
             {
                 Alert.Show("Exception", exception.Message);
             }
+            txtUserMail.Value = "";
+            txtPassword.Value = "";
         }
 
         /// <summary>
@@ -119,6 +121,8 @@ namespace Ubiquicity
             {
                 Alert.Show("Exception", exception.Message);
             }
+
+            FormRegisterWebUser.CleanForm();
         }
 
         /// <summary>
@@ -226,13 +230,21 @@ namespace Ubiquicity
 
         protected void btnPassword_Click(object sender, EventArgs e)
         {
-            //Controlar que el password no esté vacío.
-            if (!String.IsNullOrEmpty(txtPasswordMail.Value))
+            try
             {
                 UserManager userManager = new UserManager();
-                userManager.ResetPasswordRequest(txtPasswordMail.Value);
-            }
+                bool success = userManager.ResetPasswordRequest(txtPasswordMail.Value);
 
+                if (!success && userManager.HasErrors)
+                {
+                    Alert.Show("Error", userManager.ErrorDescription);
+                }
+
+            }
+            catch (Exception exception)
+            {
+                Alert.Show("Excepción", exception.Message);
+            }
         }
 
         /// <summary>
@@ -248,7 +260,7 @@ namespace Ubiquicity
                 string categoryIds = "";
                 foreach (ListItem item in checkCategory.Items)
                 {
-                    categoryIds += item.Selected? item.Value + "@" : "";
+                    categoryIds += item.Selected ? item.Value + "@" : "";
                 }
 
                 NewsAddresseeManager manager = new NewsAddresseeManager();
@@ -294,7 +306,8 @@ namespace Ubiquicity
                 checkCategory.DataTextField = "Name";
                 checkCategory.DataValueField = "Id";
                 checkCategory.DataBind();
-            } catch (Exception exception)
+            }
+            catch (Exception exception)
             {
                 Alert.Show("Exception", exception.Message);
             }

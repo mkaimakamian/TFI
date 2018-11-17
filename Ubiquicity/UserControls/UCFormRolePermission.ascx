@@ -5,11 +5,13 @@
     <div class="row justify-content-center">
         <div class="form-group col-12">
             <label for="roleNameInput">Nombre</label>
-            <input id="roleNameInput" runat="server" type="text" class="form-control"  placeholder="Ingresa el nombre">
+            <input id="roleNameInput" runat="server" type="text" class="form-control" 
+                placeholder="Ingresa el nombre" maxlength="50">
         </div>
         <div class="form-group col-12">
             <label for="roleDescriptionInput">Descripción</label>
-            <input id="roleDescriptionInput" runat="server" type="text" class="form-control"  placeholder="Ingresa la descripcióno">
+            <input id="roleDescriptionInput" runat="server" type="text" class="form-control" 
+                placeholder="Ingresa la descripción" maxlength="250">
         </div>
             <div class="form-group col-5">
                 <label for="lstPermissionGranted">Obtenidos</label>

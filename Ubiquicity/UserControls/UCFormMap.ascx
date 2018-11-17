@@ -51,7 +51,8 @@
     <div class="row">
             <div class="form-group col-2">
             <label for="priceInput">Precio</label>
-            <input id="priceInput" runat="server" type="number" class="form-control form-control-sm">
+            <input id="priceInput" runat="server" type="number" class="form-control form-control-sm"
+                placeholder="1.0" step="0.01" min="0" max="9999">
         </div>
         </div>
 </div>

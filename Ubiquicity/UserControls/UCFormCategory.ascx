@@ -3,7 +3,7 @@
     <div class="row justify-content-center">
         <div class="form-group col-12">
             <label for="nameInput">Nombre</label>
-            <input id="nameInput" runat="server" type="text" class="form-control form-control-sm">
+            <input id="nameInput" runat="server" type="text" class="form-control form-control-sm" maxlength="50">
         </div>
     </div>
 </div>

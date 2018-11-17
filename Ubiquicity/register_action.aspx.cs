@@ -12,7 +12,10 @@ namespace Ubiquicity
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            PerformActivation(Request["a"]);
+            if(!IsPostBack)
+            {
+                PerformActivation(Request["a"]);
+            }
         }
 
         /// <summary>

@@ -49,11 +49,14 @@
 
                         <div class="form-group col-md-12">
                             <label for="passwordInput">Password</label>
-                            <input id="passwordInput" runat="server" type="password" class="form-control form-control-sm" placeholder="Ingresá tu password">
+                            <input id="passwordInput" runat="server" type="password" class="form-control form-control-sm" 
+                                placeholder="Ingresá tu password" maxlength="50" mixlength="6">
                         </div>
                         <div class="form-group col-md-12">
                             <label for="passwordConfirmInput">Confirmar password</label>
-                            <input id="passwordVerificationInput" runat="server" type="password" class="form-control form-control-sm" placeholder="Reingresá tu password">
+                            <input id="passwordVerificationInput" runat="server" type="password" 
+                                class="form-control form-control-sm" placeholder="Reingresá tu password"
+                                maxlength="50" mixlength="6">
                         </div>
                         <div class="form-group col-md-12">
                             <asp:Button ID="btnPassword" runat="server" CssClass="btn btn-primary btn-sm" OnClick="btnPassword_Click" Text="Cambiar" />

@@ -29,7 +29,7 @@
                             <label for="activationCodeInput">
                                 Código de activación
                             </label>
-                            <input id="activationCodeInput" runat="server" class="form-control form-control-sm" type="email" />
+                            <input id="activationCodeInput" runat="server" class="form-control form-control-sm" maxlength="50" type="text" />
                         </div>
                         <asp:Button ID="btnApplyCode" runat="server" CssClass="btn btn-sm btn-success" OnClick="ApplyCode" Text="Confirmar" />
                     </div>

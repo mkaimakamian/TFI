@@ -87,7 +87,7 @@ namespace BL
         {
             if (user == null)
             {
-                string errorDescription = "El usuario no existe.";
+                string errorDescription = "Credenciales inválidas.";
                 log.AddLogWarn("LogIn", errorDescription, this);
                 AddError(new ResultBE(ResultBE.Type.INVALID_CREDENTIAL, errorDescription));
                 return false;
