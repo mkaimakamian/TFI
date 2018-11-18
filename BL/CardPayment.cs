@@ -46,11 +46,11 @@ namespace BL
             creditCard.Field3 = SecurityHelper.RDesencrypt(creditCard.Field3);
             creditCard.Field4 = SecurityHelper.RDesencrypt(creditCard.Field4);
 
-            isValid &= IsValidNumber(SecurityHelper.RDesencrypt(creditCard.Cvv), 3);
-            isValid &= IsValidNumber(creditCard.Field1);
-            isValid &= IsValidNumber(creditCard.Field2);
-            isValid &= IsValidNumber(creditCard.Field3);
-            isValid &= IsValidNumber(creditCard.Field4);
+            isValid &= IsValidNumber(SecurityHelper.RDesencrypt(creditCard.Cvv), "CVV", 3);
+            isValid &= IsValidNumber(creditCard.Field1, "CAMPO 1");
+            isValid &= IsValidNumber(creditCard.Field2, "CAMPO 2");
+            isValid &= IsValidNumber(creditCard.Field3, "CAMPO 3");
+            isValid &= IsValidNumber(creditCard.Field4, "CAMPO 4");
 
             if (creditCard.DueDate < DateTime.Today)
             {
@@ -59,6 +59,9 @@ namespace BL
                 AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
                 isValid = false;
             }
+
+            //Evalúo parcialmente el estado de la validación
+            if (!isValid) return false;
 
             // Control de validez de la tarjeta
             CreditCardMapper creditCardMapper = new CreditCardMapper();
@@ -75,10 +78,13 @@ namespace BL
             creditCard.Field3 = SecurityHelper.REncrypt(creditCard.Field3);
             creditCard.Field4 = SecurityHelper.REncrypt(creditCard.Field4);
 
+            //Evalúo parcialmente el estado de la validación
+            if (!isValid) return false;
+
             CreditCard cc = creditCardMapper.CreditCardList(creditCard);
             if (cc == null)
             {
-                string errorDescription = "La tarjeta debe ser habilitada para su uso.";
+                string errorDescription = "La tarjeta no está registrada ante la entidad emisora; verifique los datos.";
                 log.AddLogCritical("IsValid", errorDescription, this);
                 AddError(new ResultBE(ResultBE.Type.FAIL, errorDescription));
                 isValid = false;
@@ -94,14 +100,14 @@ namespace BL
             return isValid;
         }
 
-        private bool IsValidNumber(string number, int qty = 4)
+        private bool IsValidNumber(string number, string type,  int qty = 4)
         {
             bool isValid = true;
             int converted = 0;
 
             if (String.IsNullOrEmpty(number))
             {
-                string errorDescription = "Alguno de los números de la tarjeta está incompleto.";
+                string errorDescription = "El número del campo "+type +" está incompleto.";
                 log.AddLogCritical("IsValidNumber", errorDescription, this);
                 AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
                 isValid = false;
@@ -109,7 +115,7 @@ namespace BL
 
             if (number.Length != qty)
             {
-                string errorDescription = "Todos los números deben poseer "+ qty+" dígitos";
+                string errorDescription = "El campo " +type + " debe poseer "+ qty+" dígitos";
                 log.AddLogCritical("IsValidNumber", errorDescription, this);
                 AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
                 isValid = false;
@@ -117,7 +123,7 @@ namespace BL
 
             if (!int.TryParse(number, out converted))
             {
-                string errorDescription = "No se admiten caracteres en los campos numéricos de la tarjeta.";
+                string errorDescription = "No se admiten caracteres en el campo " + type + ".";
                 log.AddLogCritical("IsValidNumber", errorDescription, this);
                 AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
                 isValid = false;

@@ -84,6 +84,7 @@
   <ItemGroup>
     <Content Include="20181111.sql" />
     <Content Include="20181115.sql" />
+    <Content Include="201811172330.sql" />
     <Content Include="20181117_1230.sql" />
     <Content Include="20181117_1700.sql" />
     <Content Include="TypeScript_Dev14Full.exe" />

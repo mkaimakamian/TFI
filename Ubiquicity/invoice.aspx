@@ -78,11 +78,12 @@
                             </div>
                             <div class="form-group col-3">
                                 <label for="cvvInput">Código</label>
-                                <input id="cvvInput" runat="server" type="text" class="form-control form-control-sm">
+                                <input id="cvvInput" runat="server" type="text" minlength="3" maxlength="3"
+                                    class="form-control form-control-sm">
                             </div>
                             <div class="form-group">
                                 <label for="duedateInput">Vencimiento</label>
-                                <UCmkc:UCCalendar runat="server" ID="duedateInput" />
+                                <UCmkc:UCCalendar runat="server" ID="duedateInput" DefaultView="Months" />
                             </div>
                         </div>
                         <div class="row pb-2">
@@ -92,19 +93,23 @@
                         </div>
                         <div class="row">
                             <div class="form-group col">
-                                <input id="card1Input" runat="server" type="text" class="form-control form-control-sm">
+                                <input id="card1Input" runat="server" type="text" minlength="4" maxlength="4"
+                                     pattern="[0-9]{4}" class="form-control form-control-sm">
                             </div>
                             -
                             <div class="form-group col">
-                                <input id="card2Input" runat="server" type="text" class="form-control form-control-sm">
+                                <input id="card2Input" runat="server" type="text" minlength="4" maxlength="4"
+                                     pattern="[0-9]{4}" class="form-control form-control-sm">
                             </div>
                             -
                             <div class="form-group col">
-                                <input id="card3Input" runat="server" type="text" class="form-control form-control-sm">
+                                <input id="card3Input" runat="server" type="text" minlength="4" maxlength="4"
+                                    pattern="[0-9]{4}" class="form-control form-control-sm">
                             </div>
                             -                       
                             <div class="form-group col">
-                                <input id="card4Input" runat="server" type="text" class="form-control form-control-sm">
+                                <input id="card4Input" runat="server" type="text" minlength="4" maxlength="4"
+                                    pattern="[0-9]{4}" class="form-control form-control-sm">
                             </div>
                         </div>
 
@@ -124,11 +129,13 @@
                         <h6>¿A quién le facturamos?</h6>
                         <div class="form-group">
                             <label for="namesInput">Nombres</label>
-                            <input id="firstNamesInput" runat="server" type="text" class="form-control form-control-sm">
+                            <input id="firstNamesInput" runat="server" type="text" maxlength="50" 
+                                pattern="[a-zA-Z]{1-50}" class="form-control form-control-sm">
                         </div>
                         <div class="form-group">
                             <label for="lastNamesInput">Apellidos</label>
-                            <input id="lastNamesInput" runat="server" type="text" class="form-control form-control-sm">
+                            <input id="lastNamesInput" runat="server" type="text" maxlength="50"
+                                pattern="[a-zA-Z]{1-50}" class="form-control form-control-sm">
                         </div>
                     </div>
 
@@ -140,11 +147,14 @@
                                 <div class="row">
                                     <div class="form-group col-6">
                                         <label for="streetInput">Calle</label>
-                                        <input id="streetInput" runat="server" type="text" class="form-control form-control-sm">
+                                        <input id="streetInput" runat="server" type="text" maxlength="50"
+                                            class="form-control form-control-sm">
                                     </div>
                                     <div class="form-group col-3">
                                         <label for="numberInput">Número</label>
-                                        <input id="numberInput" runat="server" type="text" class="form-control form-control-sm">
+                                        <input id="numberInput" runat="server" type="text" maxlength="5"
+                                            pattern="[0-9]{0-5}"
+                                            class="form-control form-control-sm">
                                     </div>
                                     <div class="form-group col-3">
                                         <label for="zipInput">C. P.</label>

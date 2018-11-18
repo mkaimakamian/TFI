@@ -21,9 +21,16 @@ namespace Ubiquicity.UserControls
 
         }
 
-        //public string CalendarImage
-        //{
-        //    set { btnCalendar.ImageUrl = value; }
-        //}
+        public AjaxControlToolkit.CalendarDefaultView DefaultView
+        {
+            get { return calendar.DefaultView; }
+            set { calendar.DefaultView = value;
+                calendar.Format = "yyyy-MM"; }
+
+            //public string CalendarImage
+            //{
+            //    set { btnCalendar.ImageUrl = value; }
+            //}
+        }
     }
 }
