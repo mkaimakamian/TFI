@@ -71,7 +71,7 @@ namespace BL
         public bool Edit(Poll poll)
         {
             if (!IsValid(poll)) return false;
-            if (!Delete(poll.Id)) return false;
+            if (!Delete(poll)) return false;
             //TODO - Regenerar la tabla de relaciones
             if (!Save(poll)) return false;
 
@@ -79,17 +79,26 @@ namespace BL
         }
 
         /// <summary>
-        /// Elimina todas las preguntas asociadas a la encuestra cuyo id es pasado por parámetro.
+        /// Elimina todas las preguntas asociadas a la encuestrapasada por parámetro.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public bool Delete(int pollId)
+        public bool Delete(Poll poll)
         {
             PollQuestionMapper pollQuestionMapper = new PollQuestionMapper();
+            PollQuestionOptionMapper pollQuestionOptionMapper = new PollQuestionOptionMapper();
 
-            if (!pollQuestionMapper.Delete(pollId))
+            if (!pollQuestionOptionMapper.Delete(poll.Id))
             {
-                string errorDescription = "No se han podido eliminar las preguntas de la encueta con id " + pollId + ".";
+                string errorDescription = "No se han podido eliminar las opciones de las preguntas de la encuesta con id " + poll.Id + ".";
+                log.AddLogCritical("Delete", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.FAIL, errorDescription));
+                return false;
+            }
+
+            if (!pollQuestionMapper.Delete(poll.Id))
+            {
+                string errorDescription = "No se han podido eliminar las preguntas de la encuesta con id " + poll.Id + ".";
                 log.AddLogCritical("Delete", errorDescription, this);
                 AddError(new ResultBE(ResultBE.Type.FAIL, errorDescription));
                 return false;
@@ -102,7 +111,7 @@ namespace BL
         {
             bool isValid = true;
 
-            if (poll.Questions == null | poll.Questions.Count == 0)
+            if (poll.Questions == null || poll.Questions.Count == 0)
             {
                 string errorDescription = "La encuesta debe contener al menos una pregunta.";
                 log.AddLogWarn("IsValid", errorDescription, this);

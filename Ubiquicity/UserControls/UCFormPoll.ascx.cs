@@ -23,12 +23,15 @@ namespace Ubiquicity.UserControls
             optionListInput.DataValueField = "Id";
             optionListInput.DataBind();
 
+            SessionUtilHelper.FlushPollQuestion(Session);
+            pollQuestionList.Items.Clear();
             pollQuestionList.DataSource = null;
             pollQuestionList.DataBind();
 
             nameInput.Value = "";
             descriptionInput.Value = "";
             dueDateInput.Date = DateTime.Now.ToString();
+            dueDateInput.DefaultView = AjaxControlToolkit.CalendarDefaultView.Days;
             pollRadioList.SelectedIndex = 0;
             activeCheck.Checked = false;
         }
@@ -38,6 +41,7 @@ namespace Ubiquicity.UserControls
             nameInput.Value = poll.Name;
             descriptionInput.Value = poll.Description;
             dueDateInput.Date = poll.DueDate.ToShortDateString();
+            dueDateInput.DefaultView = AjaxControlToolkit.CalendarDefaultView.Days;
             pollRadioList.SelectedIndex = (int)poll.Type;
             SessionUtilHelper.KeepPollQuestion(poll.Questions, Session);
             RefreshQuestionList(poll.Questions);
@@ -53,6 +57,10 @@ namespace Ubiquicity.UserControls
             Poll.PollType type;
             Enum.TryParse<Poll.PollType>(pollRadioList.SelectedItem.Value, true, out type);
             poll.Type = type;
+
+            //Es un manejo malo... pero se eliminan todas las preguntas de la lista porque
+            //se recibe el listado actualizado de la sesión
+            poll.Questions = new List<PollQuestion>();
 
             //Es un chinito: si no se editaron, no se debe llenar la lista
             if (SessionUtilHelper.PollQuestionEdited())
@@ -79,8 +87,14 @@ namespace Ubiquicity.UserControls
 
         protected void AddQuestion(object sender, EventArgs e)
         {
+            //Prgeunta vacía...
+            if (String.IsNullOrEmpty(questionInput.Value) ) return;
+
             List<PollOption> pollOptions = new List<PollOption>();
             List<ListItem> selectedOptions = optionListInput.Items.Cast<ListItem>().Where(li => li.Selected).ToList();
+
+            //No se eligieron opciones
+            if (selectedOptions.Count == 0) return;
 
             //Como es un elemento simple, no tiene sentido buscar el elemento en la base
             //puesto que todos los datos ya están disponibles.
@@ -110,6 +124,7 @@ namespace Ubiquicity.UserControls
         /// <param name="e"></param>
         protected void DeleteQuestion(object sender, EventArgs e)
         {
+            if (pollQuestionList.SelectedItem == null) return;
             ListItem selectedQuestion = pollQuestionList.SelectedItem;
             PollQuestion pollQuestion = new PollQuestion();
             pollQuestion.Question = selectedQuestion.Text;

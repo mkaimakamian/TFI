@@ -34,7 +34,7 @@ namespace Ubiquicity.UserControls
 
                 if (poll != null && poll.Questions.Count > 0)
                 {
-                    txtPollTitle.InnerText = poll.Description;
+                    txtPollTitle.InnerText = poll.Name;
                     pollRepeater.DataSource = poll.Questions;
                     pollRepeater.DataBind();
                     divPoll.Visible = true;

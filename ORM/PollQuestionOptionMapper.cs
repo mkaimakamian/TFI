@@ -63,6 +63,20 @@ namespace ORM
         }
 
         /// <summary>
+        /// Elimina las opciones asociadas a las preguntas.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public bool Delete(int pollId)
+        {
+            Dal dal = new Dal();
+            Hashtable table = new Hashtable();
+
+            table.Add("@pollId", pollId);
+            return dal.Write(table, "spDeletePollQuestionOption") > 0;
+        }
+
+        /// <summary>
         /// Devuelve un objeto modelado con los valores del dataRow que recibe por parámetro.
         /// </summary>
         /// <param name="data"></param>

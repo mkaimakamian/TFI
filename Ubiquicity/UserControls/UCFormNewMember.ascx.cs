@@ -13,20 +13,7 @@ namespace Ubiquicity.UserControls
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if (!IsPostBack)
-            //{
-            //    LoadLanguages();   
-            //}
         }
-
-        //private void LoadLanguages()
-        //{
-        //    LanguageManager languageManager = new LanguageManager();
-        //    dropLanguageInput.DataTextField = "Name";
-        //    dropLanguageInput.DataValueField = "Id";
-        //    dropLanguageInput.DataSource = languageManager.Get();
-        //    dropLanguageInput.DataBind();
-        //}
 
         public void HidePasswordFields()
         {

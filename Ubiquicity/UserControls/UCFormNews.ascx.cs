@@ -26,7 +26,10 @@ namespace Ubiquicity.UserControls
             dropCategoryInput.DataSource = categories;
             dropCategoryInput.DataBind();
             sinceInput.Date = DateTime.Now.ToShortDateString();
+            sinceInput.DefaultView = AjaxControlToolkit.CalendarDefaultView.Days;
             untilInput.Date = DateTime.Now.AddDays(1).ToShortDateString();
+            untilInput.DefaultView = AjaxControlToolkit.CalendarDefaultView.Days;
+
         }
 
         public void FillForm(News news)
@@ -37,7 +40,9 @@ namespace Ubiquicity.UserControls
             imageInputBase64.Value = news.Image;
             dropCategoryInput.SelectedValue = news.Category.Id.ToString();
             sinceInput.Date = news.Since.ToString();
+            sinceInput.DefaultView = AjaxControlToolkit.CalendarDefaultView.Days;
             untilInput.Date = news.Until.ToString();
+            untilInput.DefaultView = AjaxControlToolkit.CalendarDefaultView.Days;
         }
 
         public void PopulateModel(News news)

@@ -27,17 +27,17 @@
                             <asp:ListBox ID="pollQuestionList" runat="server" CssClass="form-control" Height="100" />
                         </div>
                         <div class="col">
-                            <asp:LinkButton ID="deleteBtn" runat="server" CssClass="btn btn-primary btn-sm" Text="Eliminar" OnClick="DeleteQuestion" />
-                            <asp:LinkButton ID="newBtn" runat="server" CssClass="btn btn-primary btn-sm" Text="Nueva" OnClick="NewQuestion" />
+                            <asp:LinkButton ID="deleteBtn" runat="server" CssClass="btn btn-primary btn-sm" Text="Eliminar pregunta" OnClick="DeleteQuestion" />
+                            <%--<asp:LinkButton ID="newBtn" runat="server" CssClass="btn btn-primary btn-sm" Text="Nueva" OnClick="NewQuestion" />--%>
                         </div>
                     </div>
                 </div>
 
                 <div class="col">
                     <div class="row">
-                        <div class="form-group col">
+                        <div class="form-group col-8">
                             <label for="pollTypeInput">Tipo</label>
-                            <asp:RadioButtonList ID="pollRadioList" runat="server" RepeatDirection="Horizontal">
+                            <asp:RadioButtonList ID="pollRadioList" runat="server" RepeatDirection="Vertical">
                                 <asp:ListItem Selected="True" Value="0">Satisfacción</asp:ListItem>
                                 <asp:ListItem Value="1">General</asp:ListItem>
                             </asp:RadioButtonList>

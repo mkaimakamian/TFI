@@ -175,6 +175,15 @@ namespace BL
                 isValid = false;
             }
 
+            //esto es competencia del manager de preguntas
+            if (poll.Questions != null && poll.Questions.Count == 0)
+            {
+                string errorDescription = "La encuesta debe poseer al menos una pregunta.";
+                log.AddLogWarn("IsValid", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
+                isValid = false;
+            }
+
             return isValid;
         }
 

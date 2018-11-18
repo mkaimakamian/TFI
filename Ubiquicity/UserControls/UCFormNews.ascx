@@ -17,8 +17,7 @@
     <div class="row justify-content-center">
         <div class="form-group col-12">
             <label for="titleInput">Título</label>
-            <input id="titleInput" runat="server" type="text" class="form-control form-control-sm" 
-                placeholder="Ingresa el nombre" maxlength="50">
+            <input id="titleInput" runat="server" type="text" class="form-control form-control-sm" maxlength="50">
         </div>
         <div class="form-group col-8">
             <label for="bodyInput">Cuerpo</label>

@@ -25,12 +25,12 @@ namespace Ubiquicity.UserControls
         {
             get { return calendar.DefaultView; }
             set { calendar.DefaultView = value;
-                calendar.Format = "yyyy-MM"; }
 
-            //public string CalendarImage
-            //{
-            //    set { btnCalendar.ImageUrl = value; }
-            //}
+                if (value == AjaxControlToolkit.CalendarDefaultView.Months) calendar.Format = "yyyy-MM";
+                if (value == AjaxControlToolkit.CalendarDefaultView.Days) calendar.Format = "yyyy-MM-dd";
+            }
         }
+
+
     }
 }

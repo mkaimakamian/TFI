@@ -127,7 +127,7 @@ namespace BL
 
             if (String.IsNullOrEmpty(category.Name))
             {
-                string errorDescription = "Debe asociarse un archivo al mapa.";
+                string errorDescription = "Debe completarse el nombre de la categoría.";
                 log.AddLogWarn("IsValid", errorDescription, this);
                 AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
                 isValid = false;

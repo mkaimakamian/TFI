@@ -71,6 +71,7 @@ namespace Helper
             {
                 //Se elimina por pregunta porque en caso de ser nuevo el item, no presenta id
                 ((List<PollQuestion>)session[POLL_QUESTION]).RemoveAll(x => x.Question == pollQuestion.Question);
+                pollQuestionEdited = true;
             }
         }
 
@@ -81,6 +82,7 @@ namespace Helper
         public static void FlushPollQuestion(HttpSessionState session)
         {
             if (Exist(POLL_QUESTION, session)) session.Remove(POLL_QUESTION);
+            pollQuestionEdited = false;
         }
 
         /// <summary>

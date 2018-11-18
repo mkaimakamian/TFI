@@ -9,7 +9,7 @@
                 <ItemTemplate>
                     <font color="Blue"><%# Eval("Question") %></font> 
                     <asp:HiddenField ID="lblQuestion" runat="server" Value='<%# Eval("Id") %>' />
-                    <asp:RadioButtonList ID="radioOptionList" runat="server" RepeatDirection="Horizontal">
+                    <asp:RadioButtonList ID="radioOptionList" runat="server" RepeatDirection="Vertical">
                     </asp:RadioButtonList>
                 </ItemTemplate>
             </asp:Repeater>
