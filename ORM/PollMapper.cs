@@ -103,6 +103,34 @@ namespace ORM
         }
 
         /// <summary>
+        /// Recupera las encuestas sin tener en cuenta si están activas y/ vencidas,
+        /// Sí filtra las eliminadas.
+        /// </summary>
+        /// <param name="instant"></param>
+        /// <returns></returns>
+        public List<Poll> GetPollsForReport(bool instant)
+        {
+            Dal dal = new Dal();
+            Hashtable table = new Hashtable();
+            List<Poll> polls = null;
+
+            table.Add("@instant", instant);
+
+            DataSet result = dal.Read(table, "spReadPollReport");
+
+            if (result != null && result.Tables[0].Rows.Count > 0)
+            {
+                polls = new List<Poll>();
+                foreach (DataRow data in result.Tables[0].Rows)
+                {
+                    polls.Add(ConvertToModel(data));
+                }
+            }
+
+            return polls;
+        }
+
+        /// <summary>
         /// Recupera el listado de elementos de la base.
         /// </summary>
         /// <returns></returns>

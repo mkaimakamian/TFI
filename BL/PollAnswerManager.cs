@@ -44,20 +44,25 @@ namespace BL
             return pollAnswerMapper.HasAnswers(poll);
         }
 
-            /// <summary>
+        /// <summary>
         /// Devuelve un diccionario cuyas keys son el nombre de la serie, y cuyos valores
         /// es un array de objeto bidimensional con 0 = opcion, 1 = valor
         /// </summary>
         /// <param name="pollId"></param>
         /// <returns></returns>
-        public Dictionary<string, ArrayList[]> GetPollAnswersForChart(int pollId)
+        public Dictionary<string, ArrayList[]> GetReportForPollAnswers(int pollId)
         {
             PollAnswerMapper pollAnswerMapper = new PollAnswerMapper();
             List<PollAnswerSerie> series = pollAnswerMapper.GetPollAnswersForChart(pollId);
+
+            //Nadie contestó :|
+            if (series == null) return null;
+
             Dictionary<string, ArrayList[]> chartSeries = new Dictionary<string, ArrayList[]>();
 
             //La estrategia consiste en devolver un diccionario para identificar adecuadamente
-            //las series, cada una con los array que necesita el chart para ser mostrado
+            //las series, cada una con los array que necesita el chart para ser mostrado.
+            //Una serie = una pregunta.
             foreach (PollAnswerSerie paserie in series)
             {
                 if (!chartSeries.ContainsKey(paserie.SerieLabel))

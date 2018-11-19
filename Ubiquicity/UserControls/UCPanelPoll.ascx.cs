@@ -105,7 +105,7 @@ namespace Ubiquicity.UserControls
                     divPoll.Visible = false;
                     divPollStatistics.Visible = true;
                     int pollId = Convert.ToInt32(SessionUtilHelper.GetIdFromSession(Session));
-                    Dictionary<string, ArrayList[]> statistics = pollAnswerManager.GetPollAnswersForChart(pollId);
+                    Dictionary<string, ArrayList[]> statistics = pollAnswerManager.GetReportForPollAnswers(pollId);
                     
                     int i = 0;
 

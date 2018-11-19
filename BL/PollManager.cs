@@ -85,6 +85,24 @@ namespace BL
         }
 
         /// <summary>
+        /// Devuelve el listado de encuestas "generales" / "on the fly".
+        /// </summary>
+        /// <returns></returns>
+        public List<Poll> GetPollsForReport(bool instant)
+        {
+            PollMapper pollMapper = new PollMapper();
+            List<Poll> polls = pollMapper.GetPollsForReport(instant);
+
+            foreach (Poll poll in polls)
+            {
+                PopulatePoll(poll);
+
+            }
+           
+            return polls;
+        }
+
+        /// <summary>
         /// Recupera el listado de todos los items.
         /// </summary>
         /// <returns></returns>

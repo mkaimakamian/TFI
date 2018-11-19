@@ -53,6 +53,33 @@ namespace ORM
         }
 
         /// <summary>
+        /// Devuelve una lista de QueryFilters que modela dia, mes o año, y el totalizado.
+        /// para generar los reportes.
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <returns></returns>
+        public List<QueryFilter> GetSales(QueryFilter filter)
+        {
+            Dal dal = new Dal();
+            Hashtable table = new Hashtable();
+            List<QueryFilter> queryFilters = null;
+
+            table.Add("@key", filter.Value);
+            DataSet result = dal.Read(table, "spReadSellReport");
+
+            if (result != null && result.Tables[0].Rows.Count > 0)
+            {
+                queryFilters = new List<QueryFilter>();
+                foreach (DataRow data in result.Tables[0].Rows)
+                {
+                    queryFilters.Add(ConvertToQFModel(data));
+                }
+            }
+
+            return queryFilters;
+        }
+
+        /// <summary>
         /// Devuelve un objeto modelado con los valores del dataRow que recibe por parámetro.
         /// </summary>
         /// <param name="data"></param>
@@ -66,6 +93,20 @@ namespace ORM
             invoice.BillingAddress.Id = Convert.ToInt32(data["billingAddressId"]);
 
             return invoice;
+        }
+
+        /// <summary>
+        /// Usado para los reportes e ventas
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        private QueryFilter ConvertToQFModel(DataRow data)
+        {
+            QueryFilter queryFilter = new QueryFilter();
+            queryFilter.Key = data["key"].ToString();
+            queryFilter.Value = data["value"].ToString();
+
+            return queryFilter;
         }
     }
 }

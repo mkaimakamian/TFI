@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -142,6 +143,29 @@ namespace BL
             TrackingManager trackingManager = new TrackingManager();
             // TODO - implementar control de error.
             trackingManager.Save(invoice);
+        }
+
+        /// <summary>
+        /// Devuelve una estructura que permite ser interpretada para la creación de charts.
+        /// </summary>
+        /// <param name="queryFilter"></param>
+        /// <returns></returns>
+        public Dictionary<string, ArrayList[]> GetReportForSales(QueryFilter queryFilter)
+        {
+            InvoiceMapper invoiceMapper = new InvoiceMapper();
+            List<QueryFilter> qfResult =  invoiceMapper.GetSales(queryFilter);
+
+            Dictionary<string, ArrayList[]> chartSeries = new Dictionary<string, ArrayList[]>();
+
+            chartSeries.Add(queryFilter.Key, new ArrayList[2] { new ArrayList(), new ArrayList() });
+
+            foreach (QueryFilter qf in qfResult)
+            {
+                chartSeries[queryFilter.Key][0].Add(qf.Key);
+                chartSeries[queryFilter.Key][1].Add(Convert.ToInt32(qf.Value));
+            }
+            
+            return chartSeries;
         }
 
         private bool IsValid(Invoice invoice)
