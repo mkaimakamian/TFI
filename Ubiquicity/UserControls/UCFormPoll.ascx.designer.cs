@@ -22,15 +22,6 @@ namespace Ubiquicity.UserControls {
         protected global::System.Web.UI.HtmlControls.HtmlInputText nameInput;
         
         /// <summary>
-        /// dueDateInput control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Ubiquicity.UserControls.UCCalendar dueDateInput;
-        
-        /// <summary>
         /// descriptionInput control.
         /// </summary>
         /// <remarks>
@@ -40,22 +31,13 @@ namespace Ubiquicity.UserControls {
         protected global::System.Web.UI.HtmlControls.HtmlTextArea descriptionInput;
         
         /// <summary>
-        /// pollQuestionList control.
+        /// dueDateInput control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox pollQuestionList;
-        
-        /// <summary>
-        /// deleteBtn control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton deleteBtn;
+        protected global::Ubiquicity.UserControls.UCCalendar dueDateInput;
         
         /// <summary>
         /// pollRadioList control.
@@ -76,13 +58,22 @@ namespace Ubiquicity.UserControls {
         protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox activeCheck;
         
         /// <summary>
-        /// newQuestionListCol control.
+        /// pollQuestionList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl newQuestionListCol;
+        protected global::System.Web.UI.WebControls.ListBox pollQuestionList;
+        
+        /// <summary>
+        /// deleteBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton deleteBtn;
         
         /// <summary>
         /// questionInput control.

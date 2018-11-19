@@ -47,7 +47,6 @@
                                                             <%# Eval("User.Name") %> - <%# Eval("Date") %>
                                                         </h4>
                                                         <p>
-
                                                             <%# Eval("Sentence") %>
                                                         </p>
                                                     </div>
