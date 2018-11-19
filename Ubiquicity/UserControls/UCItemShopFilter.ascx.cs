@@ -12,7 +12,7 @@ namespace Ubiquicity.UserControls
     public partial class UCItemShopFilter : System.Web.UI.UserControl
     {
         private Repeater shopRepeater;
-        private const string PLACE_HOLDER = "::: Todas:::";
+        private const string PLACE_HOLDER = "::: Categorías :::";
 
         protected void Page_Load(object sender, EventArgs e)
         {

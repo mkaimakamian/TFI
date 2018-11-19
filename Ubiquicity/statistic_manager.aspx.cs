@@ -21,9 +21,9 @@ namespace Ubiquicity
 
             if (!IsPostBack)
             {
-                LoadPolls();
-                LoadSatisfactionPolls();
-                LoadSells();
+                //LoadPolls();
+                //LoadSatisfactionPolls();
+                //LoadSells();
             }
         }
 
@@ -33,12 +33,13 @@ namespace Ubiquicity
             {
                 PollManager pollmanager = new PollManager();
                 List<Poll> polls = pollmanager.GetPollsForReport(true);
-                bListPoll.DataTextField = "Name";
-                bListPoll.DataValueField = "Id";
-                bListPoll.DataSource = polls;
-                bListPoll.DataBind();
+                lstReports.DataTextField = "Name";
+                lstReports.DataValueField = "Id";
+                lstReports.DataSource = polls;
+                lstReports.DataBind();
             }
-            catch (Exception exception) {
+            catch (Exception exception)
+            {
                 ((front)Master).Alert.Show("Exception", exception.Message);
             }
         }
@@ -49,25 +50,26 @@ namespace Ubiquicity
             {
                 PollManager pollmanager = new PollManager();
                 List<Poll> polls = pollmanager.GetPollsForReport(false);
-                bListSPoll.DataTextField = "Name";
-                bListSPoll.DataValueField = "Id";
-                bListSPoll.DataSource = polls;
-                bListSPoll.DataBind();
+                lstReports.DataTextField = "Name";
+                lstReports.DataValueField = "Id";
+                lstReports.DataSource = polls;
+                lstReports.DataBind();
             }
-            catch (Exception exception) {
+            catch (Exception exception)
+            {
                 ((front)Master).Alert.Show("Exception", exception.Message);
             }
 
         }
 
-        private void LoadSells()
+        private void LoadSales()
         {
             try
             {
-                bListSell.DataTextField = "Key";
-                bListSell.DataValueField = "Value";
-                bListSell.DataSource = GetQFSell();
-                bListSell.DataBind();
+                lstReports.DataTextField = "Key";
+                lstReports.DataValueField = "Value";
+                lstReports.DataSource = GetQFSales();
+                lstReports.DataBind();
             }
             catch (Exception exception)
             {
@@ -75,32 +77,43 @@ namespace Ubiquicity
             }
         }
 
-        protected void ShowSPoll(object sender, EventArgs e)
+        /// <summary>
+        /// Muestra el reporte según el tipo elegido.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void ShowReport(object sender, EventArgs e)
         {
-            int id = Convert.ToInt32(bListSPoll.SelectedItem.Value);
+            if (dropReportType.SelectedIndex == -1 || lstReports.SelectedIndex == -1) return;
+
+            int type = dropReportType.SelectedIndex;
             PollAnswerManager pollAnswerManager = new PollAnswerManager();
-            Dictionary<string, ArrayList[]> dataChart = pollAnswerManager.GetReportForPollAnswers(id);
+            Dictionary<string, ArrayList[]> dataChart = null;
+
+            switch (type)
+            {
+                case 1: //satisfacción
+                    int id = Convert.ToInt32(lstReports.SelectedItem.Value);
+                    dataChart = pollAnswerManager.GetReportForPollAnswers(id);
+                    break;
+                case 2: //general
+                    int id2 = Convert.ToInt32(lstReports.SelectedItem.Value);
+                    dataChart = pollAnswerManager.GetReportForPollAnswers(id2);
+                    break;
+                case 3: //ventas
+                    QueryFilter queryFilter = new QueryFilter();
+                    queryFilter.Key = lstReports.SelectedItem.Text;
+                    queryFilter.Value = lstReports.SelectedItem.Value;
+                    InvoiceManager invoiceManager = new InvoiceManager();
+                    dataChart = invoiceManager.GetReportForSales(queryFilter);
+                    break;
+                default:
+                    return;
+            }
+
             ShowChart(dataChart);
         }
-
-        protected void ShowPoll(object sender, EventArgs e)
-        {
-            int id = Convert.ToInt32(bListPoll.SelectedItem.Value);
-            PollAnswerManager pollAnswerManager = new PollAnswerManager();
-            Dictionary<string, ArrayList[]> dataChart = pollAnswerManager.GetReportForPollAnswers(id);
-            ShowChart(dataChart);
-        }
-
-        protected void ShowSell(object sender, EventArgs e)
-        {
-            QueryFilter queryFilter = new QueryFilter();
-            queryFilter.Key = bListSell.SelectedItem.Text;
-            queryFilter.Value = bListSell.SelectedItem.Value;
-            InvoiceManager invoiceManager = new InvoiceManager();
-            Dictionary<string, ArrayList[]> dataChart = invoiceManager.GetReportForSales(queryFilter);
-            ShowChart(dataChart);
-
-        }
+    
         private void ShowChart(Dictionary<string, ArrayList[]> statistics)
         {
             if (statistics == null)
@@ -130,7 +143,7 @@ namespace Ubiquicity
         /// Devuelve el set de "tipo" de reportes de venta que puede generar.
         /// </summary>
         /// <returns></returns>
-        private List<QueryFilter> GetQFSell()
+        private List<QueryFilter> GetQFSales()
         {
             List<QueryFilter> filters = new List<QueryFilter>();
             QueryFilter yearFilter = new QueryFilter();
@@ -148,6 +161,29 @@ namespace Ubiquicity
             filters.Add(dayFilter);
 
             return filters;
+        }
+
+        /// <summary>
+        /// Cambia le contenido del listado de reportes según el tipo.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void Listreports(object sender, EventArgs e)
+        {
+            int type = ((DropDownList)sender).SelectedIndex;
+
+            switch (type)
+            {
+                case 1:
+                    LoadSatisfactionPolls();
+                    break;
+                case 2:
+                    LoadPolls();
+                    break;
+                case 3:
+                    LoadSales();
+                    break;
+            }
         }
     }
 }

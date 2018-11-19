@@ -22,31 +22,22 @@ namespace Ubiquicity {
         protected global::Ubiquicity.UserControls.UCHeaderBackOffice UCHeaderBackOffice;
         
         /// <summary>
-        /// bListSPoll control.
+        /// dropReportType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox bListSPoll;
+        protected global::System.Web.UI.WebControls.DropDownList dropReportType;
         
         /// <summary>
-        /// bListPoll control.
+        /// lstReports control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox bListPoll;
-        
-        /// <summary>
-        /// bListSell control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox bListSell;
+        protected global::System.Web.UI.WebControls.ListBox lstReports;
         
         /// <summary>
         /// Chart1 control.

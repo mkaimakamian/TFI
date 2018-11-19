@@ -103,7 +103,7 @@ namespace ORM
         }
 
         /// <summary>
-        /// Recupera las encuestas sin tener en cuenta si están activas y/ vencidas,
+        /// Recupera las encuestas sin tener en cuenta si están activas o vencidas,
         /// Sí filtra las eliminadas.
         /// </summary>
         /// <param name="instant"></param>
