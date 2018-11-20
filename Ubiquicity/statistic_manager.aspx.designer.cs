@@ -22,6 +22,15 @@ namespace Ubiquicity {
         protected global::Ubiquicity.UserControls.UCHeaderBackOffice UCHeaderBackOffice;
         
         /// <summary>
+        /// upUCCrudGrid control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upUCCrudGrid;
+        
+        /// <summary>
         /// dropReportType control.
         /// </summary>
         /// <remarks>
@@ -38,6 +47,42 @@ namespace Ubiquicity {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ListBox lstReports;
+        
+        /// <summary>
+        /// divDates control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divDates;
+        
+        /// <summary>
+        /// divMonth control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divMonth;
+        
+        /// <summary>
+        /// dropMonth control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList dropMonth;
+        
+        /// <summary>
+        /// dropYear control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList dropYear;
         
         /// <summary>
         /// Chart1 control.

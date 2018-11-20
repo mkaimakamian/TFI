@@ -150,10 +150,13 @@ namespace BL
         /// </summary>
         /// <param name="queryFilter"></param>
         /// <returns></returns>
-        public Dictionary<string, ArrayList[]> GetReportForSales(QueryFilter queryFilter)
+        public Dictionary<string, ArrayList[]> GetReportForSales(Dictionary<String, QueryFilter> filters)
         {
+            QueryFilter queryFilter = filters["Type"];
             InvoiceMapper invoiceMapper = new InvoiceMapper();
-            List<QueryFilter> qfResult =  invoiceMapper.GetSales(queryFilter);
+            List<QueryFilter> qfResult =  invoiceMapper.GetSales(filters);
+
+            if (qfResult == null) return null; 
 
             Dictionary<string, ArrayList[]> chartSeries = new Dictionary<string, ArrayList[]>();
 

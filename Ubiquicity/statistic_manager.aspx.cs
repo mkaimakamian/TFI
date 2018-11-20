@@ -101,11 +101,23 @@ namespace Ubiquicity
                     dataChart = pollAnswerManager.GetReportForPollAnswers(id2);
                     break;
                 case 3: //ventas
-                    QueryFilter queryFilter = new QueryFilter();
-                    queryFilter.Key = lstReports.SelectedItem.Text;
-                    queryFilter.Value = lstReports.SelectedItem.Value;
+                    QueryFilter salesType = new QueryFilter();
+                    salesType.Key = lstReports.SelectedItem.Text;
+                    salesType.Value = lstReports.SelectedItem.Value;
+
+                    QueryFilter monthFilter = new QueryFilter();
+                    monthFilter.Value = dropMonth.SelectedValue;
+
+                    QueryFilter yearFilter = new QueryFilter();
+                    yearFilter.Value = dropYear.SelectedValue;
+
+                    Dictionary<String, QueryFilter> filters = new Dictionary<String, QueryFilter>();
+                    filters.Add("Type", salesType);
+                    filters.Add("Month", monthFilter);
+                    filters.Add("Year", yearFilter);
+
                     InvoiceManager invoiceManager = new InvoiceManager();
-                    dataChart = invoiceManager.GetReportForSales(queryFilter);
+                    dataChart = invoiceManager.GetReportForSales(filters);
                     break;
                 default:
                     return;
@@ -176,14 +188,45 @@ namespace Ubiquicity
             {
                 case 1:
                     LoadSatisfactionPolls();
+                    divDates.Visible = false;
                     break;
                 case 2:
                     LoadPolls();
+                    divDates.Visible = false;
                     break;
                 case 3:
                     LoadSales();
+                    divDates.Visible = true;
                     break;
             }
+        }
+
+        /// <summary>
+        /// Atiende la peticiónd e cmabio de índice de la lista de reportes; se emplea
+        /// para ocultar filtros o mostrarlos según el tipo de reporte.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void SelectReport(object sender, EventArgs e)
+        {
+            string value = ((ListBox)sender).SelectedValue;
+
+            if (value == "year")
+            {
+                divDates.Visible = false;
+            } else if (value == "month")
+            {
+                divMonth.Visible = false;
+                divDates.Visible = true;
+
+            }
+            else if (value == "day")
+            {
+                divMonth.Visible = true;
+                divDates.Visible = true;
+            }
+
+
         }
     }
 }

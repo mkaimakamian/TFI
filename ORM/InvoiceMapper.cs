@@ -58,13 +58,16 @@ namespace ORM
         /// </summary>
         /// <param name="filter"></param>
         /// <returns></returns>
-        public List<QueryFilter> GetSales(QueryFilter filter)
+        public List<QueryFilter> GetSales(Dictionary<String, QueryFilter> filters)
         {
             Dal dal = new Dal();
             Hashtable table = new Hashtable();
             List<QueryFilter> queryFilters = null;
 
-            table.Add("@key", filter.Value);
+            table.Add("@key", filters["Type"].Value);
+            table.Add("@month", filters["Month"].Value);
+            table.Add("@year", filters["Year"].Value);
+            
             DataSet result = dal.Read(table, "spReadSellReport");
 
             if (result != null && result.Tables[0].Rows.Count > 0)
