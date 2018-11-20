@@ -65,12 +65,15 @@
 
             </div>
 
-            <div class="col">
+            <div class="col" runat="server" id="divChart" visible="false">
                 <asp:Chart ID="Chart1" runat="server" Height="400px" Width="700px">
                     <ChartAreas>
                         <asp:ChartArea Name="ChartArea1" Area3DStyle-Enable3D="true"></asp:ChartArea>
                     </ChartAreas>
                 </asp:Chart>
+            </div>
+            <div class="col align-self-center p-5" runat="server" id="divNoChart">
+                <div class="row justify-content-center bg-light">[ No hay datos para mostrar ]</div>
             </div>
         </div>
     </ContentTemplate>

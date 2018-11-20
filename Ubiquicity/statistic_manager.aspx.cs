@@ -85,7 +85,7 @@ namespace Ubiquicity
         protected void ShowReport(object sender, EventArgs e)
         {
             if (dropReportType.SelectedIndex == -1 || lstReports.SelectedIndex == -1) return;
-
+            
             int type = dropReportType.SelectedIndex;
             PollAnswerManager pollAnswerManager = new PollAnswerManager();
             Dictionary<string, ArrayList[]> dataChart = null;
@@ -130,15 +130,19 @@ namespace Ubiquicity
         {
             if (statistics == null)
             {
-                //mostrar que no hay nada
-                //quizá mostrar el div "no hay nada para mostrar"
+                divNoChart.Visible = true;
+                divChart.Visible = false;
             }
             else
             {
+                divNoChart.Visible = false;
+                divChart.Visible = true;
                 int i = 0;
                 foreach (KeyValuePair<string, ArrayList[]> serie in statistics)
                 {
-                    Chart1.Series.Add(new Series(serie.Key));
+                    Series series = new Series(serie.Key);
+                    //series.LabelFormat = "{0:c}";
+                    Chart1.Series.Add(series);
                     Chart1.Legends.Add(serie.Key);
                     Array yValues = serie.Value[1].ToArray(typeof(int));
                     Array xLabels = (string[])serie.Value[0].ToArray(typeof(string));
@@ -147,7 +151,6 @@ namespace Ubiquicity
                     ++i;
                 }
             }
-            //Page.ClientScript.RegisterStartupScript(this.GetType(), "openModalChart", "window.onload = function() { $('#ucModalChart').modal('show'); }", true);
         }
 
 
@@ -183,6 +186,8 @@ namespace Ubiquicity
         protected void Listreports(object sender, EventArgs e)
         {
             int type = ((DropDownList)sender).SelectedIndex;
+            divNoChart.Visible = true;
+            divChart.Visible = false;
 
             switch (type)
             {
@@ -197,6 +202,9 @@ namespace Ubiquicity
                 case 3:
                     LoadSales();
                     divDates.Visible = true;
+                    break;
+                default:
+                    lstReports.Items.Clear();
                     break;
             }
         }
@@ -226,7 +234,8 @@ namespace Ubiquicity
                 divDates.Visible = true;
             }
 
-
+            divNoChart.Visible = true;
+            divChart.Visible = false;
         }
     }
 }
