@@ -52,7 +52,7 @@ namespace BL
                     {
                         result = new WebSearch();
                         result.Url = fileName;
-                        result.Description = fileName;
+                        result.Description = fileName.Substring(0, fileName.Length -5);
                         searchResult.Add(result);
                     }
 

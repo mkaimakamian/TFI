@@ -169,6 +169,16 @@ namespace BL
 
         public bool Delete(int id)
         {
+            //Agregado de último momento
+            User user = SessionHelper.GetUser();
+            if (user.Id == id)
+            {
+                string errorDescription = "No e sposible elimiar el usuario porque es el mismo que está ejecutando la acción.";
+                log.AddLogWarn("Delete", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.EMPTY, errorDescription));
+                return false;
+            }
+
             UserMapper mapper = new UserMapper();
             return mapper.Delete(id);
         }

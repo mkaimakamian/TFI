@@ -107,7 +107,7 @@ namespace Ubiquicity
 
                 if (!Boolean.Parse(success.ToString()) && Manager.HasErrors)
                 {
-                    Alert.Show("Error", Manager.ErrorDescription);
+                    Alert.ShowUP("Error", Manager.ErrorDescription);
                 } else
                 {
                     Session.Remove("Ubiquicity_itemId");

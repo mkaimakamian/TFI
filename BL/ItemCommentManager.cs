@@ -22,11 +22,12 @@ namespace BL
             List<ItemComment> comments = commentMapper.GetByResource(resourceId);
 
             //feo, pero supongo que es lo único que podemos hacer por el momento
+            if (comments != null) { 
             foreach (ItemComment comment in comments)
             {
                 comment.User = userManager.Get(comment.User.Id);
             }
-
+            }
             return comments;
         }
 

@@ -61,9 +61,7 @@
                         <div class="col-12 form-group">--%>
                             <input id="searchInput" runat="server" type="text" class="form-control form-control-sm mr-1" 
                                 placeholder="Buscar" style="width:200px;" maxlength="50">
-                            <asp:Button ID="searchBtn" runat="server" CssClass="btn btn-secondary btn-sm mr-4" 
-                                Text="Buscar" OnClick="PerformSearch" />
-
+                            <asp:Button ID="searchBtn" runat="server" CssClass="btn btn-secondary btn-sm mr-4" Text="Buscar" OnClick="PerformSearch" />
                       <%--  </div>
                     </div>--%>
                     <asp:Panel ID="panelLogin" runat="server">

@@ -316,6 +316,8 @@ namespace Ubiquicity
 
         protected void PerformSearch(object sender, EventArgs e)
         {
+            if (String.IsNullOrEmpty(searchInput.Value)) return;
+
             List<WebSearch> webSearchResult = new SearchManager().PerformSearch(searchInput.Value, SessionHelper.GetUser());
             UCModalSearch.Show(webSearchResult);
         }

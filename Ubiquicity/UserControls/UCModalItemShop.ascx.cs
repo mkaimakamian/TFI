@@ -77,7 +77,7 @@ namespace Ubiquicity.UserControls
             }
             catch(Exception exception)
             {
-                //TODO - Agregar control de error
+                //((front) Master).Alert.Show("Exception", exception.Message);
             }
 
             return null;

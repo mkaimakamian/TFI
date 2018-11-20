@@ -129,7 +129,6 @@
     <Content Include="Resources\login.svg" />
     <Content Include="Resources\logo.png" />
     <Content Include="Resources\logo_azul.png" />
-    <Content Include="Resources\mail.htm" />
     <Content Include="Resources\map.svg" />
     <Content Include="Resources\mapa_vect.png" />
     <Content Include="Resources\news01.svg" />
@@ -140,6 +139,7 @@
     <Content Include="Resources\shop01.svg" />
     <Content Include="Resources\star.svg" />
     <Content Include="Resources\template\invoice.htm" />
+    <Content Include="Resources\template\!mail.htm" />
     <Content Include="Resources\template\mail.htm" />
     <Content Include="Resources\ubiquicity.css" />
     <Content Include="Resources\ucity.png" />
