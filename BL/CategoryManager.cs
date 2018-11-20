@@ -113,27 +113,19 @@ namespace BL
             List<Category> categories = Get();
             Dictionary<int, Category> categoriesDict = new Dictionary<int, Category>();
 
+            if (categories != null) { 
             foreach (Category category in categories)
             {
                 categoriesDict.Add(category.Id, category);
             }
-
+            }
             return categoriesDict;
         }
 
         private bool IsValid(Category category)
         {
             bool isValid = true;
-
-            if (String.IsNullOrEmpty(category.Name))
-            {
-                string errorDescription = "Debe completarse el nombre de la categoría.";
-                log.AddLogWarn("IsValid", errorDescription, this);
-                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
-                isValid = false;
-            }
-
-            return isValid;
-        }
+            return isValid &= VLetterNumbers(category.Name, 1, 50, "Categoría", "IsValid");
+           }
     }
 }

@@ -61,5 +61,66 @@ namespace BL
         {
             Errors.AddRange(errors);
         }
+
+        protected bool VOnlyNumber(string toValidate, int minLenght, int maxLenght, string fieldName, string actionErr)
+        {
+            if (!VLetterNumbers(toValidate, minLenght, maxLenght, fieldName, actionErr)) return false;
+
+            if (toValidate.Any(char.IsLetter))
+            {
+                string errorDescription = fieldName + " debe poseer únicamente números: " + toValidate;
+                log.AddLogWarn(actionErr, errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.DATA_TYPE, errorDescription));
+                return false;
+            }
+
+            return true;
+        }
+
+        protected bool VOnlyLetter(string toValidate, int minLenght, int maxLenght, string fieldName, string actionErr)
+        {
+            if (!VLetterNumbers(toValidate, minLenght, maxLenght, fieldName, actionErr)) return false;
+
+            if (toValidate.Any(char.IsDigit))
+            {
+                string errorDescription = fieldName + " debe contener únicamente caracteres: " + toValidate;
+                log.AddLogWarn(actionErr, errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.DATA_TYPE, errorDescription));
+                return false;
+            }
+
+            return true;
+        }
+
+        protected bool VLetterNumbers(string toValidate, int minLenght, int maxLenght, string fieldName, string actionErr)
+        {
+            if (String.IsNullOrEmpty(toValidate))
+            {
+                string errorDescription = fieldName + " no debe estar vacío.";
+                log.AddLogWarn(actionErr, errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
+                return false;
+            }
+
+            if (toValidate.Length < minLenght)
+            {
+                string errorDescription = fieldName + " debe poseer al menos " + minLenght + " caracteres.";
+                log.AddLogWarn(actionErr, errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.FAIL, errorDescription));
+                return false;
+            }
+
+            //Cero como valor de corte para señalar que no posee cota superior
+            if (maxLenght > 0 && toValidate.Length > maxLenght)
+            {
+                string errorDescription = fieldName + " debe poseer a lo sumo " + maxLenght + " caracteres.";
+                log.AddLogWarn(actionErr, errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.FAIL, errorDescription));
+                return false;
+            }
+
+            return true;
+        }
+
     }
 }

@@ -92,13 +92,7 @@ namespace BL
         {
             PollMapper pollMapper = new PollMapper();
             List<Poll> polls = pollMapper.GetPollsForReport(instant);
-
-            foreach (Poll poll in polls)
-            {
-                PopulatePoll(poll);
-
-            }
-           
+            foreach (Poll poll in polls) PopulatePoll(poll);
             return polls;
         }
 
@@ -176,14 +170,7 @@ namespace BL
         private bool IsValideForEdit(Poll poll)
         {
             bool isValid = true;
-
-            if (String.IsNullOrEmpty(poll.Name))
-            {
-                string errorDescription = "Debe completarse el nombre.";
-                log.AddLogWarn("IsValid", errorDescription, this);
-                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
-                isValid = false;
-            }
+            isValid &= VLetterNumbers(poll.Name, 1, 50, "Nombre", "IsValidForEdit");
 
             if (poll.DueDate == null)
             {

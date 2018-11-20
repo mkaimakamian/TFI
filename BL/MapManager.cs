@@ -120,53 +120,24 @@ namespace BL
                 AddError(new ResultBE(ResultBE.Type.FAIL, errorDescription));
                 return false;
             }
-
             return true;
         }
 
         private bool IsValid(Map map)
         {
             bool isValid = IsValidForEdit(map);
-
-            if (String.IsNullOrEmpty(map.Resource))
-            {
-                string errorDescription = "Debe asociarse un archivo al mapa.";
-                log.AddLogWarn("IsValid", errorDescription, this);
-                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
-                isValid = isValid & false;
-            }
-
+            //Debe asociarse un archivo la mapa
+            isValid &= VLetterNumbers(map.Resource, 1, 0, "Recurso", "IsValid");
             return isValid;
         }
 
         private bool IsValidForEdit(Map map)
         {
             bool isValid = true;
-
-            if (String.IsNullOrEmpty(map.Name))
-            {
-                string errorDescription = "Debe completarse el nombre.";
-                log.AddLogWarn("IsValid", errorDescription, this);
-                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
-                isValid = false;
-            }
-
-            if (String.IsNullOrEmpty(map.Description))
-            {
-                string errorDescription = "Debe completarse la descripción.";
-                log.AddLogWarn("IsValid", errorDescription, this);
-                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
-                isValid = false;
-            }
-
-            if (String.IsNullOrEmpty(map.Image))
-            {
-                string errorDescription = "Debe asociarse una imagen al mapa.";
-                log.AddLogWarn("IsValid", errorDescription, this);
-                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
-                isValid = false;
-            }
-
+            isValid &= VLetterNumbers(map.Name, 1, 50, "Nombre", "IsValidForEdit");
+            isValid &= VLetterNumbers(map.Description, 1, 250, "Descripción", "IsValidForEdit");
+            isValid &= VLetterNumbers(map.Name, 1, 0, "Imagen", "IsValidForEdit");
+            //isValid &= VOnlyNumber(map.Price.ToString(), 1, 0, "Price", "IsValidForEdit");
             return isValid;
         }
     }

@@ -287,14 +287,7 @@ namespace BL
         private bool IsValid(Role role)
         {
             bool isValid = true;
-
-            if (String.IsNullOrEmpty(role.Name))
-            {
-                string errorDescription = "Debe completarse el nombre del rol.";
-                log.AddLogCritical("IsValid", errorDescription, this);
-                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
-                isValid = isValid & false;
-            }
+            isValid &= VLetterNumbers(role.Name, 1, 50, "Nombre", "IsValid");
 
             if(role.Permissions.Count == 0)
             {

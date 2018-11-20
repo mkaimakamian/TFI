@@ -15,7 +15,7 @@ namespace BL
         //TODO - Actualizar en ea
         public bool ActivateAccount(string hash)
         {
-            if (!isValidHash(hash)) return false;
+            if (!IsValidHash(hash)) return false;
             string activation = hash.Substring(0, 32);
             int userId = int.Parse(hash.Substring(32, hash.Length - 32));
 
@@ -60,7 +60,7 @@ namespace BL
 
         public bool ResetPasswordAction(String password, string passwordHash)
         {
-            if (!isValidHash(passwordHash)) return false;
+            if (!IsValidHash(passwordHash)) return false;
             string recovery = passwordHash.Substring(0, 32);
             int userId = int.Parse(passwordHash.Substring(32, passwordHash.Length - 32));
             UserMapper userMapper = new UserMapper();
@@ -387,48 +387,17 @@ namespace BL
         private bool IsValidForEdit(User user)
         {
             bool isValid = true;
-
-            if (String.IsNullOrEmpty(user.Name))
-            {
-                string errorDescription = "Debe completarse el nombre.";
-                log.AddLogWarn("IsValidForSave", errorDescription, this);
-                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
-                isValid = false;
-            }
-
-            if (String.IsNullOrEmpty(user.Lastname))
-            {
-                string errorDescription = "Debe completarse el apellido.";
-                log.AddLogWarn("IsValidForSave", errorDescription, this);
-                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
-                isValid = isValid & false;
-            }
-
-            if (String.IsNullOrEmpty(user.Mail))
-            {
-                string errorDescription = "Debe completarse el correo electrónico.";
-                log.AddLogWarn("IsValidForSave", errorDescription, this);
-                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
-                isValid = isValid & false;
-            }
-
+            isValid &= VOnlyLetter(user.Name, 1, 50, "Nombre", "IsValidForEdit");
+            isValid &= VOnlyLetter(user.Lastname, 1, 50, "Apellido", "IsValidForEdit");
+            isValid &= VLetterNumbers(user.Mail, 7, 50, "Mail", "IsValidForEdit");
             return isValid;
         }
-
 
         //TODO - agregar en ea
         private bool IsValidForSave(User user)
         {
             bool isValid = IsValidForEdit(user);
-            
-            if (String.IsNullOrEmpty(user.Password))
-            {
-                string errorDescription = "Debe completarse el password.";
-                log.AddLogWarn("IsValidForSave", errorDescription, this);
-                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
-                isValid = isValid & false;
-            }
-
+            isValid &= VLetterNumbers(user.Password, 6, 50, "Password", "IsValidForSave");
             return isValid;
         }
 
@@ -437,47 +406,14 @@ namespace BL
         /// </summary>
         /// <param name="hash"></param>
         /// <returns></returns>
-        private bool isValidHash(string hash)
+        private bool IsValidHash(string hash)
         {
-
-            if (String.IsNullOrEmpty(hash))
-            {
-                string errorDescription = "No se ha provisto el código.";
-                log.AddLogWarn("isValidHash", errorDescription, this);
-                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
-               return false;
-            }
-
-            if (!String.IsNullOrEmpty(hash) && hash.Length <= 32)
-            {
-                string errorDescription = "Código hash inválido.";
-                log.AddLogWarn("isValidHash", errorDescription, this);
-                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
-                return false;
-            }
-
-            if (!String.IsNullOrEmpty(hash) && hash.Length <= 32)
-            {
-                string errorDescription = "Código inválido.";
-                log.AddLogWarn("isValidHash", errorDescription, this);
-                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
-                return false;
-            }
-
-            return true;
+           return VLetterNumbers(hash, 32, 36, "Hash", "IsValidHash"); ;
         }
 
         private bool IsValidForRecover(string mail)
         {
-            if (String.IsNullOrEmpty(mail))
-            {
-                string errorDescription = "Debe especificarse un mail.";
-                log.AddLogWarn("IsValidForRecover", errorDescription, this);
-                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
-                return false;
-            }
-
-            return true;
+            return VLetterNumbers(mail, 7, 50, "Mail", "IsValidForRecover"); ;
         }
     }
 }

@@ -122,17 +122,7 @@ namespace BL
 
         private bool IsValid(ItemComment itemComment)
         {
-            bool isValid = true;
-
-            if (String.IsNullOrEmpty(itemComment.Sentence))
-            {
-                string errorDescription = "Debe ingresarse un comentario.";
-                log.AddLogWarn("IsValid", errorDescription, this);
-                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
-                isValid = false;
-            }
-
-            return isValid;
+            return VLetterNumbers(itemComment.Sentence, 1, 250, "Comentario", "IsValid");
         }
     }
 }

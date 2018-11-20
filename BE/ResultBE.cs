@@ -21,7 +21,8 @@ namespace BE
             EMPTY,
             ALREADY_EXISTS,
             RELATIONSHIP_ERROR,
-            LOCKED_USER
+            LOCKED_USER,
+            DATA_TYPE
         };
 
         private Type type;

@@ -79,15 +79,8 @@ namespace BL
         private bool IsValidForUnsuscribe(NewsAddressee newsAddressee, bool confirm)
         {
             bool isValid = true;
-
-            if (String.IsNullOrEmpty(newsAddressee.Email))
-            {
-                string errorDescription = "Debe completarse el correo.";
-                log.AddLogWarn("IsValid", errorDescription, this);
-                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
-                isValid = false;
-            }
-
+            isValid &= VLetterNumbers(newsAddressee.Email, 7, 50, "Mail", "IsValid");
+            
             if (!confirm)
             {
                 string errorDescription = "Debe confirmarse la acción de desuscripción.";
@@ -107,31 +100,9 @@ namespace BL
         private bool IsValid(NewsAddressee newsAddressee)
         {
             bool isValid = true;
-
-            if (String.IsNullOrEmpty(newsAddressee.Name))
-            {
-                string errorDescription = "Debe completarse el nombre.";
-                log.AddLogWarn("IsValid", errorDescription, this);
-                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
-                isValid = false;
-            }
-
-            if (String.IsNullOrEmpty(newsAddressee.Email))
-            {
-                string errorDescription = "Debe completarse el correo.";
-                log.AddLogWarn("IsValid", errorDescription, this);
-                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
-                isValid = false;
-            }
-
-            if (String.IsNullOrEmpty(newsAddressee.Categories))
-            {
-                string errorDescription = "Debe elegir la menos una categoría.";
-                log.AddLogWarn("IsValid", errorDescription, this);
-                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
-                isValid = false;
-            }
-
+            isValid &= VOnlyLetter(newsAddressee.Name, 1, 50, "Nombre", "IsValid");
+            isValid &= VLetterNumbers(newsAddressee.Email, 7, 50, "Mail", "IsValid");
+            isValid &= VLetterNumbers(newsAddressee.Categories, 1, 250, "Categorías", "IsValid");
             return isValid;
         }
     }

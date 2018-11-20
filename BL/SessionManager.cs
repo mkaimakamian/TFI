@@ -62,23 +62,8 @@ namespace BL
         private bool IsValid(string mail, string password)
         {
             bool isValid = true;
-
-            if (String.IsNullOrEmpty(mail))
-            {
-                string errorDescription = "Nombre de usuario (mail) incompleto";
-                log.AddLogWarn("IsValid", errorDescription, this);
-                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
-                isValid = isValid & false;
-            }
-
-            if (String.IsNullOrEmpty(password))
-            {
-                string errorDescription = "Password incompleto";
-                log.AddLogWarn("IsValid", errorDescription, this);
-                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
-                isValid = isValid & false;
-            }
-
+            isValid &= VLetterNumbers(mail, 1, 50, "Usuario (mail)", "IsValid");
+            isValid &= VLetterNumbers(password, 6, 50, "Password", "IsValid");
             return isValid;
         }
 

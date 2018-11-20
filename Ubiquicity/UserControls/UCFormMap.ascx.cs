@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using BE;
 using System.Configuration;
+using Helper;
 
 namespace Ubiquicity.UserControls
 {
@@ -53,6 +54,7 @@ namespace Ubiquicity.UserControls
             if (resourceInput.HasFile) {
                 string fileName = DateTime.Now.Ticks + resourceInput.FileName;
                 string path = ConfigurationManager.AppSettings["MAP_PATH"];
+                UtilsHelper.CreateDirectory(path);
                 resourceInput.PostedFile.SaveAs(path + "/" + fileName);
                 map.Resource = fileName;
             }

@@ -145,23 +145,7 @@ namespace BL
             }
             return success;
         }
-        //public bool Edit(CreditNote creditNote)
-        //{
-        //    if (!IsValid(creditNote)) return false;
-
-        //    CreditNoteMapper creditNoteMapper = new CreditNoteMapper();
-
-        //    if (!creditNoteMapper.Edit(creditNote))
-        //    {
-        //        string errorDescription = "No se ha podido modificar la nota de crédito.";
-        //        log.AddLogCritical("Edit", errorDescription, this);
-        //        AddError(new ResultBE(ResultBE.Type.FAIL, errorDescription));
-        //        return false;
-        //    }
-
-        //    return true;
-        //}
-
+        
         /// <summary>
         /// Comprueba que la nota de crédito cumpla con los requerimientos mínimos de validez.
         /// </summary>

@@ -16,7 +16,7 @@
     <div class="form-group col">
         <label for="maxInput">Monto máximo</label>
         <input id="maxInput" runat="server" class="form-control form-control-sm"
-            type="number" placeholder="1.0" step="0.01" min="0" max="9999">
+            type="number" placeholder="200.0" step="0.01" min="0" max="9999">
     </div>
 
     <div class="form-group col">

@@ -73,14 +73,14 @@ namespace BL
                 if (news != null) newsList.AddRange(newsMapper.GetByCategory(categoriesId[i]));
             }
 
-
             Dictionary<int, Category> newsCategories = newscategoryManager.GetDictinoray();
 
+            if (newsList != null) { 
             foreach (News news in newsList)
             {
                 news.Category = newsCategories[news.Category.Id];
             }
-
+            }
             return newsList;
         }
 

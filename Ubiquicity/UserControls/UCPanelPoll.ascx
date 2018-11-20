@@ -3,7 +3,7 @@
 <%--<div class="container-fluid">--%>
 
     <div class="row" id="divPoll" runat="server" visible="false">
-        <div runat="server" class="col border rounded mt-1" style="background:#cee1ff">
+        <div runat="server" class="col border rounded mt-1" style="background:#fcfcfc">
             <p id="txtPollTitle" runat="server"></p>
             <asp:Repeater ID="pollRepeater" runat="server" OnItemCreated="PopulateOptions">
                 <ItemTemplate>
