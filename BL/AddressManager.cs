@@ -55,39 +55,12 @@ namespace BL
         public bool IsValid(Address address)
         {
             bool isValid = true;
-
-            if (String.IsNullOrEmpty(address.Street))
-            {
-                string errorDescription = "Debe completarse la calle.";
-                log.AddLogWarn("IsValid", errorDescription, this);
-                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
-                isValid = false;
-            }
-
-            if (String.IsNullOrEmpty(address.Zip))
-            {
-                string errorDescription = "Debe completarse el código postal.";
-                log.AddLogWarn("IsValid", errorDescription, this);
-                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
-                isValid = false;
-            }
-
-            if (String.IsNullOrEmpty(address.City))
-            {
-                string errorDescription = "Debe completarse la ciudad.";
-                log.AddLogWarn("IsValid", errorDescription, this);
-                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
-                isValid = false;
-            }
-
+            isValid &= VLetterNumbers(address.Street, 1, 50, "Dirección", "IsValid");
+            isValid &= VLetterNumbers(address.Zip, 1, 10, "Código postal", "IsValid");
+            isValid &= VOnlyLetter(address.City, 1, 50, "Ciudad", "IsValid");
             //Debería ser id
-            if (String.IsNullOrEmpty(address.Country.Name))
-            {
-                string errorDescription = "Debe completarse el país.";
-                log.AddLogWarn("IsValid", errorDescription, this);
-                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
-                isValid = false;
-            }
+            isValid &= VOnlyLetter(address.Country.Name, 1, 50, "País", "IsValid");
+
             return isValid;
         }
     }

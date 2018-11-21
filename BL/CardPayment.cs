@@ -46,11 +46,11 @@ namespace BL
             creditCard.Field3 = SecurityHelper.RDesencrypt(creditCard.Field3);
             creditCard.Field4 = SecurityHelper.RDesencrypt(creditCard.Field4);
 
-            isValid &= IsValidNumber(SecurityHelper.RDesencrypt(creditCard.Cvv), "CVV", 3);
-            isValid &= IsValidNumber(creditCard.Field1, "CAMPO 1");
-            isValid &= IsValidNumber(creditCard.Field2, "CAMPO 2");
-            isValid &= IsValidNumber(creditCard.Field3, "CAMPO 3");
-            isValid &= IsValidNumber(creditCard.Field4, "CAMPO 4");
+            isValid &= VOnlyNumber(SecurityHelper.RDesencrypt(creditCard.Cvv), 3, 3, "CVV", "IsValidForEdit");
+            isValid &= VOnlyNumber(creditCard.Field1, 4, 4, "Campo #1", "IsValid");
+            isValid &= VOnlyNumber(creditCard.Field2, 4, 4, "Campo #2", "IsValid");
+            isValid &= VOnlyNumber(creditCard.Field3, 4, 4, "Campo #3", "IsValid");
+            isValid &= VOnlyNumber(creditCard.Field4, 4, 4, "Campo #4", "IsValid");
 
             if (creditCard.DueDate < DateTime.Today)
             {
@@ -97,38 +97,6 @@ namespace BL
                 AddError(new ResultBE(ResultBE.Type.FAIL, errorDescription));
                 isValid = false;
             }
-            return isValid;
-        }
-
-        private bool IsValidNumber(string number, string type,  int qty = 4)
-        {
-            bool isValid = true;
-            int converted = 0;
-
-            if (String.IsNullOrEmpty(number))
-            {
-                string errorDescription = "El número del campo "+type +" está incompleto.";
-                log.AddLogCritical("IsValidNumber", errorDescription, this);
-                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
-                isValid = false;
-            }
-
-            if (number.Length != qty)
-            {
-                string errorDescription = "El campo " +type + " debe poseer "+ qty+" dígitos";
-                log.AddLogCritical("IsValidNumber", errorDescription, this);
-                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
-                isValid = false;
-            }
-
-            if (!int.TryParse(number, out converted))
-            {
-                string errorDescription = "No se admiten caracteres en el campo " + type + ".";
-                log.AddLogCritical("IsValidNumber", errorDescription, this);
-                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
-                isValid = false;
-            }
-
             return isValid;
         }
     }

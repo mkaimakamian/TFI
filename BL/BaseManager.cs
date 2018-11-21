@@ -62,6 +62,15 @@ namespace BL
             Errors.AddRange(errors);
         }
 
+        /// <summary>
+        /// Evalúa que sólo se hayan incluido números.
+        /// </summary>
+        /// <param name="toValidate"></param>
+        /// <param name="minLenght"></param>
+        /// <param name="maxLenght"></param>
+        /// <param name="fieldName"></param>
+        /// <param name="actionErr"></param>
+        /// <returns></returns>
         protected bool VOnlyNumber(string toValidate, int minLenght, int maxLenght, string fieldName, string actionErr)
         {
             if (!VLetterNumbers(toValidate, minLenght, maxLenght, fieldName, actionErr)) return false;
@@ -77,6 +86,15 @@ namespace BL
             return true;
         }
 
+        /// <summary>
+        /// Evalúa que únicamente haya caractéres alfabéticos.
+        /// </summary>
+        /// <param name="toValidate"></param>
+        /// <param name="minLenght"></param>
+        /// <param name="maxLenght"></param>
+        /// <param name="fieldName"></param>
+        /// <param name="actionErr"></param>
+        /// <returns></returns>
         protected bool VOnlyLetter(string toValidate, int minLenght, int maxLenght, string fieldName, string actionErr)
         {
             if (!VLetterNumbers(toValidate, minLenght, maxLenght, fieldName, actionErr)) return false;
@@ -92,6 +110,15 @@ namespace BL
             return true;
         }
 
+        /// <summary>
+        /// Valida que no exceda el máximo permitido. Si maxLenght = 0, entonces no contempla máximo.
+        /// </summary>
+        /// <param name="toValidate"></param>
+        /// <param name="minLenght"></param>
+        /// <param name="maxLenght"></param>
+        /// <param name="fieldName"></param>
+        /// <param name="actionErr"></param>
+        /// <returns></returns>
         protected bool VLetterNumbers(string toValidate, int minLenght, int maxLenght, string fieldName, string actionErr)
         {
             if (String.IsNullOrEmpty(toValidate))

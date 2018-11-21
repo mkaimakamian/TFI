@@ -155,13 +155,7 @@ namespace BL
         {
             bool isValid = true;
 
-            if (String.IsNullOrEmpty(creditNote.Observation))
-            {
-                string errorDescription = "Debe ingresarse una observación.";
-                log.AddLogWarn("IsValid", errorDescription, this);
-                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
-                isValid = isValid & false;
-            }
+            isValid &= VOnlyLetter(creditNote.Observation, 1, 250, "Observación", "IsValid");
 
             if (creditNote.Amount <= 0)
             {

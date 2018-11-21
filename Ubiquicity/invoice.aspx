@@ -158,24 +158,24 @@
                                     </div>
                                     <div class="form-group col-3">
                                         <label for="zipInput">C. P.</label>
-                                        <input id="zipInput" runat="server" type="text" class="form-control form-control-sm">
+                                        <input id="zipInput" runat="server" type="text" class="form-control form-control-sm" maxlength="10">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col">
                                         <label for="cityInput">Ciudad</label>
-                                        <input id="cityInput" runat="server" type="text" class="form-control form-control-sm">
+                                        <input id="cityInput" runat="server" type="text" class="form-control form-control-sm" maxlength="50">
                                     </div>
                                     <div class="form-group col">
                                         <label for="countryInput">País</label>
-                                        <input id="countryInput" runat="server" type="text" class="form-control form-control-sm">
+                                        <input id="countryInput" runat="server" type="text" class="form-control form-control-sm" maxlength="50">
                                     </div>
                                 </div>
 
                             </div>
                             <div class="col-4">
                                 <label for="observationInput">Observación</label>
-                                <textarea id="observationInput" runat="server" class="form-control form-control-sm" rows="5"></textarea>
+                                <textarea id="observationInput" runat="server" class="form-control form-control-sm" rows="5" maxlength="250"></textarea>
                             </div>
                         </div>
                     </div>

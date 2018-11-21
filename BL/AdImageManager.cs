@@ -34,23 +34,8 @@ namespace BL
         public bool IsValid(Ad adImage)
         {
             bool isValid = true;
-
-            if (String.IsNullOrEmpty(adImage.Image))
-            {
-                string errorDescription = "Debe escogerse una imagen para la publicidad.";
-                log.AddLogWarn("IsValid", errorDescription, this);
-                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
-                isValid = false;
-            }
-
-            if (String.IsNullOrEmpty(adImage.NavigateUrl))
-            {
-                string errorDescription = "Debe completarse con la url destino.";
-                log.AddLogWarn("IsValid", errorDescription, this);
-                AddError(new ResultBE(ResultBE.Type.INCOMPLETE_FIELDS, errorDescription));
-                isValid = false;
-            }
-
+            isValid &= VLetterNumbers(adImage.Image, 1, 0, "Imagen publicitaria", "IsValid");
+            isValid &= VLetterNumbers(adImage.NavigateUrl, 1, 250, "Url de la publicidad", "IsValid");
             return isValid;
         }
     }
