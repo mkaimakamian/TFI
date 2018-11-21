@@ -179,10 +179,7 @@ namespace BL
             } else
             {
                 //TODO - revisar la performance
-                foreach (Role role in roles)
-                {
-                    role.Permissions = rolePermissionMapper.Get(role);
-                }
+                foreach (Role role in roles) role.Permissions = rolePermissionMapper.Get(role);
             }
 
             return roles;
@@ -229,7 +226,6 @@ namespace BL
             return roles;
         }
 
-        //TODO agregar a ea
         /// <summary>
         /// Recupera los roles que son exclusivamente de usuarios web
         /// </summary>
@@ -247,7 +243,6 @@ namespace BL
             return roles;
         }
 
-        // TODO - Agregar en ea
         /// <summary>
         /// Recupera los permisos que no fueron asociados a un rol.
         /// </summary>
@@ -258,7 +253,6 @@ namespace BL
             return rolePermissionMapper.GetUnassignedPermission(role);
         }
 
-        // TODO - Agregar en ea
         public List<Permission> GetAllPermission()
         {
             RolePermissionMapper rolePermissionMapper = new RolePermissionMapper();
@@ -272,7 +266,6 @@ namespace BL
             return permissions;
         }
 
-        // TODO - agregar a ea
         /// <summary>
         /// Devuelve la lista de roles disponibles para un usuario.
         /// </summary>

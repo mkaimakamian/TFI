@@ -60,21 +60,6 @@ namespace BL
             return languages;
         }
 
-        //public List<Label> GetLabels()
-        //{
-        //    LabelMapper labelMapper = new LabelMapper();
-        //    List<Label> labels = labelMapper.Get();
-
-        //    if (labels == null)
-        //    {
-        //        AddError(new ResultBE(ResultBE.Type.NULL, "No existen etiquetas"));
-        //        return null;
-        //    }
-
-        //    return labels;
-        //}
-
-        //TODO - agregar en ea
         public List<Translation> GetTranslations(int languageId)
         {
             TranslationMapper translationMapper = new TranslationMapper();
@@ -88,12 +73,6 @@ namespace BL
                 AddError(new ResultBE(ResultBE.Type.NULL, "No existen traducciones"));
                 return null;
             }
-
-            ////TODO - reveer si se puede mejorar
-            //foreach (Translation translation in translations)
-            //{
-            //    Get()
-            //}
 
             return translations;
         }

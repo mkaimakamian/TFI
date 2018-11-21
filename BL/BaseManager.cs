@@ -7,7 +7,6 @@ using BE;
 
 namespace BL
 {
-    // TODO - Agregar a EA
     public abstract class BaseManager
     {
         private List<ResultBE> errors;

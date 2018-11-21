@@ -56,29 +56,35 @@ namespace Ubiquicity
         /// <param name="e"></param>
         protected override void ShowEditForm(object sender, UbiquicityEventArg e)
         {
-            int id = Convert.ToInt32(e.TheObject);
-            Session["Ubiquicity_itemId"] = id;
+            try {
+                int id = Convert.ToInt32(e.TheObject);
+                Session["Ubiquicity_itemId"] = id;
 
-            PollManager pollManager = new PollManager();
-            Poll poll = pollManager.Get(id);
+                PollManager pollManager = new PollManager();
+                Poll poll = pollManager.Get(id);
 
-            if (poll == null && pollManager.HasErrors)
-            {
-                Alert.ShowUP("Error", pollManager.ErrorDescription);
+                if (poll == null && pollManager.HasErrors)
+                {
+                    Alert.ShowUP("Error", pollManager.ErrorDescription);
+                }
+                else
+                {
+                    //TODO - agregar controles de error
+                    PollOptionManager pollOptionManager = new PollOptionManager();
+                    List<PollOption> pollOptions = pollOptionManager.Get();
+
+                    UCFormPoll.CleanForm(pollOptions);
+                    UCFormPoll.FillForm(poll);
+                    Session["Ubiquicity_action"] = EDIT;
+                    //Page.ClientScript.RegisterStartupScript(this.GetType(), "openModalEdit", "window.onload = function() { $('#modalMap').modal('show'); }", true);
+                    ScriptManager.RegisterStartupScript(upUCModalForm, upUCModalForm.GetType(), "openModalEdit", "$('#modalPol').modal('show');", true);
+                    upUCModalForm.Update();
+                }
             }
-            else
-            {
-                //TODO - agregar controles de error
-                PollOptionManager pollOptionManager = new PollOptionManager();
-                List<PollOption> pollOptions = pollOptionManager.Get();
-
-                UCFormPoll.CleanForm(pollOptions);
-                UCFormPoll.FillForm(poll);
-                Session["Ubiquicity_action"] = EDIT;
-                //Page.ClientScript.RegisterStartupScript(this.GetType(), "openModalEdit", "window.onload = function() { $('#modalMap').modal('show'); }", true);
-                ScriptManager.RegisterStartupScript(upUCModalForm, upUCModalForm.GetType(), "openModalEdit", "$('#modalPol').modal('show');", true);
-                upUCModalForm.Update();
+            catch (Exception exception){
+                Alert.ShowUP("Exception", exception.Message);
             }
+
         }
 
         protected override bool AcceptCreate(BL.BaseManager manager)

@@ -12,7 +12,6 @@ namespace BL
     public class UserManager:BaseManager
     {
 
-        //TODO - Actualizar en ea
         public bool ActivateAccount(string hash)
         {
             if (!IsValidHash(hash)) return false;
@@ -356,7 +355,6 @@ namespace BL
             return true;
         }
 
-        //TODO - Actualizar ea
         public bool SendRecovery(string userName)
         {
             UserMapper userMapper = new UserMapper();
@@ -383,7 +381,6 @@ namespace BL
             }
         }
 
-        //TODO - agregar en ea
         private bool IsValidForEdit(User user)
         {
             bool isValid = true;
@@ -393,7 +390,6 @@ namespace BL
             return isValid;
         }
 
-        //TODO - agregar en ea
         private bool IsValidForSave(User user)
         {
             bool isValid = IsValidForEdit(user);

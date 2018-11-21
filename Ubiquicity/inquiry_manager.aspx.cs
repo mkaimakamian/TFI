@@ -36,8 +36,7 @@ namespace Ubiquicity
 
             if (itemComment == null && itemCommentManager.HasErrors)
             {
-                //mostrar error
-
+                Alert.ShowUP("Error", itemCommentManager.ErrorDescription);
             }
             else
             {
@@ -101,7 +100,7 @@ namespace Ubiquicity
             columns.Add("Sentence", "Comentario");
             columns.Add("Date", "Fecha");
             columns.Add("Answer", "Respuesta");
-            columns.Add("AnswerDate", "Fecha");
+            columns.Add("AnswerDate", "Respondido");
 
             //columns.Add("Username", "Usuario");
 

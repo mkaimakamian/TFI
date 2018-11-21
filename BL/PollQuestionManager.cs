@@ -50,13 +50,20 @@ namespace BL
         {
             PollQuestionOptionMapper pollQuestionOptionMapper = new PollQuestionOptionMapper();
             PollQuestionMapper pollQuestionMapper = new PollQuestionMapper();
-            //TODO - controlar errores
             List<PollQuestion> pollQuestions = pollQuestionMapper.GetByPoll(pollId);
             
-            foreach (PollQuestion pollQuestion in pollQuestions)
+            if (pollQuestions != null)
             {
-                //TODO - controlar errores
-                pollQuestion.Options = pollQuestionOptionMapper.Get(pollQuestion.Id);
+                foreach (PollQuestion pollQuestion in pollQuestions)
+                {
+                    //TODO - controlar errores
+                    pollQuestion.Options = pollQuestionOptionMapper.Get(pollQuestion.Id);
+                }
+            } else
+            {
+                string errorDescription = "No se han podido encontrar las preguntas para la encuesta con Id "+ pollId + ".";
+                log.AddLogCritical("Get", errorDescription, this);
+                AddError(new ResultBE(ResultBE.Type.FAIL, errorDescription));
             }
 
             return pollQuestions;
@@ -72,7 +79,6 @@ namespace BL
         {
             if (!IsValid(poll)) return false;
             if (!Delete(poll)) return false;
-            //TODO - Regenerar la tabla de relaciones
             if (!Save(poll)) return false;
 
             return true;

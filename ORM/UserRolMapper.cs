@@ -10,7 +10,6 @@ using BE;
 
 namespace ORM
 {
-    // TODO - agregar en ea
     public class UserRoleMapper
     {
         public bool InUse(int roleId)

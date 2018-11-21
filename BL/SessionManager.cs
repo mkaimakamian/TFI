@@ -9,7 +9,6 @@ using Helper;
 
 namespace BL
 {
-    //TODO - Agregar A EA
     public class SessionManager:BaseManager
     {
      
@@ -32,16 +31,7 @@ namespace BL
 
             if (!IsValidAfterRetrieve(user)) return null;
             
-          /*  
-             user.Language = languageManager.Get(user.Language.Id);
-
-            if (languageManager.HasErrors)
-            {
-                Errors.AddRange(languageManager.Errors);
-                return null;
-            }
-            */
-
+            //Se debería recuperar el idioma en caso de utilizar managr de idioma
             List<Role> roles = roleManager.Get(user);
             
             // Si no posee permisos asociados, debería poder navegar igual aunque a los efectos prácticos
@@ -58,7 +48,6 @@ namespace BL
             return user; 
         }
 
-        //TODO - Agregar en EA
         private bool IsValid(string mail, string password)
         {
             bool isValid = true;
@@ -67,7 +56,6 @@ namespace BL
             return isValid;
         }
 
-        //TODO - Agregar en EA
         private bool IsValidAfterRetrieve(User user)
         {
             if (user == null)

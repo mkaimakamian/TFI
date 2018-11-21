@@ -189,8 +189,6 @@ namespace BE
             }
         }
 
-        //TODO - agregar en ea
-
         /// <summary>
         /// Devuelve una cadena con todos los permisos, separados por coma.
         /// </summary>

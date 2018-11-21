@@ -114,7 +114,6 @@ namespace DA
             return ExecuteQuery(sql);
         }
 
-        //TODO - Actualizar ea
         private bool ExecuteQuery(string sql)
         {
             SqlConnection connection = new SqlConnection(connStr);

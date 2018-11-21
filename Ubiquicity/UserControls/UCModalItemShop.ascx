@@ -61,7 +61,7 @@
                                     <div class="form-group col-12">
                                         <label for="commentInput">Comentario</label>
                                         <textarea id="commentInput" runat="server" class="form-control form-control-sm" rows="3" maxlength="250"></textarea>
-                                        <asp:Button ID="btnComentar" runat="server" CssClass="btn btn-primary btn-sm" Text="Comentar" OnClick="btnComentar_Click" />
+                                        <asp:Button ID="btnComentar" runat="server" CssClass="btn btn-primary btn-sm mt-2" Text="Comentar" OnClick="btnComentar_Click" />
                                     </div>
                                 </div>
                             </div>

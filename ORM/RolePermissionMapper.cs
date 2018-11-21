@@ -10,7 +10,6 @@ using DA;
 
 namespace ORM
 {
-    //TODO - agregar en ea
     public class RolePermissionMapper
     {
         /// <summary>

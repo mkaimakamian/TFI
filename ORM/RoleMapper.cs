@@ -51,7 +51,6 @@ namespace ORM
             return dal.Write(table, "spModifyRole") > 0;
         }
 
-        //TODO - Cambiar el tipo de parámetro en ea
         /// <summary>
         /// Chequea si existe un rol con el mismo nombre.
         /// </summary>

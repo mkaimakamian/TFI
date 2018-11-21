@@ -39,13 +39,6 @@ namespace Ubiquicity
         {
             try
             {
-                //Todo - debería evaluar de algún modo si me están solicitando el reenvío
-                //if (String.IsNullOrEmpty(txtPassword.Value))
-                //{
-                //    UserManager userManager = new UserManager();
-                //    userManager.SendRecovery(txtUser.Value);
-                //}
-
                 if (IsValid(txtUserMail.Value, txtPassword.Value))
                 {
                     // El password se encrypta antes de enviarse al back
@@ -170,10 +163,7 @@ namespace Ubiquicity
                     }
                 }
 
-                foreach (int key in access.Keys)
-                {
-                    mnuSection.Items.Add(access[key]);
-                }
+                foreach (int key in access.Keys) mnuSection.Items.Add(access[key]);
             }
         }
 

@@ -8,7 +8,6 @@ using ORM;
 
 namespace BL
 {
-    // TODO - Actualizar en ea
     public class LogManager
     {
         public void AddLogInfo(String action, string description, Object entity, string user = null)

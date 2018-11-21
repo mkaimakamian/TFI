@@ -9,8 +9,6 @@ namespace ORM
 {
     public class UserMapper
     {
-        
-        //TODO - Agregar en EA
         public User Get(string username, string password)
         {
             Dal dal = new Dal();
@@ -153,7 +151,6 @@ namespace ORM
             return user.Id > 0;
         }
 
-        // TODO - Agregar en EA
         /// <summary>
         /// Convierte el dataset al modelo de datos correspondiente.
         /// </summary>

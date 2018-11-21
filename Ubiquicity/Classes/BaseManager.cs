@@ -123,7 +123,7 @@ namespace Ubiquicity
             try
             {
                 int action = Convert.ToInt32(Session["Ubiquicity_action"]);
-                //TODO - Validar los campos
+
                 bool success = false;
 
                 switch (action)

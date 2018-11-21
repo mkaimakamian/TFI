@@ -74,7 +74,6 @@ namespace ORM
             return dal.Write(table, "spWriteLanguage") > 0;
         }
 
-        // TODO - Agregar en EA
         /// <summary>
         /// Convierte el dataset al modelo de datos correspondiente.
         /// </summary>

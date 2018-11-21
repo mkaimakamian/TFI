@@ -220,14 +220,14 @@ namespace BL
 
             PollQuestionManager pollQuestionManager = new PollQuestionManager();
             List<PollQuestion> pollQuestions = pollQuestionManager.Get(poll.Id);
+            
 
             if (pollQuestions == null || pollQuestions.Count == 0)
             {
-                string errorDescription = "No se han encontrado preguntas para la encuesta " + poll.Id + ".";
-                log.AddLogCritical("Get", errorDescription, this);
-                AddError(new ResultBE(ResultBE.Type.NULL, errorDescription));
+                AddError(pollQuestionManager.Errors);
                 return;
             }
+
             poll.Questions = pollQuestions;
         }
     }
