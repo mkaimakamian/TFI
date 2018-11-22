@@ -105,5 +105,35 @@ namespace Ubiquicity
                 ((front)Master).Alert.Show("Excepción", exception.Message);
             }
         }
+
+        protected void PerformDownload(object sender, EventArgs e)
+        {
+            try
+            {
+                int id = Convert.ToInt32(SessionUtilHelper.GetIdFromSession(Session));
+                 
+                InvoiceManager invoiceManager = new InvoiceManager();
+                string url = invoiceManager.DownloadInvoice(id);
+
+                if (invoiceManager.HasErrors)
+                {
+                    ((front)Master).Alert.Show("Error", invoiceManager.ErrorDescription);
+                }
+                else
+                {
+                    HttpResponse res = HttpContext.Current.Response;
+                    res.Clear();
+                    res.AppendHeader("content-disposition", "attachment; filename=PaymentReceipt.pdf");
+                    res.ContentType = "application/octet-stream";
+                    res.WriteFile(url);
+                    res.Flush();
+                    res.End();
+                }
+            }
+            catch (Exception exception)
+            {
+                ((front)Master).Alert.Show("Exception", exception.Message);
+            }
+        }
     }
 }

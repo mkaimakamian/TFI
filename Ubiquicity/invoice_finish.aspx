@@ -43,6 +43,8 @@
                 <div id="divSuccessMessage" runat="server" class="row justify-content-center text-center" visible="false">
                     <div class="col">
                         <h3 class="text-success">¡Gracias por participar!</h3>
+                            <asp:Button runat="server" CssClass="btn btn-secondary btn-sm mr-4" Text="Descargar factura" OnClick="PerformDownload" />
+
                     </div>
                 </div>
             </div>

@@ -128,6 +128,7 @@ namespace Ubiquicity
                     ((front)Master).Alert.Show("Error", invoiceManager.ErrorDescription);
                 } else
                 {
+                    SessionUtilHelper.KeepInSession(invoice.Id.ToString(), Session);
                     Response.Redirect("/invoice_finish.aspx");
                 }
 

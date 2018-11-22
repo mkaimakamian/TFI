@@ -50,10 +50,10 @@
                                     <p><%#Eval("Date") %></p>
                                 </div>
                                 <div class="col-1">
-                                    <p><%#Eval("Debe") %></p>
+                                    <p><%# Eval("Debe", "{0:c}") %></p>
                                 </div>
                                 <div class="col-1">
-                                    <p><%#Eval("Haber") %></p>
+                                    <p><%#Eval("Haber", "{0:c}") %></p>
                                 </div>
                             </div>
                         </div>
