@@ -131,11 +131,17 @@ namespace BL
             addressManager.Save(invoice.BillingAddress);
             invoiceMapper.Save(invoice);
             invoiceItemMapper.Save(invoice);
+
             if (invoice.CreditCard != null)
             {
                 creditCardMapper.Save(invoice.CreditCard);
                 invoiceCCMapper.Save(invoice);
             }
+
+            /*if (invoice.CreditNotes != null)
+            {
+                creditno
+            }*/
         }
 
         /// <summary>
