@@ -20,6 +20,12 @@ namespace BL
             return creditCardMapper.Get();
         }
 
+        public CreditCard Get(Invoice incoice)
+        {
+            CreditCardMapper creditCardMapper = new CreditCardMapper();
+            return creditCardMapper.Get(incoice);
+        }
+
         public override string ToString() { return "CreditCard"; }
     }
 }

@@ -97,7 +97,10 @@ namespace BL
             }
 
             invoice.CreditNotes = creditNoteManager.GetByInvoice(invoice);
-            //creditCardmanager.Get()
+            invoice.CreditCard = creditCardmanager.Get(invoice);
+
+            invoice.CreditCard.Field1 = SecurityHelper.RDesencrypt(invoice.CreditCard.Field1);
+            invoice.CreditCard.Field4 = SecurityHelper.RDesencrypt(invoice.CreditCard.Field4);
 
             string fullPath = PDFHelper.CreateInvoice(invoice);
 

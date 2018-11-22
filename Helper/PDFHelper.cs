@@ -64,13 +64,15 @@ namespace Helper
             ).Replace(
                 "@mail", invoice.User.Mail
             ).Replace(
-                "@address", invoice.BillingAddress.Street + " " + invoice.BillingAddress.Number + " ("+ invoice.BillingAddress.Zip + "), " + invoice.BillingAddress.City
+                "@address", invoice.BillingAddress.Street + " " + invoice.BillingAddress.Number + " (" + invoice.BillingAddress.Zip + "), " + invoice.BillingAddress.City
             ).Replace(
                 "@itemDetail", finalBlock
             ).Replace(
                 "@total", invoice.InvoiceItems.Sum(resource => resource.Price).ToString()
             ).Replace(
             "@notasCredito", crediNotes
+            ).Replace(
+                "@creditCard", "Tarjeta: " + invoice.CreditCard.Field1 + "-xxxx-xxxx-" + invoice.CreditCard.Field4
             );
 
             return replaced;

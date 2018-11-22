@@ -60,6 +60,24 @@ namespace ORM
             return cardTypes;
         }
 
+        public CreditCard Get(Invoice invoice)
+        {
+            Dal dal = new Dal();
+            Hashtable table = new Hashtable();
+            CreditCard creditCard = null;
+
+            table.Add("@invoiceId", invoice.Id);
+
+            DataSet result = dal.Read(table, "spReadInvoiceCreditCard");
+
+            if (result != null && result.Tables[0].Rows.Count > 0)
+            {
+                creditCard = ConvertToCCModel2(result.Tables[0].Rows[0]);
+            }
+
+            return creditCard;
+        }
+
         /// <summary>
         /// Controla que el tipo de tarjeta declarada y le prefijo se correspondan
         /// </summary>
@@ -129,5 +147,16 @@ namespace ORM
             creditCard.Allowed = Convert.ToBoolean(data["allowed"]);
             return creditCard;
         }
+
+        private CreditCard ConvertToCCModel2(DataRow data)
+        {
+            CreditCard creditCard = new CreditCard();
+            creditCard.Field1 = data["prefix"].ToString();
+            creditCard.Field2 = data["field2"].ToString();
+            creditCard.Field3 = data["field3"].ToString();
+            creditCard.Field4 = data["field4"].ToString();
+            return creditCard;
+        }
+
     }
 }

@@ -51,7 +51,7 @@ namespace BL
             isValid &= VOnlyNumber(creditCard.Field2, 4, 4, "Campo #2", "IsValid");
             isValid &= VOnlyNumber(creditCard.Field3, 4, 4, "Campo #3", "IsValid");
             isValid &= VOnlyNumber(creditCard.Field4, 4, 4, "Campo #4", "IsValid");
-
+            
             if (creditCard.DueDate < DateTime.Today)
             {
                 string errorDescription = "La tarjeta no puede presentar fecha de expiración anterior al día actual.";
