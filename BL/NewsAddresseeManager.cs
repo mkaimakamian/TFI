@@ -105,5 +105,8 @@ namespace BL
             isValid &= VLetterNumbers(newsAddressee.Categories, 1, 250, "Categorías", "IsValid");
             return isValid;
         }
+
+        public override string ToString() { return "NewsAddressee"; }
+
     }
 }

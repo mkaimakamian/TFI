@@ -186,5 +186,7 @@ namespace BL
             return isValid;
         }
 
+        public override string ToString() { return "Invoice"; }
+
     }
 }

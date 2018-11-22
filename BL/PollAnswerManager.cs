@@ -76,5 +76,8 @@ namespace BL
 
             return chartSeries;
         }
+
+        public override string ToString() { return "PollAnswer"; }
+
     }
 }

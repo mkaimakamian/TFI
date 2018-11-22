@@ -230,5 +230,7 @@ namespace BL
 
             poll.Questions = pollQuestions;
         }
+
+        public override string ToString() { return "Poll"; }
     }
 }

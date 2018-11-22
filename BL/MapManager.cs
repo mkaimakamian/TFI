@@ -140,5 +140,8 @@ namespace BL
             //isValid &= VOnlyNumber(map.Price.ToString(), 1, 0, "Price", "IsValidForEdit");
             return isValid;
         }
+
+        public override string ToString() { return "Map"; }
+
     }
 }

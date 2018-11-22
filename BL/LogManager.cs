@@ -12,22 +12,22 @@ namespace BL
     {
         public void AddLogInfo(String action, string description, Object entity, string user = null)
         {
-            CreateLog(LogEntry.Level.INFO, action, description, entity.GetType().ToString(), user);
+            CreateLog(LogEntry.Level.INFO, action, description, entity.ToString(), user);
         }
 
         public void AddLogWarn(String action, string description, Object entity, string user = null)
         {
-            CreateLog(LogEntry.Level.WARNING, action, description, entity.GetType().ToString(), user);
+            CreateLog(LogEntry.Level.WARNING, action, description, entity.ToString(), user);
         }
 
         public void AddLogCritical(String action, string description, Object entity, string user = null)
         {
-            CreateLog(LogEntry.Level.CRITICAL, action, description, entity.GetType().ToString(), user);
+            CreateLog(LogEntry.Level.CRITICAL, action, description, entity.ToString(), user);
         }
 
         public void AddLogDebug(String action, string description, Object entity, string user = null)
         {
-            CreateLog(LogEntry.Level.DEBUG, action, description, entity.GetType().ToString(), user);
+            CreateLog(LogEntry.Level.DEBUG, action, description, entity.ToString(), user);
         }
 
         private void CreateLog(LogEntry.Level loglevel, string action, string description, string entity, string user)

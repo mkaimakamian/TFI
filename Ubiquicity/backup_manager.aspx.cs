@@ -18,6 +18,7 @@ namespace Ubiquicity
             GridView.HideDeleteButton();
             GridView.HideEditButton();
             GridView.ShowGenericActionButton("Restaurar");
+            Alert.PerformMainAction -= PerformDeleteItem;
             Alert.PerformMainAction += PerformBackup;
             Alert.PerformSecondAction += PerformRestore;
             Manager = new BackupManager();

@@ -65,10 +65,13 @@ namespace Ubiquicity.UserControls
             string since = dateSince.Date;
             string until = dateUntil.Date;
 
-            if (Convert.ToDateTime(since) > Convert.ToDateTime(until))
+            if (!String.IsNullOrEmpty(since) && !String.IsNullOrEmpty(until))
             {
-                dateUntil.Date = since;
-                dateSince.Date = until;
+                if (Convert.ToDateTime(since) > Convert.ToDateTime(until))
+                {
+                    dateUntil.Date = since;
+                    dateSince.Date = until;
+                }
             }
 
             if (!String.IsNullOrEmpty(dateSince.Date))

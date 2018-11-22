@@ -30,9 +30,9 @@ namespace Ubiquicity.UserControls
 
             nameInput.Value = "";
             descriptionInput.Value = "";
-            dueDateInput.Date = DateTime.Now.ToString();
+            dueDateInput.Date = "";
             dueDateInput.DefaultView = AjaxControlToolkit.CalendarDefaultView.Days;
-            pollRadioList.SelectedIndex = 0;
+            pollRadioList.SelectedIndex = 1;
             activeCheck.Checked = false;
         }
 

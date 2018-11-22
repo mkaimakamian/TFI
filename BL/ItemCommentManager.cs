@@ -124,5 +124,8 @@ namespace BL
         {
             return VLetterNumbers(itemComment.Sentence, 1, 250, "Comentario", "IsValid");
         }
+
+        public override string ToString() { return "ItemComment"; }
+
     }
 }

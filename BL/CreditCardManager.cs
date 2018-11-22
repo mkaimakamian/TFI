@@ -19,5 +19,7 @@ namespace BL
             CreditCardMapper creditCardMapper = new CreditCardMapper();
             return creditCardMapper.Get();
         }
+
+        public override string ToString() { return "CreditCard"; }
     }
 }

@@ -127,5 +127,7 @@ namespace BL
             bool isValid = true;
             return isValid &= VLetterNumbers(category.Name, 1, 50, "Categoría", "IsValid");
            }
+
+        public override string ToString() { return "Category"; }
     }
 }

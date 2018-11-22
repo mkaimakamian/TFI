@@ -50,5 +50,7 @@ namespace BL
 
             return pollOptions;
         }
+
+        public override string ToString() { return "PollOption"; }
     }
 }

@@ -34,8 +34,9 @@ namespace Ubiquicity
             if (IsValidForSave())
             {
                 user.Password = SecurityHelper.Encrypt(user.Password);
-                success = ((UserManager) manager).Save(user);
-            } else
+                success = ((UserManager)manager).Save(user);
+            }
+            else
             {
                 success = false;
                 Alert.Show("Error", "El password y su verificación, deben coincidir.");
@@ -46,9 +47,9 @@ namespace Ubiquicity
 
         protected override bool AcceptModify(BL.BaseManager manager, int id)
         {
-            User user = ((UserManager) manager).Get(id);
+            User user = ((UserManager)manager).Get(id);
             UCFormNewMember.PopulateModel(user);
-            return ((UserManager) manager).Edit(user);
+            return ((UserManager)manager).Edit(user);
         }
 
         /// <summary>
@@ -58,13 +59,20 @@ namespace Ubiquicity
         /// <param name="e"></param>
         protected override void ShowNewForm(object sender, UbiquicityEventArg e)
         {
-            UCFormNewMember.ShowPasswordFields();
-            UCFormNewMember.EnableUserField();
-            UCFormNewMember.CleanForm();
-            Session["Ubiquicity_action"] = CREATE;
-            //Page.ClientScript.RegisterStartupScript(this.GetType(), "openModalCreate", "window.onload = function() { $('#ucModalNewMember').modal('show'); }", true);
-            ScriptManager.RegisterStartupScript(upUCModalForm, upUCModalForm.GetType(), "openModalCreate", "$('#ucModalNewMember').modal('show');", true);
-            upUCModalForm.Update();
+            try
+            {
+                UCFormNewMember.ShowPasswordFields();
+                UCFormNewMember.EnableUserField();
+                UCFormNewMember.CleanForm();
+                Session["Ubiquicity_action"] = CREATE;
+                ScriptManager.RegisterStartupScript(upUCModalForm, upUCModalForm.GetType(), "openModalCreate", "$('#ucModalNewMember').modal('show');", true);
+                upUCModalForm.Update();
+            }
+            catch (Exception exception)
+            {
+                Alert.ShowUP("Excepción", exception.Message);
+            }
+
         }
 
         /// <summary>
@@ -74,26 +82,33 @@ namespace Ubiquicity
         /// <param name="e"></param>
         protected override void ShowEditForm(object sender, UbiquicityEventArg e)
         {
-            int id = Convert.ToInt32(e.TheObject);
-            Session["Ubiquicity_itemId"] = id;
-
-            UserManager userManager = new UserManager();
-            User user = userManager.Get(id);
-
-            if (userManager.HasErrors)
+            try
             {
-                Alert.Show("Error", userManager.ErrorDescription);
+                int id = Convert.ToInt32(e.TheObject);
+                Session["Ubiquicity_itemId"] = id;
+
+                UserManager userManager = new UserManager();
+                User user = userManager.Get(id);
+
+                if (userManager.HasErrors)
+                {
+                    Alert.ShowUP("Error", userManager.ErrorDescription);
+                }
+                else
+                {
+                    UCFormNewMember.HidePasswordFields();
+                    UCFormNewMember.DisableUserField();
+                    UCFormNewMember.FillForm(user);
+                    Session["Ubiquicity_action"] = EDIT;
+                    ScriptManager.RegisterStartupScript(upUCModalForm, upUCModalForm.GetType(), "openModalEdit", "$('#ucModalNewMember').modal('show');", true);
+                    upUCModalForm.Update();
+                }
             }
-            else
+            catch (Exception exception)
             {
-                UCFormNewMember.HidePasswordFields();
-                UCFormNewMember.DisableUserField();
-                UCFormNewMember.FillForm(user);
-                Session["Ubiquicity_action"] = EDIT;
-                //Page.ClientScript.RegisterStartupScript(this.GetType(), "openModalEdit", "window.onload = function() { $('#ucModalNewMember').modal('show'); }", true);
-                ScriptManager.RegisterStartupScript(upUCModalForm, upUCModalForm.GetType(), "openModalEdit", "$('#ucModalNewMember').modal('show');", true);
-                upUCModalForm.Update();
+                Alert.ShowUP("Excepción", exception.Message);
             }
+
         }
 
         /// <summary>
@@ -102,22 +117,32 @@ namespace Ubiquicity
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        protected override void PerformGenericAction(object sender, UbiquicityEventArg e) {
+        protected override void PerformGenericAction(object sender, UbiquicityEventArg e)
+        {
             Session["Ubiquicity_itemId"] = e.TheObject.ToString();
-            Alert.Show("resetear password", "Estás a punto de iniciar el proceso de reseteo de password. Estás seguro?", null, "Si, resetear");
+            Alert.ShowUP("Resetear password", "Estás a punto de iniciar el proceso de reseteo de password. Estás seguro?", null, "Si, resetear");
         }
 
         protected void SendPasswordReset(object sender, UbiquicityEventArg e)
         {
-            if (Session["Ubiquicity_itemId"] != null)
+            try
             {
-                int id = Convert.ToInt32(Session["Ubiquicity_itemId"]);
+                if (Session["Ubiquicity_itemId"] != null)
+                {
+                    int id = Convert.ToInt32(Session["Ubiquicity_itemId"]);
 
-                UserManager userManager = new UserManager();
-                userManager.ResetPasswordRequest(id);
-                Session.Remove("Ubiquicity_itemId");
+                    UserManager userManager = new UserManager();
+                    userManager.ResetPasswordRequest(id);
+                    Session.Remove("Ubiquicity_itemId");
 
-                //TODO - debería mostrar un mensaje de "trabajo hecho"
+                    //TODO - No se muestra la alerta :|
+                    Alert.ShowUP("Solicitud enviada", "Se ha enviado la solicitud de reseteo de password.");
+
+                }
+            }
+            catch (Exception exception)
+            {
+                Alert.ShowUP("Excepción", exception.Message);
             }
         }
 

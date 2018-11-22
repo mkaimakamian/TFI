@@ -115,5 +115,8 @@ namespace BL
             creditNote.InvoiceId = creditNoteTS.InvoiceId;
             return creditNoteManager.Save(creditNote);
         }
+
+        public override string ToString() { return "CreditNote"; }
+
     }
 }

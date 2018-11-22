@@ -306,5 +306,6 @@ namespace BL
             return true;
         }
 
+        public override string ToString() { return "Role"; }
     }
 }

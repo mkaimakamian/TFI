@@ -411,5 +411,8 @@ namespace BL
         {
             return VLetterNumbers(mail, 7, 50, "Mail", "IsValidForRecover"); ;
         }
+
+        public override string ToString() { return "User"; }
+
     }
 }

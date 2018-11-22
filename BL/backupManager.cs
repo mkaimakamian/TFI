@@ -97,5 +97,8 @@ namespace BL
 
             return backups;
         }
+
+        public override string ToString() { return "Backup Manager"; }
+
     }
 }
