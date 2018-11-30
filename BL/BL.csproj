@@ -55,6 +55,7 @@
     <Compile Include="CreditNotePayment.cs" />
     <Compile Include="InvoiceManager.cs" />
     <Compile Include="ItemCommentManager.cs" />
+    <Compile Include="ItemCommentSupportManager.cs" />
     <Compile Include="MapManager.cs" />
     <Compile Include="LanguageManager.cs" />
     <Compile Include="LogManager.cs" />

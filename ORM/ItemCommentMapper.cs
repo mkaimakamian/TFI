@@ -56,7 +56,6 @@ namespace ORM
             return comments;
         }
 
-
         public List<ItemComment> Get()
         {
             //Como se está consultando una lista, es preferible que sp devuelva todos los

@@ -15,6 +15,7 @@ namespace Ubiquicity
     {
         private const string PERFORM_CLAIM = "PerformClaim";
         private const string PERFORM_RANKING = "PerformRanking";
+        private const string PERFORM_SUPPORT = "PerformSupport";
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -189,9 +190,14 @@ namespace Ubiquicity
                 else if (e.CommandName == PERFORM_RANKING)
                 {
                     SessionUtilHelper.KeepInSession(e.CommandArgument.ToString(), Session);
-                    Page.ClientScript.RegisterStartupScript(this.GetType(), "openModal", "window.onload = function() { $('#modalCategory').modal('show'); }", true);
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "openModal", "window.onload = function() { $('#modalRanking').modal('show'); }", true);
                 }
-
+                 else if (e.CommandName == PERFORM_SUPPORT)
+                {
+                    SessionUtilHelper.KeepInSession(e.CommandArgument.ToString(), Session);
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "openModal", "window.onload = function() { $('#modalInvoiceItemSupport').modal('show'); }", true);
+                    UCModalInvoiceItemSupport.LoadCommentsSupport(Convert.ToInt32(e.CommandArgument.ToString()));
+                }
             }
             catch (Exception exception)
             {

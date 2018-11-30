@@ -51,7 +51,9 @@
     <Compile Include="CreditNote.cs" />
     <Compile Include="Invoice.cs" />
     <Compile Include="InvoiceItem.cs" />
+    <Compile Include="InvoiceItemSupport.cs" />
     <Compile Include="ItemComment.cs" />
+    <Compile Include="ItemCommentSupport.cs" />
     <Compile Include="Language.cs" />
     <Compile Include="LogEntry.cs" />
     <Compile Include="Map.cs" />

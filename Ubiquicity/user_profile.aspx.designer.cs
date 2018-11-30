@@ -47,5 +47,14 @@ namespace Ubiquicity {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Ubiquicity.UserControls.UCFormRanking UCFormRanking;
+        
+        /// <summary>
+        /// UCModalInvoiceItemSupport control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ubiquicity.UserControls.UCModalInvoiceItemSupport UCModalInvoiceItemSupport;
     }
 }

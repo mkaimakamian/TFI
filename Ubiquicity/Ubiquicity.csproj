@@ -222,6 +222,7 @@
     <Content Include="UserControls\UCLogFilter.ascx" />
     <Content Include="UserControls\UCModalChart.ascx" />
     <Content Include="UserControls\UCModalCompare.ascx" />
+    <Content Include="UserControls\UCModalInvoiceItemSupport.ascx" />
     <Content Include="UserControls\UCModalItemShop.ascx" />
     <Content Include="UserControls\UCModalNews.ascx" />
     <Content Include="UserControls\UCModalSearch.ascx" />
@@ -622,6 +623,13 @@
     </Compile>
     <Compile Include="UserControls\UCModalCompare.ascx.designer.cs">
       <DependentUpon>UCModalCompare.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCModalInvoiceItemSupport.ascx.cs">
+      <DependentUpon>UCModalInvoiceItemSupport.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCModalInvoiceItemSupport.ascx.designer.cs">
+      <DependentUpon>UCModalInvoiceItemSupport.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\UCModalItemShop.ascx.cs">
       <DependentUpon>UCModalItemShop.ascx</DependentUpon>

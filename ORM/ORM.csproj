@@ -53,6 +53,7 @@
     <Compile Include="InvoiceItemMapper.cs" />
     <Compile Include="InvoiceMapper.cs" />
     <Compile Include="ItemCommentMapper.cs" />
+    <Compile Include="ItemCommentSupportMapper.cs" />
     <Compile Include="LabelMapper.cs" />
     <Compile Include="LanguageMapper.cs" />
     <Compile Include="LogMapper.cs" />

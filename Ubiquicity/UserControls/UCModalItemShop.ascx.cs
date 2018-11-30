@@ -15,7 +15,7 @@ namespace Ubiquicity.UserControls
         protected void Page_Load(object sender, EventArgs e)
         {
             //commentInputDiv
-            User user = (User)Session["SessionCreated"];
+            User user = SessionHelper.GetUser();
             if (user != null)
             {
                 commentInputDiv.Style.Remove("display");

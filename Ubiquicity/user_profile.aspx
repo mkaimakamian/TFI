@@ -86,6 +86,9 @@
                 <div class="col">
                     <p>Acciones / Observaciones</p>
                 </div>
+                                <div class="col">
+                    <p>Soporte</p>
+                </div>
             </div>
             <div class="row">
                 <asp:Repeater ID="productRepeater" runat="server" OnItemDataBound="ResolveActionLink" OnItemCommand="PerformTrackingAction">
@@ -107,10 +110,12 @@
                                 <div class="col-2">
                                     <p><%#Eval("Date") %></p>
                                 </div>
-
                                 <div class="col">
                                     <asp:LinkButton ID="claimCNLink" runat="server" CommandArgument='<%#Eval("InvoiceItem.Id") %>'>Reclamar</asp:LinkButton>
-
+                                </div>
+                                
+                                <div class="col">
+                                    <asp:LinkButton ID="supportLink" runat="server" CommandName="PerformSupport" CommandArgument='<%#Eval("InvoiceItem.Id") %>'>Soporte</asp:LinkButton>
                                 </div>
                             </div>
                         </div>
@@ -122,7 +127,7 @@
     </div>
 
  <!-- Ranking form -->
-    <div id="modalCategory" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div id="modalRanking" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
               <%--  <asp:UpdatePanel ID="upUCModalForm" runat="server" UpdateMode="Conditional">--%>
@@ -138,4 +143,22 @@
         </div>
     </div>
 
+
+        <div id="modalInvoiceItemSupport" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <%--  <asp:UpdatePanel ID="upUCModalForm" runat="server" UpdateMode="Conditional">--%>
+                    <%--<ContentTemplate>--%>
+
+                <UCmkc:UCModalInvoiceItemSupport runat="server" ID="UCModalInvoiceItemSupport" />
+
+<%--                    </ContentTemplate>
+                </asp:UpdatePanel>--%>
+                <div class="modal-footer">
+                    <asp:Button runat="server" CssClass="btn btn-primary btn-sm" Text="Aceptar"/>
+                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </asp:Content>

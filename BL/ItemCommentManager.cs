@@ -11,7 +11,7 @@ namespace BL
     public class ItemCommentManager : BaseManager
     {
         /// <summary>
-        /// Recupera los id de un producto
+        /// Recupera los comentarios asociados a un producto.
         /// </summary>
         /// <param name="resourceId"></param>
         /// <returns></returns>
