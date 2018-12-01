@@ -11,6 +11,41 @@ namespace BL
     public class ItemCommentSupportManager: BaseManager
     {
 
+        public List<ItemCommentSupport> Get()
+        {
+            UserManager userManager = new UserManager();
+            InvoiceItemSupport invoiceItemSupport = new InvoiceItemSupport();
+            InvoiceItemMapper invoiceItemMapper = new InvoiceItemMapper();
+            ItemCommentSupportMapper itemCommentSupportMapper = new ItemCommentSupportMapper();
+
+            //InvoiceItem invoiceItem = invoiceItemMapper.Get(invoiceItemId);
+
+            //if (invoiceItem == null)
+            //{
+            //    string errorDescription = "No se ha podido recuperar el artículo comprado con id " + invoiceItemId + ".";
+            //    log.AddLogCritical("GetByInoiceItem", errorDescription, this);
+            //    AddError(new ResultBE(ResultBE.Type.NULL, errorDescription));
+            //    return null;
+            //}
+
+            List<ItemCommentSupport> comments = itemCommentSupportMapper.Get();
+
+            if (comments == null || comments.Count == 0) return null;
+
+            foreach (ItemCommentSupport comment in comments)
+            {
+                comment.User = userManager.Get(comment.User.Id);
+                comment.Id = comment.InvoiceItemId;//dngr!
+            }
+
+            //invoiceItemSupport.InvoiceItem = invoiceItem;
+            //invoiceItemSupport.Comments = comments;
+
+            return comments;
+        }
+
+
+
         /// <summary>
         /// Recupera los comentarios asociados a un producto.
         /// </summary>

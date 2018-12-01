@@ -42,6 +42,29 @@ namespace ORM
             return comments;
         }
 
+        public List<ItemCommentSupport> Get()
+        {
+            //Como se está consultando una lista, es preferible que sp devuelva todos los
+            //valores y no optar por una estrategia que discrimine entre la recuperación 
+            //de los datos de la clase padre por un lado, y los hijos por otro.
+            Dal dal = new Dal();
+            Hashtable table = new Hashtable();
+            List<ItemCommentSupport> comments = null;
+
+            DataSet result = dal.Read(table, "spReadItemCommentSupport");
+
+            if (result != null && result.Tables[0].Rows.Count > 0)
+            {
+                comments = new List<ItemCommentSupport>();
+                foreach (DataRow data in result.Tables[0].Rows)
+                {
+                    comments.Add(ConvertToModel(data));
+                }
+            }
+
+            return comments;
+        }
+
         public bool Save(InvoiceItemSupport invoiceItemSupport)
         {
             ItemCommentSupport itemCommentSupport = invoiceItemSupport.Comments[0];
@@ -65,6 +88,8 @@ namespace ORM
             itemComment.Date = Convert.ToDateTime(data["date"]);
             itemComment.User.Id = int.Parse(data["userid"].ToString());
             itemComment.IsOperator = Convert.ToBoolean(data["isOperator"]);
+            itemComment.InvoiceItemId = int.Parse(data["invoiceItemid"].ToString());
+
             return itemComment;
         }
     }

@@ -68,6 +68,7 @@ namespace Ubiquicity.UserControls
                 invoiceItemSupport.Comments.Add(itemCommentSupport);
 
                 commentManager.Save(invoiceItemSupport);
+                LoadCommentsSupport(invoiceItemId);
             }
             catch (Exception exception)
             {

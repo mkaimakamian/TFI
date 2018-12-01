@@ -86,8 +86,8 @@
                 <div class="col">
                     <p>Acciones / Observaciones</p>
                 </div>
-                                <div class="col">
-                    <p>Soporte</p>
+                <div class="col">
+                    <p>Postventa</p>
                 </div>
             </div>
             <div class="row">
@@ -113,9 +113,9 @@
                                 <div class="col">
                                     <asp:LinkButton ID="claimCNLink" runat="server" CommandArgument='<%#Eval("InvoiceItem.Id") %>'>Reclamar</asp:LinkButton>
                                 </div>
-                                
+
                                 <div class="col">
-                                    <asp:LinkButton ID="supportLink" runat="server" CommandName="PerformSupport" CommandArgument='<%#Eval("InvoiceItem.Id") %>'>Soporte</asp:LinkButton>
+                                    <asp:LinkButton ID="supportLink" runat="server" CommandName="PerformSupport" CommandArgument='<%#Eval("InvoiceItem.Id") %>'>Consultar</asp:LinkButton>
                                 </div>
                             </div>
                         </div>
@@ -126,36 +126,33 @@
         </div>
     </div>
 
- <!-- Ranking form -->
+    <!-- Ranking form -->
     <div id="modalRanking" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-              <%--  <asp:UpdatePanel ID="upUCModalForm" runat="server" UpdateMode="Conditional">--%>
-                    <%--<ContentTemplate>--%>
-                        <UCmkc:UCFormRanking runat="server" ID="UCFormRanking" />
-<%--                    </ContentTemplate>
+                <%--  <asp:UpdatePanel ID="upUCModalForm" runat="server" UpdateMode="Conditional">--%>
+                <%--<ContentTemplate>--%>
+                <UCmkc:UCFormRanking runat="server" ID="UCFormRanking" />
+                <%--                    </ContentTemplate>
                 </asp:UpdatePanel>--%>
                 <div class="modal-footer">
-                    <asp:Button runat="server" CssClass="btn btn-primary btn-sm" Text="Aceptar" OnClick="PerformRanking"/>
+                    <asp:Button runat="server" CssClass="btn btn-primary btn-sm" Text="Aceptar" OnClick="PerformRanking" />
                     <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>
         </div>
     </div>
 
-
-        <div id="modalInvoiceItemSupport" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div id="modalInvoiceItemSupport" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-              <%--  <asp:UpdatePanel ID="upUCModalForm" runat="server" UpdateMode="Conditional">--%>
-                    <%--<ContentTemplate>--%>
-
+                <%--  <asp:UpdatePanel ID="upUCModalForm" runat="server" UpdateMode="Conditional">--%>
+                <%--<ContentTemplate>--%>
                 <UCmkc:UCModalInvoiceItemSupport runat="server" ID="UCModalInvoiceItemSupport" />
-
-<%--                    </ContentTemplate>
+                <%--                    </ContentTemplate>
                 </asp:UpdatePanel>--%>
                 <div class="modal-footer">
-                    <asp:Button runat="server" CssClass="btn btn-primary btn-sm" Text="Aceptar"/>
+                    <asp:Button runat="server" CssClass="btn btn-primary btn-sm" Text="Aceptar" />
                     <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>
