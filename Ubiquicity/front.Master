@@ -23,6 +23,18 @@
                 document.querySelector('.goog-te-gadget').setAttribute('style', 'font-size: 0');
             }
         }
+
+        function resizeFont(multiplier) {
+            
+            if (!sessionStorage["usability"]) {
+                sessionStorage["usability"] = "1em";
+            }
+
+            if (multiplier != 0) {
+                sessionStorage["usability"] = parseFloat(sessionStorage["usability"]) + parseFloat(multiplier);
+            }
+                document.body.style.fontSize = parseFloat(sessionStorage["usability"])  + "em";
+        }
     </script>
 
     <!-- Api Google Translate-->
@@ -30,7 +42,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
 </head>
 
-<body>
+<body onload="resizeFont(0)">
     <form runat="server" class="wrapper">
         <asp:ScriptManager ID="ScriptManager1" runat="server" EnableScriptGlobalization="true" EnableScriptLocalization="true" />
         <div class="container-fluid">
@@ -226,9 +238,8 @@
 
     <!-- footer -->
     <footer class="row mkcFooter" style="padding: 0px; margin: 0px">
-        <div class="col-12" style="padding: 0px; margin: 0px">
+        <div class="col-10" style="padding: 0px; margin: 0px">
             <nav class="navbar navbar-expand-sm mx-auto navbar-dark mkcColorNavbar">
-
                 <ul class="navbar-nav mr-auto mx-auto ">
                     <li class="nav-item ">
                         <a class="nav-link" href="about.aspx">Nosotros</a>
@@ -246,17 +257,30 @@
                         <a class="nav-link" href="faq.aspx">F.A.Qs.</a>
                     </li>
                     <li class="nav-item">
-                        <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalNewsSuscription">¡Suscribite al newsletter!</button>
+                        <%--<button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalNewsSuscription">¡Suscribite al newsletter!</button>--%>
+                        <a class="nav-link" href="#" data-toggle="modal" data-target="#modalNewsSuscription">¡Suscribite al newsletter!</a>
+                    
                     </li>
+
+                </ul>
+
+            </nav>
+        </div>
+        <div class="col" style="padding: 0px; margin: 0px">
+                        <nav class="navbar navbar-expand-sm mx-auto navbar-dark mkcColorNavbar">
+                <ul class="navbar-nav mr-auto mx-auto ">
+                                        <li class="nav-item"><a class="nav-link" href="#" onclick="resizeFont(0.2)">A+</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="resizeFont(-0.2)">A-</a></li>
+
 
                 </ul>
             </nav>
         </div>
+
     </footer>
 
     <script src="Scripts/jquery-3.3.1.js"></script>
     <script src="Scripts/bootstrap.js"></script>
     <script src="Scripts/umd/popper.js"></script>
-
 </body>
 </html>
