@@ -68,7 +68,30 @@ namespace Ubiquicity
             {
                 lstReports.DataTextField = "Key";
                 lstReports.DataValueField = "Value";
-                lstReports.DataSource = GetQFSales();
+                lstReports.DataSource = GetDateQFilter();
+                lstReports.DataBind();
+            }
+            catch (Exception exception)
+            {
+                ((front)Master).Alert.Show("Exception", exception.Message);
+            }
+        }
+
+        private void LoadSupport ()
+        {
+            try
+            {
+                lstReports.DataTextField = "Key";
+                lstReports.DataValueField = "Value";
+
+                QueryFilter rateFilter = new QueryFilter();
+                rateFilter.Key = "Cerrados / Totales";
+                rateFilter.Value = "monthRate";
+
+                List<QueryFilter> filters = GetDateQFilter();
+                filters.Add(rateFilter);
+
+                lstReports.DataSource = filters;
                 lstReports.DataBind();
             }
             catch (Exception exception)
@@ -84,7 +107,8 @@ namespace Ubiquicity
         /// <param name="e"></param>
         protected void ShowReport(object sender, EventArgs e)
         {
-            if (dropReportType.SelectedIndex == -1 || lstReports.SelectedIndex == -1) return;
+            try {
+if (dropReportType.SelectedIndex == -1 || lstReports.SelectedIndex == -1) return;
             
             int type = dropReportType.SelectedIndex;
             PollAnswerManager pollAnswerManager = new PollAnswerManager();
@@ -119,11 +143,35 @@ namespace Ubiquicity
                     InvoiceManager invoiceManager = new InvoiceManager();
                     dataChart = invoiceManager.GetReportForSales(filters);
                     break;
+                case 4: //ventas
+                    QueryFilter supportType = new QueryFilter();
+                    supportType.Key = lstReports.SelectedItem.Text;
+                    supportType.Value = lstReports.SelectedItem.Value;
+
+                    QueryFilter smonthFilter = new QueryFilter();
+                    smonthFilter.Value = dropMonth.SelectedValue;
+
+                    QueryFilter syearFilter = new QueryFilter();
+                    syearFilter.Value = dropYear.SelectedValue;
+
+                    Dictionary<String, QueryFilter> sfilters = new Dictionary<String, QueryFilter>();
+                    sfilters.Add("Type", supportType);
+                    sfilters.Add("Month", smonthFilter);
+                    sfilters.Add("Year", syearFilter);
+
+                    ItemCommentSupportManager commentManager = new ItemCommentSupportManager();
+                    dataChart = commentManager.GetReportForSupport(sfilters);
+                    break;
                 default:
                     return;
             }
 
             ShowChart(dataChart);
+            }
+            catch (Exception exception)
+            {
+                ((front)Master).Alert.Show("Exception", exception.Message);
+            }
         }
     
         private void ShowChart(Dictionary<string, ArrayList[]> statistics)
@@ -144,7 +192,7 @@ namespace Ubiquicity
                     //series.LabelFormat = "{0:c}";
                     Chart1.Series.Add(series);
                     Chart1.Legends.Add(serie.Key);
-                    Array yValues = serie.Value[1].ToArray(typeof(int));
+                    Array yValues = serie.Value[1].ToArray(typeof(double));
                     Array xLabels = (string[])serie.Value[0].ToArray(typeof(string));
                     Chart1.Series[i].Points.DataBindXY(xLabels, yValues);
                     Chart1.Series[i].ChartType = SeriesChartType.Column;
@@ -158,7 +206,7 @@ namespace Ubiquicity
         /// Devuelve el set de "tipo" de reportes de venta que puede generar.
         /// </summary>
         /// <returns></returns>
-        private List<QueryFilter> GetQFSales()
+        private List<QueryFilter> GetDateQFilter()
         {
             List<QueryFilter> filters = new List<QueryFilter>();
             QueryFilter yearFilter = new QueryFilter();
@@ -179,7 +227,7 @@ namespace Ubiquicity
         }
 
         /// <summary>
-        /// Cambia le contenido del listado de reportes según el tipo.
+        /// Cambia el contenido del listado de reportes según el tipo.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -203,6 +251,10 @@ namespace Ubiquicity
                     LoadSales();
                     divDates.Visible = true;
                     break;
+                case 4:
+                    LoadSupport();
+                    divDates.Visible = true;
+                    break;
                 default:
                     lstReports.Items.Clear();
                     break;
@@ -222,7 +274,7 @@ namespace Ubiquicity
             if (value == "year")
             {
                 divDates.Visible = false;
-            } else if (value == "month")
+            } else if (value == "month" || value == "monthRate")
             {
                 divMonth.Visible = false;
                 divDates.Visible = true;

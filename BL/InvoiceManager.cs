@@ -174,7 +174,7 @@ namespace BL
             foreach (QueryFilter qf in qfResult)
             {
                 chartSeries[queryFilter.Key][0].Add(qf.Key);
-                chartSeries[queryFilter.Key][1].Add(Convert.ToInt32(qf.Value));
+                chartSeries[queryFilter.Key][1].Add(Convert.ToDouble(qf.Value));
             }
             
             return chartSeries;

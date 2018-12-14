@@ -30,21 +30,27 @@ namespace Ubiquicity
         /// <param name="e"></param>
         protected override void PerformGenericAction(object sender, UbiquicityEventArg e)
         {
-            //GREGAR TRY
-            int id = Convert.ToInt32(e.TheObject.ToString());
+            try {
+                int id = Convert.ToInt32(e.TheObject.ToString());
 
-            //UCFormInquiry.CleanForm();
-            //UCFormInquiry.FillForm(itemComment);
-            SessionUtilHelper.KeepInSession(id.ToString(), Session);
-            //ScriptManager.RegisterStartupScript(upUCModalForm, upUCModalForm.GetType(), "openModalCreate", "$('#modalInquiry').modal('show');", true);
-            //upUCModalForm.Update();
+                //UCFormInquiry.CleanForm();
+                //UCFormInquiry.FillForm(itemComment);
+                SessionUtilHelper.KeepInSession(id.ToString(), Session);
+                //ScriptManager.RegisterStartupScript(upUCModalForm, upUCModalForm.GetType(), "openModalCreate", "$('#modalInquiry').modal('show');", true);
+                //upUCModalForm.Update();
 
-            //SessionUtilHelper.KeepInSession(e.CommandArgument.ToString(), Session);
+                //SessionUtilHelper.KeepInSession(e.CommandArgument.ToString(), Session);
 
-            //Page.ClientScript.RegisterStartupScript(this.GetType(), "openModal", "window.onload = function() { $('#modalInvoiceItemSupport').modal('show'); }", true);
-            UCModalInvoiceItemSupport.LoadCommentsSupport(id);
-            ScriptManager.RegisterStartupScript(upUCModalInvoiceItemSupport, upUCModalInvoiceItemSupport.GetType(), "openModalCreate", "$('#modalInvoiceItemSupport').modal('show');", true);
-            upUCModalInvoiceItemSupport.Update();
+                //Page.ClientScript.RegisterStartupScript(this.GetType(), "openModal", "window.onload = function() { $('#modalInvoiceItemSupport').modal('show'); }", true);
+                UCModalInvoiceItemSupport.LoadCommentsSupport(id);
+                ScriptManager.RegisterStartupScript(upUCModalInvoiceItemSupport, upUCModalInvoiceItemSupport.GetType(), "openModalCreate", "$('#modalInvoiceItemSupport').modal('show');", true);
+                upUCModalInvoiceItemSupport.Update();
+            }
+            catch (Exception exception)
+            {
+                Alert.Show("Excepción", exception.Message);
+            }
+
         }
 
         /// <summary>
@@ -93,6 +99,7 @@ namespace Ubiquicity
             Dictionary<string, string> columns = new Dictionary<string, string>();
             columns.Add("Sentence", "Consulta");
             columns.Add("Date", "Fecha");
+            columns.Add("IsClosed", "Cerrado");
             return columns;
         }
     }

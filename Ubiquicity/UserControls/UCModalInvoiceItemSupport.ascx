@@ -33,7 +33,8 @@
                             <label for="commentInput">Comentario</label>
                             <textarea id="commentInput" runat="server" class="form-control form-control-sm" rows="3" maxlength="250"></textarea>
                             <asp:Button ID="btnComentar" runat="server" CssClass="btn btn-primary btn-sm mt-2" Text="Comentar" OnClick="PerformComment" />
-                        </div>
+                            <asp:Button ID="btnCerrar" runat="server" CssClass="btn btn-success btn-sm mt-2" Text="Marcar como cerrado" OnClick="PerformClose" />
+                       </div>
                     </div>
                 </div>
     </div>

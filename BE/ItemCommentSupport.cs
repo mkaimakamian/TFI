@@ -10,5 +10,7 @@ namespace BE
     {
         public bool IsOperator { get; set; }
         public int InvoiceItemId { get; set; } //está mal este modelo
+        public bool IsClosed { get; set; }
+
     }
 }

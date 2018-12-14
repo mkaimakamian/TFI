@@ -80,6 +80,42 @@ namespace ORM
             return dal.Write(table, "spWriteItemCommentSupport") > 0;
         }
 
+        public bool ChangeTopicStatus(int invoiceItemid, bool close=false)
+        {
+           
+            Dal dal = new Dal();
+            Hashtable table = new Hashtable();
+
+            table.Add("@invoiceItemid", invoiceItemid);
+            table.Add("@isClosed", close);
+            
+            return dal.Write(table, "spModifyItemCommentSupport") > 0;
+        }
+
+        public List<QueryFilter> GetSupport(Dictionary<String, QueryFilter> filters)
+        {
+            Dal dal = new Dal();
+            Hashtable table = new Hashtable();
+            List<QueryFilter> queryFilters = null;
+
+            table.Add("@key", filters["Type"].Value);
+            table.Add("@month", filters["Month"].Value);
+            table.Add("@year", filters["Year"].Value);
+
+            DataSet result = dal.Read(table, "spReadSupportReport");
+
+            if (result != null && result.Tables[0].Rows.Count > 0)
+            {
+                queryFilters = new List<QueryFilter>();
+                foreach (DataRow data in result.Tables[0].Rows)
+                {
+                    queryFilters.Add(ConvertToQFModel(data));
+                }
+            }
+
+            return queryFilters;
+        }
+
         private ItemCommentSupport ConvertToModel(DataRow data)
         {
             ItemCommentSupport itemComment = new ItemCommentSupport();
@@ -88,9 +124,24 @@ namespace ORM
             itemComment.Date = Convert.ToDateTime(data["date"]);
             itemComment.User.Id = int.Parse(data["userid"].ToString());
             itemComment.IsOperator = Convert.ToBoolean(data["isOperator"]);
+            itemComment.IsClosed = Convert.ToBoolean(data["isClosed"]);
             itemComment.InvoiceItemId = int.Parse(data["invoiceItemid"].ToString());
 
             return itemComment;
+        }
+
+        /// <summary>
+        /// Usado para los reportes.
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        private QueryFilter ConvertToQFModel(DataRow data)
+        {
+            QueryFilter queryFilter = new QueryFilter();
+            queryFilter.Key = data["key"].ToString();
+            queryFilter.Value = data["value"].ToString();
+
+            return queryFilter;
         }
     }
 }

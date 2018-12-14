@@ -76,5 +76,22 @@ namespace Ubiquicity.UserControls
                 //((front)Master).Alert.Show("Exception", exception.Message);
             }
         }
+
+        protected void PerformClose(object sender, EventArgs e)
+        {
+            try
+            {
+                int invoiceItemId = Convert.ToInt32(SessionUtilHelper.GetIdFromSession(Session));
+
+                ItemCommentSupportManager commentManager = new ItemCommentSupportManager();
+                commentManager.CloseTopic(invoiceItemId);
+                LoadCommentsSupport(invoiceItemId);
+            }
+            catch (Exception exception)
+            {
+                //TODO - agregar control de error
+                //((front)Master).Alert.Show("Exception", exception.Message);
+            }
+        }
     }
 }

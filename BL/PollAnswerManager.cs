@@ -71,7 +71,7 @@ namespace BL
                 }
 
                 chartSeries[paserie.SerieLabel][0].Add(paserie.ValueLabel);
-                chartSeries[paserie.SerieLabel][1].Add(paserie.Value);
+                chartSeries[paserie.SerieLabel][1].Add(Convert.ToDouble(paserie.Value));
             }
 
             return chartSeries;

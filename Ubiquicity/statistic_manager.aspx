@@ -17,6 +17,7 @@
                             <asp:ListItem Value="1">Opinión / Satisfacción</asp:ListItem>
                             <asp:ListItem Value="2">Encuestas generales</asp:ListItem>
                             <asp:ListItem Value="3">Ventas</asp:ListItem>
+                            <asp:ListItem Value="4">Soporte</asp:ListItem>
                         </asp:DropDownList>
                     </div>
                 </div>

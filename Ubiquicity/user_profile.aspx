@@ -152,7 +152,7 @@
                 <%--                    </ContentTemplate>
                 </asp:UpdatePanel>--%>
                 <div class="modal-footer">
-                    <asp:Button runat="server" CssClass="btn btn-primary btn-sm" Text="Aceptar" />
+                    <%--<asp:Button runat="server" CssClass="btn btn-primary btn-sm" Text="Aceptar" />--%>
                     <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>
