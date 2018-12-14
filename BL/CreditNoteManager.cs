@@ -121,6 +121,18 @@ namespace BL
         }
 
         /// <summary>
+        /// Devuelve el listado de Notas de créditos usadas para cancelar un invoice
+        /// </summary>
+        /// <param name="invoice"></param>
+        /// <returns></returns>
+        public List<CreditNote> GetUsedByInvoice(Invoice invoice)
+        {
+            CreditNoteMapper creditNoteMapper = new CreditNoteMapper();
+            return creditNoteMapper.GetUsedByInvoice(invoice);
+        }
+        
+
+        /// <summary>
         /// Recupera los credit notes cuyos ids son pasados por parámetro.
         /// </summary>
         /// <param name="ids"></param>
@@ -155,7 +167,7 @@ namespace BL
         {
             bool isValid = true;
 
-            isValid &= VOnlyLetter(creditNote.Observation, 1, 250, "Observación", "IsValid");
+            isValid &= VLetterNumbers(creditNote.Observation, 1, 250, "Observación", "IsValid");
 
             if (creditNote.Amount <= 0)
             {

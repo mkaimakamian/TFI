@@ -102,6 +102,27 @@ namespace ORM
             return GetCNLIst(table);
         }
 
+        public List<CreditNote> GetUsedByInvoice(Invoice invoice)
+        {
+            Hashtable table = new Hashtable();
+            table.Add("@invoiceId", invoice.Id);
+
+            Dal dal = new Dal();
+            List<CreditNote> creditNotes = null;
+            DataSet result = dal.Read(table, "spReadInvoiceCreditNote");
+
+            if (result != null && result.Tables[0].Rows.Count > 0)
+            {
+                creditNotes = new List<CreditNote>();
+                foreach (DataRow data in result.Tables[0].Rows)
+                {
+                    creditNotes.Add(ConvertToModel(data));
+                }
+            }
+            return creditNotes;
+        }
+        
+
         /// <summary>
         /// Devuelve el listado de notas de crédito asociadas a un usuario.
         /// </summary>

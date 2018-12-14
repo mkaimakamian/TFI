@@ -37,6 +37,15 @@ namespace Helper
             GetSessionState().Remove(resourceId);
         }
 
+        public static void DropCart(HttpSessionState session)
+        {
+            if (sessionState == null)
+            {
+                sessionState = session;
+            }
+            GetSessionState().Clear();
+        }
+
         /// <summary>
         /// Devuelve la cantidad de ítems almacenados
         /// </summary>

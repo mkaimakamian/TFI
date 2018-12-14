@@ -29,6 +29,7 @@ namespace Ubiquicity
         {
             try
             {
+                ShopHelper.DropCart(Session);
                 PollManager pollManager = new PollManager();
                 Poll poll = pollManager.GetSatisfactionPoll();
 

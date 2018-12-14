@@ -50,6 +50,7 @@
     <Compile Include="CreditCardMapper.cs" />
     <Compile Include="CreditNoteMapper.cs" />
     <Compile Include="InvoiceCreditCardMapper.cs" />
+    <Compile Include="InvoiceCreditNoteMapper.cs" />
     <Compile Include="InvoiceItemMapper.cs" />
     <Compile Include="InvoiceMapper.cs" />
     <Compile Include="ItemCommentMapper.cs" />

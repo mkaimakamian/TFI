@@ -54,8 +54,16 @@ namespace Helper
                     crediNotes += "Nota de crédito #" + creditNote.Id + " - " + creditNote.Description + "</br>";
                 }
             }
-            //Reemplazo
-            string replaced = body.Replace(
+
+            string creditCard = string.Empty;
+
+            if (invoice.CreditCard != null)
+            {
+                creditCard = "Tarjeta: " + invoice.CreditCard.Field1 + "-xxxx-xxxx-" + invoice.CreditCard.Field4;
+            }
+
+                //Reemplazo
+                string replaced = body.Replace(
                 "@user", invoice.User.Name + " " + invoice.User.Lastname
             ).Replace(
                 "@invoice", invoice.Id.ToString()
@@ -72,7 +80,7 @@ namespace Helper
             ).Replace(
             "@notasCredito", crediNotes
             ).Replace(
-                "@creditCard", "Tarjeta: " + invoice.CreditCard.Field1 + "-xxxx-xxxx-" + invoice.CreditCard.Field4
+                "@creditCard", creditCard
             );
 
             return replaced;

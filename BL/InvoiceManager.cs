@@ -96,11 +96,13 @@ namespace BL
                 invoiceItem.Resource = new MapManager().Get(invoiceItem.Resource.Id);
             }
 
-            invoice.CreditNotes = creditNoteManager.GetByInvoice(invoice);
+            invoice.CreditNotes = creditNoteManager.GetUsedByInvoice(invoice);
             invoice.CreditCard = creditCardmanager.Get(invoice);
 
+            if (invoice.CreditCard != null) { 
             invoice.CreditCard.Field1 = SecurityHelper.RDesencrypt(invoice.CreditCard.Field1);
             invoice.CreditCard.Field4 = SecurityHelper.RDesencrypt(invoice.CreditCard.Field4);
+            }
 
             string fullPath = PDFHelper.CreateInvoice(invoice);
 
@@ -127,6 +129,7 @@ namespace BL
             // TODO - si se crea un manager, mover la tarjeta
             CreditCardMapper creditCardMapper = new CreditCardMapper();
             InvoiceCreditCardMapper invoiceCCMapper = new InvoiceCreditCardMapper();
+            InvoiceCreditNoteMapper invoiceCNoteMapper = new InvoiceCreditNoteMapper();
 
             addressManager.Save(invoice.BillingAddress);
             invoiceMapper.Save(invoice);
@@ -138,10 +141,10 @@ namespace BL
                 invoiceCCMapper.Save(invoice);
             }
 
-            /*if (invoice.CreditNotes != null)
+            if (invoice.CreditNotes != null)
             {
-                creditno
-            }*/
+                invoiceCNoteMapper.Save(invoice);
+            }
         }
 
         /// <summary>
